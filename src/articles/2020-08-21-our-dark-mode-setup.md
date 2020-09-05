@@ -40,7 +40,7 @@ PostCSS mixin:
     @content;
   }
 }
-`"
+```
 
 Use it like that:
 
@@ -57,7 +57,7 @@ h3 {
     color: $textDark;
   }
 }
-`"
+```
 
 All three modes: auto, light and dark, are tackled with this simple `mixin' — only one nested clause `@include darkTheme {...}` is all it takes to define an alternative, dark styling.
 

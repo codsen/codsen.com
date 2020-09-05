@@ -40,7 +40,7 @@ stripHtml("abc<a>click me</a>def");
 //        [14, 18],
 //      ],
 //    }
-`"
+```
 
 ### Why change what's returned, upon user's request, when we can _return everything_?
 
@@ -70,7 +70,7 @@ before, `v.4`:
 const result = stripHtml("abc<a>click me</a>def");
 console.log(result);
 // => abc click me def
-`"
+```
 
 now, `v.5` — [destructure](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) what you need:
 
@@ -78,7 +78,7 @@ now, `v.5` — [destructure](https://developer.mozilla.org/en-US/docs/Web/JavaSc
 const { result } = stripHtml("abc<a>click me</a>def");
 console.log(result);
 // => abc click me def
-`"
+```
 
 If you need [ranges](/ranges/), now they're always returned:
 
@@ -90,7 +90,7 @@ const result = stripHtml("abc<a>click me</a>def", {
 });
 console.log(result);
 // => [[3, 6, " "], [14, 18 ," "]]
-`"
+```
 
 now, `v.5`:
 
@@ -98,7 +98,7 @@ now, `v.5`:
 const { ranges } = stripHtml("abc<a>click me</a>def");
 console.log(ranges);
 // => [[3, 6, " "], [14, 18 ," "]]
-`"
+```
 
 ## `opts.filteredTagLocations`
 
@@ -137,6 +137,6 @@ filteredTagLocations.forEach(([from, to]) => {
 });
 console.log(JSON.stringify(gatheredExtractedTagStrings, null, 4));
 // => [`<tr>`, `<tr>`, `</tr>`, `</tr>`]
-`"
+```
 
 For even more control over the result, use [`opts.cb`](/os/string-strip-html/#optscb).

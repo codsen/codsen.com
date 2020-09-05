@@ -117,7 +117,7 @@ The HTML templates also need to "know" the hash, to write correct JS and CSS fil
 
 ```html
 <link rel="stylesheet" href="/assets/{{ cacheBusting.hash }}/css/app.css">
-`"
+```
 
 That's the essence of the setup.
 
@@ -137,7 +137,7 @@ The script `start` is triggered by `npm run start` and it builds a development v
 
 ```json
 "start": "cross-env ELEVENTY_ENV=dev run-s clean:* build:assets && cross-env ELEVENTY_ENV=dev run-p serve hash watch:*"
-`"
+```
 
 Destructured, it calls the following npm scripts:
 
@@ -147,13 +147,13 @@ Destructured, it calls the following npm scripts:
 "clean:cache": "rimraf ./.cache",
 "clean:dist": "rimraf ./dist",
 "clean:bundle": "rimraf ./bundle",
-`"
+```
 
 These commands above delete folders. DIY solution for [#19](https://github.com/11ty/eleventy/issues/19).
 
 ```json
 "build:assets": "parcel build ./src/assets/css/app.pcss ./src/assets/js/app.js ./src/assets/js/interdeps.js ./src/assets/js/search-worker.js --out-dir ./bundle --no-source-maps",
-`"
+```
 
 This command above calls Parcel. JS file processing is configured by `.babelrc` and PostCSS `.pcss` file processing is configured by `postcss.config.js` — both configs are in the root.
 
@@ -163,13 +163,13 @@ Parcel doesn't need to be aware of our hash.
 
 ```json
 "serve": "date +%s > hash.txt && eleventy --serve --port=8080",
-`"
+```
 
 The command above does two things: `date +%s > hash.txt` writes the timestamp into a `hash.txt`. `eleventy --serve --port=8080` being for development, builds and watches for changes.
 
 ```json
 "hash": "delay 15 && node utils/scripts/fixDistWorkerHash.js",
-`"
+```
 
 The command above might not be relevant for some, but our search runs off a [web worker](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers) to a) unblock the thread, and b) to make it easy to start and kill it after each keypress in the _search_ field. Simply speaking, it's one JS file running another, pet JS file, in a separate CPU thread. There's messaging in-between.
 
@@ -178,13 +178,13 @@ The _catch_ is, `app.js`, the main script, needs to know the URL of the file of 
 myWorker = new Worker(
   "http://localhost:8080/assets/REPLACE_WITH_HASH_URL/js/search-worker.js"
 );
-`"
+```
 
 When Eleventy is running in parallel, we give it 15 seconds using `delay 15`, and then we find-and-replace text in a file using Node's `fs.readFileSync` and `fs.writeFileSync` in a script located at `utils/scripts/fixDistWorkerHash.js`. For scripting like this, use what you know best — some people prefer Bash or Make or Perl, to name a few.
 
 ```json
 "watch:assets": "parcel watch ./src/assets/css/app.pcss ./src/assets/js/app.js --out-dir ./bundle --no-source-maps --no-hmr",
-`"
+```
 
 In the command above, Parcel runs in parallel and watches for file changes.
 
@@ -195,7 +195,7 @@ The _watch_ scripts of all kinds — commands marked by CLI flags `--serve` or `
 
 ```json
 "badexample": "eleventy --serve --port=8080 && echo \"oodles\""
-`"
+```
 
 The `oodles` will never be printed in the terminal!
 
