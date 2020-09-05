@@ -1,0 +1,240 @@
+{% extends 'layouts/page.njk' %}
+
+{% block head %}
+  <script src="https://embed.runkit.com"></script>
+{% endblock %}
+
+{% block content %}
+  {% from "macro_heading.njk" import heading %}
+  {% from "macro_package-listing.njk" import packageListing %}
+  {% set prevPackage = collections.allPackagesRandomList | getPrevPackage(title) %}
+  {% set nextPackage = collections.allPackagesRandomList | getNextPackage(title) %}
+
+  {% set isCli = packageJsons[title].bin %}
+
+  {% include "header.njk" %}
+  <hr>
+  <main class="content-main layout-package" data-role="main" id="skiplink-content" tabindex="-1">
+    <div class="content-main__inner">
+      <div class="package-head">
+        <div class="package-nav">
+          <div class="package-back">
+            <a href="/os/{{ prevPackage }}/" class="arrow_left">prev</a>
+          </div>
+          <div class="package-next">
+            <a href="/os/{{ nextPackage }}/" class="arrow_right">next</a>
+          </div>
+        </div>
+        <h1{% if title | isTall %} class="tall"{% endif %}>{{ title }}<sup title="current version is {{ packageJsons[title].version }}" aria-label="current version is {{ packageJsons[title].version }}">{{ packageJsons[title].version }}</sup>
+        </h1>
+        <div class="package-description">
+          {{ packageJsons[title].description | formatCodeBits | safe }}
+        </div>
+        <div class="package-badges">
+
+          <a href="https://gitlab.com/codsen/codsen/tree/master/packages/{{ title }}" rel="nofollow noreferrer noopener">
+            <img src="https://img.shields.io/badge/build-passing-brightgreen.svg?style=flat-square" alt="Build is always passing">
+          </a>
+          {# <a href="https://gitlab.com/codsen/codsen/tree/master/packages/{{ title }}" rel="nofollow noreferrer noopener">
+            <img src="https://img.shields.io/badge/coverage-55%25-brightgreen.svg?style=flat-square" alt="Coverage">
+          </a> #}
+          <a href="https://npmcharts.com/compare/{{ title }}?interval=30" rel="nofollow noreferrer noopener" target="_blank">
+            <img src="https://img.shields.io/npm/dm/{{ title }}.svg?style=flat-square" alt="Downloads per month">
+          </a>
+          <a href="https://prettier.io" rel="nofollow noreferrer noopener" target="_blank">
+            <img src="https://img.shields.io/badge/code_style-prettier-brightgreen.svg?style=flat-square" alt="Code style: prettier">
+          </a>
+          <img src="https://img.shields.io/badge/licence-MIT-brightgreen.svg?style=flat-square" alt="MIT License">
+        </div>
+      </div>
+
+      <div class="package-body">
+        <aside class="package-body__extras">
+          <div class="package-install">
+            {% if webapps[title] %}
+            <h3>Use web app GUI</h3>
+            <p>
+              <a href="{{ webapps[title].url }}" target="_blank">{{ webapps[title].label }}</a>
+            </p>
+            {% endif %}
+
+            <h3>Install globally, via&nbsp;npm</h3>
+
+            {% if isCli %}
+            <p>
+              This is a CLI app so you install it globally, with <code>-g</code>:
+            </p>
+            {% endif %}
+
+            {% highlight "bash" %}
+              npm i{% if isCli %} -g{% endif %} {{ title }}
+            {% endhighlight %}
+
+            {% if isCli %}
+            <p>
+              Alternatively, CLI's can also be installed as local dependencies, but you then have to call them through package.json, through another program.
+            </p>
+            {% endif %}
+
+{% if (not isCli) %}
+
+            {% if packageJsons[title].lect.defaultExported %}
+            <p>
+              The <em><a href="https://exploringjs.com/es6/ch_modules.html#_default-exports-one-per-module">default</a></em> is exported, so instead of "<code>{{ packageJsons[title].lect.req }}</code>" below, you can name the consumed function however you want.
+            </p>
+            {% endif %}
+
+            <p>Consume via a <code>require()</code>:</p>
+            {% highlight "js" %}
+              const {{ packageJsons[title].lect.req }} = require("{{ title }}");
+            {% endhighlight %}
+            <p>or as an ES Module:</p>
+            {% highlight "js" %}
+              import {{ packageJsons[title].lect.req }} from "{{ title }}";
+            {% endhighlight %}
+
+            <h3>Install as a script, via&nbsp;CDN</h3>
+
+            <p>Put this in your HTML:</p>
+
+            {% highlight "html" %}
+              <script src="https://cdn.jsdelivr.net/npm/{{ title }}/dist/{{ title }}.umd.js">
+            {% endhighlight %}
+
+            <p>
+              Then, you&rsquo;ll get a global variable <code>{{ title | packageGlobal }}</code> in your <a href="https://developer.mozilla.org/en-US/docs/Glossary/Global_object">Global object</a> and you consume it like&nbsp;this:
+            </p>
+            {% highlight "js" %}
+              const {{ packageJsons[title].lect.req }} = {{ title | packageGlobal }};
+            {% endhighlight %}
+
+            {% if packageJsons[title].lect.req | singleFuncExported %}
+            <p>
+              This <code>{{ packageJsons[title].lect.req }}</code> is your main function. See its API in the main section.
+            </p>
+            {% endif %}
+
+{% endif %}
+
+            {% if ((title | firstChunk) == "ranges") %}
+            <h3>Learn more about Ranges</h3>
+            <p>
+              We have a dedicated page about Ranges. <a class="button" href="/ranges/">Learn more</a>
+            </p>
+            {% endif %}
+
+            <div class="trivia-container">
+              <h3>Trivia</h3>
+
+              {% set medianWord = "less than" %}
+              {% if compiledAssertionCounts.all[title] > compiledAssertionCounts.assertsCountMedian %}
+                {% set medianWord = "more than" %}
+              {% elif compiledAssertionCounts.all[title] == compiledAssertionCounts.assertsCountMedian %}
+                {% set medianWord = "exactly equal to" %}
+              {% endif %}
+
+              {% set geometricMeanWord = "less than" %}
+              {% if compiledAssertionCounts.all[title] > compiledAssertionCounts.assertsCountGeometricMean %}
+                {% set geometricMeanWord = "more than" %}
+              {% elif compiledAssertionCounts.all[title] == compiledAssertionCounts.assertsCountGeometricMean %}
+                {% set geometricMeanWord = "exactly equal to" %}
+              {% endif %}
+
+              {% set joinerWord = "and" %}
+              {% if medianWord != geometricMeanWord %}
+                {% set joinerWord = "but" %}
+              {% endif %}
+
+              {% set definitelyWord = "" %}
+              {% set notATypoWord = "" %}
+
+              {% if compiledAssertionCounts.all[title] > 50000 %}
+                {% set definitelyWord = " definitely" %}
+                {% set notATypoWord = " It's not a typo — most of assertions were done programmatically." %}
+                {% set joinerWord = "or" %}
+                {% set geometricMeanWord = "" %}
+              {% endif %}
+
+              <p>This program has <strong>{{ compiledAssertionCounts.all[title] | thousandSeparator }}</strong> assertion{% if compiledAssertionCounts.all[title] > 1 %}s{% endif %} in its unit tests.{{ notATypoWord }} That's{{ definitelyWord }} {{ medianWord }} all unit test assertions' median ({{ compiledAssertionCounts.assertsCountMedian }}) {{ joinerWord }} {{ geometricMeanWord }} geometric mean ({{ compiledAssertionCounts.assertsCountGeometricMean }}).</p>
+
+              {%- if dependencyStats.dependencies[title] -%}
+                <p>In monorepo, <strong>{%- if dependencyStats.dependencies[title] == 1 -%}one{% else %}{{ dependencyStats.dependencies[title] }}{% endif %}</strong> other package
+                  {%- if dependencyStats.dependencies[title] == 1 -%}
+                  , <a href="/os/{{ title | firstConsumer }}">{{ title | firstConsumer }}</a>,
+                  {%- endif -%}
+
+                  {%- if dependencyStats.dependencies[title] > 1 -%}
+                    s
+                  {%- endif %} consume
+                  {%- if dependencyStats.dependencies[title] == 1 -%}
+                    s
+                  {%- endif %} this&nbsp;package.</p>
+              {% endif %}
+            </div>
+          </div>
+        </aside>
+        <section class="package-body__content">
+          {{ content | safe }}
+
+          {{ heading("Licence", 2) }}
+          <p>
+            MIT
+          </p>
+          {% include "btt.njk" %}
+        </section>
+      </div>
+
+      {% include "src/components/separator.njk" %}
+
+      <div class="package-extras">
+
+
+        {% if collections.posts | reverse | matchPackageName(title) | length %}
+          <div class="package-extras__articles">
+            <h2>Related articles:</h2>
+            {# loop through all articles, if a given article is tagged against #}
+            {# this package, then show it #}
+            <section class="entries">
+            {% for article in collections.posts | reverse | matchPackageName(title) | limit(3) %}
+
+
+                {% set type = "article" %}
+                {% if article.data.type %}
+
+                  {% set type = "article" %}
+                  {% if article.data.type %}
+                    {% set type = article.data.type %}
+                  {% endif %}
+
+                {% endif %}
+
+                {% include "src/components/home-article.njk" %}
+
+
+            {% endfor %}
+
+            <div class="ptb20 tac">
+              <a class="button button-smaller" href="/articles/">See all articles</a> &nbsp; <a class="button button-smaller secondary" href="/feed.xml">Subscribe to RSS</a>
+            </div>
+
+            </section>
+          </div>
+        {% endif %}
+
+
+        <div class="package-extras__packages">
+          <h2>Related packages:</h2>
+          <div class="content-row__packages content-row__packages-list">
+          {# takes "packages" key from front-matter into consideration #}
+          {% for package in compiledAssertionCounts.all | filterRelatedPackages(packages, packageCategories, title) %}
+            {{ packageListing(package, packageJsons[package]) }}
+          {% endfor %}
+          </div>
+        </div>
+
+
+      </div>
+      {% include "btt.njk" %}
+    </div>
+  </main>
+{% endblock %}

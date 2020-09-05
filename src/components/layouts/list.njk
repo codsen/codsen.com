@@ -1,0 +1,16 @@
+{% extends 'layouts/base.njk' %}
+
+{% set manuallyAddedExtras = "" %}
+{% if page.url == '/articles/tag/all/' %}
+  {% set manuallyAddedExtras = "layout-page-tag-all" %}
+{% endif %}
+
+{% block content %}
+{% include "header.njk" %}
+<hr>
+<main class="content-main layout-list{% if extraContainerClass %} {{ extraContainerClass }}{% endif %}{% if manuallyAddedExtras %} {{ manuallyAddedExtras }}{% endif %}" data-role="main" id="skiplink-content" tabindex="-1">
+  <div class="content-main__inner">
+    {{ content | safe }}
+  </div>
+</main>
+{% endblock %}

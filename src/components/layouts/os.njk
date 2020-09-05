@@ -1,0 +1,330 @@
+{% extends 'layouts/base.njk' %}
+
+{% block head %}
+<script src="https://d3js.org/d3.v4.min.js" defer></script>
+<script src="/assets/{{ cacheBusting.hash }}/js/interdeps.js" defer></script>
+{% endblock %}
+
+{% block content %}
+{% set oneStickerOnlyPlease = true %}
+
+{% from "macro_package-listing.njk" import packageListing %}
+{# we consolidate headings into macro because of TOC anchors - their styling #}
+{# is manual and tedious and potentially will change sometime, so let's DRY 'em #}
+{% from "macro_heading.njk" import heading %}
+
+{# ████ #}
+{# data #}
+{# ████ #}
+
+{% set allFlagshipLibs = packageCategories.flagshipLibsList -%}
+{%- set allRangeLibs = packageCategories.rangeLibsList | libsRange(compiledAssertionCounts.all) -%}
+{%- set allHtmlLibs = packageCategories.htmlLibsList | libsHtml(compiledAssertionCounts.all) -%}
+{%- set allStringLibs = packageCategories.stringLibsList | libsString(compiledAssertionCounts.all) -%}
+{%- set allObjectLibs = packageCategories.objectLibsList | libsObject(compiledAssertionCounts.all) -%}
+{%- set allLernaLibs = packageCategories.lernaLibsList | libsLerna(compiledAssertionCounts.all) -%}
+{%- set allCliLibs = packageCategories.cliAppsList | libsCli(compiledAssertionCounts.all) -%}
+{%- set allMiscLibs = compiledAssertionCounts.all | libsMisc(allFlagshipLibs, allRangeLibs, allHtmlLibs, allStringLibs, allObjectLibs, allLernaLibs, allCliLibs) -%}
+
+{# ████████ #}
+{# template #}
+{# ████████ #}
+
+{%- include "header.njk" %}
+<hr>
+<main class="content-main layout-page{% if extraContainerClass %} {{ extraContainerClass }}{% endif %}{% if manuallyAddedExtras %} {{ manuallyAddedExtras }}{% endif %}" data-role="main" id="skiplink-content" tabindex="-1">
+  <div class="content-main__inner">
+
+    {# ======= #}
+
+    {{ heading("Open Source", 1) }}
+    <div class="group top-row">
+      <aside>
+        <div class="aside__outer-container">
+          <div class="aside__inner-container">
+            <div class="aside__highlighted-surface">
+              <h3>At glance&hellip;</h3>
+              <section class="group total-count">
+                so far we have<br/>
+                published<br/>
+                <div class="count-container">
+                  <div class="count-container__left">
+                    <span class="count" id="os-libraries-total">{{ compiledAssertionCounts.all | objectKeys | length }}</span>
+                  </div>
+                  <div class="count-container__right">
+                    libraries<br/>on<br/>npm
+                  </div>
+                </div>
+                available<br/>
+                for your projects
+              </section>
+              <section class="commit-count">
+                we pushed
+                <div class="commit-container">
+                  <span class="count" id="os-commits-total">{{ gitStats.commitTotal }}</span>
+                </div>
+                <div class="commit-line-1">
+                  commits
+                </div>
+                <div class="commit-line-2">
+                 to GitLab
+               </div>
+              </section>
+              <section class="asserts-count">
+                <div class="asserts-line-1">
+                  there are
+                </div>
+                <div class="asserts-container">
+                  <span class="count" id="os-asserts-total">{{ compiledAssertionCounts.totalAssertsCount }}</span>
+                </div>
+                <div class="asserts-line-2">
+                  assertions
+                </div>
+                <div class="asserts-line-3">
+                  in tests
+                </div>
+              </section>
+            </div>
+          </div>
+          <img class="marker" src="/images/green_marker.png" alt=""/>
+        </div>
+      </aside>
+      <section class="interdeps-chart group">
+        <figure class="interdeps__container">
+          <figcaption id="interdeps__caption">
+            (っ◔◡◔)っ fig. 1. Inter-dependencies within the monorepo.
+          </figcaption>
+        </figure>
+      </section>
+    </div>
+
+    {# ======= #}
+
+    <div role="presentation" class="separator">
+      {% include "svg-codsen-star-small.njk" %}
+      {% include "svg-codsen-2.njk" %}
+      {% include "svg-codsen-star-large.njk" %}
+    </div>
+
+    <div class="content-row">
+
+      <div class="toc-container">
+        {{ heading("Table of Contents", 2) }}
+        <div class="content-row__container">
+          <ul>
+            <li>
+              <a href="#flagship-libraries">Flagship Libraries</a>
+            </li>
+            <li>
+              <a href="#range-libraries">Range Libraries</a>
+            </li>
+            <li>
+              <a href="#html-processing-libraries">HTML Processing Libraries</a>
+            </li>
+            <li>
+              <a href="#string-processing-libraries">String Processing Libraries</a>
+            </li>
+            <li>
+              <a href="#object-processing-libraries">Object Processing Libraries</a>
+            </li>
+            <li>
+              <a href="#lerna-libraries">Lerna Libraries</a>
+            </li>
+            <li>
+              <a href="#cli-apps">CLI Apps</a>
+            </li>
+            <li>
+              <a href="#miscellaneous-libraries">Miscellaneous Libraries</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div role="presentation" class="separator">
+        {% include "svg-codsen-star-large.njk" %}
+        {% include "svg-codsen-ok.njk" %}
+      </div>
+
+      {{ heading("Flagship Libraries", 2) }}
+
+      <div class="content-row__container">
+        <div class="content-row__description">
+          {% markdown '/src/components/content/os-flagship.md' %}
+        </div>
+        <div class="content-row__packages content-row__packages-list">
+          {{ packageListing("detergent", packageJsons.detergent) }}
+          {{ packageListing("email-comb", packageJsons["email-comb"]) }}
+          {{ packageListing("html-crush", packageJsons["html-crush"]) }}
+        </div>
+      </div>
+
+      {% include "btt.njk" %}
+
+      <div role="presentation" class="separator">
+        {% include "svg-codsen-2.njk" %}
+        {% include "svg-codsen-star-small.njk" %}
+      </div>
+
+      {{ heading("Range Libraries", 2, allRangeLibs | length) }}
+
+      <div class="content-row__container">
+        <div class="content-row__description">
+          {% markdown '/src/components/content/ranges-explanation.md' %}
+          {% markdown '/src/components/content/os-ranges.md' %}
+          <p>
+            <a href="/ranges/" class="button">Read more</a>
+          </p>
+        </div>
+        <div class="content-row__packages content-row__packages-list">
+          {% for rangePackage in allRangeLibs %}
+            {{ packageListing(rangePackage, packageJsons[rangePackage]) }}
+          {% endfor %}
+        </div>
+      </div>
+
+      {% include "btt.njk" %}
+
+      <div role="presentation" class="separator">
+        {% include "svg-codsen-star-small.njk" %}
+        {% include "svg-codsen-ok.njk" %}
+      </div>
+
+      {{ heading("HTML Processing Libraries", 2, allHtmlLibs | length) }}
+
+      <div class="content-row__container">
+        <div class="content-row__description">
+          {% markdown '/src/components/content/os-html.md' %}
+        </div>
+        <div class="content-row__packages content-row__packages-list">
+          {% for htmlPackage in allHtmlLibs %}
+            {{ packageListing(htmlPackage, packageJsons[htmlPackage]) }}
+          {% endfor %}
+        </div>
+      </div>
+
+      {% include "btt.njk" %}
+
+      <div role="presentation" class="separator">
+        {% include "svg-codsen-1.njk" %}
+        {% include "svg-codsen-star-large.njk" %}
+      </div>
+
+      {{ heading("String Processing Libraries", 2, allStringLibs | length) }}
+
+      <div class="content-row__container">
+        <div class="content-row__description">
+          {% markdown '/src/components/content/os-string.md' %}
+        </div>
+        <div class="content-row__packages content-row__packages-list">
+          {% for stringPackage in allStringLibs %}
+            {{ packageListing(stringPackage, packageJsons[stringPackage]) }}
+          {% endfor %}
+        </div>
+      </div>
+
+      {% include "btt.njk" %}
+
+      <div role="presentation" class="separator">
+        {% include "svg-codsen-2.njk" %}
+        {% include "svg-codsen-wow.njk" %}
+      </div>
+
+      {{ heading("Object Processing Libraries", 2, allObjectLibs | length) }}
+
+      <div class="content-row__container">
+        <div class="content-row__description">
+          {% markdown '/src/components/content/os-object.md' %}
+        </div>
+        <div class="content-row__packages content-row__packages-list">
+          {% for objectPackage in allObjectLibs %}
+            {{ packageListing(objectPackage, packageJsons[objectPackage]) }}
+          {% endfor %}
+        </div>
+      </div>
+
+      {% include "btt.njk" %}
+
+      <div role="presentation" class="separator">
+        {% include "svg-codsen-star-small.njk" %}
+        {% include "svg-codsen-mr.njk" %}
+      </div>
+
+      {{ heading("Lerna Libraries", 2, allLernaLibs | length) }}
+
+      <div class="content-row__container">
+        <div class="content-row__description">
+          {% markdown '/src/components/content/os-lerna.md' %}
+        </div>
+        <div class="content-row__packages content-row__packages-list">
+          {% for lernaPackage in allLernaLibs %}
+            {{ packageListing(lernaPackage, packageJsons[lernaPackage]) }}
+          {% endfor %}
+        </div>
+      </div>
+
+      {% include "btt.njk" %}
+
+      <div role="presentation" class="separator">
+        {% include "svg-codsen-2.njk" %}
+        {% include "svg-codsen-star-large.njk" %}
+      </div>
+
+      {{ heading("CLI Apps", 2, allCliLibs | length) }}
+
+      <div class="content-row__container">
+        <div class="content-row__description">
+          {% markdown '/src/components/content/os-cli.md' %}
+        </div>
+        <div class="content-row__packages content-row__packages-list">
+          {% for cliPackage in allCliLibs %}
+            {{ packageListing(cliPackage, packageJsons[cliPackage]) }}
+          {% endfor %}
+        </div>
+      </div>
+
+      {% include "btt.njk" %}
+
+      <div role="presentation" class="separator">
+        {% include "svg-codsen-star-small.njk" %}
+        {% include "svg-codsen-ok.njk" %}
+      </div>
+
+      {{ heading("Miscellaneous Libraries", 2, allMiscLibs | length) }}
+
+      <div class="content-row__container">
+        <div class="content-row__description">
+          {% markdown '/src/components/content/os-miscellaneous.md' %}
+        </div>
+        <div class="content-row__packages content-row__packages-list">
+          {% for miscPackage in allMiscLibs %}
+            {{ packageListing(miscPackage, packageJsons[miscPackage]) }}
+          {% endfor %}
+        </div>
+      </div>
+
+      {% include "btt.njk" %}
+
+      <div role="presentation" class="separator">
+        {% include "svg-codsen-1.njk" %}
+        {% include "svg-codsen-star-large.njk" %}
+      </div>
+
+      <div class="content-row__container mt20">
+        <div>
+          {{ heading("Contributing", 2, "") }}
+          <p style="margin-left: 2rem;">
+            All contributions are welcome!
+          </p>
+        </div>
+        <div class="content-row__packages" style="margin: 2rem auto 0;">
+          {% markdown '/src/components/content/os-contributing.md' %}
+        </div>
+      </div>
+
+      {% include "btt.njk" %}
+
+    </div>
+
+  </div>
+</main>
+{% endblock %}

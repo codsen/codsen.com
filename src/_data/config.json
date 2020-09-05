@@ -1,0 +1,19 @@
+{
+  "name": "Codsen",
+  "shortDesc": "Codsen website.",
+  "url": "https://codsen.com",
+  "lang": "en",
+  "authorHandle": "@revelto",
+  "authorName": "Codsen",
+  "paymentPointer": null,
+  "permalinkClass": ["permalink"],
+  "iframeClass": ["iframes-wrapper"],
+  "codeClass": ["code-wrapper"],
+  "figureClass": ["figure"],
+  "paths": {
+    "src": "src",
+    "blogdir": "articles",
+    "includes": "components",
+    "output": "dist"
+  }
+}

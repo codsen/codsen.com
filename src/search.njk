@@ -1,0 +1,34 @@
+---
+eleventyExcludeFromCollections: true
+permalink: search.json
+---
+[
+{%- set first = true -%}
+
+{# 1. list all posts/tags/content #}
+{%- for page in collections.all -%}
+
+  {%- if page.data.layout and page.url != "/contacts/" and page.url != "/articles/" and page.url != "/os/" and page.url != "/" and page.url != "/articles/tag/all/" -%}
+
+    {%- set postType = "page" -%}
+    {%- if (page.url | levelUp) == "/os/" -%}
+      {%- set postType = "package" -%}
+    {%- elif page.filePathStem | extractStem == "articles" -%}
+      {%- if page.data.type -%}
+        {%- set postType = page.data.type -%}
+      {%- else -%}
+        {%- set postType = "article" -%}
+      {%- endif -%}
+    {%- endif -%}
+
+    {%- if first -%}
+      {%- set first = false -%}
+    {%- else -%}
+      ,
+    {%- endif -%}
+
+    {"url":"{{ page.url }}","postType":"{{ postType }}","title":"{{ (page.data.title or page.data.pageTitle) | safe }}","index":"{{ page.templateContent | squash | safe }}"}
+
+  {%- endif -%}
+{%- endfor -%}
+]

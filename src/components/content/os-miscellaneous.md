@@ -1,0 +1,1 @@
+That's all programs which don't belong to any of the categories above. Here we have programs doing everything, from CSV sorting to Tap output parsing; from converting colour hex codes to processing arrays.

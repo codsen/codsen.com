@@ -1,0 +1,386 @@
+---
+layout: package
+title: string-strip-html
+packages:
+  - detergent
+  - ranges-invert
+---
+
+## Quick Take
+
+```js
+const {{ packageJsons["string-strip-html"].lect.req }} = require("string-strip-html");
+
+console.log({{ packageJsons["string-strip-html"].lect.req }}("Some text <b>and</b> text.").result);
+// => 'Some text and text.'
+
+// prevents accidental string concatenation
+console.log({{ packageJsons["string-strip-html"].lect.req }}("aaa<div>bbb</div>ccc").result);
+// => 'aaa bbb ccc'
+
+// tag pairs with content, upon request
+console.log(
+  {{ packageJsons["string-strip-html"].lect.req }}("a <pre><code>void a;</code></pre> b", {
+    stripTogetherWithTheirContents: [
+      'script', // default
+      'style',  // default
+      'xml',    // default
+      'pre', // <-- custom-added
+    ]}
+  ).result
+);
+// => 'a b'
+
+// detects raw, legit brackets:
+console.log({{ packageJsons["string-strip-html"].lect.req }}("a < b and c > d").result);
+// => 'a < b and c > d'
+```
+
+{% include "btt.njk" %}
+
+## Examples
+
+* Remove HTML tags, give me a clean string.
+* Leave only HTML tags.
+* Remove HTML tags but don't mutate the string yet, give me [ranges](/ranges/) because we'll remove widows too, then merge all ranges and apply them in one go.
+* List all string index locations and extracted values of all `<tr>` tags.
+* Make a text version from an email template.
+
+{% include "btt.njk" %}
+
+## Features
+
+- Adds or removes the whitespace to make the output presentable.
+- Removes tag pairs along with the content inside (handy for `script`).
+- Works on broken, partial, incomplete, non-valid HTML.
+- Works on HTML mixed with other languages (because it does not parse).
+- Can be used to generate Email Text versions. Puts URL links.
+- It can detect and skip false positives, for example, `a < b and c > d`.
+- Enabled-by-default but optional Recursive HTML Decoding — nothing will escape!
+
+{% include "btt.njk" %}
+
+## API - Input
+
+**{{ packageJsons["string-strip-html"].lect.req }}(input, \[opts])**
+
+In other words, it's a "string-in/string-out" function, with optional second input argument, options.
+
+| Input argument | Type         | Obligatory? | Description                                        |
+| -------------- | ------------ | ----------- | -------------------------------------------------- |
+| `input`        | String       | yes         | Text you want to strip HTML tags from              |
+| `opts`         | Plain object | no          | The Optional Options Object, see below for its API |
+
+If input arguments are supplied have any other types, an error will be `throw`n.
+
+{% include "btt.njk" %}
+
+## API - Output
+
+The `{{ packageJsons["string-strip-html"].lect.req }}()` function will return **a plain object**, for example:
+
+```js
+{
+  log: {
+    timeTakenInMilliseconds: 6
+  },
+  result: "abc click me def",
+  ranges: [
+    [3, 6, " "],
+    [14, 18, " "],
+  ],
+  allTagLocations: [
+    [3, 6],
+    [14, 18],
+  ],
+  filteredTagLocations: [
+    [3, 6],
+    [14, 18],
+  ],
+}
+```
+
+Here is its API:
+
+| Key's name | Key value's type                          | Description                                                                                                                       |
+| ---------- | ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `log`      | Plain object                              | For example, `{ timeTakenInMilliseconds: 6 }` |
+| `result`   | String                                    | The string version where all ranges were applied to it.                                                                           |
+| `ranges`   | [ranges](/ranges/): an array of one or more arrays containing from-to string index ranges OR `null` | For example, if characters from index `0` to `5` and `30` to `35` were deleted, that would be `[[0, 5], [30, 35]]`. Another example, if nothing was found, it would put here `null`.                |
+| `allTagLocations`   | Array of zero or more arrays | For example, `[[0, 5], [30, 35]]`. If you `String.slice()` each pair, you'll get HTML tag values. |
+| `filteredTagLocations`   | Array of zero or more arrays | Only the tags that ended up stripped will be reported here. Takes into account `opts.ignoreTags` and `opts.onlyStripTags`, unlike `allTagLocations` above. For example, `[[0, 5], [30, 35]]`. |
+
+**[⬆ back to top](#)**
+
+## Optional Options Object
+
+| An Optional Options Object's key | Type of its value                                    | Default                      | Description                                                                                                                                                            |
+| -------------------------------- | ---------------------------------------------------- | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ignoreTags`                     | Array of zero or more strings                        | `[]`                         | These tags will not be removed                                                                                                                                         |
+| `onlyStripTags`                  | Array of zero or more strings                        | `[]`                         | If one or more tag names are given here, only these tags will be stripped, nothing else                                                                                |
+| `stripTogetherWithTheirContents` | Array of zero or more strings, or _something falsey_ | `['script', 'style', 'xml']` | These tags will be removed from the opening tag up to closing tag, including content in-between opening and closing tags. Set it to something _falsey_ to turn it off. |
+| `skipHtmlDecoding`               | Boolean                                              | `false`                      | By default, all escaped HTML entities for example `&pound;` input will be recursively decoded before HTML-stripping. You can turn it off here if you don't need it.    |
+| `trimOnlySpaces`                 | Boolean                                              | `false`                      | Used mainly in automated setups. It ensures non-spaces are not trimmed from the outer edges of a string.                                                               |
+| `dumpLinkHrefsNearby`            | Plain object or something _falsey_                   | `false`                      | Used to customise the output of link URL's: to enable the feature, also customise the URL location and wrapping.                                                       |
+| `cb`                             | Something _falsey_ or a function                     | `null`                       | Gives you full control of the output and lets you tweak it. See the dedicated chapter below called "opts.cb" with explanation and examples.                            |
+
+The Optional Options Object is not validated; please take care of what values and of what type you pass.
+
+Here is the Optional Options Object in one place (in case you ever want to copy it whole):
+
+```js
+{
+  ignoreTags: [],
+  onlyStripTags: [],
+  stripTogetherWithTheirContents: ["script", "style", "xml"],
+  skipHtmlDecoding: false,
+  trimOnlySpaces: false,
+  dumpLinkHrefsNearby: {
+    enabled: false,
+    putOnNewLine: false,
+    wrapHeads: "",
+    wrapTails: ""
+  },
+  cb: null,
+}
+```
+
+{% include "btt.njk" %}
+
+### Using Ranges from the output
+
+{% markdown '/src/components/content/ranges-explanation.md' %}
+
+```js
+const {{ packageJsons["string-strip-html"].lect.req }} = require("string-strip-html");
+const {{ packageJsons["ranges-apply"].lect.req }} = require("ranges-apply");
+
+const input = `    <div>
+  something
+</div>
+`;
+const { result, ranges } = {{ packageJsons["string-strip-html"].lect.req }}(input);
+console.log(ranges);
+// => [[0, 12], [21, 32]]
+console.log(result);
+// => "something"
+
+// apply ranges onto string:
+const finalResultStr = {{ packageJsons["ranges-apply"].lect.req }}(input, ranges);
+// you'll get same thing:
+console.log(finalResultStr);
+// => "something"
+```
+
+It's not just strict tag index locations `[[4, 9], [30, 36]]`, it's what you'd feed to `ranges-apply` to get the nice clean result.
+
+{% include "btt.njk" %}
+
+### `opts.trimOnlySpaces`
+
+> `Hi&nbsp;` &rarr; `Hi&nbsp;` instead of `Hi&nbsp;` &rarr; `Hi`
+
+In automated setups, a single string value can be split over multiple JSON paths. In those cases, joining spaces or non-breaking spaces are intended and often placed around the values. Normally, we would treat surrounding whitespace as rogue, but not in these cases.
+
+This setting allows to distinguish between the two cases.
+
+For example, imagine we "stitch" the sentence: `Hi John! Welcome to our club.` out of three pieces: `Hi` + `John` + `! + Welcome to our club.`. In this case, spaces between the chunks would be added by your templating engine. Now, imagine, the text is of a quite large `font-size`, and there's a risk of words wrapping at wrong places. A client asks you to ensure that `Hi` and `John` are **never split between the lines**.
+
+What do you do?
+
+You remove the space between `Hi` and `John` from the template and move it to data-level. You hard-code the non-breaking space after `Hi` — `Hi&nbsp;`.
+
+As you know, this library trims the input before returning it, and recursive HTML decoding is always on. On default settings, this library would remove your non-breaking space from `Hi&nbsp;`. That's where you need to set `opts.trimOnlySpaces` to `true`.
+
+In this particular case, you can either turn off HTML decoding OR, even better, use this `opts.trimOnlySpaces` setting.
+
+In either case, whitespace between the detected tags will still be aggressively trimmed - `text <div>\n \t \r\n <br>\t \t \t</div> here` &rarr; `text here`.
+
+When this setting is on, only spaces will be trimmed from outside; an algorithm will stop at a first non-space character, in this case, non-breaking space:
+
+```
+"      &nbsp;     Hi! Please <div>shop now</div>!      &nbsp;      "
+```
+
+is turned into:
+
+```
+"&nbsp;     Hi! Please shop now!      &nbsp;"
+```
+
+Notice how space chunks between `nbsp`'s and text are retained when `opts.trimOnlySpaces` is set to `true`. But the default is `false`; this feature is off by default.
+
+{% include "btt.njk" %}
+
+### `opts.dumpLinkHrefsNearby`
+
+`opts.dumpLinkHrefsNearby` value is a plain object:
+
+| opts.dumpLinkHrefsNearby key | default value | purpose                                                                                                                                                                                                    |
+| ---------------------------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| enabled                      | `false`       | by default, this function is disabled - URL's are not inserted nearby. Set it to Boolean `true` to enable it.                                                                                              |
+| putOnNewLine                 | `false`       | By default, URL is inserted after any whatever was left after stripping the particular linked piece of code. If you want, you can force all inserted URL's to be on a new line, separated by a blank line. |
+| wrapHeads                    | `""`          | This string (default is an empty string) will be inserted in front of every URL. Set it to any string you want, for example `[`.                                                                           |
+| wrapTails                    | `""`          | This string (default is an empty string) will be inserted straight after every URL. Set it to any string you want, for example `]`.                                                                        |
+
+
+This feature is aimed at producing Text versions for promotional or transactional email campaigns.
+
+If input string is has a linked text, URL will be put after it:
+
+```html
+We watch both <a href="https://www.rt.com" target="_blank">RT</a> and
+<a href="https://www.bbc.co.uk" target="_blank">BBC</a>.
+```
+
+it's turned into:
+
+```html
+We watch both RT https://www.rt.com and BBC https://www.bbc.co.uk.
+```
+
+But equally, any link on any tag, even one without text, will be retained:
+
+```html
+Codsen
+<div>
+  <a href="https://codsen.com" target="_blank"
+    ><img
+      src="logo.png"
+      width="100"
+      height="100"
+      border="0"
+      style="display:block;"
+      alt="Codsen logo"
+  /></a>
+</div>
+```
+
+it's turned into:
+
+```
+Codsen https://codsen.com
+```
+
+Setting `opts.dumpLinkHrefsNearby` is off by default; you need to turn it on, passing options object with a key `opts.dumpLinkHrefsNearby` set to `true`.
+
+{% include "btt.njk" %}
+
+### `opts.onlyStripTags`
+
+Sometimes you want to strip only certain HTML tag or tags. It would be impractical to ignore all other known HTML tags and leave those you want. Option `opts.onlyStripTags` allows inverting the setting: whatever tags you list will be the only tags removed.
+
+`opts.onlyStripTags` is an array. When a program starts, it will filter out any empty strings and strings that can be `String.trim()`'ed to zero-length string. It's necessary because a presence on just one string in `opts.onlyStripTags` will switch this application to `delete-only-these` mode and it would be bad if empty, falsey or whitespace string value would accidentally cause it.
+
+This option can work in combination with `opts.ignoreTags`. Any tags listed in `opts.ignoreTags` will be removed from the tags, listed in `opts.onlyStripTags`. If there was one or more tag listed in `opts.onlyStripTags`, the `delete-only-these` mode will be on and will be respected, even if there will be no tags to remove because all were excluded in `opts.onlyStripTags`.
+
+{% include "btt.njk" %}
+
+### `opts.cb`
+
+Sometimes you want more control over the program: maybe you want to strip only certain tags and write your custom conditions, maybe you want to do something extra on tags which are being ignored, for example, fix whitespace within them?
+
+You can get this level of control using `opts.cb`. In options object, under key's `cb` value, put a function. Whenever this program wants to do something, it will call your function, `Array.forEach(key => {})`-style. Instead of `key` you get a plain object with the following keys:
+
+```js
+const cb = ({
+  tag,
+  deleteFrom,
+  deleteTo,
+  insert,
+  rangesArr,
+  proposedReturn,
+}) => {
+  if (tag) {
+    // do something depending on what's in the current tag
+    console.log(JSON.stringify(tag, null, 4));
+  }
+  // default action which does nothing different from normal, non-callback operation
+  rangesArr.push(deleteFrom, deleteTo, insert);
+  // you might want to do something different, depending on "tag" contents.
+};
+const { result } = {{ packageJsons["string-strip-html"].lect.req }}("abc<hr>def", { cb });
+console.log(result);
+```
+
+The `tag` key contains all the internal data for the particular tag which is being removed. Feel free to `console.log(JSON.stringify(tag, null, 4))` it and tap its contents.
+
+{% include "btt.njk" %}
+
+### cb() example one
+
+The point of this callback interface is to pass the action of pushing of ranges to a user, as opposed to a program. The program will suggest you what it would push to final ranges array, but it's up to you to perform the pushing.
+
+Below, the program "does nothing", that is, you push what it proposes, "proposedReturn" array:
+
+```js
+const cb = ({
+  tag,
+  deleteFrom,
+  deleteTo,
+  insert,
+  rangesArr,
+  proposedReturn,
+}) => {
+  rangesArr.push(deleteFrom, deleteTo, insert);
+};
+const res1 = {{ packageJsons["string-strip-html"].lect.req }}("abc<hr>def", { cb });
+console.log(res1);
+// => "abc def"
+
+// you can request ranges instead:
+const res2 = {{ packageJsons["string-strip-html"].lect.req }}("abc<hr>def", { cb });
+console.log(res2);
+// => [[3, 7, " "]]
+```
+
+{% include "btt.njk" %}
+
+### cb() example two
+
+In the example below, we are going to use one of the keys of the `tag`, the `tag.slashPresent` which tells is there a closing slash on this tag or not.
+
+For example, considering input with some rogue whitspace, `<div >abc</ div>`, replace all `div` with `tralala`, minding the closing slash:
+
+```js
+const {{ packageJsons["string-strip-html"].lect.req }} = require("string-strip-html");
+// define a callback as a separate variable if you are going to use it multiple times:
+const cb = ({
+  tag,
+  deleteFrom,
+  deleteTo,
+  // insert,
+  rangesArr,
+  // proposedReturn
+}) => {
+  rangesArr.push(
+    deleteFrom,
+    deleteTo,
+    `<${tag.slashPresent ? "/" : ""}tralala>`
+  );
+};
+const { result, ranges} = {{ packageJsons["string-strip-html"].lect.req }}("<div >abc</ div>", { cb });
+console.log(result);
+// => "<tralala>abc</tralala>"
+console.log(ranges);
+// => [
+//      [0, 6, "<tralala>"],
+//      [9, 16, "</tralala>"]
+//    ]
+```
+
+{% include "btt.njk" %}
+
+## Algorithm
+
+Speaking scientifically, it works from lexer-level, it's a _scanerless_ parser.
+
+In simple language, this program does not use parsing and AST trees. It processes the input string as text. Whatever the algorithm doesn't understand — errors, broken code, non-HTML, etc — it skips.
+
+{% include "btt.njk" %}
+
+## Quality dependencies
+
+We use only our own or very popular dependencies: [`ent`](https://www.npmjs.com/package/ent) is by [substack](https://www.npmjs.com/~substack) himself and [`lodash`](https://www.npmjs.com/package/lodash) is, well, The Lodash. All other dependencies are our own.
+
+{% include "btt.njk" %}

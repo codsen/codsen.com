@@ -1,0 +1,24 @@
+{
+  "items": [
+    {
+      "text": "Home",
+      "url": "/",
+      "external": false
+    },
+    {
+      "text": "Articles",
+      "url": "/articles/",
+      "external": false
+    },
+    {
+      "text": "Open Source",
+      "url": "/os/",
+      "external": false
+    },
+    {
+      "text": "Contacts",
+      "url": "/contacts/",
+      "external": false
+    }
+  ]
+}

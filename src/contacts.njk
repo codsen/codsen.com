@@ -1,0 +1,30 @@
+---
+layout: page
+title: Contacts
+extraContainerClass: page-contacts
+---
+
+{% from "macro_heading.njk" import heading %}
+
+{{ heading("Contacts", 1) }}
+
+<div class="contacts-contents">
+  <div role="presentation" class="separator">
+    {% include "svg-codsen-mr.njk" %}
+    {% include "svg-codsen-star-small.njk" %}
+    {% include "svg-codsen-2.njk" %}
+    {% include "svg-codsen-star-large.njk" %}
+  </div>
+
+  <p>
+    <a href="mailto:roy@codsen.com" target="_blank">roy@codsen.com</a>
+  </p>
+
+  <div role="presentation" class="separator">
+    {% include "svg-codsen-star-large.njk" %}
+    {% include "svg-codsen-1.njk" %}
+    {% include "svg-codsen-ok.njk" %}
+    {% include "svg-codsen-wow.njk" %}
+  </div>
+
+</div>

@@ -1,0 +1,58 @@
+{
+  "webApps": {
+    "email-comb": "emailcomb.com",
+    "html-crush": "htmlcrush.com",
+    "detergent": "detergent.io"
+  },
+  "flagshipLibsList": ["email-comb", "html-crush", "detergent"],
+  "rangeLibsList": [
+    "ranges-push",
+    "ranges-apply",
+    "ranges-merge",
+    "ranges-sort",
+    "string-range-expander"
+  ],
+  "objectLibsList": [
+    "ast-monkey",
+    "ast-monkey-traverse",
+    "ast-monkey-util",
+    "json-comb-core",
+    "json-variables",
+    "object-merge-advanced"
+  ],
+  "stringLibsList": [
+    "edit-package-json",
+    "easy-replace",
+    "str-indexes-of-plus",
+    "bitbucket-slug",
+    "email-all-chars-within-ascii",
+    "js-row-num"
+  ],
+  "cliAppsList": [
+    "json-comb",
+    "update-versions",
+    "lerna-clean-changelogs-cli",
+    "lerna-link-dep",
+    "lect"
+  ],
+  "lernaLibsList": [
+    "lerna-clean-changelogs-cli",
+    "lerna-link-dep",
+    "update-versions"
+  ],
+  "htmlLibsList": [
+    "emlint",
+    "html-crush",
+    "string-strip-html",
+    "detect-is-it-html-or-xhtml",
+    "html-table-patcher",
+    "is-html-tag-opening",
+    "is-html-attribute-closing",
+    "is-language-code",
+    "html-img-alt",
+    "is-media-descriptor",
+    "is-relative-uri",
+    "is-char-suitable-for-html-attr-name",
+    "html-entities-not-email-friendly"
+  ]
+}

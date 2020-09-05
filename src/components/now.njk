@@ -1,0 +1,20 @@
+<h2>The Now <del>page</del> column</h2>
+<div class="news-about">
+  {% markdown '/src/components/content/home-now-intro.md' %}
+  {% include 'src/components/svg-moustache.njk' %}
+</div>
+<div class="news-contents">
+  {% for nowEntry in collections.now | reverse | limit(20) %}
+    {% if loop.index == 4 %}
+    <div class="news-extras">
+    {% endif %}
+    <div class="now-entry-container">
+      <time datetime="{{ nowEntry.date | iso }}">{{ nowEntry.date | dateDisplay }}</time>
+      {{ nowEntry.templateContent | safe }}
+    </div>
+  {% endfor %}
+  </div>{# close .news-extras #}
+</div>
+<div class="tac" style="padding: 0 2rem 2rem;">
+  <em>old Now entries have faded into&nbsp;oblivion&hellip;</em>
+</div>

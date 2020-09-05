@@ -1,0 +1,10 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    Roy Revelt
+
+# TECHNOLOGY COLOPHON
+
+    Photoshop, 11ty, Nunjucks

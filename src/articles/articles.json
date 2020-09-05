@@ -1,0 +1,5 @@
+{
+  "type": "article",
+  "layout": "post.njk",
+  "permalink": "articles/{{ title | slug }}/index.html"
+}

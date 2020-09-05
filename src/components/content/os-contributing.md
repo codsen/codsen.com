@@ -1,0 +1,5 @@
+- If you see an error, [raise an issue](<https://gitlab.com/codsen/codsen/issues/new?title=put%20package%20name%20here%20-%20put%20issue%20title%20here>).
+- If you want a new feature but **can't code it up yourself**, also [raise an issue](<https://gitlab.com/codsen/codsen/issues/new?title=put%20package%20name%20here%20-%20put%20issue%20title%20here>). Let's discuss it.
+- If you want a new feature and **can code it up yourself** - fork the monorepo through GitLab UI, git-clone your fork into your local machine, hack away, remember to write tests. Finally, git-push and raise a merge request through GitLab UI.
+- If you tried to use a package, but something didn't work out, also [raise an issue](<https://gitlab.com/codsen/codsen/issues/new?title=put%20package%20name%20here%20-%20put%20issue%20title%20here>). We'll try to help.
+- If have anything to say, good or bad, [email us](/os/contacts/).

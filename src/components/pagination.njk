@@ -1,0 +1,22 @@
+{# https://www.11ty.dev/docs/pagination/nav/ #}
+<div class="pagination">
+
+    {%- for pageEntry in pagination.pages -%}
+
+      {% if loop.first %}
+        {% if pagination.href.previous %}<a class="arrow_left" href="{{ pagination.href.previous }}">newer</a>{% endif %}
+        <ol>
+      {% endif %}
+
+      <li>
+        <a class="pagination__bubble" href="{{ pagination.hrefs[ loop.index0 ] }}"{% if page.url == pagination.hrefs[ loop.index0 ] %} aria-current="page"{% endif %}>{{ loop.index }}</a>
+      </li>
+
+      {% if loop.last %}
+        </ol>
+        {% if pagination.href.next %}<a class="arrow_right" href="{{ pagination.href.next }}">older</a>{% endif %}
+      {% endif %}
+
+    {%- endfor -%}
+
+</div>

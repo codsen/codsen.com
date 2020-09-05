@@ -1,0 +1,7 @@
+{% extends 'layouts/base.njk' %}
+
+{% block content %}
+  <main class="content-main layout-error{% if extraContainerClass %} {{ extraContainerClass }}{% endif %}" data-role="main" id="skiplink-content" tabindex="-1">
+    {{ content | safe }}
+  </main>
+{% endblock %}

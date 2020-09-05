@@ -1,0 +1,54 @@
+{% set pageTitle = 'Codsen' %}
+{% if title %}
+  {% set pageTitle = title + ' | ' + 'Codsen' %}
+{% endif %}
+
+{% set pageDesc = config.shortDesc %}
+{% set siteTitle = 'Codsen' %}
+{% set description = config.metaDesc %}
+{% set currentUrl = config.url + page.url %}
+
+{% if metaTitle %}
+  {% set pageTitle = metaTitle %}
+{% elif page.fileSlug == "tags" and page.url | extractTagName == "all" %}
+  {% set pageTitle = "All tags | Codsen" %}
+{% elif page.fileSlug == "tags" %}
+  {% set pageTitle = 'Tag ' + page.url | extractTagName + ' | ' + 'Codsen' %}
+{% endif %}
+
+{# page.fileSlug = "tags" #}
+{# page.url = "/articles/tag/amazon/" #}
+
+{% if metaDesc %}
+  {% set pageDesc = metaDesc %}
+{% endif %}
+
+<title>{{ pageTitle }}</title>
+<link rel="canonical" href="{{ currentUrl }}"/>
+
+<meta property="og:site_name" content="{{ siteTitle }}"/>
+<meta property="og:title" content="{{ pageTitle }}"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="{{ currentUrl }}"/>
+<meta property="twitter:url" content="{{ currentUrl }}"/>
+<meta property="twitter:site" content="{{ siteTitle }}"/>
+<meta name="twitter:creator" content="@revelto"/>
+
+<meta name="description" content="{{ pageDesc }}"/>
+<meta name="twitter:description" content="{{ pageDesc }}"/>
+<meta property="og:description" content="{{ pageDesc }}"/>
+
+{% if socialImage %}
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta property="og:image" content="{{ socialImage }}"/>
+  <meta name="twitter:image" content="{{ socialImage }}"/>
+  <meta property="og:image:alt" content="Page image for {{ pageTitle }}"/>
+  <meta name="twitter:image:alt" content="Page image for {{ pageTitle }}"/>
+{% else %}
+  <meta property="og:image" content="{{ config.url }}/cover.jpg"/>
+  <meta name="twitter:image" content="{{ config.url }}/cover.jpg"/>
+{% endif %}
+
+{% if config.paymentPointer %}
+  <meta name="monetization" content="{{ config.paymentPointer }}"/>
+{% endif %}

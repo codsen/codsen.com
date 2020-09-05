@@ -1,0 +1,104 @@
+<div role="presentation" class="separator">
+
+{# import #}
+{# ------ #}
+
+{# stars #}
+{% set codsenStarLarge %}
+  {% include "svg-codsen-star-large.njk" %}
+{% endset %}
+{% set codsenStarSmall %}
+{% include "svg-codsen-star-small.njk" %}
+{% endset %}
+
+{# logos #}
+{% set codsen1 %}
+  {% include "svg-codsen-1.njk" %}
+{% endset %}
+{% set codsen2 %}
+  {% include "svg-codsen-2.njk" %}
+{% endset %}
+
+{# others #}
+{% set codsenOk %}
+{% include "svg-codsen-ok.njk" %}
+{% endset %}
+{% set codsenMr %}
+{% include "svg-codsen-mr.njk" %}
+{% endset %}
+
+{# kickers #}
+{% set codsenWow %}
+{% include "svg-codsen-wow.njk" %}
+{% endset %}
+
+{# set up arrays #}
+{# ------------- #}
+{% set logos = [codsen1, codsen2] | shuffle %}
+{% set others = [codsenOk, codsenMr] | shuffle %}
+{% set kickers = [codsenWow] | shuffle %}
+{% set finalStickers = [] %}
+
+{# generate random flags #}
+{# --------------------- #}
+{% set showLargeStar = ([0, 1, 2, 3, 4] | shuffle | limit(1)) > 0 %}
+{% set showSmallStar = ([0, 1, 2, 3, 4] | shuffle | limit(1)) > 0 %}
+{% set showKickers = ([0, 1] | shuffle | limit(1)) > 0 %}
+{% set showOthers = ([0, 1] | shuffle | limit(1)) > 0 %}
+{% set likely = ([0, 1, 2, 3, 4] | shuffle | limit(1)) > 0 %}
+{% set unlikely = ([0, 1, 2, 3, 4, 5, 6] | shuffle | limit(1)) == 0 %}
+{% set veryunlikely = ([0, 1, 2, 3, 4, 5, 6, 7, 8, 9] | shuffle | limit(1)) == 0 %}
+
+{# assemble #}
+{# -------- #}
+
+{# show big star or not #}
+{% if showLargeStar %}
+  {% set finalStickers = finalStickers | concat(codsenStarLarge) %}
+{% endif %}
+
+{# either both or small-one but always at least one star #}
+{% if showSmallStar or (not showLargeStar) %}
+  {% set finalStickers = finalStickers | concat(codsenStarSmall) %}
+{% endif %}
+
+{# always add the Codsen-name sticker #}
+{% set finalStickers = finalStickers | concat(logos[0]) %}
+
+{% if likely %}
+  {% set finalStickers = finalStickers | concat(others[0]) %}
+{% endif %}
+
+{# add a second #}
+{% if unlikely %}
+  {% set finalStickers = finalStickers | concat(others[1]) %}
+{% endif %}
+
+{% if veryunlikely %}
+  {% set finalStickers = finalStickers | concat(kickers[0]) %}
+{% endif %}
+
+{# ---------- #}
+
+{% if oneStickerOnlyPlease %}
+  {% set star = [codsenStarLarge, codsenStarSmall] | shuffle | limit(1) %}
+
+  {# make wow half-likely #}
+  {% set sticker = [codsen1, codsen2, codsenOk, codsenMr, codsen1, codsen2, codsenOk, codsenMr, codsenWow] | shuffle | limit(1) %}
+
+  {% set fiftyFifty = ([0, 1] | shuffle | limit(1)) > 0 %}
+
+  {% if fiftyFifty %}
+    {{ star | safe }}
+    {{ sticker | safe }}
+  {% else %}
+    {{ sticker | safe }}
+    {{ star | safe }}
+  {% endif %}
+{% else %}
+  {% for sticker in finalStickers | shuffle %}
+    {{ sticker | safe }}
+  {% endfor %}
+{% endif %}
+
+</div>

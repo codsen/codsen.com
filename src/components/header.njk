@@ -1,0 +1,69 @@
+<header class="site-header">
+  <div class="site-branding">
+    <a class="site-branding__logo" href="{{ rootUrl }}/" itemprop="url">
+      {% include "src/components/svg-codsen-head.njk" %}
+    </a>
+  </div>
+
+  <button class="search-toggle" aria-controls="search-form" aria-expanded="false" style="display: none;">
+    <span class="screen-reader-text">Search Menu</span>
+    {% include "src/components/svg-icon-search.njk" %}
+    {% include "src/components/svg-icon-close.njk" %}
+  </button>
+
+  <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+    <span class="screen-reader-text">Primary Menu</span>
+    {% include "src/components/svg-icon-burger.njk" %}
+    {% include "src/components/svg-icon-close.njk" %}
+  </button>
+
+  <nav id="site-navigation" class="main-navigation" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+
+    <div class="menu-container">
+      <ul id="primary-menu" class="menu-list">
+        {% for item in navigation.items %}
+          {% set relExternal = '' %}
+          {% set isCurrent = '' %}
+
+          {% if item.external %}
+            {% set relExternal = ' rel="external" target="_blank"' %}
+          {% endif %}
+
+          {% if page.url == item.url or ((page.url | levelUp) == item.url) %}
+            {% set isCurrent = ' aria-current="page"' %}
+          {% endif %}
+
+          <li class="menu-item menu-item-{{ item.text | slugify }}">
+            <a href="{{ item.url }}"{{ relExternal | safe }}{{ isCurrent | safe }} itemprop="url">
+              <span itemprop="name">{{ item.text }}</span></a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="dark-mode-toggle-container" data-controller="theme-switcher">
+
+        <button aria-pressed="false" data-target="theme-switcher.auto" data-theme-name="auto" aria-label="Set automatic theme">
+          {% include "src/components/svg-icon-auto.njk" %}
+        </button>
+
+        <button aria-pressed="true" data-target="theme-switcher.light" data-theme-name="light" aria-label="Set light theme">
+          {% include "src/components/svg-icon-light.njk" %}
+        </button>
+
+        <button aria-pressed="false" data-target="theme-switcher.dark" data-theme-name="dark" aria-label="Set dark theme">
+          {% include "src/components/svg-icon-dark.njk" %}
+        </button>
+
+    </div>
+
+    <form id="search-form" role="search" method="get" action="{{ rootUrl }}/">
+      <label>
+        <span class="screen-reader-text">Search for:</span>
+        {% include "src/components/svg-icon-search.njk" %}
+        <input type="search" class="search-field" placeholder="for example, html" value="" name="s" autofocus/>
+      </label>
+      <input type="submit" class="search-submit" value="Search"/>
+    </form>
+  </nav>
+</header>

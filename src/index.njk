@@ -1,0 +1,75 @@
+{% extends 'layouts/base.njk' %}
+
+{% block content %}
+  {% include "header.njk" %}
+  <main class="content-main" data-role="main" id="skiplink-content">
+    <div class="content-main__inner col-outer">
+      <hr>
+      <div class="col1 entries">
+        <div class="col3-clone">
+          {% include "src/components/now.njk" %}
+        </div>
+        <a href="/articles/"><h2><span>Articles</span></h2></a>
+
+        {%- for article in collections.posts | reverse -%}
+          {%- if loop.index0 < 5 -%}
+            {% set type = "article" %}
+            {% if article.data.type %}
+              {% set type = article.data.type %}
+            {% endif %}
+
+            {% include "src/components/home-article.njk" %}
+          {%- endif -%}
+        {%- endfor -%}
+
+        <div class="ptb20 tac">
+          <a class="button button-smaller" href="/articles/">See all articles</a> &nbsp; <a class="button button-smaller secondary" href="/feed.xml">Subscribe to RSS</a>
+        </div>
+
+      </div>
+      <hr>
+      <div class="col2 open-source-container entries">
+        <h2 class="inset">Open Source</h2>
+        <div class="open-source-container__detergent">
+          <a href="/os/detergent/"><h3>Detergent</h3></a>
+          <p>
+            Text extraction, cleaning and preparation tool.
+          </p>
+          <p class="h-narrowColumns">
+            Removes invisible characters (&ldquo;<a class="no-underline" href="https://www.fileformat.info/info/unicode/char/0003/index.htm" target="_blank">&#xFFFD;</a>&rdquo;), encodes&nbsp;entities and improves the English&nbsp;style.
+          </p>
+          <p class="tar">
+            <a class="button" href="/os/detergent/">Find out more</a>
+          </p>
+        </div>
+        <div class="open-source-container__comb">
+          <a href="/os/email-comb/"><h3>Email Comb</h3></a>
+          <p class="mb20">
+            <a class="button" href="/os/email-comb/">Find out more</a>
+            Unused CSS remover for email templates. Supports all ESP languages, minifies and&nbsp;uglifies.
+          </p>
+        </div>
+        <div class="open-source-container__crush">
+          <a href="/os/html-crush/"><h3>HTML Crush</h3></a>
+          <p>
+            <a class="button" href="/os/html-crush/">Find out more</a>
+            Email template-oriented HTML&nbsp;minifier. Limits line lengths for the best results in&nbsp;Outlook.
+          </p>
+        </div>
+        <div class="open-source-container__strip">
+          <a href="/os/string-strip-html/"><h3>string-strip-html</h3></a>
+          <p>
+            Removes HTML from test/strings. Can be used to produce text versions for multipart emails.
+          </p>
+          <p>
+            <a class="button" href="/os/string-strip-html/">Find out more</a>
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="col3 entries">
+        {% include "src/components/now.njk" %}
+      </div>
+    </div>
+  </main>
+{% endblock %}

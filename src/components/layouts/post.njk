@@ -1,0 +1,66 @@
+{% extends 'layouts/base.njk' %}
+
+{# Populate <head> with post-related assets #}
+{% block head %}{% endblock %}
+
+{% block content %}
+{% from "macro_package-listing.njk" import packageListing %}
+
+{% set oneStickerOnlyPlease = false %}
+{% if page.url == "/trivia/" %}
+  {% set oneStickerOnlyPlease = true %}
+{% endif %}
+
+{% include "header.njk" %}
+<hr>
+<main class="content-main layout-post{% if extraContainerClass %} {{ extraContainerClass }}{% endif %}" data-role="main" id="skiplink-content" tabindex="-1">
+  <div class="content-main__inner">
+    <article>
+      {%- if image -%}
+      <figure class="hero-img" itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject">
+        <div class="post-hero">
+          <img width="" height="" src="/images/codsen-article-{{ image }}-l.png" class="post-image-hero" alt="" itemprop="contentUrl">
+        </div>
+    	</figure>
+      {%- endif -%}
+      <header{% if not image %} class="extra-mt"{% endif %}>
+        <h1>{{ title }}</h1>
+        {% if page.url | levelUp == "/articles/" %}
+        <div class="meta">
+    			by <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person"><a href="https://codsen.com/author/royrevelt/" itemprop="url"> <span itemprop="name">Roy Revelt</span></a></span> &mdash; posted on <span class="posted-on"><time datetime="{{ page.date | iso }}">{{ page.date | dateDisplay }}</time></span>
+          {% if tags.length %}
+          <div class="entry-tags">
+    				tagged: {% for tag in tags %}<a class="tag" href="/articles/tag/{{ tag }}" rel="tag">#{{ tag }}</a> {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+        {% endif %}
+    </header>
+
+    {% include "src/components/separator.njk" %}
+
+    {{ content | safe }}
+
+    </article>
+
+    {% include "src/components/separator.njk" %}
+
+    {% if ((page.url | levelUp == "/articles/") and packages) %}
+      <div class="package-extras">
+        <div class="package-extras__packages">
+          <h2>Related packages:</h2>
+          <div class="content-row__packages content-row__packages-list">
+          {# takes "packages" key from front-matter into consideration #}
+          {% for package in packages %}
+            {{ packageListing(package, packageJsons[package]) }}
+          {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    {% include "btt.njk" %}
+  </div>
+</main>
+
+{% endblock %}

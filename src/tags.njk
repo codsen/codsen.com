@@ -1,0 +1,64 @@
+---
+layout: list
+extraContainerClass: layout-page-tag
+description: Categories page description
+pagination:
+  data: collections
+  size: 1
+  alias: tag
+permalink: /articles/tag/{{ tag | slug }}/
+---
+{% if tag !== 'all' %}
+  <div class="layout-page-tag-single">
+    <div class="head">
+      <h1 class="large-hash"><span class="pr">{{ tag | breakDashes | safe }}<sup title="{{ collections[tag].length }} tags published" aria-label="{{ collections[tag].length }} tags published">Σ={{ collections[tag].length }}</sup></span></h1>
+      <div class="head__extras">
+        <a class="button secondary" href="/articles/tag/all/">See all tags</a>
+      </div>
+    </div>
+
+    <section>
+        {% for article in collections[tag] | reverse %}
+
+        {% set type = "article" %}
+        {% if article.data.type %}
+
+          {% set type = "article" %}
+          {% if article.data.type %}
+            {% set type = article.data.type %}
+          {% endif %}
+
+        {% endif %}
+
+        {% include "src/components/home-article.njk" %}
+
+        {% endfor %}
+    </section>
+  </div>
+{% else %}
+  <div class="layout-page-tag-all">
+    <h1>
+      <span class="all-tags__all">All</span> <span class="all-tags__tags pr">tags<sup title="{{ collections.tagList | length }} tags published" aria-label="{{ collections.tagList | length }} tags published">Σ={{ collections.tagList | length }}</sup></span>
+    </h1>
+    <div class="all-tags__content">
+      <section>
+        <h2>a-z</h2>
+        <ul>
+          {% for tag in collections.tagList | sort %}
+            {% set tagUrl %}/articles/tag/{{ tag }}/{% endset %}
+            <li><a href="{{ tagUrl | url }}" class="tag">{{ tag }}</a> ({{ collections[tag].length }})</li>
+          {% endfor %}
+        </ul>
+      </section>
+      <section>
+        <h2>by count</h2>
+        <ul>
+          {% for tag in collections.tagListSortedByCount %}
+            {% set tagUrl %}/articles/tag/{{ tag }}/{% endset %}
+            <li><a href="{{ tagUrl | url }}" class="tag">{{ tag }}</a> ({{ collections[tag].length }})</li>
+          {% endfor %}
+        </ul>
+      </section>
+    </div>
+  </div>
+{% endif %}

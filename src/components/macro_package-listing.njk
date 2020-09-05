@@ -1,0 +1,10 @@
+{% macro packageListing(name, packageJson) %}
+<div class="content-row__package">
+  <a href="{% if packageJson %}/os/{% else %}https://www.npmjs.com/package/{% endif %}{{ name }}"><span class="emoji">📦</span> {{ name }}{% if packageJson %} <sup>{{ packageJson.version }}</sup>{% endif %}</a>
+  {% if packageJson %}
+  <div class="content-row__package__description">
+    {{ packageJson.description | formatCodeBits | safe }}
+  </div>
+  {% endif %}
+</div>
+{% endmacro %}

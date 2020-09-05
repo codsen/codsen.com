@@ -1,0 +1,41 @@
+---
+layout: list
+title: Articles
+pagination:
+  data: collections.posts
+  size: 4
+  reverse: true
+---
+<section class="two-thirds page-articles-home">
+  <h1><span class="pr">Articles<sup title="{{ collections.posts | length }} posts published" aria-label="{{ collections.posts | length }} posts published">Σ={{ collections.posts | length }}</sup></span></h1>
+  {% include "src/components/pagination.njk" %}
+  <div>
+    {%- for article in pagination.items -%}
+      {# {%- if loop.index0 < 5 -%} #}
+        {% set type = "article" %}
+        {% if article.data.type %}
+
+          {% set type = "article" %}
+          {% if article.data.type %}
+            {% set type = article.data.type %}
+          {% endif %}
+
+        {% endif %}
+
+        {% include "src/components/home-article.njk" %}
+      {# {%- endif -%} #}
+    {%- endfor -%}
+  </div>
+  {% include "src/components/pagination.njk" %}
+</section>
+<aside class="one-third">
+  <section>
+    <p>
+      <a href="/articles/list/">List of all posts &rarr;</a>
+      <br>
+      <a href="/articles/tag/all/">All tags</a>
+    </p>
+    {% include "sidebar_rss_contents.njk" %}
+    {% include "svg-codsen-wow.njk" %}{% include "svg-codsen-2.njk" %}
+  </section>
+</aside>
