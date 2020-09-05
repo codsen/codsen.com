@@ -77,7 +77,7 @@ That leaves us with _file-changing_ and _folder-changing_ options.
 
 ```js
 eleventyConfig.addPassthroughCopy({ bundle: `assets/${hash}` })
-`"
+```
 
 **File approach** would involve either:
 
