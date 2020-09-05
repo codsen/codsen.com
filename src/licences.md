@@ -6,6 +6,8 @@ extraContainerClass: layout-page-centered
 
 # Licences
 
+{% include "src/components/separator.njk" %}
+
 ## External link icon
 
 <div class="licence-container">
@@ -14,6 +16,9 @@ extraContainerClass: layout-page-centered
 
 We're using a modified version of Wikipedia's [external link icon](https://commons.wikimedia.org/wiki/File:External.svg) which is Public Domain.
 
+{% include "btt.njk" %}
+{% include "src/components/separator.njk" %}
+
 ## Loader Party Parrots
 
 <div class="licence-container">
@@ -21,6 +26,9 @@ We're using a modified version of Wikipedia's [external link icon](https://commo
 </div>
 
 [cultofthepartyparrot.com](https://cultofthepartyparrot.com/)<br>Creative Commons Attribution-ShareAlike 4.0 International [License](https://github.com/jmhobbs/cultofthepartyparrot.com/blob/master/LICENSE)
+
+{% include "btt.njk" %}
+{% include "src/components/separator.njk" %}
 
 ## Eleventy starter templates
 
@@ -37,6 +45,9 @@ We're using a modified version of Wikipedia's [external link icon](https://commo
     </div>
   </div>
 </div>
+
+{% include "btt.njk" %}
+{% include "src/components/separator.njk" %}
 
 ## Other dependencies
 
@@ -55,3 +66,6 @@ We're using a modified version of Wikipedia's [external link icon](https://commo
 {% endfor %}
 
 </div>
+
+{% include "src/components/separator.njk" %}
+{% include "btt.njk" %}
