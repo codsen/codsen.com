@@ -54,7 +54,7 @@ $darkYellow: #d98d45; /* 85% */
 $darkerYellow: #804b22; /* 50% */
 $darkOrange: #cc5335; /* 80% */
 $darkerOrange: #803421; /* 50% */
-$darkRed: #a62626; /* 65% */
+$darkRed: #8c2020; /* 55% */
 $darkerRed: #802a22; /* 50% */
 $darkGreen: #569939; /* 60 */
 
@@ -2101,7 +2101,11 @@ open source at all. */
     a {
       line-height: 1;
       margin-top: 4rem;
-      font-size: 6rem;
+
+      font-size: 3rem;
+      @media (min-width: $mid) {
+        font-size: 6rem;
+      }
 
       &:hover {
         color: $blue;
@@ -3073,7 +3077,7 @@ article, .package-body__content {
   h1 {
     position: relative;
     display: inline-block;
-    line-height: 10.7rem;
+    line-height: 1.2;
 
     sup {
       font-family: monospace;
@@ -3329,9 +3333,6 @@ h1, h2, h3 {
     position: absolute;
 
     top: -1.5rem;
-    @media (min-width: $thousand) {
-      top: 0;
-    }
     right: 0;
     cursor: help;
     z-index: 20;
@@ -3992,4 +3993,11 @@ html::-webkit-scrollbar-thumb {
 html[data-theme='dark']::-webkit-scrollbar-thumb {
   background-color: $textDark;
   border-color: $black;
+}
+
+.wp-admin-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 2rem;
 }

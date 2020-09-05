@@ -1,5 +1,5 @@
 // extracts the root path:
-// in: /articles/1/
+// in: /articles/zzz/yyy/uuu/
 // out: /articles/
 
 // used in matching what to underline in nav, necessary

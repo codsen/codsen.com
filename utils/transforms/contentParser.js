@@ -136,7 +136,7 @@ module.exports = (value, outputPath) => {
         const getHref = link.getAttribute("href");
         const currentRel = link.getAttribute("rel") || "";
         const isExternal =
-          getHref.startsWith("http") && !getHref.includes("/codsen.com");
+          getHref.startsWith("http") && !getHref.includes("https://codsen.com");
         if (isExternal) {
           externalLink.setAttribute(
             "rel",

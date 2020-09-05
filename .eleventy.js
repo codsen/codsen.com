@@ -71,8 +71,10 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter("breakDashes", require("./utils/filters/breakDashes.js"));
   // extracts "amazon" from "/articles/tag/amazon/" in <title>
   eleventyConfig.addFilter("extractTagName", require("./utils/filters/extractTagName.js"));
-  // turns "/articles/1/" in "/articles/", used to underline nav
-  eleventyConfig.addFilter("levelUp", require("./utils/filters/levelUp.js"));
+  // turns "/articles/aaa/bbb/ccc/" into "/articles/", used to underline nav
+  eleventyConfig.addFilter("rootUrl", require("./utils/filters/rootUrl.js"));
+  // turns "/articles/aaa/bbb/ccc/" into "/articles/aaa/bbb/", used calculate the "edit on GitLab" URL
+  eleventyConfig.addFilter("goUpUrl", require("./utils/filters/goUpUrl.js"));
   // turns package name into global (remove dashes and turn camelcase)
   eleventyConfig.addFilter("packageGlobal", require("./utils/filters/packageGlobal.js"));
   // returns boolean, are any of last three letters are tall ("t" or "i" or "l" etc)

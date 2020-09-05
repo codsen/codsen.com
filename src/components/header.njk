@@ -29,7 +29,7 @@
             {% set relExternal = ' rel="external" target="_blank"' %}
           {% endif %}
 
-          {% if page.url == item.url or ((page.url | levelUp) == item.url) %}
+          {% if page.url == item.url or ((page.url | rootUrl) == item.url) %}
             {% set isCurrent = ' aria-current="page"' %}
           {% endif %}
 

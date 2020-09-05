@@ -11,7 +11,7 @@ permalink: search.json
   {%- if page.data.layout and page.url != "/contacts/" and page.url != "/articles/" and page.url != "/os/" and page.url != "/" and page.url != "/articles/tag/all/" -%}
 
     {%- set postType = "page" -%}
-    {%- if (page.url | levelUp) == "/os/" -%}
+    {%- if (page.url | rootUrl) == "/os/" -%}
       {%- set postType = "package" -%}
     {%- elif page.filePathStem | extractStem == "articles" -%}
       {%- if page.data.type -%}
