@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    {
+      "source": "/articles/tag/",
+      "destination": "/articles/tag/all/",
+      "statusCode": 301
+    },
+    {
+      "source": "/wordpress/",
+      "destination": "/wordpress/wp-admin/",
+      "statusCode": 301
+    }
+  ]
+}
