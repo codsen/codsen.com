@@ -5,7 +5,7 @@ title: Ranges
 
 {% from "macro_heading.njk" import heading %}
 
-We invented the term but it's just a fancy way to describe arrays of "from" — "to" string index _ranges_:
+We invented the term, but it's just a fancy way to describe arrays of "from" — "to" string index _ranges_:
 
 ```js
 [
@@ -33,7 +33,7 @@ A case of **no ranges** is marked by `null` (but if you pass an empty array, it 
 
 Same indexes as in `String.prototype.slice()`.
 
-_Ranges_ give us flexibility to process strings. For example, [detergent](/os/detergent/) taps different packages, one to [strip HTML](/os/string-strip-html/), another to [remove widow words](/os/string-remove-widows/) and so on — they all report _ranges_. They all operate on the same source string, not on the source, mutated by the previous operation.
+_Ranges_ gives us the flexibility to process strings. For example, [detergent](/os/detergent/) taps different packages, one to [strip HTML](/os/string-strip-html/), another to [remove widow words](/os/string-remove-widows/) and so on — they all report _ranges_. They all operate on the same source string, not on the source, mutated by the previous operation.
 
 In the end, [detergent](/os/detergent/) [merges](#ranges-merge) those ranges and processes the string, [rendering](#ranges-apply) the result.
 
@@ -147,7 +147,7 @@ That's a different approach from the old way, mutating string over and over usin
 
 The [`magic-string`](https://github.com/rich-harris/magic-string) by Rich Harris, the _Rollup_ creator.
 
-It is an all-in-one program to perform operations on strings in a controllable manner. It's oriented at operations on code and its produced sourcemaps are aimed at browsers.
+It is an all-in-one program to perform operations on strings in a controllable manner. It's oriented at operations on code, and its produced sourcemaps are aimed at browsers.
 
 _Range_ libraries are best used for when you want to:
 
