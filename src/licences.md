@@ -1,18 +1,14 @@
 ---
-layout: page
+layout: post
 title: Licences
-extraContainerClass: layout-page-centered
+extraContainerClass: layout-page-centered1
 ---
-
-# Licences
-
-{% include "src/components/separator.njk" %}
 
 ## External link icon
 
-<div class="licence-container">
+<p class="licence-container">
   <img src="https://upload.wikimedia.org/wikipedia/commons/2/25/External.svg" alt="External link"/>
-</div>
+</p>
 
 We're using a modified version of Wikipedia's [external link icon](https://commons.wikimedia.org/wiki/File:External.svg) which is Public Domain.
 
@@ -21,9 +17,9 @@ We're using a modified version of Wikipedia's [external link icon](https://commo
 
 ## Loader Party Parrots
 
-<div class="licence-container">
+<p class="licence-container">
   <img src="/images/fastparrot.gif" alt="Fast parrot"/>
-</div>
+</p>
 
 [cultofthepartyparrot.com](https://cultofthepartyparrot.com/)<br>Creative Commons Attribution-ShareAlike 4.0 International [License](https://github.com/jmhobbs/cultofthepartyparrot.com/blob/master/LICENSE)
 
@@ -32,15 +28,14 @@ We're using a modified version of Wikipedia's [external link icon](https://commo
 
 ## Eleventy starter templates
 
+We borrowed some template structures from:
+
 <div class="starter-container">
-  <p>
-    We borrowed some template structures from:
-  </p>
   <div class="starter-container-2col">
-    <div>
+    <div class="tac">
       {% markdown '/src/components/content/licences-phils.md' %}
     </div>
-    <div>
+    <div class="tac">
       {% markdown '/src/components/content/licences-xity.md' %}
     </div>
   </div>
@@ -66,6 +61,3 @@ We're using a modified version of Wikipedia's [external link icon](https://commo
 {% endfor %}
 
 </div>
-
-{% include "src/components/separator.njk" %}
-{% include "btt.njk" %}
