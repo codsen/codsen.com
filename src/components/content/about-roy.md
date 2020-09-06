@@ -1,7 +1,7 @@
 
 Roy is a well-rounded software engineer, _mainly_ working with JavaScript and _mainly_ on the front-end.
 
-He specialises in enterprise-level Email front-end and is well-versed in modern JS-ecosystem web development (SSR, React, Redux, RTL, Styled Components, storybook etc.).
+He specialises in enterprise-level Email front-end and is well-versed in modern JS-ecosystem web development (SSR, React, Redux, RTL, Styled Components, Storybook etc.).
 
 His JavaScript open-source programs are downloaded [~1.5&nbsp;million times](https://npm-stat.com/charts.html?author=royston) per month (September 2020 data).
 
