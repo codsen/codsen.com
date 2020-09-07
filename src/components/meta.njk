@@ -16,36 +16,53 @@
   {% set pageTitle = 'Tag ' + page.url | extractTagName + ' | ' + 'Codsen' %}
 {% endif %}
 
-{# page.fileSlug = "tags" #}
-{# page.url = "/articles/tag/amazon/" #}
-
 {% if metaDesc %}
   {% set pageDesc = metaDesc %}
 {% endif %}
 
 <title>{{ pageTitle }}</title>
 
-<meta property="og:site_name" content="{{ siteTitle }}"/>
-<meta property="og:title" content="{{ pageTitle }}"/>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#b31b1e">
+<meta name="theme-color" content="#ffffff">
+
+<meta property="og:site_name" content="Codsen"/>
+<meta property="og:title" content="{{ title }}">
 <meta property="og:type" content="website"/>
-<meta property="og:url" content="{{ currentUrl }}"/>
-<meta property="twitter:url" content="{{ currentUrl }}"/>
-<meta property="twitter:site" content="{{ siteTitle }}"/>
+<meta property="og:url" content="https://codsen.com{{ page.url }}">
+
+<meta property="twitter:url" content="https://codsen.com{{ page.url }}"/>
+<meta property="twitter:site" content="Codsen"/>
 <meta name="twitter:creator" content="@revelto"/>
 
-<meta name="description" content="{{ pageDesc }}"/>
-<meta name="twitter:description" content="{{ pageDesc }}"/>
-<meta property="og:description" content="{{ pageDesc }}"/>
 
-{% if socialImage %}
+{% if page.url and image %}
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="600">
+  <meta property="og:description" content="{{ page.excerpt | md | strip | trimPunctuation }}">
+  <meta name="description" content="{{ page.excerpt | md | strip | trimPunctuation }}"/>
+  <meta name="twitter:description" content="{{ page.excerpt | md | strip | trimPunctuation }}"/>
+
+
+  <meta property="og:title" content="{{ title }}">
+  <meta property="og:image" content="https://codsen.com/images/codsen-article-{{ image }}-l.png">
+
   <meta name="twitter:card" content="summary_large_image"/>
-  <meta property="og:image" content="{{ socialImage }}"/>
-  <meta name="twitter:image" content="{{ socialImage }}"/>
-  <meta property="og:image:alt" content="Page image for {{ pageTitle }}"/>
-  <meta name="twitter:image:alt" content="Page image for {{ pageTitle }}"/>
+  <meta property="og:image" content="https://codsen.com/images/codsen-article-{{ image }}-l.png"/>
+  <meta name="twitter:image" content="https://codsen.com/images/codsen-article-{{ image }}-l.png"/>
+  <meta property="og:image:alt" content="Page image for article {{ pageTitle }}"/>
+  <meta name="twitter:image:alt" content="Page image for article {{ pageTitle }}"/>
 {% else %}
-  <meta property="og:image" content="{{ config.url }}/cover.jpg"/>
-  <meta name="twitter:image" content="{{ config.url }}/cover.jpg"/>
+  <meta property="og:image" content="{{ config.url }}/cover.png"/>
+  <meta name="twitter:image" content="{{ config.url }}/cover.png"/>
+
+  <meta property="og:description" content="Codsen is all about web and email development.">
+  <meta name="description" content="Codsen is all about web and email development."/>
+  <meta name="twitter:description" content="Codsen is all about web and email development."/>
 {% endif %}
 
 {% if config.paymentPointer %}

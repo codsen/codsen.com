@@ -107,6 +107,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter("concat", require("./utils/filters/concat.js"));
   // Object.keys
   eleventyConfig.addFilter("objectKeys", require("./utils/filters/objectKeys.js"));
+  // trim punctuation - used in social card metadata descriptions
+  eleventyConfig.addFilter("trimPunctuation", require("./utils/filters/trimPunctuation.js"));
 
   // determines what's the type of the article
   eleventyConfig.addFilter("calculateType", arr => {
