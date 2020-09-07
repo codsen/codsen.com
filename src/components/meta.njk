@@ -41,12 +41,11 @@
 
 
 {% if page.url and image %}
-  <meta property="og:image:width" content="1200">
+  <meta property="og:image:width" content="1146">
   <meta property="og:image:height" content="600">
   <meta property="og:description" content="{{ page.excerpt | md | strip | trimPunctuation }}">
   <meta name="description" content="{{ page.excerpt | md | strip | trimPunctuation }}"/>
   <meta name="twitter:description" content="{{ page.excerpt | md | strip | trimPunctuation }}"/>
-
 
   <meta property="og:title" content="{{ title }}">
   <meta property="og:image" content="https://codsen.com/images/codsen-article-{{ image }}-l.png">
@@ -57,8 +56,8 @@
   <meta property="og:image:alt" content="Page image for article {{ pageTitle }}"/>
   <meta name="twitter:image:alt" content="Page image for article {{ pageTitle }}"/>
 {% else %}
-  <meta property="og:image" content="{{ config.url }}/cover.png"/>
-  <meta name="twitter:image" content="{{ config.url }}/cover.png"/>
+  <meta property="og:image" content="https://codsen.com/images/cover.png"/>
+  <meta name="twitter:image" content="https://codsen.com/images/cover.png"/>
 
   <meta property="og:description" content="Codsen is all about web and email development.">
   <meta name="description" content="Codsen is all about web and email development."/>
