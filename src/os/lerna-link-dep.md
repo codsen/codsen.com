@@ -7,9 +7,9 @@ packages:
 
 ## Quick Take
 
-`lerna add` runs whole chain of actions which are excessive, requires internet connection and slows us down.
+`lerna add` runs a whole chain of actions redundantly validating the packages and calling the internet.
 
-We just want the — `npm i` but for packages within our monorepo!
+We want the — `npm i` but for packages within our monorepo!
 
 That's what this CLI does:
 
@@ -32,7 +32,7 @@ deplink "detergent" --dev
 
 ## Supports CLI's
 
-If your package ("b" from example above) is a CLI, symlinks will be put one level deeper, instead of within `node_modules`, for each entry in `bin` from package.json, a symlink will be created in `node_modules/.bin/`, pointing not to the root of the package "b" but straight to the file that `bin` entry in package.json was pointing to.
+If your package ("b" from the example above) is a CLI, symlinks will be put one level deeper, instead of within `node_modules`, for each entry in `bin` from package.json, a symlink will be created in `node_modules/.bin/`, pointing not to the root of the package "b" but straight to the file that `bin` entry in package.json was pointing to.
 
 For example, [`lerna-clean-changelogs-cli`](/os/lerna-clean-changelogs-cli/) of ours has the following `bin` entry in its `package.json`:
 

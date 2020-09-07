@@ -4,11 +4,13 @@ title: Trivia
 extraContainerClass: page-trivia
 ---
 
+{% set oneStickerOnlyPlease = true %}
+
 **Codsen** is an amalgamation of "**Code**" and "**Send**" — meaning skill in _both_ web and email development.
 
 <div role="presentation" class="separator">
+  {% include "svg-codsen-star-small.njk" %}
   {% include "svg-codsen-1.njk" %}
-  {% include "svg-codsen-star-large.njk" %}
 </div>
 
 This website is static and follows [Indieweb](https://indieweb.org/) principles:

@@ -53,7 +53,7 @@ You then interact with your newly-created ranges class by calling its _methods_:
 
 ## `opts.mergeType`
 
-When merging, ranges are sorted first. Then, pairs starting from the end of the sorted array are merged. Last two becomes one, last two becomes one and so on.
+When merging, ranges are [sorted](/os/ranges-sort/) first. Then, pairs starting from the end of the sorted array are [merged](/os/ranges-merge/). Last two becomes one, last two becomes one and so on.
 
 The challenge is, what to do with values to add, third range array's element.
 

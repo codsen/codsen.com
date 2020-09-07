@@ -21,7 +21,7 @@ STRENGTHS:
 - Has email-specific features like [removing](/os/regex-empty-conditional-comments/) empty Outlook conditional comments
 - Attempts to fix some code issues, for example, remove space in `< body` (which would otherwise break in Chrome)
 - API contains no file I/O operations or anything front-end-related — it's "string-in, string-out"
-- All dependencies are either our own or Lodash's or Mr Sindre Sorhus'
+- All dependencies are either our own or Lodash's or Mr Sorhus'
 - CommonJS, ES Modules and UMD builds available, published to npm and available to consume via CDN's like [jsdelivr.com](https://cdn.jsdelivr.net/npm/email-comb/dist/email-comb.umd.js)
 - Complete console logging set and retained in the source (which is automatically removed from builds)
 - Modern setup: node-tap tests pointing at ES Modules build, Rollup bundling the builds, coverage high, prettier and ESLint in place
