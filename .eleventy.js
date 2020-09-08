@@ -7,6 +7,7 @@ const uslug = require('uslug')
 const uslugify = s => uslug(s)
 const arrayShuffle = require("array-shuffle");
 const implicitFigures = require("markdown-it-implicit-figures")
+const clone = require("lodash.clonedeep");
 
 /**
  * Import site configuration
@@ -109,6 +110,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter("objectKeys", require("./utils/filters/objectKeys.js"));
   // trim punctuation - used in social card metadata descriptions
   eleventyConfig.addFilter("trimPunctuation", require("./utils/filters/trimPunctuation.js"));
+  // removes <div role="presentation">...</div> - used in RSS <content> tags
+  eleventyConfig.addFilter("textDeletePresentationDivs", require("./utils/filters/textDeletePresentationDivs.js"));
 
   // determines what's the type of the article
   eleventyConfig.addFilter("calculateType", arr => {
@@ -180,7 +183,7 @@ module.exports = function (eleventyConfig) {
         .getFilteredByGlob(
           `./${config.paths.src}/${config.paths.blogdir}/**/*`
         )
-        .filter(livePosts),
+        .filter(livePosts)
     ]
   })
   eleventyConfig.addCollection('now', collectionApi => {
