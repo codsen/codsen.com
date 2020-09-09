@@ -20,7 +20,7 @@
       {% if image %}
       <figure class="hero-img" itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject">
         <div class="post-hero">
-          <img width="700" height="350" src="/images/codsen-article-{{ image }}-l.png" class="post-image-hero" alt="" itemprop="contentUrl">
+          {% include "src/components/partials/post-hero-img.njk" %}
         </div>
     	</figure>
       {% endif %}
