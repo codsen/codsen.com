@@ -2,7 +2,7 @@
 permalink: '/feed.xml'
 ---
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom" xmlns:g="http://base.google.com/ns/1.0">
+<feed xmlns="http://www.w3.org/2005/Atom">
   <title>Codsen</title>
   <generator>https://www.11ty.dev/</generator>
   <subtitle>A blog about coding, web and email, by @revelto</subtitle>
@@ -20,7 +20,7 @@ permalink: '/feed.xml'
     <entry>
       <title>{{ post.data.title }}</title>
       <link href="{{ absolutePostUrl }}"/>
-      <g:image_link>https://codsen.com/images/codsen-article-{{ post.data.image }}-l.png</g:image_link>
+      <logo>https://codsen.com/images/codsen-article-{{ post.data.image }}-l.png</logo>
       <updated>{{ post.date | rssDate }}</updated>
       <category>
         <term>{{ post.data.type | capitalize }}</term>
