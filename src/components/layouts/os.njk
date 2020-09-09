@@ -8,10 +8,10 @@
 {% block content %}
 {% set oneStickerOnlyPlease = true %}
 
-{% from "macro_package-listing.njk" import packageListing %}
+{% from "macros/package-listing.njk" import packageListing %}
 {# we consolidate headings into macro because of TOC anchors - their styling #}
 {# is manual and tedious and potentially will change sometime, so let's DRY 'em #}
-{% from "macro_heading.njk" import heading %}
+{% from "macros/heading.njk" import heading %}
 
 {# ████ #}
 {# data #}

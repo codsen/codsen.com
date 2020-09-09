@@ -4,7 +4,7 @@ title: Roy Revelt
 permalink: /author/royrevelt/
 extraContainerClass: layout-page-about
 ---
-{% from "macro_heading.njk" import heading %}
+{% from "macros/heading.njk" import heading %}
 
 <div role="presentation" class="separator">
   {% include "svg-codsen-ok.njk" %}

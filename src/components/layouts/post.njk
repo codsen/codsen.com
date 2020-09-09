@@ -4,7 +4,8 @@
 {% block head %}{% endblock %}
 
 {% block content %}
-{% from "macro_package-listing.njk" import packageListing %}
+{% from "macros/package-listing.njk" import packageListing %}
+{% from "macros/post-hero-img.njk" import postHeroImg %}
 
 {% set oneStickerOnlyPlease = false %}
 {% if page.url == "/trivia/" %}
@@ -20,7 +21,7 @@
       {% if image %}
       <figure class="hero-img" itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject">
         <div class="post-hero">
-          {% include "src/components/partials/post-hero-img.njk" %}
+          {{ postHeroImg(image) }}
         </div>
     	</figure>
       {% endif %}

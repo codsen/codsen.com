@@ -5,8 +5,8 @@
 {% endblock %}
 
 {% block content %}
-  {% from "macro_heading.njk" import heading %}
-  {% from "macro_package-listing.njk" import packageListing %}
+  {% from "macros/heading.njk" import heading %}
+  {% from "macros/package-listing.njk" import packageListing %}
   {% set prevPackage = collections.allPackagesRandomList | getPrevPackage(title) %}
   {% set nextPackage = collections.allPackagesRandomList | getNextPackage(title) %}
 

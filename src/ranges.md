@@ -3,7 +3,7 @@ layout: post
 title: Ranges
 ---
 
-{% from "macro_heading.njk" import heading %}
+{% from "macros/heading.njk" import heading %}
 
 We invented the term, but it's just a fancy way to describe arrays of "from" — "to" string index _ranges_:
 

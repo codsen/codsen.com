@@ -1,6 +1,7 @@
 ---
 permalink: '/feed.xml'
 ---
+{% from "macros/post-hero-img.njk" import postHeroImg -%}
 <?xml version="1.0" encoding="UTF-8"?>
 <rss
 	version="2.0"
@@ -40,7 +41,7 @@ permalink: '/feed.xml'
 			</category>
 			{%- endfor -%}
 			<content:encoded>
-				<![CDATA[<p>{% include "src/components/partials/post-hero-img.njk" %}</p>{{ post.templateContent | textDeletePresentationDivs | htmlToAbsoluteUrls(absolutePostUrl) | safe }}]]>
+				<![CDATA[<p>{{ postHeroImg(post.data.image) }}</p>{{ post.templateContent | textDeletePresentationDivs | htmlToAbsoluteUrls(absolutePostUrl) | safe }}]]>
 			</content:encoded>
 		</item>
 		{%- endfor -%}
