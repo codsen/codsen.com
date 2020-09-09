@@ -2,24 +2,29 @@
 permalink: '/feed.xml'
 ---
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:g="http://base.google.com/ns/1.0">
   <title>Codsen</title>
+  <generator>https://www.11ty.dev/</generator>
   <subtitle>A blog about coding, web and email, by @revelto</subtitle>
   <link href="https://codsen.com/feed.xml" rel="self"/>
   <link href="https://codsen.com/"/>
   <updated>{{ collections.posts | rssLastUpdatedDate }}</updated>
   <id>https://codsen.com/</id>
+  <icon>https://codsen.com/favicon-32x32.png</icon>
   <author>
     <name>Roy Revelt</name>
 		<email>roy@codsen.com</email>
   </author>
   {% for post in collections.posts | reverse | limit(10) %}
     {% set absolutePostUrl %}{{ post.url | url | absoluteUrl('https://codsen.com/') }}{% endset %}
-    absolutePostUrl = {{ absolutePostUrl }}
     <entry>
       <title>{{ post.data.title }}</title>
       <link href="{{ absolutePostUrl }}"/>
+      <g:image_link>https://codsen.com/images/codsen-article-{{ post.data.image }}-l.png</g:image_link>
       <updated>{{ post.date | rssDate }}</updated>
+      <category>
+        <term>{{ post.data.type | capitalize }}</term>
+      </category>
       <id>{{ absolutePostUrl }}</id>
       <content type="html"><![CDATA[{{ post.templateContent | textDeletePresentationDivs | htmlToAbsoluteUrls(absolutePostUrl) | safe }}]]></content>
     </entry>
