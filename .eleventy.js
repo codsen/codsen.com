@@ -165,6 +165,11 @@ module.exports = function (eleventyConfig) {
    * @link https://github.com/11ty/eleventy-plugin-syntaxhighlight
    */
   eleventyConfig.addPlugin(require('@11ty/eleventy-plugin-rss'))
+  eleventyConfig.addPlugin(require('@quasibit/eleventy-plugin-sitemap'), {
+    sitemap: {
+      hostname: "https://codsen.com",
+    },
+  });
   eleventyConfig.addPlugin(require('@11ty/eleventy-plugin-syntaxhighlight'))
   eleventyConfig.addPlugin(require("eleventy-plugin-markdown-shortcode"), {
     html: true,

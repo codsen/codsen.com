@@ -41,6 +41,7 @@
     "@babel/core": "^7.11.4",
     "@babel/preset-env": "^7.11.0",
     "@octokit/core": "^3.1.2",
+    "@quasibit/eleventy-plugin-sitemap": "^2.0.1",
     "@tbranyen/jsdom": "^13.0.0",
     "array-shuffle": "^1.0.1",
     "axios": "^0.20.0",
