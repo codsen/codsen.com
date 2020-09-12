@@ -103,8 +103,12 @@ PS. Input argument (in case of plain objects and arrays) is not mutated in any w
 
 {% include "btt.njk" %}
 
-## Reliability
+## Dependencies
 
-I'm using only the best ingredients, namely [hex-color-regex](https://www.npmjs.com/package/hex-color-regex) by [@tunnckocore](https://www.npmjs.com/~tunnckocore) and standalone Lodash functions (`_.clonedeep`, `_.isplainobject` and `_.isstring`). This library is being currently used in commercial projects.
+Only the best ingredients were used:
+
+- [hex-color-regex](https://www.npmjs.com/package/hex-color-regex) by [@tunnckocore](https://www.npmjs.com/~tunnckocore)
+- [`lodash.clonedeep`](https://www.npmjs.com/package/lodash.clonedeep)
+- [`lodash.isplainobject`](https://www.npmjs.com/package/lodash.isplainobject)
 
 {% include "btt.njk" %}

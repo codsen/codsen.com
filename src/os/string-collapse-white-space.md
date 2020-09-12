@@ -134,11 +134,3 @@ Notice the part `< b and c >` almost matches the HTML tag description - it's wra
 **The plan is**: if there are spaces, this means this suspect tag has got attributes. In that case, there has to be at least one equal sign or equal count of unescaped double quotes. Otherwise, nothing will be collapsed/deleted from that particular tag.
 
 {% include "btt.njk" %}
-
-## Practical use
-
-We want a reliable string white space collapsing library which would traverse the input ONLY ONCE and gather result IN ONE GO, before returning it. This is not regex approach where we mutate the string when trimming, then mutate again when collapsing... No. It's a proper traversal within a backward FOR loop (backward instead of forwards is for better speed), where we only gather the intel while traversing.
-
-I'm going to use it first in [Detergent](/os/detergent/), but you never know, it might prove handy in email template building in general.
-
-{% include "btt.njk" %}

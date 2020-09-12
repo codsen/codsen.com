@@ -1,10 +1,17 @@
-const fs = require("fs");
+const writeFileAtomic = require("write-file-atomic");
+const path = require("path");
 
-module.exports = (data, path) => {
+module.exports = (data, filename) => {
   if (process.env.ELEVENTY_ENV === "seed") {
-    fs.writeFileSync(path, data);
-    console.log(
-      `saveData.js: ${`\u001b[${32}m${`Data saved for dev: ${path}`}\u001b[${39}m`}`
-    );
+    writeFileAtomic(filename, data, (err) => {
+      if (err) throw err;
+
+      // truncate the URL to be project's
+      // +1 removes leading slash
+      const rootUrlLen = path.resolve(".").length + 1;
+      console.log(
+        `saveData.js: Writing ${path.resolve(filename).slice(rootUrlLen)}.`
+      );
+    });
   }
 };

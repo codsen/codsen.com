@@ -3,21 +3,38 @@ layout: package
 title: object-no-new-keys
 ---
 
-## Idea
+## Quick Take
 
-Check, does a `given thing` (probably a nested plain object) have any keys, not present in a `reference thing` (probably an another nested plain object). I'm using a term "thing" because this library uses a recursive algorithm which means both inputs can be _whatever_-type (string, plain object or an array).
+Check, does a given plain object have any keys, not present in a reference object. Returns array of zero or more paths in [`object-path`](https://www.npmjs.com/package/object-path) notation.
 
-This library will try to perform a **deep, recursive traversal** of both inputs and will not mutate the input arguments.
+```js
+const res = {{ packageJsons["object-no-new-keys"].lect.req }}(
+  {
+    a: {
+      b: "b",
+      c: "c",
+    },
+    x: "y",
+  },
+  {
+    a: {
+      c: "z",
+    },
+  }
+)
+console.log(res);
+// => ["a.b", "x"]
+```
 
-It is meant for work with AST's, parsed HTML or JSON, the cases where there are _objects within arrays within objects_.
-
-We use this library to look for any rogue keys in email template content files, in JSON format.
+For example, it can be used to look for any rogue keys in email template content JSON files.
 
 {% include "btt.njk" %}
 
 ## API
 
-**nnk(input, reference\[, opts])** - in other words, it's a function which takes two obligatory arguments and third, optional.
+**{{ packageJsons["object-no-new-keys"].lect.req }}(input, reference, \[opts])**
+
+In other words, it's a function which takes two obligatory arguments and third, optional.
 
 ### API - Function's Input
 

@@ -207,7 +207,7 @@ console.log(res);
 
 One of the unique (and complex) features of this program is HTML tag recognition. We process only the text and don't touch the tags, for example, widow word removal won't add non-breaking spaces within your tags if you choose not to strip the HTML.
 
-`opts.cb` lets you perform additional operations on all the string characters outside any HTML tags. For example, [https://detergent.io](detergent.io) uppercase-lowercase functionality relies on `opts.cb`.
+`opts.cb` lets you perform additional operations on all the string characters outside any HTML tags. For example, [detergent.io](https://detergent.io) uppercase-lowercase functionality relies on `opts.cb`.
 
 Here's an example, consider this case — HTML tags skipped when turning letters uppercase:
 
