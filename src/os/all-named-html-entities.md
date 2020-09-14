@@ -43,7 +43,7 @@ This package exports a plain object with 11 keys:
     ...
 ```
 
-The point of `entStartsWith` is that we don't have to iterate through upto 2127 entities to match. Instead, we match by first and second letter and match against that list, which varies but is on average tens of strings long.
+The point of `entStartsWith` is that we don't have to iterate through up to 2,127 entities to match. Instead, we match by first and second letter and match against that list, which varies but is on average tens of strings long.
 
 Let's tap it.
 

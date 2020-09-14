@@ -170,7 +170,7 @@ result:
 ["elem1", "elem5"];
 ```
 
-If the mode is default, non-strict, this library will match things (object or array values or strings) containing only empty space (space character, line break or tab) agressively:
+If the mode is default, non-strict, this library will match object or array values or strings hungrily if they contain only whitespace:
 
 ```js
 delObj(

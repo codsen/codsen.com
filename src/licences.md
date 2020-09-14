@@ -12,7 +12,6 @@ extraContainerClass: layout-page-centered1
 
 We're using a modified version of Wikipedia's [external link icon](https://commons.wikimedia.org/wiki/File:External.svg) which is Public Domain.
 
-{% include "btt.njk" %}
 {% include "src/components/separator.njk" %}
 
 ## Loader Party Parrots
@@ -23,7 +22,6 @@ We're using a modified version of Wikipedia's [external link icon](https://commo
 
 [cultofthepartyparrot.com](https://cultofthepartyparrot.com/)<br>Creative Commons Attribution-ShareAlike 4.0 International [License](https://github.com/jmhobbs/cultofthepartyparrot.com/blob/master/LICENSE)
 
-{% include "btt.njk" %}
 {% include "src/components/separator.njk" %}
 
 ## Eleventy starter templates

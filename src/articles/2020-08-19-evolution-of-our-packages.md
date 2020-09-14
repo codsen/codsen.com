@@ -98,7 +98,7 @@ Website and programs monorepo are separate git repositories, so their issue trac
 
 People from outside can raise tickets and help you to update README, and that won't affect programs' source code.
 
-There are SAAS companies out there wich "quality assess" open-source npm packages, are they "suitable for corporate" or not. I was shocked to find out that excessive (by their standards) `patch` releasing is deemed to be **a sign of low code quality**. Oops! Our effort seeking README perfection is apparently harmful!
+There are SAAS companies out there which "quality assess" open-source npm packages, are they "suitable for corporate" or not. I was shocked to find out that excessive (by their standards) `patch` releasing is deemed to be **a sign of low code quality**. Oops! Our effort seeking README perfection is apparently harmful!
 
 Another argument to port README's outside npm/git provider is **UX and features in general**. Your website can outdo npm or GitHub/GitLab/BitBucket easily:
 

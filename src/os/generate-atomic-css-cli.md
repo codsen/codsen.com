@@ -63,7 +63,7 @@ GENERATE-ATOMIC-CSS-CONTENT-STARTS */
 z
 ```
 
-As you see, pipes are inclusive values, one value means "upto", two values mean "from" and "upto".
+As you see, pipes are inclusive values, one value means "up to", two values mean "from" and "up to".
 
 You can use this CLI to generate/update any file: HTML, CSS or SCSS or whatever. Just put the placeholders and job will be done.
 

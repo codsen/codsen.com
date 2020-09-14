@@ -122,7 +122,7 @@ Here is its API:
 | `skipHtmlDecoding`               | Boolean                                              | `false`                      | By default, all escaped HTML entities for example `&pound;` input will be recursively decoded before HTML-stripping. You can turn it off here if you don't need it.    |
 | `trimOnlySpaces`                 | Boolean                                              | `false`                      | Used mainly in automated setups. It ensures non-spaces are not trimmed from the outer edges of a string.                                                               |
 | `dumpLinkHrefsNearby`            | Plain object or something _falsey_                   | `false`                      | Used to customise the output of link URL's: to enable the feature, also customise the URL location and wrapping.                                                       |
-| `cb`                             | Something _falsey_ or a function                     | `null`                       | Gives you full control of the output and lets you tweak it. See the dedicated chapter below called "opts.cb" with explanation and examples.                            |
+| `cb`                             | Something _falsey_ or a function                     | `null`                       | Gives you full control of the output and lets you tweak it. See the [dedicated chapter below](#optscb).                            |
 
 The Optional Options Object is not validated; please take care of what values and of what type you pass.
 
