@@ -2770,6 +2770,9 @@ article, .package-body__content {
 
   .star-under-header {
     display: none;
+    @include darkTheme {
+      opacity: 0.6;
+    }
     @media (min-width: 500px) and (max-width: $thousand) {
       display: block;
       position: absolute;
