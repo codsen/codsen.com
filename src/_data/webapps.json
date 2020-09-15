@@ -1,14 +1,20 @@
 {
   "detergent": {
     "label": "detergent.io",
-    "url": "https://detergent.io"
+    "url": "https://detergent.io",
+    "dark": "/images/site-det-dark.png",
+    "light": "/images/site-det-light.png"
   },
   "email-comb": {
     "label": "emailcomb.com",
-    "url": "https://emailcomb.com"
+    "url": "https://emailcomb.com",
+    "dark": "/images/site-comb-dark.png",
+    "light": "/images/site-comb-light.png"
   },
   "html-crush": {
     "label": "htmlcrush.com",
-    "url": "https://htmlcrush.com"
+    "url": "https://htmlcrush.com",
+    "dark": "/images/site-crush-dark.png",
+    "light": "/images/site-crush-light.png"
   }
 }

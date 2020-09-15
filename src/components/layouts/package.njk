@@ -56,10 +56,18 @@
         <aside class="package-body__extras">
           <div class="package-install">
             {% if webapps[title] %}
-            <h3>Use web app GUI</h3>
-            <p>
-              <a href="{{ webapps[title].url }}" target="_blank">{{ webapps[title].label }}</a>
-            </p>
+              <h3>Use web app GUI</h3>
+              {% if webapps[title].dark and webapps[title].light %}
+                <p class="show-dark-only">
+                  <img src="{{ webapps[title].dark }}" width="438" height="250" alt="{{ title }} web app"/>
+                </p>
+                <p class="show-light-only">
+                  <img src="{{ webapps[title].light }}" width="438" height="250" alt="test {{ title }} program online"/>
+                </p>
+              {% endif %}
+              <p>
+                <a class="button" href="{{ webapps[title].url }}" target="_blank">{{ webapps[title].label }}</a>
+              </p>
             {% endif %}
 
             <h3>Install globally, via&nbsp;npm</h3>

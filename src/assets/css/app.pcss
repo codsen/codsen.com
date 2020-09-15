@@ -669,6 +669,9 @@ kbd {
   margin-left: 0.3rem;
   cursor: help;
 }
+.button .ext-link path {
+  stroke: #000;
+}
 
 blockquote {
   quotes: "\201C""\201D""\2018""\2019";
@@ -678,6 +681,20 @@ blockquote {
     border-left-color: $darkerOrange;
   }
   padding-left: 2rem;
+}
+
+.show-dark-only {
+  display: none;
+  @include darkTheme {
+    display: block;
+  }
+}
+
+.show-light-only {
+  display: block;
+  @include darkTheme {
+    display: none;
+  }
 }
 
 /* body */
@@ -946,7 +963,7 @@ footer {
 }
 
 nav {
-  line-height: 4.4rem;
+  line-height: 6rem;
   width: 100%;
 
   @media (min-width: $narrow) {
@@ -2722,12 +2739,24 @@ article, .package-body__content {
 
 .layout-page-open-source {
   .content-main__inner > h1 {
-    /* to place it above green absolute sidebar */
-    position: absolute;
-    z-index: 5;
 
     @media (min-width: $mid) {
+      /* to place it above green absolute sidebar */
+      position: absolute;
+      z-index: 5;
       padding-left: 2rem;
+    }
+
+    @media (min-width: 800px) and (max-width: $thousand) {
+      right: 2rem;
+      font-size: 12rem;
+      max-width: 60rem;
+      text-align: right;
+      letter-spacing: -0.06em;
+    }
+
+    @media (min-width: 880px) and (max-width: $thousand) {
+      right: 7rem;
     }
 
     color: #040305; /* 2% */
@@ -2736,74 +2765,122 @@ article, .package-body__content {
     @include darkTheme {
       color: #fffbf2; /* 100 */
       opacity: 0.45;
+    }
+  }
 
-      /* color: #807e79;
-      opacity: 1; */
+  .star-under-header {
+    display: none;
+    @media (min-width: 500px) and (max-width: $thousand) {
+      display: block;
+      position: absolute;
+      top: 40rem;
+      right: 4rem;
+      text-align: right;
+    }
+    @media (min-width: 800px) {
+      top: 60rem;
     }
   }
 
   h2 {
     position: relative;
     display: inline-block;
+    padding-right: 6rem;
 
+    @media (min-width: $mid) {
+      padding-right: 4rem;
+    }
     @media (min-width: $thousand) {
       margin-left: 2rem;
     }
+
+    sup {
+      top: -1rem;
+    }
+  }
+
+  #table-of-contents, #flagship-libraries, #contributing {
+    padding-right: 0;
   }
 
   .top-row {
-    /* flex stands in the way */
-    /* display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-content: space-between; */
-
-    /* position: relative; */
-
-    & > aside {
-      width: 33%;
-      /* padding-right: 2rem; */
-    }
-
     & > .interdeps-chart {
-      left: 33%;
-      margin-top: 10rem;
-      width: calc(50vw + 16%);
-      max-width: 85vmin;
-      min-width: 67%;
+      display: none;
 
-      /* fixed ratio starts: */
-      display: inline-block;
-      position: relative;
-      /* fixed ratio ends */
-
-      /* fixed ratio starts: */
-      &:after {
-        padding-top: 100%;
-        min-height: 80rem;
-        /* 1:1 ratio */
+      @media (min-width: $mid) {
         display: block;
-        content: '';
-      }
-      /* fixed ratio ends */
-
-      .interdeps__container {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        right: 0;
-        left: 0;
       }
     }
 
     .aside__outer-container {
-      position: absolute;
-      top: 0;
-      width: 34%;
+      max-width: 34.6rem;
+    }
+
+    & > aside {
+      /* on tablet, reduce the gap above the interdeps chart */
+      margin-bottom: -60rem;
+      @media (min-width: $mid) {
+        margin-bottom: -45rem;
+        padding-left: 5rem;
+      }
+      @media (min-width: $thousand) {
+        padding-left: 0;
+        margin-bottom: 0;
+      }
+    }
+
+    @media (min-width: $thousand) {
+        & > aside {
+          width: 33%;
+        }
+
+        & + .separator {
+          margin: 14rem 0 0;
+        }
+
+        & > .interdeps-chart {
+          left: 33%;
+          margin-top: 10rem;
+          width: calc(50vw + 16%);
+          max-width: 85vmin;
+          min-width: 67%;
+
+          /* fixed ratio-related chunk starts: */
+          display: inline-block;
+          position: relative;
+          /* fixed ratio ends */
+
+          /* another fixed ratio-related chunk starts: */
+          &:after {
+            padding-top: 100%;
+            min-height: 80rem;
+            /* 1:1 ratio */
+            display: block;
+            content: '';
+          }
+          /* fixed ratio ends */
+
+          .interdeps__container {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+          }
+        }
+
+        .aside__outer-container {
+          position: absolute;
+          top: 0;
+          width: 34%;
+          max-width: none;
+        }
     }
 
     .aside__inner-container {
-      padding: 0 9% 0 12%;
+      @media (min-width: $thousand) {
+        padding: 0 9% 0 12%;
+      }
     }
 
     .aside__highlighted-surface {
@@ -2819,7 +2896,17 @@ article, .package-body__content {
           color: #b33b30;
         }
       }
-      padding: 31rem 2rem 11rem;
+
+      padding: 2rem 2rem 13rem;
+      @media (min-width: $mid) {
+        padding: 16rem 2rem 13rem;
+      }
+      @media (min-width: 800px) and (max-width: $thousand) {
+        padding: 1rem 2rem 13rem;
+      }
+      @media (min-width: $thousand) {
+        padding: 31rem 2rem 13rem;
+      }
 
       section {
         font-size: 2.4rem;
@@ -2931,16 +3018,28 @@ article, .package-body__content {
 
   .marker {
     position: relative;
-    left: -2rem;
-    top: -20rem;
-    width: 100%;
+
+    left: -7rem;
+    top: -22rem;
+
+    @media (min-width: $mid) {
+      left: -7rem;
+      top: -22rem;
+    }
+    @media (min-width: $thousand) {
+      width: 100%;
+      left: -2rem;
+      top: -18rem;
+    }
+    @media (min-width: 1200px) {
+      top: -22rem;
+    }
     height: auto;
     /* top: 40rem; */
     @include darkTheme {
       filter: brightness(0.14) grayscale(1);
     }
   }
-
 }
 
 .toc-container {
@@ -3053,6 +3152,11 @@ article, .package-body__content {
 }
 
 .content-row__packages-list {
+  margin: 4rem 0;
+  @media (min-width: $mid) {
+    margin: 0;
+  }
+
   a {
     text-decoration: none;
   }
@@ -3216,10 +3320,21 @@ article, .package-body__content {
   }
 
   .package-install {
+    /* restore: */
+    h1, h2, h3, h4, h5, h6 {
+      display: block;
+    }
+
     width: calc(100% - 1rem);
 
     .code-wrapper {
       margin: 0 0 3.1rem 1rem;
+    }
+
+    p[class^="show-"] img {
+      width: 100%;
+      height: auto;
+      max-width: 43.8rem;
     }
 
     /* h3 {
@@ -3250,7 +3365,7 @@ article, .package-body__content {
 
       p, h1, h2, h3, h4, h5, h6 {
         padding-left: 2rem;
-        padding-right: 2rem;
+        padding-right: 1rem;
       }
       padding-bottom: 2rem;
       margin-left: 4rem;
@@ -3376,7 +3491,7 @@ h1, h2, h3 {
     line-height: 1;
     position: absolute;
 
-    top: -1.5rem;
+    top: 0.5rem;
     right: 0;
     cursor: help;
     z-index: 20;
@@ -3400,8 +3515,9 @@ h1, h2, h3 {
   opacity: 0.7;
 
   @include darkTheme {
-    color: $darkOrange;
-    opacity: 0.4;
+    color: #222;
+    opacity: 1;
+    z-index: 0;
   }
 
   font-weight: 900;
@@ -3414,6 +3530,10 @@ h1, h2, h3 {
 }
 .all-tags__tags {
   margin-left: 5rem;
+  line-height: 1;
+  @include darkTheme {
+    opacity: 0.6;
+  }
 }
 
 .all-tags__content {
@@ -4098,4 +4218,13 @@ html[data-theme='dark']::-webkit-scrollbar-thumb {
   align-items: center;
   justify-content: center;
   padding-top: 2rem;
+}
+
+html[data-whatinput='touch'] *:focus {
+  outline: 0;
+}
+
+
+html[data-whatinput='keyboard'] *:focus {
+  outline: 2px solid blue;
 }
