@@ -12,7 +12,7 @@ For an exported function, _string-in, string-out_ API is awesome because it's si
 
 ---
 
-If we could send a message to the past ourselves, we would send ** "always return a plain object from a function, never return a string"**.
+If we could send a message to the past ourselves, we would send **"always return a plain object from a function, never return a string"**.
 
 _Chummy_ API would be to keep _string-in, string-out_ function, but switch between different outputs using options object flags. Like we did with `opts.returnRangesOnly` on previous versions of [`string-strip-html`](/os/string-strip-html/).
 
