@@ -1,0 +1,66 @@
+---
+layout: post
+pagination:
+    data: collections.allPackages
+    size: 1
+    alias: packageName
+permalink: "/os/{{ packageName }}/examples/"
+packageName: Examples
+extraContainerClass: page-examples centered-headings
+---
+
+{% set oneStickerOnlyPlease = true %}
+{% from "macros/heading.njk" import heading %}
+{% set headingLabel = "<code>" + packageName + "</code> examples" %}
+
+<div class="package-nav">
+  <div class="package-back">
+    <a href="/os/{{ packageName }}/" class="arrow_left">back</a>
+  </div>
+</div>
+
+{{ heading(headingLabel | safe, 1) | safe }}
+
+{% include "src/components/separator.njk" %}
+
+{% if packageExamples[packageName] %}
+
+    {{ heading("Table of Contents", 2) }}
+    <ul>
+      <li><a href="#quick-take">Quick Take</a></li>
+      {% if packageExamples[packageName] and (packageExamples[packageName] | extractNonQuickTakeExamples | length) %}
+          {% for example in packageExamples[packageName] | extractNonQuickTakeExamples %}
+              <li><a href="#{{ example.title | slugify }}">{{ example.title }}</a></li>
+          {% endfor %}
+      {% endif %}
+    </ul>
+
+    {% include "src/components/separator.njk" %}
+
+    {% if packageExamples[packageName] and packageExamples[packageName]['_quickTake.mjs'] %}
+      {{ heading("Quick Take", 2) }}
+      <pre class="language-js"><code class="language-js">{{ packageExamples[packageName]['_quickTake.mjs'].content | prism | safe }}</code></pre>
+      {% include "btt.njk" %}
+    {% endif %}
+    {% include "src/components/separator.njk" %}
+
+    {% if packageExamples[packageName] and (packageExamples[packageName] | extractNonQuickTakeExamples | length) %}
+      {% for example in packageExamples[packageName] | extractNonQuickTakeExamples %}
+      {{ heading(example.title, 2) }}
+      <pre class="language-js"><code class="language-js">{{ example.content | prism | safe }}</code></pre>
+
+      {% if not loop.last %}
+      {% include "btt.njk" %}
+      {% include "src/components/separator.njk" %}
+      {% endif %}
+
+      {% endfor %}
+    {% endif %}
+
+    <div class="package-nav">
+      <div class="package-back">
+        <a href="/os/{{ packageName }}/" class="arrow_left">back</a>
+      </div>
+    </div>
+
+{% endif %}

@@ -18,29 +18,34 @@
   <div class="content-main__inner">
     <article>
 
-      {% if image %}
-      <figure class="hero-img" itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject">
-        <div class="post-hero">
-          {{ postHeroImg(image) }}
-        </div>
-    	</figure>
-      {% endif %}
+    {% if image %}
 
-      <header{% if not image %} class="extra-mt"{% endif %}>
-        <h1>{{ title }}</h1>
-        {% if page.url | rootUrl == "/articles/" %}
-          <div class="meta">
-      			by <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person"><a href="/author/royrevelt/" itemprop="url"> <span itemprop="name">Roy Revelt</span></a></span> &mdash; posted on <span class="posted-on"><time datetime="{{ page.date | iso }}">{{ page.date | dateDisplay }}</time></span>
-            {% if tags.length %}
-            <div class="entry-tags">
-      				tagged: {% for tag in tags %}<a class="tag" href="/articles/tag/{{ tag }}" rel="tag">#{{ tag }}</a> {% endfor %}
-            </div>
-            {% endif %}
+        <figure class="hero-img" itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject">
+          <div class="post-hero">
+            {{ postHeroImg(image) }}
           </div>
-        {% endif %}
-    </header>
+      	</figure>
 
-    {% include "src/components/separator.njk" %}
+    {% endif %}
+
+    {% if title %}
+
+        <header{% if not image %} class="extra-mt"{% endif %}>
+          <h1>{{ title }}</h1>
+          {% if page.url | rootUrl == "/articles/" %}
+            <div class="meta">
+        			by <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person"><a href="/author/royrevelt/" itemprop="url"> <span itemprop="name">Roy Revelt</span></a></span> &mdash; posted on <span class="posted-on"><time datetime="{{ page.date | iso }}">{{ page.date | dateDisplay }}</time></span>
+              {% if tags.length %}
+              <div class="entry-tags">
+        				tagged: {% for tag in tags %}<a class="tag" href="/articles/tag/{{ tag }}" rel="tag">#{{ tag }}</a> {% endfor %}
+              </div>
+              {% endif %}
+            </div>
+          {% endif %}
+        </header>
+
+      {% include "src/components/separator.njk" %}
+    {% endif %}
 
     {{ content | safe }}
 

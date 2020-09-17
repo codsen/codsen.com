@@ -8,6 +8,9 @@ const uslugify = s => uslug(s)
 const arrayShuffle = require("array-shuffle");
 const implicitFigures = require("markdown-it-implicit-figures")
 const clone = require("lodash.clonedeep");
+const Prism = require('prismjs');
+const escape = require('markdown-escape');
+const prettier = require("prettier");
 
 /**
  * Import site configuration
@@ -123,8 +126,55 @@ module.exports = function (eleventyConfig) {
     }
     return "article"
   });
+
+  eleventyConfig.addFilter("extractNonQuickTakeExamples", (dataObj = {}) => {
+    // dataObj looks like:
+
+    // {
+    //   "_quickTake.mjs": {
+    //     "title": "...",
+    //     "content": "import ..."
+    //   },
+    //   "extract-html-head-contents.mjs": {
+    //     "title": "...",
+    //     "content": "import ..."
+    //   },
+    //   "leave-only-html.mjs": {
+    //     "title": "...",
+    //     "content": "import ..."
+    //   },
+    //   "leave-only-opening-td.mjs": {
+    //     "title": "...",
+    //     "content": "import ..."
+    //   },
+    //   "leave-only-td.mjs": {
+    //     "title": "...",
+    //     "content": "import ..."
+    //   },
+    //   "remove-html.mjs": {
+    //     "title": "...",
+    //     "content": "import ... ;"
+    //   }
+    // }
+
+    const newClonedObj = clone(dataObj);
+    delete newClonedObj['_quickTake.mjs'];
+    return Object.keys(newClonedObj).map(key => (
+      {
+        file: key,
+        ...newClonedObj[key]
+      }
+    ));
+  });
+
+
+
   // diy slugify
   eleventyConfig.addFilter("slugify", (str) => {
+    if (str.endsWith(".mjs")) {
+      // remove .mjs - needed for codsen.com/os/ example file-page slugs
+      str = str.replace(/\.mjs/, "");
+    }
     return str.toLowerCase().replace(/\s+/g, "-");
   });
   // for explorations
@@ -145,6 +195,21 @@ module.exports = function (eleventyConfig) {
     return markdownIt({
       html: true
     }).render(content)
+  });
+
+  // highlight js upon request
+  eleventyConfig.addFilter("prism", function(content = "") {
+    return Prism.highlight(
+      prettier.format(content, {
+        printWidth: 55 // especially considering the sidebar on codsen.com/os/*/
+      }),
+      Prism.languages.javascript, 'javascript'
+    );
+  });
+
+  // escape markdown
+  eleventyConfig.addFilter("escapeMarkdown", function(content = "") {
+    return escape(content);
   });
 
   /**
@@ -198,6 +263,14 @@ module.exports = function (eleventyConfig) {
           `./${config.paths.src}/now/**/*`
         )
     ]
+  })
+  eleventyConfig.addCollection('allPackages', collectionApi => {
+    return [
+      ...collectionApi
+        .getFilteredByGlob(
+          `./${config.paths.src}/os/*`
+        ),
+    ].map(packagePostObj => packagePostObj.data.title)
   })
   eleventyConfig.addCollection('allPackagesRandomList', collectionApi => {
     return arrayShuffle([

@@ -1,6 +1,6 @@
 {% macro heading(name, level, count) %}
 <h{{ level }} id="{{ name | slugify }}"><a href="#{{ name | slugify }}" class="header-anchor">§</a> {{ name }}
-{%- if count %} <sup title="{{ count }} {{ name | lower }} in total" aria-label="{{ count }} {{ name | lower }} in total">Σ={{ count }}</sup>
+{%- if count %} <sup title="{{ count }} {{ name | lower }} in total" aria-label="{{ count }} {{ name | lower }} in total">Σ={{ count }}</sup>&nbsp;&nbsp;&nbsp;
 {% endif %}
 </h{{ level }}>
 {% endmacro %}

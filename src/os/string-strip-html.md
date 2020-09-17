@@ -6,48 +6,6 @@ packages:
   - ranges-invert
 ---
 
-## Quick Take
-
-```js
-const {{ packageJsons["string-strip-html"].lect.req }} = require("string-strip-html");
-
-console.log({{ packageJsons["string-strip-html"].lect.req }}("Some text <b>and</b> text.").result);
-// => 'Some text and text.'
-
-// prevents accidental string concatenation
-console.log({{ packageJsons["string-strip-html"].lect.req }}("aaa<div>bbb</div>ccc").result);
-// => 'aaa bbb ccc'
-
-// tag pairs with content, upon request
-console.log(
-  {{ packageJsons["string-strip-html"].lect.req }}("a <pre><code>void a;</code></pre> b", {
-    stripTogetherWithTheirContents: [
-      'script', // default
-      'style',  // default
-      'xml',    // default
-      'pre', // <-- custom-added
-    ]}
-  ).result
-);
-// => 'a b'
-
-// detects raw, legit brackets:
-console.log({{ packageJsons["string-strip-html"].lect.req }}("a < b and c > d").result);
-// => 'a < b and c > d'
-```
-
-{% include "btt.njk" %}
-
-## Examples
-
-* Remove HTML tags, give me a clean string.
-* Leave only HTML tags.
-* Remove HTML tags but don't mutate the string yet, give me [ranges](/ranges/) because we'll remove widows too, then merge all ranges and apply them in one go.
-* List all string index locations and extracted values of all `<tr>` tags.
-* Make a text version from an email template.
-
-{% include "btt.njk" %}
-
 ## Features
 
 - Adds or removes the whitespace to make the output presentable.
@@ -64,7 +22,7 @@ console.log({{ packageJsons["string-strip-html"].lect.req }}("a < b and c > d").
 
 **{{ packageJsons["string-strip-html"].lect.req }}(input, \[opts])**
 
-In other words, it's a "string-in/string-out" function, with optional second input argument, options.
+In other words, it's a function which takes string and an optional options.
 
 | Input argument | Type         | Obligatory? | Description                                        |
 | -------------- | ------------ | ----------- | -------------------------------------------------- |
@@ -147,9 +105,9 @@ Here is the Optional Options Object in one place (in case you ever want to copy 
 
 {% include "btt.njk" %}
 
-### Using Ranges from the output
+### Using ranges from the output
 
-{% markdown '/src/components/content/ranges-explanation.md' %}
+The _ranges_ from the output are compatible with [range-ecosystem libraries](/ranges/) like [`ranges-apply`](/os/ranges-apply/):
 
 ```js
 const {{ packageJsons["string-strip-html"].lect.req }} = require("string-strip-html");
@@ -172,7 +130,7 @@ console.log(finalResultStr);
 // => "something"
 ```
 
-It's not just strict tag index locations `[[4, 9], [30, 36]]`, it's what you'd feed to `ranges-apply` to get the nice clean result.
+Behind the scenes, this program operates on [ranges](/ranges/). The result string you see is rendered from ranges, at the time of returning.
 
 {% include "btt.njk" %}
 
@@ -382,5 +340,3 @@ In simple language, this program does not use parsing and AST trees. It processe
 ## Quality dependencies
 
 We use only our own or very popular dependencies: [`ent`](https://www.npmjs.com/package/ent) is by [substack](https://www.npmjs.com/~substack) himself and [`lodash`](https://www.npmjs.com/package/lodash) is, well, The Lodash. All other dependencies are our own.
-
-{% include "btt.njk" %}
