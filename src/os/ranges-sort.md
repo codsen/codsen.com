@@ -3,12 +3,6 @@ layout: package
 title: ranges-sort
 ---
 
-## Quick Take
-
-{% include "src/components/content/tldr-ranges-sort.md" %}
-
-{% include "btt.njk" %}
-
 ## API
 
 **{{ packageJsons["ranges-sort"].lect.req }}(arr[, opts])**

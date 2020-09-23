@@ -5,31 +5,17 @@ packages:
   - detergent
 ---
 
-### Idea
+### Purpose
 
-Split by whitespace is easy - [use](https://stackoverflow.com/a/32727737/3943954) `String.split(/\s+/)`:
+When `String.split(/\s+/)` is not enough, for example, when you need to exclude certain substrings, this program will help.
 
-```js
-console.log(JSON.stringify("abc  def ghi".split(/\s+/), null, 4));
-// => [
-//      "abc",
-//      "def",
-//      "ghi"
-//    ]
-```
+It splits the string by _whitespace_ — definition of "whitespace" being "anything that trims to zero-length" — that's tabs, line breaks (CR and LF), space character and raw non-breaking space. There are quite few Unicode characters across the whole Unicode range.
 
-But sometimes you need to ignore certain index ranges:
+## API
 
-```js
-const splitByW = require("string-split-by-whitespace");
-const result = splitByW(`\n     \n    a\t \nb    \n      \t`);
-console.log(JSON.stringify(result, null, 4));
-// => ["a", "b"]
-```
+**{{ packageJsons["string-split-by-whitespace"].lect.req }}(str, \[opts])**
 
-Above, we split the string by whitespace consisting of spaces, tabs and linebreaks.
-
-{% include "btt.njk" %}
+In other words, it's a function which takes two input arguments, second-one being optional (marked by square brackets).
 
 ### API - Input
 

@@ -3,7 +3,7 @@ layout: package
 title: ranges-ent-decode
 ---
 
-## Quick Take
+## Purpose
 
 {% include "src/components/content/tldr-ranges-ent-decode.md" %}
 

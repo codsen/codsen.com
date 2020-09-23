@@ -3,7 +3,7 @@ layout: package
 title: ranges-regex
 ---
 
-## Quick Take
+## Purpose
 
 {% include "src/components/content/tldr-ranges-regex.md" %}
 
@@ -13,7 +13,7 @@ title: ranges-regex
 
 **{{ packageJsons["ranges-regex"].lect.req }}(regexp, str, \[replacement])**
 
-In other words, it's a function which takes three input arguments, third one is optional (marked with brackets).
+In other words, it's a function which takes three input arguments, third one is optional (marked with square brackets).
 
 | Input argument | Type               | Obligatory? | Description                                                                                       |
 | -------------- | ------------------ | ----------- | ------------------------------------------------------------------------------------------------- |

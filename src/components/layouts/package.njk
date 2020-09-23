@@ -186,9 +186,9 @@
           </div>
         </aside>
         <section class="package-body__content">
-          {% if packageExamples[title] and packageExamples[title]['_quickTake.mjs'] %}
-            {{ heading(packageExamples[title]['_quickTake.mjs'].title, 2) }}
-            <pre class="language-js"><code class="language-js">{{ packageExamples[title]['_quickTake.mjs'].content | prism | safe }}</code></pre>
+          {% if packageExamples[title] and packageExamples[title]['_quickTake.js'] %}
+            {{ heading(packageExamples[title]['_quickTake.js'].title, 2) | titleProper | formatTags | safe }}
+            <pre class="language-js"><code class="language-js">{{ packageExamples[title]['_quickTake.js'].content | prism | safe }}</code></pre>
             {% include "btt.njk" %}
           {% endif %}
 
@@ -196,14 +196,13 @@
             {{ heading("Examples", 2) }}
             <ul>
             {% for example in packageExamples[title] | extractNonQuickTakeExamples %}
-              <li><a href="/os/{{ title }}/examples/#{{ example.title | slugify }}">{{ example.title }} <span class="screen-reader-text">example</span></a></li>
+              <li><a href="/os/{{ title }}/examples/#{{ example.title | slugify }}">{{ example.title | titleProper | formatTags | safe }} <span class="screen-reader-text">example</span></a></li>
             {% endfor %}
             </ul>
             {% include "btt.njk" %}
           {% endif %}
 
           {{ content | safe }}
-          {% include "btt.njk" %}
 
           {{ heading("Licence", 2) }}
           <p>

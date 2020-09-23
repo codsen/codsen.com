@@ -89,7 +89,7 @@ The `det` above is a function. You pass two input arguments to it:
 | `stripHtml`              | Boolean                          | True                                      | by default, all HTML tags are stripped (with exception to `opts.keepBoldEtc` - option to ignore `b`, `strong` and other tags). You can turn off HTML tag removal completely here. |
 | `stripHtmlButIgnoreTags` | Array                            | `["b", "strong", "i", "em", "br", "sup"]` | List zero or more strings, each meaning a tag name that should not be stripped. For example, `["a", "sup"]`.                                                                      |
 | `stripHtmlAddNewLine`    | Array                            | `["li", "/ul"]`                           | List of zero or more tag names which, if stripped, are replaced with a line break. Closing tags must start with slash.                                                            |
-| `cb`                     | something _falsey_ or a function | `null`                                    | Callback function to additionally process characters between tags (like turning letters uppercase)                                                                                |
+| `cb`                     | something _falsy_ or a function | `null`                                    | Callback function to additionally process characters between tags (like turning letters uppercase)                                                                                |
 
 Here it is in one place:
 

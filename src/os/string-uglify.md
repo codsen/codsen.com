@@ -166,30 +166,6 @@ console.log(input2.map((val, i) => `${val} - ${output2[i]}`).join("\n"));
 
 {% include "btt.njk" %}
 
-## Usage
-
-```js
-const { uglifyArr } = require("string-uglify");
-// notice we put dots and hashes for classes and id's but algorithm will work
-// fine too if you won't.
-const names = [
-  ".module-promo-all",
-  ".module-promo-main",
-  ".module-promo-second",
-  "#zzz",
-];
-const res = uglifyArr(names);
-console.log("res = " + JSON.stringify(res1, null, 0));
-// => [".m', ".b", ".r", #a]
-
-// uglify a particular id number:
-const res2 = uglifyById(names, 3);
-console.log("res2 = " + JSON.stringify(res2, null, 4));
-// => "#a"
-```
-
-{% include "btt.njk" %}
-
 ## API
 
 When you `require`/`import`, you get three things:

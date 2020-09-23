@@ -8,41 +8,23 @@ packages:
 
 ## Idea
 
-This library converts fancy strings like curly apostrophes into not fancy ones, like a single quote. One could say it's the opposite of [Detergent](/os/detergent/).
+Convert typographically-correct characters (like curly quotes or m-dashes) to their basic counterparts (like apostrophes or hyphens).
 
-`string-unfancy` main purpose is to simplify the images `alt` attribute content in email templates.
+It's the opposite of [`detergent`](/os/detergent/) and [`string-apostrophes`](/os/string-apostrophes/).
 
-The list of covered characters includes all kinds of single quotes, double quotes, dashes and the non-breaking space.
-
-Also, this library will recursively decode any HTML entities before performing the replacement.
-
-PS. If you want a higher-level tool, [html-img-alt](/os/html-img-alt/) uses `string-unfancy` and performs many more fixes (adding empty `alt` attributes if they are missing, cleaning of the whitespace between the attributes, trimming of the `alt` contents and even replacing single quotes to double quotes).
-
-{% include "btt.njk" %}
-
-## Usage
-
-```js
-const unfancy = require("string-unfancy");
-const res = unfancy("someone’s");
-console.log("res = " + JSON.stringify(res1, null, 4));
-// => "someone's"
-
-// works with encoded HTML:
-const res2 = unfancy("someone&rsquo;s");
-console.log("res2 = " + JSON.stringify(res2, null, 4));
-// => "someone's"
-```
+It's used in ASCII-restricted places where encoding is too unwieldy, for example, image `alt` attribute values in email templates.
 
 {% include "btt.njk" %}
 
 ## API
 
-API is simple: `string` in, `string` out.
+**{{ packageJsons["string-unfancy"].lect.req }}(str)**
 
 Caveat: if the input is not a `string` it will `throw`.
 
-## Example - treating the image alt attributes - Gulp and stream-tapping
+Function returns a string.
+
+## Example - Gulp streams
 
 If you are using Gulp to build email templates, you can `tap` the stream, apply a function to it, then within that function, [replace](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/String/replace) all instances of `alt="..."` with their unfancied versions.
 

@@ -102,7 +102,7 @@ If an input is not a string or an empty string, an empty array will be returned.
 | ---------------------- | ------- | ----------- | ------- | ------------------------------------------------------ |
 | `offset`               | Integer | no          | `0`     | All reported indexes will be incremented by this much. |
 
-Falsey `opt.offset` is fine but something truthy which is not a natural number will _throw_.
+falsy `opt.offset` is fine but something truthy which is not a natural number will _throw_.
 
 {% include "btt.njk" %}
 

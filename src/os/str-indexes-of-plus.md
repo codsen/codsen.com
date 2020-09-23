@@ -1,62 +1,38 @@
 ---
 layout: package
 title: str-indexes-of-plus
+packages:
+  - str-indexes-of
 ---
 
-## Idea
+## Compared to Others
 
-Search for a string in another string. Return the array of indexes of any findings. Astral character-friendly. Allows to optionally offset the starting point of the search (3rd argument).
+| method / program | returns | index system based on |
+| ---- | ------- | ------------ |
+| [`String.prototype.indexOf()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf) | index where the first finding starts | code point count |
+| [`str-indexes-of`](https://www.npmjs.com/package/str-indexes-of) | array of indexes where each finding starts | code point count |
+| <span class="emoji">📦</span> This package, <br/> `str-indexes-of-plus` | array of indexes where each finding starts | grapheme count |
 
-## Usage
-
-```js
-const indx = require("str-indexes-of-plus");
-var res1 = indx("abczabc", "abc");
-console.log("res1 = " + JSON.stringify(res1, null, 4));
-// => [0, 4]
-
-// works with strings containing emoji too:
-var res2 = indx("ab🦄", "🦄");
-console.log("res2 = " + JSON.stringify(res2, null, 4));
-// => [2]
-
-// you can offset the starting point, from which the checking commences.
-// observe the third input argument:
-var res3 = indx("abczabc", "abc", 3);
-console.log("res3 = " + JSON.stringify(res3, null, 4));
-// => [4]
-```
+See [this](https://mathiasbynens.be/notes/javascript-unicode) article about Unicode, graphemes and code points.
 
 {% include "btt.njk" %}
 
 ## API
 
-**indx(str, searchValue\[, fromIndex])**
+**{{ packageJsons["str-indexes-of-plus"].lect.req }}(str, searchValue, \[fromIndex])**
 
-Returns an array of zero or more numbers, each indicating the index of each finding's first character. Unicode astral characters are counted correctly, as one character-long.
+In other words, it's a _function_ which takes three arguments, third one is optional (marked by square brackets).
 
-{% include "btt.njk" %}
+**Output**: an array of zero or more numbers, each indicating the index of each finding's first character. Unicode astral characters are counted, as one character-long.
 
-#### str
-
-Type: `string`
-
-First input argument — the string in which you want to perform a search.
-
-#### searchValue
-
-Type: `string`
-
-Second input argument — the string you're looking for.
-
-#### fromIndex
-
-Type: A natural number or zero. `number` or `string`.
-
-An optional third argument - offset index from which to start searching.
-
-## The algorithm
-
-We came up with a unique algorithm. It follows the way how we would search for strings: iterate through the given string, looking for the first letter. If found, check does second letter match second finding's letter. If it matches, continue matching each consecutive letter. In anything mismatches, start from new, continuing to iterate along the input string.
+| Input argument | Type                         | Obligatory? | Description                                                                                                                                                                                                                 |
+| -------------- | ---------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `str`  | string | yes         | Source string, where to search. |
+| `searchValue`       | string               | yes         | What to search for. |
+| `fromIndex`         | natural number or zero | no          | If set, the searching will start from this index. |
 
 {% include "btt.njk" %}
+
+## Trivia
+
+Roy asked [~Shinnn](https://www.npmjs.com/~shinnn) is it all right to create grapheme-count-based-index alternative of his [`str-indexes-of`](https://www.npmjs.com/package/str-indexes-of) and he said it's OK.

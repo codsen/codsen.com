@@ -7,17 +7,7 @@ packages:
 
 ## Idea
 
-This library takes a string and removes [widow words](https://en.wikipedia.org/wiki/Widows_and_orphans), by replacing last space in the paragraph with [non-breaking space](http://www.fileformat.info/info/unicode/char/00a0/index.htm):
-
-```html
-Some text with many words on one&nbsp;line.
-```
-
-Also, optionally, it can replace spaces in front of dashes and between two parts of UK postcodes.
-
-{% include "btt.njk" %}
-
-## Features
+This library takes a string and removes [widow words](https://en.wikipedia.org/wiki/Widows_and_orphans), by replacing last space in the paragraph with [non-breaking space](http://www.fileformat.info/info/unicode/char/00a0/index.htm).
 
 - Not just adds but if want, **removes** widow word prevention measures
 - Tackles both paragraphs and single lines
@@ -41,18 +31,12 @@ This program is used by [`detergent`](/os/detergent/).
 
 {% include "btt.njk" %}
 
-## Usage
-
-```js
-const { removeWidows } = require("string-remove-widows");
-```
-
 ## API
 
 When you `require`/`import`, you get three things:
 
 ```js
-const { removeWidows, defaultOpts, version } = require("string-remove-widows");
+const {{ packageJsons["string-remove-widows"].lect.req }} = require("string-remove-widows");
 ```
 
 `removeWidows` is a function which does all the work.
@@ -83,8 +67,8 @@ const { removeWidows, defaultOpts, version } = require("string-remove-widows");
 | `targetLanguage`                | string                                                                    | `html`  | Choose out of `html`, `css` or `js` — non-breaking spaces will be encoded in this language                       |
 | `UKPostcodes`                   | boolean                                                                   | `false` | If enabled, every whitespace between two parts of UK postcodes will be replaced with non-breaking space          |
 | `hyphens`                       | boolean                                                                   | `true`  | Whitespace in front of dashes (`-`), n-dashes (`–`) or m-dashes (`—`) will be replaced with a non-breaking space |
-| `minWordCount`                  | natural number, `0` (disables feature), _falsey_ thing (disables feature) | `4`     | Minimum word count on a paragraph to trigger widow removal                                                       |
-| `minCharCount`                  | natural number, `0` (disables feature), _falsey_ thing (disables feature) | `20`    | Minimum non-whitespace character count on a paragraph to trigger widow removal                                   |
+| `minWordCount`                  | natural number, `0` (disables feature), _falsy_ thing (disables feature) | `4`     | Minimum word count on a paragraph to trigger widow removal                                                       |
+| `minCharCount`                  | natural number, `0` (disables feature), _falsy_ thing (disables feature) | `20`    | Minimum non-whitespace character count on a paragraph to trigger widow removal                                   |
 | `ignore`                        | array of zero or more strings OR string                                   | `[]`    | List templating languages whose heads/tails will be recognised and skipped                                       |
 | `reportProgressFunc`            | function or `null`                                                        | `null`  | If function is given, it will be pinged a natural number, for each percentage-done (in its first input argument) |
 | `reportProgressFuncFrom`        | natural number or `0`                                                     | `0`     | Normally `reportProgressFunc()` reports percentages starting from zero, but you can set it to a custom value     |

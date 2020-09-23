@@ -103,7 +103,7 @@ Optionally, you can pass the Optional Options Object as a second argument:
 | `removeHTMLComments`                             | Boolean                                   | `true`              | n/a                                                            | When enabled, all HTML comments (`<!--` to `-->`) will be removed                                                                                                                                                |
 | `removeCSSComments`                              | Boolean                                   | `true`              | n/a                                                            | When enabled, all CSS comments (`/*` to `*/`) will be removed                                                                                                                                                    |
 | `doNotRemoveHTMLCommentsWhoseOpeningTagContains` | Array of zero or more insensitive strings | `["[if", "[endif"]` | n/a                                                            | Email code often contains Outlook or IE conditional comments which you probably don't want to remove. Whatever strings you list here, if comment's opening tag will contain these, that tag will not be removed. |
-| `reportProgressFunc`                             | Function or something falsey              | `null`              | n/a                                                            | If supplied, it will ping the function you assign passing current percentage done (natural number) as an input argument                                                                                          |
+| `reportProgressFunc`                             | Function or something falsy              | `null`              | n/a                                                            | If supplied, it will ping the function you assign passing current percentage done (natural number) as an input argument                                                                                          |
 | `reportProgressFuncFrom`                         | Natural number                            | `0`                 | n/a                                                            | By default, percentages are reported from 0 to 100. This value overrides this starting percentage value.                                                                                                         |
 | `reportProgressFuncTo`                           | Natural number                            | `100`               | n/a                                                            | By default, percentages are reported from 0 to 100. This value overrides this ending percentage value.                                                                                                           |
 
@@ -181,7 +181,9 @@ Since the main purpose of this library is to clean **email** HTML, it needs to c
 .ExternalClass span, .ExternalClass td { line-height:100%; }
 ```
 
-<div class="box-tip"><strong>2020 update:</strong> <code>.ExternalClass</code> are not needed any more in email templates, see <a href="https://github.com/hteumeuleu/email-bugs/issues/4" target="_blank">https://github.com/hteumeuleu/email-bugs/issues/4</a></div>
+::: tip
+**2020 update:** `.ExternalClass` are not needed any more in email templates, see [https://github.com/hteumeuleu/email-bugs/issues/4](https://github.com/hteumeuleu/email-bugs/issues/4)
+:::
 
 You will not be using these classes within the `<body>` of your HTML code, so they would get removed as "unused" because they are present in `<head>` only. To avoid that, pass the classes, and `id`'s in the _whitelist_ key's value, as an array. For example:
 

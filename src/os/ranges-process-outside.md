@@ -3,7 +3,7 @@ layout: package
 title: ranges-process-outside
 ---
 
-## Quick Take
+## Purpose
 
 {% include "src/components/content/tldr-ranges-process-outside.md" %}
 
@@ -48,7 +48,7 @@ It's API is the following:
 | -------------- | ------------ | ----------- |
 | `fromIdx`      | String index: natural number or zero | Starting index of the chunk programs pings you |
 | `toIdx`        | String index: natural number or zero | Ending index of the chunk programs pings you |
-| `offsetValueCb`        | Function or something _falsey_ | Callback function to bump the indexes in the loop that pings you all this. See [below](#offsetvaluecb-api) for more. |
+| `offsetValueCb`        | Function or something _falsy_ | Callback function to bump the indexes in the loop that pings you all this. See [below](#offsetvaluecb-api) for more. |
 
 ## `offsetValueCb` API
 

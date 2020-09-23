@@ -5,7 +5,7 @@ packages:
   - detergent
 ---
 
-## Idea
+## The Purpose
 
 {% raw %}
 

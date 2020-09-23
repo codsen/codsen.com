@@ -8,6 +8,7 @@
   "paymentPointer": null,
   "permalinkClass": ["permalink"],
   "iframeClass": ["iframes-wrapper"],
+  "tableClass": ["tables-wrapper"],
   "codeClass": ["code-wrapper"],
   "figureClass": ["figure"],
   "paths": {

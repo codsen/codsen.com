@@ -8,31 +8,11 @@ packages:
   - string-strip-html
 ---
 
-## Quick Take
-
-```js
-const trimSpaces = require("string-trim-spaces-only");
-const res = trimSpaces("  aaa   ");
-console.log("res = " + JSON.stringify(res1, null, 4));
-// => {
-//     res: "aaa",
-//     ranges: [[0, 2], [5, 8]]
-// }
-
-// trimming stops at first non-space:
-const res2 = trimSpaces("   \t  zz   \n    ");
-console.log("res2 = " + JSON.stringify(res2, null, 4));
-// => {
-//     res: "\t  zz   \n",
-//     ranges: [[0, 3], [12, 16]]
-// }
-```
-
-{% include "btt.njk" %}
-
 ## API
 
-**trimSpaces(str, [opts])**
+**{{ packageJsons["string-trim-spaces-only"].lect.req }}(str, [opts])**
+
+In other words, it's a function which takes two input arguments, second-one being optional (marked by square brackets).
 
 ### API - Function's Input
 

@@ -6,61 +6,24 @@ packages:
   - detergent
 ---
 
-## Quick Take
+## Purpose
 
 {% raw %}
 
-Imagine a templating scenario: you have a string and you want to put a value somewhere. The "somewhere" will be marked by special markers — Nunjucks use `{{` and `}}`, Salesforce use `{!` and `}`, Mailchimp use `*|` and `|*` — there are many templating languages.
+There are many templating languages out there, each using different special "markers" — Nunjucks use `{{` and `}}`, Salesforce use `{!` and `}`, Mailchimp use `*|` and `|*` — there are many templating languages.
 
-Specific names to distinguish the two, like "an opening marker" or "a closing marker" don't exist so we invented a term, _heads_ and _tails_.
+We call those "markers" _heads_ and _tails_ (invented term) because we need to distinguish between the two.
 
-This program finds out, **where are templating marker heads and tails located in a given string**.
+This program finds out, **where are the templating marker heads and tails located in a given string**.
+
+It will be used in JSON [pre-processing](/os/json-variables/) and it will let you use any existing or invented templating language.
+
 {% endraw %}
-
-```js
-const {{ packageJsons["string-find-heads-tails"].lect.req }} = require('string-find-heads-tails')
-const result = {{ packageJsons["string-find-heads-tails"].lect.req }}(
-  "some text %%_var1-%% more text %%_var2_%%",
-  ["%%_", "%%-"], // two flavours of heads
-  ["-%%", "_%%"] // two flavours of tails
-),
-console.log(result);
-// => [
-//      {
-//        headsStartAt: 10,
-//        headsEndAt: 13,
-//        tailsStartAt: 17,
-//        tailsEndAt: 20,
-//      },
-//      {
-//        headsStartAt: 31,
-//        headsEndAt: 34,
-//        tailsStartAt: 38,
-//        tailsEndAt: 41,
-//      }
-//    ]
-```
-
 {% include "btt.njk" %}
-
-## Purpose
-
-It will be used in JSON [pre-processing](/os/json-variables/), replacing the dumb string search being used currently.
 
 ## Context
 
 {% raw %}
-
-Different programming languages, templating languages and even proprietary notations (such as used by Email Service Providers) use different `heads` and `tails` to mark variable names.
-
-For example,
-
-- Nunjucks templating language would use `{%` and `%}`, then `{{` and `}}` (among others).
-- Java JSP's would use `${` and `}` (among others).
-- Oracle Responsys, ESP, would use `$(` and `)`.
-- ex-eDialog/ex-eBay Enterprise/Zeta Interactive ESP use `_` and `__`.
-
-This library enables to build tools which process such code. All processing starts with searching for variables in a string and `string-find-heads-tails` will help you here.
 
 It's a (scanerless) parser for arbitrary templating language markers.
 
@@ -77,8 +40,11 @@ There are few rules:
 
 **{{ packageJsons["string-find-heads-tails"].lect.req }}(str, heads, tails, \[fromIndex])**
 
-**IMPORTANT**
-The index is based on native JavaScript string indexing where each astral character's length will be counted as two. If you wish to convert the index system to be based on _Unicode character count_, use `nativeToUnicode()` method of [string-convert-indexes](/os/string-convert-indexes/). It can convert the whole nested array output of this library (not to mention number indexes).
+In other words, it's a function which takes four input arguments, last-one optional (marked with square brackets).
+
+::: tip
+The index system used here is the native JavaScript string index system where each astral character's length will be counted as having length of two (or more). If you wish to convert the index system to be based on _grapheme count_ where emoji is 1-character-long, use `nativeToUnicode()` method of [string-convert-indexes](/os/string-convert-indexes/). It can process the whole output of this library.
+:::
 
 {% include "btt.njk" %}
 

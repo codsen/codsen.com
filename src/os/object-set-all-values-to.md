@@ -15,28 +15,11 @@ This library is well-tested and is being used in commercial projects.
 
 {% include "btt.njk" %}
 
-## Use
-
-```js
-const setAllValuesTo = require("object-set-all-values-to");
-
-console.log(setAllValuesTo({ a: "b", c: "d" }));
-// => {a: false, c: false}
-
-console.log(setAllValuesTo({ a: "b", c: "d" }, "x"));
-// => {a: 'x', c: 'x'}
-
-console.log(setAllValuesTo({ a: "b", c: "d" }, ["x"]));
-// => {a: ['x'], c: ['x']}
-```
-
-{% include "btt.njk" %}
-
 ## API
 
-```js
-setAllValuesTo(input, value);
-```
+**{{ packageJsons["object-set-all-values-to"].lect.req }}(input, value)**
+
+In other words, it's a function which takes two input arguments, both obligatory.
 
 ### API - Input
 

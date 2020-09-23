@@ -7,22 +7,6 @@ packages:
 
 ## Idea
 
-Place one string "on top" of another:
-
-```js
-const str1 = "aaa";
-const str2 = "bbb";
-const result = overlap(str1, str2, { offset: -2 });
-console.log(
-  `${`\u001b[${33}m${`result`}\u001b[${39}m`} = ${JSON.stringify(
-    result,
-    null,
-    4
-  )}`
-);
-// result = "bbbaa"
-```
-
 In essence,
 
 ```js
@@ -36,7 +20,7 @@ In essence,
 
 ## API
 
-**overlap(str1, str2, [, opts])**
+**{{ packageJsons["string-overlap-one-on-another"].lect.req }}(str1, str2, [, opts])**
 
 ### API - Input
 
@@ -75,15 +59,5 @@ The algorithm is the following:
 1. If one and only one of two input strings is zero-long, the other string is returned as a result.
 2. If both input strings are empty, an empty string is returned.
 3. If both input strings are non-empty, the result is second string overlaid on the first, considering the offset.
-
-Practically,
-
-```js
-const res = overlap("", "456", { offset: 99, offsetFillerCharacter: "zzzz" });
-console.log(`res = ${res}`);
-// => res = "456"
-```
-
-Consider the sample above - even though offset is long enough to warrant the filler, no characters are added to the `str2`, `456` because the first argument, `str1` is empty.
 
 {% include "btt.njk" %}

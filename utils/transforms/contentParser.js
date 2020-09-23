@@ -63,8 +63,7 @@ module.exports = (value, outputPath) => {
     }
 
     /**
-     * Get all the iframes inside the article
-     * and wrap them inside a class
+     * Wrap iframes inside the article with a div
      */
     const articleEmbeds = [...document.querySelectorAll("main article iframe")];
     if (articleEmbeds.length) {
@@ -74,6 +73,19 @@ module.exports = (value, outputPath) => {
         setClass(wrapper, eleventyConfig.iframeClass);
         wrapper.appendChild(embed.cloneNode(true));
         embed.replaceWith(wrapper);
+      });
+    }
+
+    /**
+     * Wrap tables inside the package pages with a div
+     */
+    const tables = [...document.querySelectorAll(".package-body table")];
+    if (tables.length) {
+      tables.forEach((table) => {
+        const wrapper = document.createElement("div");
+        setClass(wrapper, eleventyConfig.tableClass);
+        wrapper.appendChild(table.cloneNode(true));
+        table.replaceWith(wrapper);
       });
     }
 

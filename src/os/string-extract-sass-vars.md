@@ -5,44 +5,6 @@ packages:
   - detergent
 ---
 
-## Quick Take
-
-Parse a SASS/PostCSS variables file:
-
-```scss
-// all variables are here!!!
-// ------------------------------------------
-$red: #ff6565; // this is red
-// $green: #63ffbd; // no green here
-$yellow: #ffff65; // this is yellow
-$blue: #08f0fd; // this is blue
-$fontfamily: Helvetica, sans-serif;
-$border: 1px solid #dedede;
-$borderroundedness: 3px;
-$customValue1: tralala;
-$customValue2: tralala;
-// don't mind this comment about #ff6565;
-$customValue3: 10;
-```
-
-into a plain object:
-
-```js
-{
-  red: "#ff6565",
-  yellow: "#ffff65",
-  blue: "#08f0fd",
-  fontfamily: "Helvetica, sans-serif",
-  border: "1px solid #dedede",
-  borderroundedness: "3px",
-  customValue1: "tralala",
-  customValue2: "tralala",
-  customValue3: 10
-}
-```
-
-{% include "btt.njk" %}
-
 ## API
 
 ```js
@@ -113,38 +75,6 @@ By default, this option is disabled.
 Think of it as a middleware — if you pass a function, then before placing the extracted value into a result object, this program will feed that value into your function and use function's result instead.
 
 This gives opportunities to process the values, for example, [turning](/os/color-shorthand-hex-to-six-digit/) 3-digit hex colour numbers into email-friendly 6-digit:
-
-```js
-const extractVars = require("string-extract-sass-vars");
-const conv = require("color-shorthand-hex-to-six-digit");
-const res = extractVars("$blue: #ccc;", {
-  throwIfEmpty: true,
-  cb: (val) => conv(val), // converts hex codes only, bypasses the rest
-});
-console.log(JSON.stringify(res, null, 4));
-// => {
-//       "blue": "#cccccc"
-//    }
-//
-// notice hex code is 6-digit, not 3-digit
-```
-
-{% include "btt.njk" %}
-
-## Another example
-
-```js
-const extractVars = require("string-extract-sass-vars");
-const res = extractVars("$blue: #08f0fd;", {
-  throwIfEmpty: true,
-});
-console.log(JSON.stringify(res, null, 4));
-// => {
-//       "blue": "#08f0fd"
-//    }
-```
-
-{% include "btt.njk" %}
 
 ## What this program doesn't do
 

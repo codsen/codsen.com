@@ -16,32 +16,6 @@ That's what this program is about — it is a string value lookup helper.
 
 {% include "btt.njk" %}
 
-## Usage
-
-```js
-const {
-  left,
-  right,
-  leftSeq,
-  rightSeq,
-  chompLeft,
-  chompRight,
-  leftStopAtNewLines,
-  rightStopAtNewLines,
-} = require("string-left-right");
-// let's get the closest non-whitespace letter to the left of "d"
-const str = "abc   def";
-const res = left(str, 6); // 6th index marks letter "d"
-console.log(
-  `next non-whitespace character to the left of ${str[6]} (index 6) is ${
-    str[left(str, 6)]
-  } (index ${left(str, 6)})`
-);
-// => next non-whitespace character to the left of d (index 6) is c (index 2)
-```
-
-{% include "btt.njk" %}
-
 ## API - left() and right()
 
 Both exported functions have the same API:

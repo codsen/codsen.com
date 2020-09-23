@@ -3,7 +3,7 @@ layout: package
 title: array-of-arrays-sort-by-col
 ---
 
-## Quick Take
+## Purpose
 
 Sorts array of arrays by any column (default is first element, zero'th column index).
 

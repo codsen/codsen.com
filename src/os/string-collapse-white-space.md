@@ -5,36 +5,6 @@ packages:
   - detergent
 ---
 
-## Quick Take
-
-Find chunks of whitespace (characters that `String.trim()` to zero-length) and replace them with **a single space**. Then trim each line.
-
-```js
-const collapse = require("string-collapse-white-space");
-
-const res1 = collapse("  aaa     bbb    ccc   dddd  ");
-console.log(res1);
-// => "aaa bbb ccc dddd"
-
-const res2 = collapse("   \t\t\t   aaa   \t\t\t   ");
-console.log(res2);
-// => 'aaa'
-
-const res3 = collapse("   aaa   bbb  \n    ccc   ddd   ", { trimLines: true });
-console.log(res3);
-// => 'aaa bbb\nccc ddd'
-
-// \xa0 is an unencoded non-breaking space:
-const res4 = collapse(
-  "     \xa0    aaa   bbb    \xa0    \n     \xa0     ccc   ddd   \xa0   ",
-  { trimLines: true, trimnbsp: true }
-);
-console.log(res4);
-// => 'aaa bbb\nccc ddd'
-```
-
-{% include "btt.njk" %}
-
 ## Whitespace Collapsing
 
 Take string. First **trim** the outsides, then **collapse** two and more spaces into one.
@@ -70,9 +40,9 @@ When collapsing, _only spaces_ are collapsed. Non-space whitespace within text w
 
 {% include "btt.njk" %}
 
-## The API
+## API
 
-**collapse (string\[, opts])**
+**collapse (string, \[opts])**
 
 Input:
 

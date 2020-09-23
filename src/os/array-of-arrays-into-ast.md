@@ -3,41 +3,15 @@ layout: package
 title: array-of-arrays-into-ast
 ---
 
-## What it does
+## Purpose
 
-It consumes array of arrays and produces a [trie](https://en.wikipedia.org/wiki/Trie)-like AST from them:
-
-Input:
-
-```js
-[[1, 2, 3], [1, 2], [5]];
-```
-
-Output:
-
-```js
-{
-  1: [
-    {
-      2: [
-        {
-          3: [null]
-        },
-        null
-      ]
-    }
-  ],
-  5: [null]
-}
-```
-
-This library was a piece of a one experimental code generator of ours.
+It consumes array of arrays and produces a [trie](https://en.wikipedia.org/wiki/Trie)-like AST from them. This library was a piece of a one experimental code generator of ours.
 
 {% include "btt.njk" %}
 
 ## API
 
-**generateAst (input, [opts])**
+**generateAst (input, \[opts])**
 
 ### API - Input
 

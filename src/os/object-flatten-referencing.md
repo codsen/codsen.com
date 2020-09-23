@@ -143,7 +143,7 @@ This library recursively traverses both inputs, compares their types and if one 
 
 ## In practice
 
-In practice, you will need this library when you need to map the variables in email templates.
+In practice, this library is used to map the variables in email templates.
 
 For example, your _data content file_ in JSON (development version) that controls your template is:
 

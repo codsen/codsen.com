@@ -5,9 +5,9 @@ packages:
   - detergent
 ---
 
-## Quick Take
+## Idea
 
-As you know, straight apostrophes are not typographically-correct: `test's` should be `test’s`, with [right single quote](https://www.fileformat.info/info/unicode/char/2019/index.htm) instead of [apostrophe](https://www.fileformat.info/info/unicode/char/27/index.htm).
+As you know, straight apostrophes are not always typographically-correct: `John's` should be `John’s`, with [right single quote](https://www.fileformat.info/info/unicode/char/2019/index.htm) instead of [apostrophe](https://www.fileformat.info/info/unicode/char/27/index.htm).
 
 This program converts all cases of single and double apostrophes, plus [primes](<https://en.wikipedia.org/wiki/Prime_(symbol)>).
 
@@ -15,24 +15,6 @@ Sources used in rules logic and unit tests:
 
 - Oxford A-Z of Grammar and Punctuation 2nd Ed., 2009, [ISBN 978-0199564675](https://www.google.com/search?q=isbn+978-0199564675)
 - Butterick's Practical Typography 2nd Ed., "Apostrophes" [chapter](https://practicaltypography.com/apostrophes.html)
-
-```js
-const {{ packageJsons["string-apostrophes"].lect.req }} = require("string-apostrophes");
-const res = convertAll(`In the '60s, rock 'n' roll`, {
-  convertApostrophes: 1,
-  convertEntities: 0,
-});
-console.log(JSON.stringify(res, null, 4));
-// =>
-// {
-//   "result": "In the ’60s, rock ’n ’ roll",
-//   "ranges": [
-//     [7, 8, "’"],
-//     [18, 19, "’"],
-//     [20, 21, "’"]
-//   ]
-// }
-```
 
 {% include "btt.njk" %}
 
@@ -47,11 +29,11 @@ const {{ packageJsons["string-apostrophes"].lect.req }} = require("string-apostr
 import {{ packageJsons["string-apostrophes"].lect.req }} from "string-apostrophes";
 ```
 
-two functions are exported: `convertOne` and `convertAll`.
+you get two functions: [`convertAll()`](#convertall) and [`convertOne()`](#convertone).
 
 {% include "btt.njk" %}
 
-## API - `convertAll()` input
+## `convertAll()`
 
 `convertAll` is a function; its API is the following:
 
@@ -72,23 +54,14 @@ console.log(convertAll(`test's`, {
 
 {% include "btt.njk" %}
 
-### Options Object, `opts`
-
-| Options Object's key | The type of its value | Default | Obligatory? | Description                                            |
-| -------------------- | --------------------- | ------- | ----------- | ------------------------------------------------------ |
-| `convertEntities`    | Boolean               | `false` | no          | Should we HTML-encode the characters?                  |
-| `convertApostrophes` | Boolean               | `true`  | no          | Killswitch. If it's `false`, the program does nothing. |
-
-{% include "btt.njk" %}
-
-## API - `convertAll()` output
+### Output
 
 A plain object is returned:
 
 | Returned object's key | The type of its value        | Description                                               |
 | --------------------- | ---------------------------- | --------------------------------------------------------- |
 | `result`              | String                       | Processed string, with all ranges applied                 |
-| `ranges`              | Array of zero or more arrays | Ranges that were gathered and applied to produce `result` |
+| `ranges`              | Array of zero or more arrays | [Ranges](/ranges/) that were [gathered](/os/ranges-push/) and [applied](/os/ranges-apply/) to produce `result` |
 
 For example, if you gave string `In the '60s, rock 'n' roll` with apostrophes, the result on default settings would be:
 
@@ -105,7 +78,16 @@ For example, if you gave string `In the '60s, rock 'n' roll` with apostrophes, t
 
 {% include "btt.njk" %}
 
-## API - `convertOne()` input
+### Options Object, `opts`
+
+| Options Object's key | The type of its value | Default | Obligatory? | Description                                            |
+| -------------------- | --------------------- | ------- | ----------- | ------------------------------------------------------ |
+| `convertEntities`    | Boolean               | `false` | no          | Should we HTML-encode the characters?                  |
+| `convertApostrophes` | Boolean               | `true`  | no          | Killswitch. If it's `false`, the program does nothing. |
+
+{% include "btt.njk" %}
+
+## `convertOne()`
 
 `convertOne` is a function; its API is the following:
 
@@ -127,6 +109,14 @@ console.log(convertOne(`test's`, {
 })),
 // => [[4, 5, "&rsquo;"]]
 ```
+
+{% include "btt.njk" %}
+
+### Output
+
+It returns **an array** of zero or more arrays ([ranges](/ranges/)), each representing what needs to be done.
+
+For example, result `[[2, 3, "&lsquo;"], [5, 6, "&rsquo;"]]` means "replace string chunk from index `2` to `3` with `&lsquo;`" and from index `5` to `6` with `&rsquo;`. You can use [`ranges-apply`](/os/ranges-apply/) to process a string using those ranges (in other words, "to apply those ranges").
 
 {% include "btt.njk" %}
 
@@ -212,21 +202,13 @@ In practice, that's how [`detergent`](/os/detergent/) uses this package.
 
 {% include "btt.njk" %}
 
-## API - `convertOne()` output
-
-It returns **an array** of zero or more arrays ([ranges](/ranges/)), each representing what needs to be done.
-
-For example, result `[[2, 3, "&lsquo;"], [5, 6, "&rsquo;"]]` means "replace string chunk from index `2` to `3` with `&lsquo;`" and from index `5` to `6` with `&rsquo;`. You can use [`ranges-apply`](/os/ranges-apply/) to process a string using those ranges (in other words, "to apply those ranges").
-
-{% include "btt.njk" %}
-
-## Compared to competitors on npm
+## Compared to Others
 
 |                                                                           | This program, <br> [`string-apostrophes`](/os/string-apostrophes)                                              | [`straight-to-curly-quotes`](https://www.npmjs.com/package/straight-to-curly-quotes)                                                               | [`smartquotes`](https://www.npmjs.com/package/smartquotes)                                                               | [`typographic-quotes`](https://www.npmjs.com/package/typographic-quotes)                                                               |
 | ------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
 |                                                                           | [![npm link](https://img.shields.io/npm/v/string-apostrophes.svg?style=flat-square)](/os/string-remove-widows/) | [![npm link](https://img.shields.io/npm/v/straight-to-curly-quotes.svg?style=flat-square)](https://www.npmjs.com/package/straight-to-curly-quotes) | [![npm link](https://img.shields.io/npm/v/smartquotes.svg?style=flat-square)](https://www.npmjs.com/package/smartquotes) | [![npm link](https://img.shields.io/npm/v/typographic-quotes.svg?style=flat-square)](https://www.npmjs.com/package/typographic-quotes) |
 | Returns processed string                                                  | ✅                                                                                                                                       | ✅                                                                                                                                                 | ✅                                                                                                                       | ✅                                                                                                                                     |
-| Returns index ranges                                                      | ✅                                                                                                                                       | ❌                                                                                                                                                 | ❌                                                                                                                       | ❌                                                                                                                                     |
+| Additionally returns index [ranges](/ranges/)                                                      | ✅                                                                                                                                       | ❌                                                                                                                                                 | ❌                                                                                                                       | ❌                                                                                                                                     |
 | Replaces quotes in DOM, on a web page, where you put a script in          | ❌                                                                                                                                       | ❌                                                                                                                                                 | ✅                                                                                                                       | ❌                                                                                                                                     |
 | Not regex-based                                                           | ✅                                                                                                                                       | ❌                                                                                                                                                 | ❌                                                                                                                       | ❌                                                                                                                                     |
 | Can output HTML-encoded content upon request                              | ✅                                                                                                                                       | ❌                                                                                                                                                 | ❌                                                                                                                       | ❌                                                                                                                                     |

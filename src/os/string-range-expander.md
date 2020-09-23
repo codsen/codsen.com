@@ -7,28 +7,9 @@ packages:
   - string-left-right
 ---
 
-## Usage
+## The Purpose
 
-```js
-const expand = require("string-range-expander");
-// let's say we have picked the "zzzz" index range - [16, 20]
-// "something>\n\t    zzzz <here"
-//                    |   |
-//                  from  to
-//
-// PS. "\n" and "\t" take up a single character's length
-//
-const res = expand({
-  str: "something>\n\t    zzzz <here",
-  from: 16,
-  to: 20,
-  ifRightSideIncludesThisThenCropTightly: "<",
-});
-console.log("res = " + JSON.stringify(res1, null, 4));
-// => [10, 21]
-```
-
-This library is used to manage the whitespace in the string index selections. The "from" and "to" indexes correspond the `String.slice()` "beginIndex" and "endIndex" API as described in [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/slice).
+This program is used to manage the whitespace in the string index selections. Let's say we want to delete certain index range in a string but maybe there is whitespace around? This program extends the index ranges as needed.
 
 {% include "btt.njk" %}
 
@@ -36,9 +17,9 @@ This library is used to manage the whitespace in the string index selections. Th
 
 **expand(opts)**
 
-The function is exported as _default_, you can name it any way you like when you `import`/`require`.
+In other words, it's a function which takes a single input argument.
 
-### API - Function's Input
+## API - Input
 
 | Input argument | Key value's type | Obligatory? | Description                               |
 | -------------- | ---------------- | ----------- | ----------------------------------------- |
@@ -84,6 +65,6 @@ Here it is in one place if you want to copy-paste it somewhere:
 
 {% include "btt.njk" %}
 
-### API - Function's Output
+## API - Output
 
 The output is an array of two indexes, the new "from" and new "to". For example, `[12, 14]`.

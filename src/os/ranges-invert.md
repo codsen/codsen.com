@@ -3,15 +3,9 @@ layout: package
 title: ranges-invert
 ---
 
-## Quick Take
-
-{% include "src/components/content/tldr-ranges-invert.md" %}
-
-{% include "btt.njk" %}
-
 ## API
 
-**rangesInvert(arr, strLen [, opts])**
+**{{ packageJsons["ranges-invert"].lect.req }}(arr, strLen, \[opts])**
 
 | Input argument | Type                         | Obligatory? | Description                                                                                                                                                                                                                 |
 | -------------- | ---------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

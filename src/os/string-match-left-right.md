@@ -6,6 +6,14 @@ packages:
   - detergent
 ---
 
+## The Purpose
+
+It's easy to check what's on the left/right of a given string index:
+
+```
+
+```
+
 ## The API
 
 ### Input
@@ -37,70 +45,28 @@ Returns Boolean `false` or value of the string that was matched, that is,
 
 ### Optional Options Object's API:
 
-| `options` object's key    | Type                                                           | Obligatory? | Default     | Description                                                                                                                                                                                                                                                                                                                                                                                        |
+| `options` object's key    | Type                                                           | Default     | Description                                                                                                                                                                                                                                                                                                                                                                                        |
 | ------------------------- | -------------------------------------------------------------- | ----------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `i`                       | Boolean                                                        | no          | `false`     | If `false`, it's case sensitive. If `true`, it's insensitive.                                                                                                                                                                                                                                                                                                                                      |
-| `cb`                      | Function                                                       | no          | `undefined` | If you feed a function to this key, that function will be called with the remainder of the string. Which side, it depends on which side method (left side for `matchLeft` and `matchLeftIncl` and others for right accordingly) is being called. The result of this callback will be joined using "AND" logical operator to calculate the final result. We use `cb` mainly to check for whitespace. |
-| `trimBeforeMatching`      | Boolean                                                        | no          | `false`     | If set to `true`, there can be whitespace before what's being checked starts. Basically, this means, substring can begin (when using right side methods) or end (when using left side methods) with a whitespace.                                                                                                                                                                                  |
-| `trimCharsBeforeMatching` | String or Array of zero or more strings, each 1 character-long | no          | `[]`        | If set to `true`, similarly like `trimBeforeMatching` will remove whitespace, this will remove any characters you provide in an array. For example, useful when checking for tag names to the right of `<`, with or without closing slash, `<div` or `</div`.                                                                                                                                      |
-| `relaxedApi`              | Boolean                                                        | no          | `false`     | If set to `true`, missing/falsey input arguments will not `throw` an error but instantly cause a result, Boolean `false`. In other words, it's bypass for errors with ID's `THROW_ID_01`, `THROW_ID_02` and `THROW_ID_03`.                                                                                                                                                                         |
+| `i`                       | Boolean                                                                  | `false`     | If `false`, it's case sensitive. If `true`, it's insensitive.                                                                                                                                                                                                                                                                                                                                      |
+| `cb`                      | Function                                                                 | `undefined` | If you feed a function to this key, that function will be called with the remainder of the string. Which side, it depends on which side method (left side for `matchLeft` and `matchLeftIncl` and others for right accordingly) is being called. The result of this callback will be joined using "AND" logical operator to calculate the final result. We use `cb` mainly to check for whitespace. |
+| `trimBeforeMatching`      | Boolean                                                                  | `false`     | If set to `true`, there can be whitespace before what's being checked starts. Basically, this means, substring can begin (when using right side methods) or end (when using left side methods) with a whitespace.                                                                                                                                                                                  |
+| `trimCharsBeforeMatching` | String or Array of zero or more strings, each 1 character-long           | `[]`        | If set to `true`, similarly like `trimBeforeMatching` will remove whitespace, this will remove any characters you provide in an array. For example, useful when checking for tag names to the right of `<`, with or without closing slash, `<div` or `</div`.                                                                                                                                      |
+| `maxMismatches` | Natural number or zero           | `0`        | It's like Levenshtein distance - how many characters can mismatch to yield false result? |
+| `firstMustMatch` | Boolean           | `false`        | When `opts.maxMismatches` is enabled, you can enforce that the first character must match. |
+| `lastMustMatch` | Boolean           | `false`        | When `opts.maxMismatches` is enabled, you can enforce that the last character must match. |
 
 Here it is with defaults, in one place, ready for copying:
 
 ```js
 {
-  i: false,
   cb: undefined,
+  i: false,
   trimBeforeMatching: false,
-  trimCharsBeforeMatching: []
+  trimCharsBeforeMatching: [],
+  maxMismatches: 0,
+  firstMustMatch: false,
+  lastMustMatch: false,
 }
-```
-
-The Optional Options Object is sanitized by [`check-types-mini`](/os/check-types-mini/) which will `throw` if you set options' keys to wrong types or add any unrecognized keys.
-
-```js
-// K E Y
-// -----
-// test string with character indexes to help you count:
-//
-// test string:                a  b  c  d  e  f  g  h  i
-// indexes of letters above:   0  1  2  3  4  5  6  7  8
-//
-// a is #0, b is #1 and so on. Look the digit under letter above.
-//
-// that is, c is number (term "number" further abbreviated as hash character "#") 2 or i is #8.
-//
-// we'll be using the same string "abcdefghi" below:
-
-const {
-  matchLeftIncl,
-  matchRightIncl,
-  matchLeft,
-  matchRight,
-} = require("string-match-left-right");
-
-let res1 = matchLeftIncl("abcdefghi", 3, ["bcd"]);
-// 3rd character is "d" because indexes start from zero.
-// We're checking the string to the left of it, "bcd", inclusive of current character ("d").
-// This means, "bcd" has to end with existing character and the other chars to the left
-// must match exactly:
-console.log(`res1 = ${res1}`);
-// => res1 = 'bcd'
-
-let res2 = matchLeft("abcdefghi", 3, ["ab", `zz`]);
-// neither "ab" nor "zz" are to the left of 3rd index, "d":
-console.log(`res2 = ${res2}`);
-// => res2 = false
-
-let res3 = matchRightIncl("abcdefghi", 3, ["def", `zzz`]);
-// "def" is to the right of 3rd index (including it), "d":
-console.log(`res3 = ${res3}`);
-// => res3 = 'def'
-
-let res4 = matchRight("abcdefghi", 3, ["ef", `zz`]);
-// One of values, "ef" is exactly to the right of 3rd index, "d":
-console.log(`res4 = ${res4}`);
-// => res4 = 'ef'
 ```
 
 {% include "btt.njk" %}

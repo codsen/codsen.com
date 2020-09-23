@@ -1,6 +1,8 @@
 ---
 layout: package
 title: ast-monkey-traverse
+packages:
+  - object-path
 ---
 
 ## Idea

@@ -158,7 +158,7 @@ When validating the URI's which can be relative (for example, `href` attribute v
 
 For example, [is-url-superb](https://www.npmjs.com/package/is-url-superb) and this package.
 
-If `opts.flagUpUrisWithSchemes` is set to `true`, this program will search for schemes and yield a falsey result if it detects a known `<scheme>:` for example `mailto:`.
+If `opts.flagUpUrisWithSchemes` is set to `true`, this program will search for schemes and yield a falsy result if it detects a known `<scheme>:` for example `mailto:`.
 
 Another challenge: URI with schema-as-error is not the same "error" — it's not a "real error". To distinguish the two we'll set result object's key `message` to `null`.
 

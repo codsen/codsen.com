@@ -2,16 +2,18 @@
 layout: package
 title: string-fix-broken-named-entities
 packages:
+  - ranges-apply
   - detergent
+  - leven
 ---
 
 ## Purpose
 
-This program detects and fixes broken named HTML entities. The algorithm is Levenshtein distance, for smaller entities, we match by distance `1`, for longer entities we allow distance `2`.
+This program detects and fixes broken named HTML entities (like `&nbsp;`). The algorithm is _Levenshtein distance_, for smaller entities, we match by distance `1`, for longer entities we allow distance `2`.
 
 In practice, this means we can catch errors like: `&nbp;` (mistyped `&nbsp;`).
 
-This program also works as a healthy entities catcher - broken entities are fed to one callback (`opts.cb`), healthy entities are fed to another callback (opts.entityCatcherCb).
+This program also works as a healthy entities catcher - broken entities are fed to one callback ([`opts.cb`](#optscb-a-callback-function)), healthy entities are fed to another callback ([`opts.entityCatcherCb`](#optsentitycatchercb)).
 
 There is a decoding function; the algorithm is aware of numeric HTML entities as well.
 
@@ -30,9 +32,7 @@ For example:
 
 ```js
 const fixEnt = require("string-fix-broken-named-entities");
-const result = fixEnt("&nsp;x&nsp;y&nsp;");
-console.log(JSON.stringify(result, null, 4));
-// => [[0, 5, "&nbsp;"], [6, 11, "&nbsp;"], [12, 17, "&nbsp;"]]
+
 ```
 
 {% include "btt.njk" %}
@@ -241,7 +241,7 @@ console.log(
 
 {% include "btt.njk" %}
 
-## `opts.progressFn` - progress callback
+## `opts.progressFn`
 
 In web worker setups, a worker can return "in progress" values. When we put this package into a web worker, this callback function under `opts.progress` will be called with a string, containing a natural number, showing the percentage of the work done so far.
 

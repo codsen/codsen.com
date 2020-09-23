@@ -3,7 +3,7 @@ layout: package
 title: ranges-push
 ---
 
-## Quick Take
+## Purpose
 
 {% include "src/components/content/tldr-ranges-push.md" %}
 
@@ -11,7 +11,7 @@ title: ranges-push
 
 ## API
 
-This package exports a constructor, `Ranges` (with uppercase), which you call using `new` to create class instances:
+This package exports a _constructor_, `Ranges` (with uppercase), which you call using `new` to create class instances:
 
 ```js
 const Ranges = require("ranges-push");

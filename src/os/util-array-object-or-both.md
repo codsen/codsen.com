@@ -24,7 +24,9 @@ It standardises the input strings a user has given:
 
 ## API
 
-**{{ packageJsons["util-array-object-or-both"].lect.req }}(arrOfRanges, \[opts])**
+**{{ packageJsons["util-array-object-or-both"].lect.req }}(str, \[opts])**
+
+In other words, it's a function which takes two input arguments, second-one being optional (marked by square brackets).
 
 If the input is valid, normalised version: `array` or `object` or `any` will be returned.
 
@@ -53,6 +55,10 @@ For example, set `optsVarName` to `opts.only` and set `msg` to `ast-delete-key/d
 ```
 
 {% include "btt.njk" %}
+
+## API - Output
+
+Returns one of three possible string values: `"array"` or `"object"` or `"any"`.
 
 ## Use
 
@@ -93,7 +99,7 @@ function myPrecious (input, opts) {
     msg: 'my-library/myPrecious(): [THROW_ID_02]',
     optsVarName: 'opts.only'
   })
-  // now we can guarantee that it's either falsey (undefined or null) OR:
+  // now we can guarantee that it's either falsy (undefined or null) OR:
   //   - `object`
   //   - `array`
   //   - `any`

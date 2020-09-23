@@ -376,7 +376,7 @@ body {
 }
 
 table {
-  width: 100%;
+  /* width: 100%; */
   table-layout: fixed;
   border-collapse: collapse;
 
@@ -387,20 +387,12 @@ table {
     }
   }
   th, td {
-    border: 1px solid $borderGrey;
-    overflow-x: auto;
-    /* white-space: nowrap; */
     padding: 1rem;
-    /* width: 20%; */
 
+    border: 1px solid $borderGrey;
     @include darkTheme {
       border-color: $borderDark;
     }
-  }
-
-  td:first-child code {
-    display: block;
-    overflow-x: auto;
   }
 }
 
@@ -2678,6 +2670,8 @@ pre[class*='language-'] {
 
 article, .package-body__content {
   div[class^="box-"] {
+    float: left;
+    max-width: 58rem;
     padding: 3rem 2rem;
     margin-bottom: 3rem;
     background-color: $lighterGrey;
@@ -3226,8 +3220,12 @@ article, .package-body__content {
 .layout-package .content-main__inner {
   padding: 1rem;
 
-  blockquote, ol, p, table, ul {
+  blockquote, ol, p, ul, .tables-wrapper {
     margin-bottom: 2.1rem;
+  }
+
+  table {
+    margin-bottom: 0;
   }
 
   h1 {
@@ -4237,6 +4235,11 @@ pre[class*="language-"] > code[class*="language-"] {
 
 /* etc */
 /* -------------------------------------------------------------------------- */
+
+/* add scrollbars to tables if needed */
+.tables-wrapper {
+  overflow-x: auto;
+}
 
 /* .layout-licence {
   h1 {

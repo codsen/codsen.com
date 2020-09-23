@@ -5,36 +5,7 @@ packages:
   - detergent
 ---
 
-## Usage
-
-Below, we look for dodgy cases of `<!--`, our callback is pinged with a location of the culprit:
-
-```js
-const strFindMalformed = require("string-find-malformed");
-const gathered = [];
-strFindMalformed(
-  "<div><!-something--></div>",
-  "<!--",
-  // your callback function:
-  (obj) => {
-    gathered.push(obj);
-  },
-  {
-    maxDistance: 1, // default
-  }
-);
-console.log(JSON.stringify(gathered, null, 4));
-// => [
-//      {
-//        idxFrom: 5,
-//        idxTo: 8
-//      }
-//    ]
-```
-
-{% include "btt.njk" %}
-
-## Problem
+## The Purpose
 
 We need a program to help to find malformed string instances.
 
@@ -90,8 +61,8 @@ PS. Input arguments are not mutated.
 | options object's key | Type of its value      | Default | Description                                                                                   |
 | -------------------- | ---------------------- | ------- | --------------------------------------------------------------------------------------------- |
 | `stringOffset`       | Natural number or zero | `0`     | Every index fed to the callback will be incremented by this much.                             |
-| `maxDistance`        | Natural number or zero | `1`     | Controls, how many characters can differ before we disregard the particular chunk as a result |
-| `maxDistance`        | Boolean                | `true`  | Whitepace (characters that trim to zero length) is skipped by default.                        |
+| `maxDistance`        | Natural number or zero | `1`     | Controls, how many characters can differ before we disregard the particular chunk as a result, [Levenshtein distance](https://en.wikipedia.org/wiki/Levenshtein_distance) |
+| `ignoreWhitespace`        | Boolean                | `true`  | Whitepace (characters that trim to zero length) is skipped by default.                        |
 
 Here is the Optional Options Object in one place with all default settings:
 
@@ -105,7 +76,7 @@ Here is the Optional Options Object in one place with all default settings:
 
 {% include "btt.njk" %}
 
-### API - 3rd argument - callback
+### API - 3rd argument - a callback
 
 The third input argument is a callback function that you supply. When a result is found, this function is called and a plain object is passed to function's first argument.
 
@@ -155,3 +126,9 @@ Returns an array of zero or more plain objects, each having format:
   idxTo: 5
 }
 ```
+
+## Further Ideas
+
+Nobody would mistype "owned" as "ewned" — "fat finger" errors occur on vicinity keys, in this case, "o" can be mistyped with "i" or "p" because those keys are near. Key "e" is far, it's unrealistic.
+
+In this light, _Levenshtein distance_ is not strictly suited for purpose. Alternative version of it should be written, where algorithm considers both distance AND neighbouring keys and evaluates accordingly.

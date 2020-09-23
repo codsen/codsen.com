@@ -3,7 +3,7 @@ layout: package
 title: ranges-merge
 ---
 
-## Quick Take
+## Purpose
 
 {% include "src/components/content/tldr-ranges-merge.md" %}
 

@@ -142,7 +142,7 @@ console.log(`res = ${JSON.stringify(res, null, 4)}`);
 // }
 ```
 
-To trigger normalisation on an ignored path, you have to set the value on that path to be _falsey_, but not a placeholder. If you are using default placeholder, `false`, just set the value in the path as `true`. If you're using a custom placeholder, different as `false`, set it to `false`. The normalisation will see not a placeholder and will start by comparing/filling in missing branches in your object.
+To trigger normalisation on an ignored path, you have to set the value on that path to be _falsy_, but not a placeholder. If you are using default placeholder, `false`, just set the value in the path as `true`. If you're using a custom placeholder, different as `false`, set it to `false`. The normalisation will see not a placeholder and will start by comparing/filling in missing branches in your object.
 
 For example, we want to fill the value for `a.b.c`, but we are not sure what's the data structure. We _want_ a placeholder to be set during normalisation under path `a.b`. We set `a.b` to `true`:
 
@@ -231,7 +231,7 @@ console.log(`res = ${JSON.stringify(res, null, 4)}`);
 
 ### `opts.useNullAsExplicitFalse`
 
-By default, if a value is `null`, this means it's an explicit `false`, which is used to completely diffuse any incoming "truthy" values. It's an ultimate "falsey" value.
+By default, if a value is `null`, this means it's an explicit `false`, which is used to completely diffuse any incoming "truthy" values. It's an ultimate "falsy" value.
 
 For example:
 

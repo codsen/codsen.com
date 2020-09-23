@@ -3,7 +3,7 @@ layout: package
 title: ranges-is-index-within
 ---
 
-## Quick Take
+## Purpose
 
 {% include "src/components/content/tldr-ranges-is-index-within.md" %}
 

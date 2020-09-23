@@ -3,28 +3,9 @@ layout: package
 title: object-no-new-keys
 ---
 
-## Quick Take
+## Purpose
 
 Check, does a given plain object have any keys, not present in a reference object. Returns array of zero or more paths in [`object-path`](https://www.npmjs.com/package/object-path) notation.
-
-```js
-const res = {{ packageJsons["object-no-new-keys"].lect.req }}(
-  {
-    a: {
-      b: "b",
-      c: "c",
-    },
-    x: "y",
-  },
-  {
-    a: {
-      c: "z",
-    },
-  }
-)
-console.log(res);
-// => ["a.b", "x"]
-```
 
 For example, it can be used to look for any rogue keys in email template content JSON files.
 

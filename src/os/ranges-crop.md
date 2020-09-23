@@ -3,7 +3,7 @@ layout: package
 title: ranges-crop
 ---
 
-## Quick Take
+## Purpose
 
 {% include "src/components/content/tldr-ranges-crop.md" %}
 

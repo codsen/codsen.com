@@ -54,53 +54,17 @@ we have:
 
 The program above extracts both values `50%` (string index ranges are fed to the callback, [20, 23] and [27, 30]) and reports all rogue spaces, tabs, non-breaking space and commas.
 
-```js
-const processCommaSeparated = require("string-process-comma-separated");
-const gatheredChunks = [];
-const gatheredErrors = [];
-const rawnbsp = "\u00a0";
-processCommaSeparated(`<FRAMESET rows=" ,,\t50% ,${rawnbsp} 50% ,\t\t,">`, {
-  from: 16, // <- beginning of the attribute's value
-  to: 35, // <- ending of the attribute's value
-  separator: ",",
-  cb: (idxFrom, idxTo) => {
-    gatheredChunks.push([idxFrom, idxTo]);
-  },
-  errCb: (ranges, message) => {
-    gatheredErrors.push({ ranges, message });
-  },
-});
-
-console.log(JSON.stringify(gatheredChunks, null, 4));
-// => [
-//      [20, 23],
-//      [27, 30]
-//    ]
-
-console.log(JSON.stringify(gatheredErrors, null, 4));
-// => [
-//      { ranges: [[16, 17]], message: "Remove the whitespace." },
-//      { ranges: [[17, 18]], message: "Remove the separator." },
-//      { ranges: [[18, 19]], message: "Remove the separator." },
-//      { ranges: [[19, 20]], message: "Remove the whitespace." },
-//      { ranges: [[23, 24]], message: "Remove the whitespace." },
-//      { ranges: [[25, 27]], message: "Remove the whitespace." },
-//      { ranges: [[30, 31]], message: "Remove the whitespace." },
-//      { ranges: [[32, 34]], message: "Remove the whitespace." },
-//      { ranges: [[31, 32]], message: "Remove the separator." },
-//      { ranges: [[34, 35]], message: "Remove the separator." }
-//    ]
-```
-
 This program saves you time from having to tackle all those possible error cases: rogue separators, consecutive separators and spaces.
 
 {% include "btt.njk" %}
 
 ## API
 
-**processCommaSeparated(str, [opts])**
+**processCommaSeparated(str, \[opts])**
 
-### API - Function's Input
+In other words, it's a function which takes two input arguments, second-one being optional (marked by square brackets).
+
+### API - Input
 
 | Input argument | Key value's type | Obligatory? | Description                            |
 | -------------- | ---------------- | ----------- | -------------------------------------- |
@@ -117,9 +81,9 @@ Main thing, you must pass the callbacks in the options object, `cb` and `errCb`:
 
 | An Options Object's key  | Type of its value      | Default      | Description                                                                                                                  |
 | ------------------------ | ---------------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------- |
-| `from`                   | Integer or falsey      | `0`          | Where in the string does the comma-separated chunk start                                                                     |
-| `to`                     | Integer or falsey      | `str.length` | Where in the string does the comma-separated chunk end                                                                       |
-| `offset`                 | Integer or falsey      | `0`          | Handy when you've been given cropped string and want to report real indexes. Offset adds that number to each reported index. |
+| `from`                   | Integer or falsy      | `0`          | Where in the string does the comma-separated chunk start                                                                     |
+| `to`                     | Integer or falsy      | `str.length` | Where in the string does the comma-separated chunk end                                                                       |
+| `offset`                 | Integer or falsy      | `0`          | Handy when you've been given cropped string and want to report real indexes. Offset adds that number to each reported index. |
 | `leadingWhitespaceOK`    | Boolean                | `false`      | Is whitespace at the beginning of the range OK?                                                                              |
 | `trailingWhitespaceOK`   | Boolean                | `false`      | Is whitespace at the end of the range OK?                                                                                    |
 | `oneSpaceAfterCommaOK`   | Boolean                | `false`      | Can values have space after comma?                                                                                           |
