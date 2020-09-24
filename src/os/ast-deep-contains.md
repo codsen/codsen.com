@@ -21,7 +21,7 @@ Another consideration is that result error object might have extra keys we don't
     ruleId: "tag-is-present",
     line: 1, // not present in matched object
     column: 4, // not present in matched object
-    severity: 2,
+    severity: 2, // not present in matched object
     idxFrom: 0,
     idxTo: 4,
     message: "h1 is not allowed.",
