@@ -3,33 +3,30 @@ layout: package
 title: arrayiffy-if-string
 ---
 
-## Idea
+## Purpose
 
 - If it's a non-empty string, put it into an array and return it.
 - If it's empty string, return an empty array.
 - If it's anything else, just return it.
 
-```js
-const arrayiffy = require("arrayiffy-if-string");
-var res = arrayiffy("aaa");
-console.log("res = " + JSON.stringify(res, null, 4));
-// => ['aaa']
-```
+It's main purpose is to prepare the input argument options' objects.
 
-```js
-const arrayiffy = require("arrayiffy-if-string");
-var res = arrayiffy("");
-console.log("res = " + JSON.stringify(res, null, 4));
-// => []
-```
+Also, check out [`check-types-mini`](/os/check-types-mini).
 
-```js
-const arrayiffy = require("arrayiffy-if-string");
-var res = arrayiffy(true);
-console.log("res = " + JSON.stringify(res, null, 4));
-// => true
-```
+{% include "btt.njk" %}
 
-It's main purpose is to prepare the input argument options' objects. Check out [`check-types-mini`](/os/check-types-mini).
+## API
+
+**arrayiffy(something)**
+
+In other words, it's a function which takes one input argument.
+
+{% include "btt.njk" %}
+
+## Competition
+
+Mr. Sorhus' [`arrify`](https://www.npmjs.com/package/arrify) API is slightly different, it casts everything to array (`null` into empty array, for example). `arrayiffy-if-string` on other hand, wraps only strings into arrays, bypassing the rest (`null` into `null`, for example).
+
+It depends what you need.
 
 {% include "btt.njk" %}

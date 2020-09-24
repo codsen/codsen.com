@@ -1,45 +1,21 @@
 ---
 layout: package
 title: ast-delete-object
+packages:
+  - email-comb
 ---
 
-## Quick Take
+## Purpose
 
-Sometimes you want to look for certain key/value pair in all nested objects, and if found, **delete the whole parent object**.
-
-```js
-const deleteObj = require("ast-delete-object");
-let res = deleteObj(
-  [
-    // arg #1 - where to look
-    "elem1",
-    {
-      findme1: "zzz",
-      findme2: "yyy",
-      somethingelse: "qqq",
-    },
-    "elem2",
-  ],
-  {
-    // arg #2 - what to look for
-    findme1: "zzz",
-    findme2: "yyy",
-  }
-);
-console.log("res = " + JSON.stringify(res, null, 4));
-// => [
-//      'elem1',
-//      'elem2'
-//    ]
-```
+It deletes objects in AST if all given keys-value pairs are matched.
 
 {% include "btt.njk" %}
 
 ## API
 
-```js
-deleteObj(input, objToDelete, [strictOrNot]);
-```
+**deleteObj(input, objToDelete, \[options])**
+
+In other words, it's a function which takes three input arguments, third-one being optional (marked by square brackets). It will not mutate the `input` AST.
 
 ### API - Input
 
@@ -47,7 +23,7 @@ deleteObj(input, objToDelete, [strictOrNot]);
 | -------------- | -------- | ----------- | --------------------------------------------------------------- |
 | `input`        | Whatever | yes         | AST tree, or object or array or whatever. Can be deeply-nested. |
 | `objToDelete`  | Whatever | yes         | Key/value pairs that should be used to match plain objects.     |
-| `options`      | Boolean  | no          | OOO: Optional Options Object                                    |
+| `options`      | Boolean  | no          | OOO: Optional Options Object (see API below)                                    |
 
 By the way, the input arguments are not mutated in any way.
 
@@ -60,11 +36,20 @@ By the way, the input arguments are not mutated in any way.
 | `matchKeysStrictly`    | Boolean | no          | `false` | If you supplied an object to match, and all its keys were found in target object, that target object will be deleted. Now, there could have been extra keys there. If you set `matchKeysStrictly` to `true`, both **keysets** as well as key values have to match. |
 | `hungryForWhitespace`  | Boolean | no          | `false` | When active, empty value (one which would get `trim`-med to empty string, `""`) will match any other empty value (which might be different matching strictly, yet `trim` to the same empty string, `""`).                                                          |
 
+Defaults in one place:
+
+```js
+{
+  matchKeysStrictly: false,
+  hungryForWhitespace: false,
+}
+```
+
 {% include "btt.njk" %}
 
 ### API - Output
 
-This library will return the same thing as argument `#1`, but with relevant elements deleted (or not).
+This library will return the clone of first input argument with relevant elements deleted.
 
 ## `opts.matchKeysStrictly`
 
@@ -137,79 +122,8 @@ console.log("res = " + JSON.stringify(res, null, 4));
 
 {% include "btt.njk" %}
 
-## Example
-
-Simple nested array/object:
-
-`input`:
-
-```js
-[
-  "elem1",
-  {
-    key2: "val2",
-    key3: "val3",
-    key4: "val4", // this key value pair will get deleted along with its parent object
-  },
-  "elem5",
-];
-```
-
-`objToDelete`:
-
-```js
-{
-  key2: 'val2',
-  key3: 'val3'
-}
-```
-
-result:
-
-```js
-["elem1", "elem5"];
-```
-
-If the mode is default, non-strict, this library will match object or array values or strings hungrily if they contain only whitespace:
-
-```js
-delObj(
-  [
-    {
-      x: "y",
-    },
-    {
-      a: "a",
-      b: ["\t\t\t \n\n\n"],
-      c: "c",
-    },
-  ],
-  {
-    a: "a",
-    b: [""],
-  }
-);
-// => [{x: 'y'}]
-```
-
-Notice how key `a` contained a non-empty space character, so was matched exactly, but key `b` had only empty space. Since this was default non-strict mode (Boolean `true` missing as third argument), the third key `c` didn't even matter — both matched keys `a` and `b` was enough to get that plain object deleted.
-
-Here's more of a real-life example:
-
-```js
-// require first:
-const delObj = require('ast-delete-object')
-...
-// then, for example, delete empty style tag from parsed AST (parsed array/object-tree):
-parsedHTMLObject = delObj(parsedHTMLObject, { 'tag': 'style', 'content': {} })
-```
-
-{% include "btt.njk" %}
-
 ## The story
 
-We used a parser to parse some HTML and then deleted some objects from the AST trees on [email-comb](/os/email-comb/) (deep-nested array of objects and arrays and strings). We wanted to delete empty tag objects and couldn't find a library that does this. That's how this library came to life.
-
-Later we stopped parsing the HTML [email-comb](/os/email-comb/), treating HTML code **as string**. This increased the speed of processing by magnitudes - what previously took a minute now takes milliseconds.
+Originally, this program was created to help us delete unused CSS (as objects) from parsed HTML (AST tree) in [email-comb](/os/email-comb/). Since then, we've rewritten `email-comb` to process the code without parsing, without AST. `email-comb` became faster by magnitude (milliseconds instead of seconds/minutes).
 
 {% include "btt.njk" %}

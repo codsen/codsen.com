@@ -3,20 +3,24 @@ layout: package
 title: ast-deep-contains
 packages:
   - emlint
+  - codsen-tokenizer
+  - codsen-parser
 ---
 
-## Idea
+## Purpose
 
-This is a fancy assertion to match arrays of objects, where order doesn't matter and the source objects might have extra keys.
+This is a fancy assertion to match arrays of objects, where order doesn't matter and the reference objects might have extra keys. This program really tries to find matches.
 
-Imagine the source, taken from [`emlint`](/os/emlint/):
+We had a situation in [`emlint`](/os/emlint/) — error objects come in asynchronous fashion so their order is pretty _random_. Yet, we want to assert, does the error array contain error object X.
+
+Another consideration is that result error object might have extra keys we don't care to match — for example, row and column numbers.
 
 ```js
 [
   {
     ruleId: "tag-is-present",
-    line: 1,
-    column: 4,
+    line: 1, // not present in matched object
+    column: 4, // not present in matched object
     severity: 2,
     idxFrom: 0,
     idxTo: 4,
@@ -24,42 +28,22 @@ Imagine the source, taken from [`emlint`](/os/emlint/):
     fix: {
       ranges: [[0, 4]],
     },
-  },
-  {
-    ruleId: "tag-is-present",
-    line: 6,
-    column: 16,
-    severity: 2,
-    idxFrom: 43,
-    idxTo: 48,
-    message: "h1 is not allowed.",
-    fix: {
-      ranges: [[43, 48]],
-    },
-  },
-];
+  }
+]
 ```
 
-Matched objects are in wrong order and contain only subset of keys:
+vs
 
 ```js
 [
   {
     ruleId: "tag-is-present",
+    severity: 2,
     idxFrom: 43,
     idxTo: 48,
     message: "h1 is not allowed.",
     fix: {
       ranges: [[43, 48]],
-    },
-  },
-  {
-    ruleId: "tag-is-present",
-    idxFrom: 0,
-    idxTo: 4,
-    message: "h1 is not allowed.",
-    fix: {
-      ranges: [[0, 4]],
     },
   },
 ];
@@ -198,7 +182,7 @@ The order in which backslashes will be reported does not matter, plus Linter mig
 
 ## API
 
-**deepContains(tree1, tree2, cb, errCb\[, opts])**
+**{{ packageJsons["ast-deep-contains"].lect.req }}(tree1, tree2, cb, errCb\[, opts])**
 
 in other words, it's a function which takes 5 input arguments:
 
@@ -209,6 +193,8 @@ in other words, it's a function which takes 5 input arguments:
 | `cb`           | function                                    | yes         | This function will be called with pairs, of values from each path. Think `t.is` of AVA. See API below.                 |
 | `errCb`        | function                                    | yes         | If path does not exist on `tree1`, this callback function will be called with a message string. Think `t.fail` of AVA. |
 | `opts`         | Plain object                                | no          | Optional plain object containing settings, see API below.                                                              |
+
+Program returns `undefined` because it's operated by callbacks.
 
 {% include "btt.njk" %}
 

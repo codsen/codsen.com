@@ -7,50 +7,25 @@ packages:
 
 ## Purpose
 
-Find out, does an object/array/string/nested-mix is a subset or equal to another input:
+It compares data structures, especially AST.
 
-```js
-var compare = require("ast-compare");
-var result = compare(
-  {
-    // <- does this nested plain object...
-    a: {
-      b: "d",
-      c: [],
-      e: "f",
-      g: "h",
-    },
-  },
-  {
-    // <- ...contain this nested plain object?
-    a: {
-      b: "d",
-      c: [],
-    },
-  }
-);
-console.log(result);
-// => true
-```
+We use it to compare two parsed HTML/CSS trees or their branches, but you can compare anything, it will recursively traverse arrays too. For example, it powers [ast-delete-object](/os/ast-delete-object/) which also works on AST's.
 
-The main purpose is to compare two parsed HTML/CSS trees or their branches, but you can compare anything, it will recursively traverse arrays too. This lib is dependency for [ast-delete-object](/os/ast-delete-object/) — library which can delete elements from [parsed](/os/codsen-parser/) HTML/CSS objects.
+The default mode is similar to [Tap](https://node-tap.org/) asserts `t.match` and the option `opts.matchStrictly` is similar to `t.sameStrict`.
 
 {% include "btt.njk" %}
 
-## Use
-
-```js
-var compare = require("ast-compare");
-```
-
 ## API
 
-The output of this library is binary and boolean: `true` or `false`.
-This library will not mutate the input arguments.
+**compare(bigObj, smallObj, \[opts])**
 
-### Input
+In other words, it's a function which takes three input arguments, third one being optional (marked by square brackets).
 
-**Input**
+It returns a boolean. This library will not mutate the input arguments.
+
+{% include "btt.njk" %}
+
+### API - Input
 
 | Input argument | Type                            | Obligatory? | Description                         |
 | -------------- | ------------------------------- | ----------- | ----------------------------------- |
@@ -73,58 +48,14 @@ This library will not mutate the input arguments.
 
 {% include "btt.njk" %}
 
-### Output
+### API - Output
 
-If `smallObj` **is** equal or a superset of `bigObj`, the returned value is always Boolean `true`.
+**Positive answer** is always boolean `true`.
 
-If it's **not** a superset or equal, the value depends on `opts.verboseWhenMismatches`:
+**Negative answer** is either:
 
-- Default, `opts.verboseWhenMismatches===false` will yield `false`
-- Default, `opts.verboseWhenMismatches===true` will yield `string`, explaining what didn't match.
-
-{% include "btt.njk" %}
-
-## Examples
-
-```js
-compare({ a: "1", b: "2", c: "3" }, { a: "1", b: "2" });
-// => true, because second (smallObj) is subset of (or equal) first (bigObj).
-```
-
-```js
-compare({ a: "1", b: "2" }, { a: "1", b: "2", c: "3" });
-// => false, because second (smallObj) is not a subset (or equal) to first (bigObj).
-```
-
-```js
-compare(["a", "b", "c"], ["a", "b"]);
-// => true, because second is a subset of first
-```
-
-```js
-compare(["a", "b", "c"], ["b", "a"]);
-// => false, because order is wrong
-```
-
-```js
-compare(["a", "b"], ["a", "b", "c"]);
-// => false, because second is not a subset of first
-```
-
-```js
-compare("a\nb", "a\nb");
-// => true, because strings are equal
-```
-
-```js
-compare({ a: "a" });
-// => false. Second input value is missing which means it's a nonsense, thus, false
-```
-
-```js
-compare(null);
-// => false.
-```
+ - boolean `false` (default, `opts.verboseWhenMismatches` off) OR
+ - _string_, explaining what didn't match (`opts.verboseWhenMismatches` on)
 
 {% include "btt.njk" %}
 

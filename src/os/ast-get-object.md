@@ -5,26 +5,24 @@ title: ast-get-object
 
 ## Purpose
 
-When you parse some HTML using a [parser](/os/codsen-parser/), you get an array which contains a nested tree of strings, objects and arrays. This library lets you query that tree. Later, if you amend and feed this query result again into the `get` as a _third_ argument, you can overwrite the search results. Basically, search and overwrite right away.
-
-In short, two arguments is GET the results, three arguments is SET (or write over) whatever was queried.
-
-Normally you would use this library to get tags from parsed HTML trees, edit the result and later write it over.
+It is a helper function to extract plain objects by certain key-value pairs (if two input arguments given) OR to replace those findings (if three input arguments given).
 
 {% include "btt.njk" %}
 
 ## API
 
-```js
-getObj(input, keyValPair, replacementContentsArr);
-```
+**{{ packageJsons["ast-get-object"].lect.req }}(input, keyValPairObj, \[replacementContentsArr])**
+
+In other words, it's a function which takes two or three input arguments.
+
+{% include "btt.njk" %}
 
 ### API - Input
 
 | Input argument           | Type         | Obligatory? | Description                                                                                                                                        |
 | ------------------------ | ------------ | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `input`                  | Whatever     | yes         | AST tree, or object or array or whatever. Can be deeply-nested.                                                                                    |
-| `keyValPair`             | Plain object | yes         | Key/value pairs to look for.                                                                                                                       |
+| `keyValPairObj`          | Plain object | yes         | Key/value pairs to look for.                                                                                                                       |
 | `replacementContentsArr` | Arrray       | no          | The array of new values to set the findings objects. Those values can even be massive nested trees of plain objects and arrays. It doesn't matter. |
 
 {% include "btt.njk" %}
