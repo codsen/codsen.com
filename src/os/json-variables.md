@@ -3,45 +3,9 @@ layout: package
 title: json-variables
 ---
 
-## Idea
+## Purpose
 
-Do you know [SASS variables](https://sass-lang.com/documentation/variables)? You declare `$red: #dd0b0b;` once and then use that `$red` many times.
-
-We did the same for JSON.
-
-`json-variables` is a JSON preprocessor which turns DRY file with special markers `%%_` (which are customiseable):
-
-```json
-{
-  "firstName": "customer.firstName",
-  "message": "Hi %%_firstName_%%",
-  "preheader": "%%_firstName_%%, look what's inside"
-}
-```
-
-into "normal" JSON:
-
-```json
-{
-  "firstName": "customer.firstName",
-  "message": "Hi customer.firstName",
-  "preheader": "customer.firstName, look what's inside"
-}
-```
-
-It's like SASS variables, but for JSON.
-
-This program is used in production — we use it to DRY the JSON files which hold the transactional email templates' content.
-
-`json-variables` also allows you to automatically wrap the resolved values with chosen heads and tails:
-
-```json
-{
-  "firstName": "customer.firstName",
-  "message": "Hi {{ customer.firstName }}",
-  "preheader": "{{ customer.firstName }}, look what's inside"
-}
-```
+It lets you DRY the plain objects (JSON files contents) - any special marker in any value can reference other values by path. As a result, there's only one reference of each value, even though, values are used in many places. That's [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) concept.
 
 {% include "btt.njk" %}
 
@@ -56,9 +20,7 @@ This program is used in production — we use it to DRY the JSON files which hol
 
 ## API
 
-This program gives you a function (`jVar` below) which turns JSON object with references into "normal" JSON object with all values "baked-in".
-
-**jVar(inputObj, \[opts])**
+**{{ packageJsons["json-variables"].lect.req }}(inputObj, \[opts])**
 
 In other words, the main export is a function which takes two input arguments, `inputObj` and optional plain object `opts` (square brackets above mean "optional").
 

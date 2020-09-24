@@ -6,43 +6,7 @@ packages:
   - ranges-apply
 ---
 
-## Quick Take
-
-Minify email template:
-
-```js
-const { crush } = require("html-crush");
-const res = crush(
-  `  <a>
-     <b>
-   c </b>
-   </a>
-     <a>
-     <b>
-   c </b>
-   </a>
-     <a>
-     <b>
-   c </b>
-   </a>`,
-  { removeLineBreaks: true, lineLengthLimit: 8 }
-).result;
-console.log("res:\n" + JSON.stringify(res, null, 4));
-// => "res:
-// <a><b> c
-// </b></a>
-// <a><b> c
-// </b></a>
-// <a><b> c
-// </b></a>
-// "
-```
-
-In production, set line length limit to `500` (default).
-
-{% include "btt.njk" %}
-
-## Solves tasks
+## Purpose
 
 * Minify email template, reducing size to the least possible.
 * Remove indentations, keep line breaks (opposite of [tabifier](http://tools.arantius.com/tabifier) / beautifiers).

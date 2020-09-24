@@ -12,7 +12,7 @@ packages:
   - string-trim-spaces-only
 ---
 
-## Quick Take
+## Purpose
 
 Detergent.js:
 
@@ -24,14 +24,6 @@ Detergent.js:
 - encode all non-ASCII characters (for example, `£` into `&pound;`)
 - improves English grammar style: prevents [widow words](https://en.wikipedia.org/wiki/Widows_and_orphans), converts [M- and N-dashes](http://practicaltypography.com/hyphens-and-dashes.html) [apostrophes](http://practicaltypography.com/apostrophes.html) and [curly quotes](http://practicaltypography.com/straight-and-curly-quotes.html)
 - aims to encode to _named_ HTML entities but switches to _numeric_ for those which [don't render correctly](/os/html-entities-not-email-friendly/) across email clients
-
-```js
-// require or import
-const { det } = require("detergent");
-let { res } = det("clean this text £");
-console.log(res);
-// => "clean this text&nbsp;&pound;"
-```
 
 Extra features are:
 
