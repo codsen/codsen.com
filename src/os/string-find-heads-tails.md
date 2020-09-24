@@ -43,7 +43,7 @@ There are few rules:
 In other words, it's a function which takes four input arguments, last-one optional (marked with square brackets).
 
 ::: tip
-The index system used here is the native JavaScript string index system where each astral character's length will be counted as having length of two (or more). If you wish to convert the index system to be based on _grapheme count_ where emoji is 1-character-long, use `nativeToUnicode()` method of [string-convert-indexes](/os/string-convert-indexes/). It can process the whole output of this library.
+You can switch to _grapheme count_-based index system — use `nativeToUnicode()` method of [string-convert-indexes](/os/string-convert-indexes/). It can process the whole output of this library.
 :::
 
 {% include "btt.njk" %}

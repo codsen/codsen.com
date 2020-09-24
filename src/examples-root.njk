@@ -39,7 +39,7 @@ extraContainerClass: page-examples centered-headings
 
     {% if packageExamples[packageName] and packageExamples[packageName]['_quickTake.js'] %}
       {{ heading("Quick Take", 2) }}
-      <pre class="language-js"><code class="language-js">{{ packageExamples[packageName]['_quickTake.js'].content | prism | safe }}</code></pre>
+      <pre class="language-js"><code class="language-js">{{ packageExamples[packageName]['_quickTake.js'].content | decodeCurlies | prism | safe }}</code></pre>
       {% include "btt.njk" %}
     {% endif %}
     {% include "src/components/separator.njk" %}
@@ -47,7 +47,7 @@ extraContainerClass: page-examples centered-headings
     {% if packageExamples[packageName] and (packageExamples[packageName] | extractNonQuickTakeExamples | length) %}
       {% for example in packageExamples[packageName] | extractNonQuickTakeExamples %}
       {{ heading(example.title | titleProper | formatTags | safe, 2) }}
-      <pre class="language-js"><code class="language-js">{{ example.content | prism | safe }}</code></pre>
+      <pre class="language-js"><code class="language-js">{{ example.content | decodeCurlies | prism | safe }}</code></pre>
 
       {% if not loop.last %}
       {% include "btt.njk" %}

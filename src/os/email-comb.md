@@ -176,13 +176,11 @@ So a **plain object** is returned. It will have the following keys:
 Since the main purpose of this library is to clean **email** HTML, it needs to cater for email code specifics. One of them is that CSS styles will contain fix or hack styles, meant for email software. For example, here are few of them:
 
 ```html
-#outlook a { padding:0; } .ExternalClass, .ReadMsgBody { width:100%; }
-.ExternalClass, .ExternalClass div, .ExternalClass font, .ExternalClass p,
-.ExternalClass span, .ExternalClass td { line-height:100%; }
+#outlook a { padding:0; } .ReadMsgBody { width:100%; }
 ```
 
 ::: tip
-**2020 update:** `.ExternalClass` are not needed any more in email templates, see [https://github.com/hteumeuleu/email-bugs/issues/4](https://github.com/hteumeuleu/email-bugs/issues/4)
+`.ExternalClass` fixes are not needed any more in email templates, see [email-bugs/issues/4](https://github.com/hteumeuleu/email-bugs/issues/4)
 :::
 
 You will not be using these classes within the `<body>` of your HTML code, so they would get removed as "unused" because they are present in `<head>` only. To avoid that, pass the classes, and `id`'s in the _whitelist_ key's value, as an array. For example:

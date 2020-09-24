@@ -173,6 +173,11 @@ module.exports = function (eleventyConfig) {
     "titleProper",
     require("./utils/filters/titleProper.js")
   );
+  // decodes curlies in the incoming examples JSON
+  eleventyConfig.addFilter(
+    "decodeCurlies",
+    require("./utils/filters/decodeCurlies.js")
+  );
 
   // determines what's the type of the article
   eleventyConfig.addFilter("calculateType", (arr) => {
@@ -189,34 +194,34 @@ module.exports = function (eleventyConfig) {
     // dataObj looks like:
 
     // {
-    //   "_quickTake.mjs": {
+    //   "_quickTake.js": {
     //     "title": "...",
     //     "content": "import ..."
     //   },
-    //   "extract-html-head-contents.mjs": {
+    //   "extract-html-head-contents.js": {
     //     "title": "...",
     //     "content": "import ..."
     //   },
-    //   "leave-only-html.mjs": {
+    //   "leave-only-html.js": {
     //     "title": "...",
     //     "content": "import ..."
     //   },
-    //   "leave-only-opening-td.mjs": {
+    //   "leave-only-opening-td.js": {
     //     "title": "...",
     //     "content": "import ..."
     //   },
-    //   "leave-only-td.mjs": {
+    //   "leave-only-td.js": {
     //     "title": "...",
     //     "content": "import ..."
     //   },
-    //   "remove-html.mjs": {
+    //   "remove-html.js": {
     //     "title": "...",
     //     "content": "import ... ;"
     //   }
     // }
 
     const newClonedObj = clone(dataObj);
-    delete newClonedObj["_quickTake.mjs"];
+    delete newClonedObj["_quickTake.js"];
     return Object.keys(newClonedObj).map((key) => ({
       file: key,
       ...newClonedObj[key],
@@ -225,9 +230,9 @@ module.exports = function (eleventyConfig) {
 
   // diy slugify
   eleventyConfig.addFilter("slugify", (str) => {
-    if (str.endsWith(".mjs")) {
-      // remove .mjs - needed for codsen.com/os/ example file-page slugs
-      str = str.replace(/\.mjs/, "");
+    if (str.endsWith(".js")) {
+      // remove .js - needed for codsen.com/os/ example file-page slugs
+      str = str.replace(/\.js/, "");
     }
     return str.toLowerCase().replace(/\s+/g, "-");
   });
