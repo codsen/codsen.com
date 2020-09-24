@@ -38,7 +38,6 @@ vs
 [
   {
     ruleId: "tag-is-present",
-    severity: 2,
     idxFrom: 43,
     idxTo: 48,
     message: "h1 is not allowed.",
