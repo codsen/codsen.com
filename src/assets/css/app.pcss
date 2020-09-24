@@ -679,11 +679,18 @@ blockquote {
   display: none;
   @include darkTheme {
     display: block;
+    &:hover {
+      opacity: .75;
+    }
   }
 }
 
 .show-light-only {
   display: block;
+  &:hover {
+    filter: brightness(90%);
+    -webkit-filter: brightness(90%);
+  }
   @include darkTheme {
     display: none;
   }
@@ -3309,6 +3316,10 @@ article, .package-body__content {
 }
 
 .package-extras {
+  h2 {
+    hyphens: none;
+  }
+
   p, ul, li {
     max-width: 70rem;
   }
@@ -3320,10 +3331,10 @@ article, .package-body__content {
 
 /* floating sidebar */
 .package-body {
-  h1, h2, h3, h4, h5, h6 {
-    /* because of floating sidebar and h anchor hovers */
+  /* because of floating sidebar and h anchor hovers */
+  /* h1, h2, h3, h4, h5, h6 {
     display: inline-block;
-  }
+  } */
 
   .package-install {
     /* restore: */
@@ -3343,10 +3354,9 @@ article, .package-body__content {
       max-width: 43.8rem;
     }
 
-    /* h3 {
-      font-size: 6rem;
-      line-height: 6rem;
-    } */
+    & > [class^="show-"] {
+      margin-bottom: .5rem;
+    }
   }
 
 
@@ -4316,4 +4326,8 @@ html[data-whatinput='touch'] *:focus {
 
 html[data-whatinput='keyboard'] *:focus {
   outline: 2px solid blue;
+}
+
+.no-ext-link-icon .ext-link {
+  display: none;
 }

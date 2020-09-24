@@ -9,7 +9,7 @@ packages:
 ## Purpose
 
 * Minify email template, reducing size to the least possible.
-* Remove indentations, keep line breaks (opposite of [tabifier](http://tools.arantius.com/tabifier) / beautifiers).
+* Remove indentations, keep line breaks (the opposite of [tabifier](http://tools.arantius.com/tabifier) / beautifiers).
 
 ## Features
 

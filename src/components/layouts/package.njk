@@ -59,10 +59,10 @@
               <h3>Use web app GUI</h3>
               {% if webapps[title].dark and webapps[title].light %}
                 <p class="show-dark-only">
-                  <img src="{{ webapps[title].dark }}" width="438" height="250" alt="{{ title }} web app"/>
+                  <a class="no-ext-link-icon" href="{{ webapps[title].url }}"><img src="{{ webapps[title].dark }}" width="438" height="250" alt="{{ title }} web app"/></a>
                 </p>
                 <p class="show-light-only">
-                  <img src="{{ webapps[title].light }}" width="438" height="250" alt="test {{ title }} program online"/>
+                  <a class="no-ext-link-icon" href="{{ webapps[title].url }}"><img src="{{ webapps[title].light }}" width="438" height="250" alt="test {{ title }} program online"/></a>
                 </p>
               {% endif %}
               <p>
