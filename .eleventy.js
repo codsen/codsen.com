@@ -253,6 +253,11 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter("md", function (content = "") {
     return markdownIt({ html: true }).render(content);
   });
+  // render without wrapping in <p>:
+  // see in /os/object-fill-missing-keys/ "Examples" section, for example
+  eleventyConfig.addFilter("mdInline", function (content = "") {
+    return markdownIt({ html: true }).renderInline(content);
+  });
 
   // highlight js upon request
   eleventyConfig.addFilter("prism", function (content = "") {

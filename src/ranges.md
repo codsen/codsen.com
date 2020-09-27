@@ -66,12 +66,16 @@ That's a different approach from the old way, mutating string over and over usin
 
 {% include "src/components/content/tldr-ranges-apply.md" %}
 
+<pre class="language-js"><code class="language-js">{{ packageExamples['ranges-apply']['_quickTake.js'].content | decodeCurlies | prism | safe }}</code></pre>
+
 <a href="/os/ranges-apply/" class="button">See the package</a>
 {% include "btt.njk" %}
 
 ## ranges-push
 
 {% include "src/components/content/tldr-ranges-push.md" %}
+
+<pre class="language-js"><code class="language-js">{{ packageExamples['ranges-push']['_quickTake.js'].content | decodeCurlies | prism | safe }}</code></pre>
 
 <a href="/os/ranges-push/" class="button">See the package</a>
 {% include "btt.njk" %}
@@ -80,12 +84,16 @@ That's a different approach from the old way, mutating string over and over usin
 
 {% include "src/components/content/tldr-ranges-merge.md" %}
 
+<pre class="language-js"><code class="language-js">{{ packageExamples['ranges-merge']['_quickTake.js'].content | decodeCurlies | prism | safe }}</code></pre>
+
 <a href="/os/ranges-merge/" class="button">See the package</a>
 {% include "btt.njk" %}
 
 ## ranges-sort
 
 {% include "src/components/content/tldr-ranges-sort.md" %}
+
+<pre class="language-js"><code class="language-js">{{ packageExamples['ranges-sort']['_quickTake.js'].content | decodeCurlies | prism | safe }}</code></pre>
 
 <a href="/os/ranges-sort/" class="button">See the package</a>
 {% include "btt.njk" %}
@@ -94,12 +102,16 @@ That's a different approach from the old way, mutating string over and over usin
 
 {% include "src/components/content/tldr-ranges-crop.md" %}
 
+<pre class="language-js"><code class="language-js">{{ packageExamples['ranges-crop']['_quickTake.js'].content | decodeCurlies | prism | safe }}</code></pre>
+
 <a href="/os/ranges-crop/" class="button">See the package</a>
 {% include "btt.njk" %}
 
 ## ranges-regex
 
 {% include "src/components/content/tldr-ranges-regex.md" %}
+
+<pre class="language-js"><code class="language-js">{{ packageExamples['ranges-regex']['_quickTake.js'].content | decodeCurlies | prism | safe }}</code></pre>
 
 <a href="/os/ranges-regex/" class="button">See the package</a>
 {% include "btt.njk" %}
@@ -108,12 +120,16 @@ That's a different approach from the old way, mutating string over and over usin
 
 {% include "src/components/content/tldr-ranges-ent-decode.md" %}
 
+<pre class="language-js"><code class="language-js">{{ packageExamples['ranges-ent-decode']['_quickTake.js'].content | decodeCurlies | prism | safe }}</code></pre>
+
 <a href="/os/ranges-ent-decode/" class="button">See the package</a>
 {% include "btt.njk" %}
 
 ## ranges-invert
 
 {% include "src/components/content/tldr-ranges-invert.md" %}
+
+<pre class="language-js"><code class="language-js">{{ packageExamples['ranges-invert']['_quickTake.js'].content | decodeCurlies | prism | safe }}</code></pre>
 
 <a href="/os/ranges-invert/" class="button">See the package</a>
 {% include "btt.njk" %}
@@ -122,6 +138,8 @@ That's a different approach from the old way, mutating string over and over usin
 
 {% include "src/components/content/tldr-ranges-is-index-within.md" %}
 
+<pre class="language-js"><code class="language-js">{{ packageExamples['ranges-is-index-within']['_quickTake.js'].content | decodeCurlies | prism | safe }}</code></pre>
+
 <a href="/os/ranges-is-index-within/" class="button">See the package</a>
 {% include "btt.njk" %}
 
@@ -129,12 +147,16 @@ That's a different approach from the old way, mutating string over and over usin
 
 {% include "src/components/content/tldr-ranges-iterate.md" %}
 
+<pre class="language-js"><code class="language-js">{{ packageExamples['ranges-iterate']['_quickTake.js'].content | decodeCurlies | prism | safe }}</code></pre>
+
 <a href="/os/ranges-iterate/" class="button">See the package</a>
 {% include "btt.njk" %}
 
 ## ranges-process-outside
 
 {% include "src/components/content/tldr-ranges-process-outside.md" %}
+
+<pre class="language-js"><code class="language-js">{{ packageExamples['ranges-process-outside']['_quickTake.js'].content | decodeCurlies | prism | safe }}</code></pre>
 
 <a href="/os/ranges-process-outside/" class="button">See the package</a>
 {% include "btt.njk" %}
