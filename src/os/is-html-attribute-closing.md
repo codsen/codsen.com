@@ -1,88 +1,29 @@
 ---
 layout: package
 title: is-html-attribute-closing
+packages:
+  - codsen-tokenizer
+  - codsen-parser
+  - emlint
 ---
 
-## Idea
+## Purpose
 
-Detect, is a character at a given index in a given string being a closing of an attribute?
+This program detects, is a character at a given index in a given string being a **closing of an attribute**. In healthy code, that's normally a double quotes character.
 
-In happy path scenarios, the closing is a closing quote of an attribute:
+This program is aimed at fixing _seriously_ broken HTML code — missing closing quotes, mismatching closing quotes, swapped quotes and unencoded "content" quotes as a part of attribute's value.
 
-```js
-const isAttrClosing = require("is-html-attribute-closing");
-const str = `<a href="zzz" target="_blank" style="color: black;">`;
+It's driving the [`codsen-tokenizer`](/os/codsen-tokenizer/) which in turn powers [`codsen-parser`](/os/codsen-parser/) which in turn powers [`emlint`](/os/emlint/).
 
-// <a href="zzz" target="_blank" ...
-//                      ^
-//                  index 21
-
-// <a href="zzz" target="_blank" ...
-//                             ^
-//                         index 28
-
-const res = is(
-  str, // reference string
-  21, // known opening (or in absence of a quote, a start of a value)
-  28 // we question, is this a closing on the attribute?
-);
-console.log(res);
-// => true - it is indeed a closing of an attribute
-```
-
-But this program detects all the crazy cases of realistic and unrealistic HTML attribute endings:
-
-```js
-const isAttrClosing = require("is-html-attribute-closing");
-const res1 = is(
-  `<a href="z' click here</a>`,
-  //       ^ ^
-  //       | \
-  //       |  \_________________________________
-  //       |                                   |
-  8, // known opening                          |
-  10 // is this an attribute closing at index 10?
-);
-console.log(res1);
-// => true - yes, indeed a closing of an attribute
-
-// -----------------------------------------------------------------------------
-
-const res2 = is(
-  `<a b = = = "c" d = = = 'e'>`,
-  //          ^ ^
-  //          | |
-  //          | L_______________________________
-  //          |                                |
-  11, // known opening                         |
-  13 // is this an attribute closing at index 13?
-);
-console.log(res2);
-// => true - indeed a closing of an attribute
-
-// -----------------------------------------------------------------------------
-
-// imagine a healthy tag:
-// <img class="so-called" alt="!" border='10'/>
-// now let's mess it up a little bit:
-const str = `<img class="so-called "alt !' border 10'/>`;
-
-// all targetting the class opening at 11
-console.log(is(str, 11, 22));
-// => true - indeed a closing of an attribute
-
-console.log(is(str, 11, 28));
-// => false
-
-console.log(is(str, 11, 28));
-// => false
-```
+For healthy HTML code, however, finding the closing double quotes is a trivial task.
 
 {% include "btt.njk" %}
 
 ## API - Input
 
-**isOpening(str, idxOfAttrOpening, isThisClosingIdx)** — in other words, function which takes three arguments:
+**{{ packageJsons["is-html-attribute-closing"].lect.req }}(str, idxOfAttrOpening, isThisClosingIdx)**
+
+In other words, function which takes three arguments:
 
 | Input argument     | Key value's type       | Obligatory? | Description                                             |
 | ------------------ | ---------------------- | ----------- | ------------------------------------------------------- |
@@ -102,13 +43,4 @@ We don't throw errors in this program.
 
 Boolean, `true` or `false`. Erroneous input arguments will yield `false` as well.
 
-## Bigger picture
-
-This program will drive [`codsen-tokenizer`](/os/codsen-tokenizer/).
-
-There's already a similar program from yours truly, [`is-html-tag-opening`](/os/is-html-tag-opening/) which tells, is given opening bracket a start of a tag.
-
-The same situation - program with its unit tests became too big to even be placed in `src/utils/` folder, so we separated it into a standalone package...
-
 {% include "btt.njk" %}
-

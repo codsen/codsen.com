@@ -3,35 +3,17 @@ layout: package
 title: detect-is-it-html-or-xhtml
 ---
 
-## Example
-
-```js
-const detect = require("detect-is-it-html-or-xhtml");
-console.log(
-  detect(
-    '<img src="some.jpg" width="zzz" height="zzz" border="0" style="display:block;" alt="zzz"/>'
-  )
-);
-// => 'xhtml'
-```
-
-{% include "btt.njk" %}
-
 ## Purpose
 
-Feed the string into this library. If it's more of an HTML, it will output a string `"html"`. If it's more of an XHTML, it will output a string `xhtml`. If your code doesn't contain any tags, or it does, but there is no `doctype`, and it's impossible to distinguish between the two, it will output `null`.
+It is a function which detects, does given string resemble XHTML or HTML. The format, XHTML or HTML, affects closing slashes and singleton tags.
 
 {% include "btt.njk" %}
 
 ### API - Input
 
-This package exports a function:
+**{{ packageJsons["detect-is-it-html-or-xhtml"].lect.req }}(str)**
 
-**detect(str)**
-
-| Input argument | Type   | Obligatory? | Description                                 |
-| -------------- | ------ | ----------- | ------------------------------------------- |
-| `htmlAsString` | String | yes         | String, hopefully containing some HTML code |
+In other words, it's a function which takes one input argument, a string.
 
 If the input is not String type, this package will throw an error. If the input is missing completely, it will return `null`.
 
@@ -39,9 +21,9 @@ If the input is not String type, this package will throw an error. If the input 
 
 ### API - Output
 
-| Type           | Value                   | Description                   |
-| -------------- | ----------------------- | ----------------------------- |
-| String or `null` | 'html', 'xhtml' or null | Identified type of your input |
+| Type             | Value                     | Description                   |
+| ---------------- | ------------------------- | ----------------------------- |
+| String or `null` | 'html', 'xhtml' or `null` | Identified type of your input |
 
 {% include "btt.njk" %}
 

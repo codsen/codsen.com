@@ -1,6 +1,10 @@
 ---
 layout: package
 title: ast-monkey-util
+packages:
+  - object-path
+  - ast-monkey
+  - ast-monkey-traverse
 ---
 
 ## Idea
@@ -12,6 +16,8 @@ Conceptually, we'd use [`ast-monkey-traverse`](/os/ast-monkey-traverse/), identi
 {% include "btt.njk" %}
 
 ## API - `pathNext`
+
+**pathNext(str)**
 
 It takes (a string) path and increments the last digit:
 
@@ -30,6 +36,8 @@ console.log(pathNext("9.children.1.children.0"));
 
 ## API - `pathPrev`
 
+**pathPrev(str)**
+
 It takes (a string) path and decrements the last digit:
 
 ```js
@@ -46,6 +54,8 @@ console.log(pathPrev("9.children.1.children.2"));
 {% include "btt.njk" %}
 
 ## API - `pathUp`
+
+**pathUp(str)**
 
 It takes (a string) path and goes "one level" up, discarding the last two path parts:
 
@@ -119,4 +129,3 @@ The notation used in this program is based on [`object-path`](https://www.npmjs.
 A drawback of this notation is that keys can't be numeric strings. But the advantage of this notation is that all children are now separated with a dot - you can split by dot `String.split(".")` and quickly process the path elements, unlike JS notation with square brackets.
 
 {% include "btt.njk" %}
-

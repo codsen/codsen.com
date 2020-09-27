@@ -3,17 +3,7 @@ layout: package
 title: csv-sort
 ---
 
-## Quick Take
-
-`csv-sort` can correct the order of rows of _any_ accounting CSV files that come in [double entry bookkeeping](https://en.wikipedia.org/wiki/Double-entry_bookkeeping_system) format:
-
-![double bookkeeping example](https://glcdn.githack.com/codsen/codsen/raw/63d7dc7cee9c957d3dc51d14af99b557c081a250/packages/csv-sort/media/img1.png)
-
-Currently (late 2017) Lloyds Bank website exports CSV files with some rows from the same day in a wrong order. This library is our attempt to fix such CSV's.
-
-{% include "btt.njk" %}
-
-## This library does two twings:
+## Purpose
 
 - Sorts rows in correct order that follows the double-entry format.
 - Trims the empty columns and rows (so-called 2D-Trim^).
@@ -26,31 +16,14 @@ In later releases, we would like to be able to recognise and fix any offset colu
 
 {% include "btt.njk" %}
 
-## Usage
+## API - Input
 
-```js
-const cSort = require("csv-sort");
-const input = `123456,Client #1 payment,,1000,1940
-123456,Bought carpet,30,,950
-123456,Bought table,10,,940
-123456,Bought pens,10,,1000
-123456,Bought chairs,20,,980
-`;
-const { res } = cSort(input).join(",").join("\n");
-console.log(`${`\u001b[${33}m${`res`}\u001b[${39}m`} = ${res}`);
-// =>
-// 123456,Client #1 payment,,1000,1940
-// 123456,Bought table,10,,940
-// 123456,Bought carpet,30,,950
-// 123456,Bought chairs,20,,980
-// 123456,Bought pens,10,,1000
-```
+**{{ packageJsons["csv-sort"].lect.req }}(str)**
 
-{% include "btt.njk" %}
+In other words, it's a function which takes one input argument, string (CSV contents).
 
-## API
+### API - Output
 
-- Input - string
 - Output - plain object:
 
 | output object | Type   | Description                                                                        |

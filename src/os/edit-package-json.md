@@ -1,44 +1,17 @@
 ---
 layout: package
 title: edit-package-json
+packages:
+  - object-path
 ---
 
-## Idea
+## Purpose
 
-Plain objects in JavaScript somewhat retain their key order after parsing but it's easy to mess up the key order.
-
-There are programs out there (like [format-package](https://www.npmjs.com/package/format-package)) which sort `package.json`.
-
-This program is an attempt to edit JSON without parsing it, to edit it as a string.
+Edit JSON contents as strings to guarantee the formatting will be intact.
 
 API uses [object-path](https://www.npmjs.com/package/object-path) notation to set values on any (for now, only already-existing) paths in JSON.
 
-```js
-const { set, del } = require("edit-package-json");
-// we defined JSON contents manually, but in real programs you'd read the file,
-// as string, without parsing and pass it to set()
-const source = `{
-  "a": "b",
-  "c": {
-    "d": "e"
-  }
-}`;
-
-// amended result:
-const result = set(source, "c.d", "f");
-// notation is the same as "object-path" from npm
-// ^ in real programs you'd write this string back to JSON file
-
-console.log(JSON.stringify(result, null, 4));
-// => {
-//   "a": "b",
-//   "c": {
-//     "d": "f"
-//   }
-// }
-```
-
-We wrote quite a few non-parsing string-processing programs ([1](/os/string-strip-html/), [2](/os/email-comb/), [3](/os/html-crush/), [4](/os/html-img-alt/), [5](/os/emlint/) for starters) so you could see it coming. We needed bullet-proof way to edit `package.json` in [`update-versions`](/os/update-versions/).
+It's powering the [`update-versions`](/os/update-versions/) CLI.
 
 {% include "btt.njk" %}
 
@@ -48,16 +21,6 @@ There are two methods: `set()` and `del()`:
 
 ### .set()
 
-When you consume `set` (`const { set, del } = require("edit-package-json");`), it is a _function_.
-
-`set()` can set values by path, on a JSON string.
-
-**THIS IS AN EARLY STAGE OF THIS PROGRAM AND IT CAN'T CREATE NEW KEYS, IT WILL ONLY CHANGE/DELETE VALUE IF KEY ALREADY EXISTS.**
-
-For now, this is the primary difference (from a more mature and more popular) `object-path`.
-
-**Input**
-
 **set(source, path, val)**
 
 | Input argument | Type     | Obligatory? | Description                                                                                                            |
@@ -66,39 +29,19 @@ For now, this is the primary difference (from a more mature and more popular) `o
 | `path`         | String   | yes         | Desired **EXISTING** path in the object, must follow [object-path](https://www.npmjs.com/package/object-path) notation |
 | `valToInsert`  | Whatever | yes         | What to insert at the given path                                                                                       |
 
+::: beware
+You can't create new paths, only amend existing-ones.
+:::
+
 **Output**
 
-Amended string is returned.
+An amended string is returned.
 
-To repeat again, `set()` can't create new paths yet, it's still in baby state. `set()` can only edit existing paths in JSON.
+To repeat, `set()` can't create new paths yet, it's still in a _baby_ state. `set()` can only edit existing paths in JSON.
 
 {% include "btt.njk" %}
 
 ### .del()
-
-Put the a JSON string and a path into `del`, [object-path](https://www.npmjs.com/package/object-path)-style.
-
-For example,
-
-```js
-const { set, del } = require("edit-package-json");
-// we defined JSON contents manually, but in real programs you'd read the file,
-// as string, without parsing and pass it to set()
-const source = `{
-  "a": "b",
-  "c": "d"
-}`;
-
-// amended result:
-const result = del(source, "c");
-
-console.log(JSON.stringify(result, null, 4));
-// => {
-//    "a": "b"
-//    }
-```
-
-**Input**
 
 **del(source, path)**
 
@@ -109,6 +52,19 @@ console.log(JSON.stringify(result, null, 4));
 
 **Output**
 
-Amended string is returned.
+An amended string is returned.
+
+{% include "btt.njk" %}
+
+## Testing
+
+Besides regular unit tests, we went great lengths to ensure this program works as intended. We took all `package.json's in this monorepo ({{ compiledAssertionCounts.totalPackageCount }} in total), then took every single leaf path in every package.json and amended and deleted it two ways:
+
+- editing it directly, using this program, string-in, string-out
+- editing using [`object-path`](https://www.npmjs.com/package/object-path), plain-object-in, plain-object-out, then stringify
+
+Every single path edit matched! By the way, we ended up with {{ compiledAssertionCounts.all['edit-package-json'] | thousandSeparator }} asserts.
+
+See the source of the test file [on GitLab](https://gitlab.com/codsen/codsen/-/blob/master/packages/edit-package-json/test/synthetic-test.js).
 
 {% include "btt.njk" %}

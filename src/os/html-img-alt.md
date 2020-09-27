@@ -3,16 +3,16 @@ layout: package
 title: html-img-alt
 ---
 
-## Idea
+## Purpose
 
-This library takes care of the `alt=` attributes (also wrongly-called "alt tags") on the image tags in HTML:
+This program adds missing `alt` attributes to `img` tags and tweaks existing-ones:
 
-1. If `alt` attribute is missing on any `img` tag, it will add an empty-one.
+1. If `alt` attribute is missing on any `img` tag, it will add an one.
 2. If `alt` attribute is present on any `img` tag, it will run its contents through [string-unfancy](/os/string-unfancy/) to:
    - decode all HTML entities, recursively (in case multiple HTML encoding was applied)
    - replace "fancy" characters with their simpler equivalents within ASCII range. For example, single curly quotes are changed into single apostrophes. This includes dashes and all sorts of double quotes.
    - replace all non-breaking spaces with regular spaces
-3. If `img` `alt` attribute has single quotes, it will remove them and all content within and replace with a pair of empty double quotes.
+3. If `img` empty `alt` attribute has single quotes, it will be replaced with empty double-quotes.
 4. It will also normalise the white space within `img` tags, leaving one space between attributes and leaving one space before the closing slash (XHTML) or closing bracket (HTML).
 5. You can turn it off, but by default all the contents of the image `ALT` attributes will be trimmed and [unfancie'd](/os/string-unfancy/) (curly quotes, m/n-dashes replaced with single quotes, minuses). That's to keep it simple for old email consumption software and make it easier to QA them.
 
@@ -24,29 +24,22 @@ The main USP of this library is that **it does not parse the HTML**. It will nev
 
 ## API
 
-String-in, string-out. You can pass in the optional options object:
+**{{ packageJsons["html-img-alt"].lect.req }}(str, \[opts])**
 
-**Defaults**:
+In other words, it's a function which takes two input arguments, second-one being optional (marked by square brackets).
 
-```js
-{
-  unfancyTheAltContents: true;
-}
-```
+## Options
 
 | `options` object's key  | Type    | Obligatory? | Default | Description                                                                                                                                                 |
 | ----------------------- | ------- | ----------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `unfancyTheAltContents` | Boolean | no          | `true`  | Are each image's `alt` attributes contents trimmed and processed by [string-unfancy](/os/string-unfancy/) |
 
-{% include "btt.njk" %}
-
-## For example,
+Here are the defaults in one place for copying:
 
 ```js
-import alts from "html-img-alt";
-var res = alts('zzz<img        alt="123" >zzz');
-console.log("res = " + res);
-// => 'res = zzz<img alt="123" >zzz'
+{
+  unfancyTheAltContents: true;
+}
 ```
 
 {% include "btt.njk" %}

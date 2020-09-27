@@ -9,56 +9,15 @@ This library fills missing keys in a plain object according to a supplied refere
 
 {% include "btt.njk" %}
 
-## How this works
-
-This library performs the key creation part in the JSON files' _normalisation_ operation. JSON file normalisation is making a set of JSON files to have the same key set.
-
-**Here's how it slots in the normalisation process:**
-
-First, you take two or more plain objects, normally originating from JSON files' contents.
-
-Then, you [calculate the _schema reference_](/os/json-comb-core#getkeysetsync/) out of them. It's a superset object of all possible keys used across the objects (your JSON files).
-
-Finally, you go through your plain objects second time, one-by-one and [fill missing keys](/os/json-comb-core/) using **this library**. It takes the plain object and your generated _schema reference_ (and optionally a custom placeholder if you don't like Boolean `false`) and creates missing keys/arrays in that plain object.
-
-Alternatively, you can use this library just to add missing keys. Mind you, for performance reasons; schema is expected to have all key _values_ equal to placeholders. This way, when creation happens, it can be merged over, and those placeholder values come into right places as placeholders. This means, if you provide a schema with some keys having values as non-placeholder, you'll get those values written onto your objects.
-
-Previously we kept "insurance" function which took a schema reference object and overwrote all its values to the `opts.placeholder`, but then we understood that "normal" reference schemas will always come with right key values anyway, and such operation would waste resources.
-
-{% include "btt.njk" %}
-
-## Example
-
-```js
-const fillMissingKeys = require("object-fill-missing-keys");
-const result = fillMissingKeys(
-  {
-    b: "b", // <---- input plain object that could have come from JSON
-  },
-  {
-    // <---- schema reference object
-    a: false,
-    b: false,
-    c: false,
-  }
-);
-console.log("result = " + JSON.stringify(result, null, 4));
-// result = {
-//   a: false,
-//   b: 'b',
-//   c: false
-// }
-```
-
-{% include "btt.njk" %}
-
 ## API
 
-```js
-fillMissingKeys(incompleteObj, schemaObj, [opts]);
-```
+**fillMissingKeys(incompleteObj, schemaObj, \[opts])**
+
+In other words, it's a function which takes three input arguments, third one being optional (marked by square brackets).
 
 Input arguments are not mutated, inputs are cloned before being used. That's important.
+
+{% include "btt.njk" %}
 
 ### API - Input
 
@@ -282,5 +241,23 @@ console.log(
 //      a: ['z'],
 //    }
 ```
+
+{% include "btt.njk" %}
+
+## How this works
+
+This library performs the key creation part in the JSON files' _normalisation_ operation. JSON file normalisation is making a set of JSON files to have the same key set.
+
+**Here's how it slots in the normalisation process:**
+
+First, you take two or more plain objects, normally originating from JSON files' contents.
+
+Then, you [calculate the _schema reference_](/os/json-comb-core#getkeysetsync/) out of them. It's a superset object of all possible keys used across the objects (your JSON files).
+
+Finally, you go through your plain objects second time, one-by-one and [fill missing keys](/os/json-comb-core/) using **this library**. It takes the plain object and your generated _schema reference_ (and optionally a custom placeholder if you don't like Boolean `false`) and creates missing keys/arrays in that plain object.
+
+Alternatively, you can use this library just to add missing keys. Mind you, for performance reasons; schema is expected to have all key _values_ equal to placeholders. This way, when creation happens, it can be merged over, and those placeholder values come into right places as placeholders. This means, if you provide a schema with some keys having values as non-placeholder, you'll get those values written onto your objects.
+
+Previously we kept "insurance" function which took a schema reference object and overwrote all its values to the `opts.placeholder`, but then we understood that "normal" reference schemas will always come with right key values anyway, and such operation would waste resources.
 
 {% include "btt.njk" %}

@@ -3,7 +3,7 @@ layout: package
 title: check-types-mini
 ---
 
-## Quick Take
+## Purpose
 
 Saves time in Options object validation, at expense of your program's perf:
 

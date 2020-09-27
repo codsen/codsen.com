@@ -17,29 +17,6 @@ This package exports a plain object with a single key, `allHtmlAttribs`. Its val
 
 {% include "btt.njk" %}
 
-## Example
-
-```js
-const { allHtmlAttribs } = require("html-all-known-attributes");
-
-console.log(allHtmlAttribs.has("href"));
-// => true
-
-console.log(allHtmlAttribs.size); // not size()
-// => 702
-
-// iterating:
-for (const x of allHtmlAttribs) {
-  console.log(x);
-}
-// => "abbr",
-//    "accept",
-//    "accept-charset",
-//    ...
-```
-
-{% include "btt.njk" %}
-
 ## Why Set not Array and not JSON?
 
 Because of performance reasons.
@@ -53,4 +30,3 @@ Size evaluation speed is 3187251.38% faster according our built-in perf tests (s
 ![matching algorithm](https://glcdn.githack.com/codsen/codsen/raw/master/packages/html-all-known-attributes/media/perf_set_vs_array_from_json.png)
 
 {% include "btt.njk" %}
-

@@ -1,26 +1,21 @@
 ---
 layout: package
 title: is-char-suitable-for-html-attr-name
+packages:
+  - html-all-known-attributes
 ---
 
-## Idea
+## Purpose
 
-Detect, is a given character suitable for an HTML attribute's name:
-
-```js
-const isAttrNameChar = require("is-char-suitable-for-html-attr-name");
-console.log(isAttrNameChar("a"));
-// => true
-
-console.log(isAttrNameChar("$"));
-// => false
-```
+It's a function which validates strings (first character of it), is it suitable to be in an HTML attribute's name. See the official [spec](https://html.spec.whatwg.org/multipage/syntax.html#attributes-2) for HTML attribute names.
 
 {% include "btt.njk" %}
 
 ## API - Input
 
-**isAttrNameChar(str)** — in other words, function which takes one string argument:
+**{{ packageJsons["is-char-suitable-for-html-attr-name"].lect.req }}(str)**
+
+In other words, function which takes one string argument:
 
 | Input argument | Key value's type | Obligatory? | Description                |
 | -------------- | ---------------- | ----------- | -------------------------- |
@@ -43,4 +38,3 @@ Boolean, `true` or `false`. Erroneous input arguments will yield `false` as well
 If you need a comprehensive list of all possible HTML attribute names, check out [`html-all-known-attributes`](/os/html-all-known-attributes/).
 
 {% include "btt.njk" %}
-

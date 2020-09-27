@@ -3,30 +3,7 @@ layout: package
 title: is-media-descriptor
 ---
 
-## Example
-
-```js
-const isMediaD = require("is-media-descriptor");
-const str = `screeen`;
-const res = isMediaD(str);
-console.log(JSON.stringify(res, null, 4));
-// => [
-//      {
-//        idxFrom: 0,
-//        idxTo: 7,
-//        message: `Did you mean "screen"?`,
-//        fix: {
-//          ranges: [[0, 7, "screen"]]
-//        }
-//      }
-//    ]
-```
-
-The error objects match those of [`emlint`](/os/emlint/), ranges value matches the [ranges](/ranges/) spec (in ranges index array, third array element means what to add; only two elements is deletion).
-
-{% include "btt.njk" %}
-
-## Background
+## Purpose
 
 We are talking about so-called _media descriptors_ ([older spec](https://www.w3.org/TR/html4/types.html#type-media-descriptors), [newer spec - CSS MQ Level 4, draft at the moment](https://drafts.csswg.org/mediaqueries/)), for example, the part `screen and (color), projection and (color)` in both HTML and CSS:
 
@@ -50,7 +27,7 @@ We plan to catch as many errors as possible:
 - untangle the boolean logic
 - ... anything that can happen to media queries and media selectors in general.
 
-This is not a replacement for validator, this is a linting tool. We will use it in [`emlint`](/os/emlint/).
+This is not a replacement for the validator; this is a linting tool. We will use it in [`emlint`](/os/emlint/).
 
 Conceptually, CSS spec is very permissive, if it doesn't like something it invalidates that part and moves on. In this light, linting needs to be the opposite.
 
@@ -58,7 +35,9 @@ Conceptually, CSS spec is very permissive, if it doesn't like something it inval
 
 ## API - Input
 
-**isMediaD(str, opts)** — in other words, a function which takes a string and options, a plain object.
+**{{ packageJsons["is-media-descriptor"].lect.req }}(str, opts)**
+
+In other words, a function which takes a string and options, a plain object.
 
 | Input argument | Type         | Obligatory? | Description                                                                                           |
 | -------------- | ------------ | ----------- | ----------------------------------------------------------------------------------------------------- |
@@ -102,7 +81,7 @@ If an input is not a string or an empty string, an empty array will be returned.
 | ---------------------- | ------- | ----------- | ------- | ------------------------------------------------------ |
 | `offset`               | Integer | no          | `0`     | All reported indexes will be incremented by this much. |
 
-falsy `opt.offset` is fine but something truthy which is not a natural number will _throw_.
+Falsy `opt.offset` is fine but something truthy which is not a natural number will _throw_.
 
 {% include "btt.njk" %}
 
@@ -138,14 +117,8 @@ There are capable CSS parsers out there, but they are all oriented at parsing th
 - [W3C](http://jigsaw.w3.org/css-validator/#validate_by_input+with_options)
 - [CSSTree Validator](https://csstree.github.io/docs/validator.html)
 
-Think, if a tool catches errors, and those errors break parsers, and parser drives a tool, how capable is the tool?
+Conceptually, code checking tools should use advanced but slow parsers, likely _scanerless_-ones to find and fix errors. Then, for general parsing (like syntax highlighting), parsers which can't recognise many errors but are fast should be used.
 
-It's similar to:
-
-If a policemen catch thieves, and thieves pay the government each month to pay police wages, how capable is that police?
-
-Parser is for correct code. For broken code or mixed sources, you need _Rambo_ tool, trained at dealing with bad guys. You need this program.
-
-This program is aimed at **broken code processing**, to power linters, to find _and fix_ broken code, possibly at code-editor-level. It does not work from AST; it processes the input as string.
+We're talking about two different levels of the "food-chain". Currently, there is not much competition for this program in this sense.
 
 {% include "btt.njk" %}

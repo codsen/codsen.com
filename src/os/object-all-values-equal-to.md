@@ -1,50 +1,46 @@
 ---
 layout: package
 title: object-all-values-equal-to
+packages:
+  - object-fill-missing-keys
 ---
 
-## Purpose
+## API
 
-It answers the question: does the given AST/nested-plain-object/array/whatever contain only one kind of value?
+**{{ packageJsons["object-all-values-equal-to"].lect.req }}(input, value)**
 
-The equality is not explicit, that is, we're just checking, that all values are **not unequal** to the given-one.
+In other words, it's a function which takes two input arguments, both obligatory.
 
-For example:
+{% include "btt.njk" %}
+
+### API - Input
+
+| Input argument | Type     | Obligatory? | Default     | Description                                                                                                                                 |
+| -------------- | -------- | ----------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `input`        | Whatever | yes         | `undefined` | AST tree, or object or array or whatever. Can be deeply-nested. Hopefully contains some nested plain objects. We love nested plain objects. |
+| `value`        | Whatever | yes         | `false`     | We will check, does `input` contain only `value` on every key. Please don't set it to `undefined`.                                          |
+
+{% include "btt.njk" %}
+
+### Optional Options Object
+
+| options object's key               | Type of its value | Default | Description                                                                                                                                                                    |
+| ---------------------------------- | ----------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `arraysMustNotContainPlaceholders` | Boolean           | `true`  | When set to `true`, `value` within array should not be present and will yield `false` result. Set this to `false` to allow one or more `value`'s within arrays in the `input`. |
+
+Here are the Optional Options Object's defaults in one place (in case you ever want to copy and tweak it):
 
 ```js
-const allValuesEqualTo = require("object-all-values-equal-to");
-
-// are all values equal to "false":
-console.log(allValuesEqualTo({ a: false, c: false }, false));
-// => true
-
-// are all values equal to "false":
-console.log(allValuesEqualTo({ a: false, c: "zzz" }, false));
-// => false, because of `zzz`
-
-// are all values equal to "false":
-console.log(
-  allValuesEqualTo(
-    {
-      a: {
-        b: false,
-        c: [
-          {
-            d: false,
-            e: false,
-          },
-          {
-            g: false,
-          },
-        ],
-      },
-      c: false,
-    },
-    false
-  )
-);
-// => true
+{
+  arraysMustNotContainPlaceholders: true,
+}
 ```
+
+{% include "btt.njk" %}
+
+### API - Output
+
+Boolean: `true` or `false`.
 
 {% include "btt.njk" %}
 
@@ -91,41 +87,6 @@ console.log(res2);
 ```
 
 {% include "btt.njk" %}
-
-## API
-
-```js
-allValuesEqualTo(input, value);
-```
-
-### API - Input
-
-| Input argument | Type     | Obligatory? | Default     | Description                                                                                                                                 |
-| -------------- | -------- | ----------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `input`        | Whatever | yes         | `undefined` | AST tree, or object or array or whatever. Can be deeply-nested. Hopefully contains some nested plain objects. We love nested plain objects. |
-| `value`        | Whatever | no          | `false`     | We will check, does `input` contain only `value` on every key. Please don't set it to `undefined`.                                          |
-
-{% include "btt.njk" %}
-
-### Optional Options Object
-
-| options object's key               | Type of its value | Default | Description                                                                                                                                                                    |
-| ---------------------------------- | ----------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `arraysMustNotContainPlaceholders` | Boolean           | `true`  | When set to `true`, `value` within array should not be present and will yield `false` result. Set this to `false` to allow one or more `value`'s within arrays in the `input`. |
-
-Here are the Optional Options Object's defaults in one place (in case you ever want to copy and tweak it):
-
-```js
-{
-  arraysMustNotContainPlaceholders: true,
-}
-```
-
-{% include "btt.njk" %}
-
-### API - Output
-
-Boolean: `true` or `false`.
 
 ## Why we need this
 

@@ -7,7 +7,7 @@ packages:
   - all-named-html-entities
 ---
 
-## Quick Take
+## Purpose
 
 Unlike Web pages, Email templates are sent over SMTP and **need to be HTML-encoded**.
 
@@ -24,6 +24,26 @@ This program exports few different lists:
 - `notEmailFriendly` — a plain object, key value pairs are like `AMP: "amp"` — total keys: 1841
 - `notEmailFriendlySetOnly` — a [Set](https://exploringjs.com/impatient-js/ch_sets.html) of only entity names (in correct letter case) — total size: 1841
 - `notEmailFriendlyLowercaseSetOnly` — an alphabetically sorted [Set](https://exploringjs.com/impatient-js/ch_sets.html) of lowercase entity names — total size: 1534
+
+{% include "btt.njk" %}
+
+## API
+
+This package exports a plain object with five keys:
+
+- `notEmailFriendly`
+- `notEmailFriendlySetOnly`
+- `notEmailFriendlyLowercaseSetOnly`
+- `notEmailFriendlyMinLength`
+- `notEmailFriendlyMaxLength`
+
+| Key's name                         | Key's value's type | Purpose                                                                                                             |
+| ---------------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------- |
+| `notEmailFriendly`                 | plain object       | Plain object of all named HTML entities. The key is an entity's name; value is a raw decoded entity. 1841 in total. |
+| `notEmailFriendlySetOnly`          | set                | A set of all entity names, in correct case, unsorted. 1841 in total.                                                |
+| `notEmailFriendlyLowercaseSetOnly` | set                | A set of all entity names, in lowercase, sorted. 1534 in total (because we have `AMP` and `amp` for example).       |
+| `notEmailFriendlyMinLength`        | natural number     | the string length of the shortest of all entities, currently hardcoded to `2`                                       |
+| `notEmailFriendlyMaxLength`        | natural number     | the string length of the longest of all entities, currently hardcoded to `31`                                       |
 
 {% include "btt.njk" %}
 
@@ -112,26 +132,6 @@ console.log(
 ```
 
 Keep in mind, `length` here does not count ampersand and semicolon. For example, `Abreve` length is 6 characters but in the HTML, it is 8: `&Abreve;`,
-
-{% include "btt.njk" %}
-
-## API
-
-This package exports a plain object with five keys:
-
-- `notEmailFriendly`
-- `notEmailFriendlySetOnly`
-- `notEmailFriendlyLowercaseSetOnly`
-- `notEmailFriendlyMinLength`
-- `notEmailFriendlyMaxLength`
-
-| Key's name                         | Key's value's type | Purpose                                                                                                             |
-| ---------------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------- |
-| `notEmailFriendly`                 | plain object       | Plain object of all named HTML entities. The key is an entity's name; value is a raw decoded entity. 1841 in total. |
-| `notEmailFriendlySetOnly`          | set                | A set of all entity names, in correct case, unsorted. 1841 in total.                                                |
-| `notEmailFriendlyLowercaseSetOnly` | set                | A set of all entity names, in lowercase, sorted. 1534 in total (because we have `AMP` and `amp` for example).       |
-| `notEmailFriendlyMinLength`        | natural number     | the string length of the shortest of all entities, currently hardcoded to `2`                                       |
-| `notEmailFriendlyMaxLength`        | natural number     | the string length of the longest of all entities, currently hardcoded to `31`                                       |
 
 {% include "btt.njk" %}
 

@@ -3,12 +3,9 @@ layout: package
 title: js-row-num
 ---
 
-## Idea
+## Purpose
 
-When we create libraries, add new features to them and/or look for bugs, we rely on `console.log` statements. On every one of our libraries, there's Rollup plugins set ([rollup-plugin-strip](
-https://www.npmjs.com/package/@rollup/plugin-strip) and [rollup-plugin-cleanup](https://www.npmjs.com/package/rollup-plugin-cleanup)) who remove all comments and `console.log` statements from the built files that later get published (`dist/` folder's contents). This means we can commit our source files (`src/` folder's contents) **with** `console.log` statements.
-
-Now, when troubleshooting code, there are two essential pieces of information: **what** happened and **from where** it happened:
+It updates the numbers in console.logs so that we can know what's happening on which line:
 
 ```js
 console.log(`056 SET counter = ${counter}`);
@@ -16,49 +13,21 @@ console.log(`056 SET counter = ${counter}`);
 //          where      what happened
 ```
 
-_Where_ part is the `console.log` statement's row number we like to add.
+Every single package on our monorepo relies on eslint rule [`eslint-plugin-row-num`](/os/eslint-plugin-row-num/) which is driven by this package.
 
-Now, we need an automated tool to update row numbers because there will be many `console.log` rows and it's enough to add or remove one line of code, and all numbers below will be offset.
+Result from real life — a snippet of [detergent](/os/detergent/) one test `dev` build's terminal output:
 
-This library updates row numbers in JS file `console.log` statements. It is an API for other tools - it consumes string (hopefully some JS code) and returns a string (hopefully, also, some JS code). Browser plugins, web apps or Node CLI applications can tap this application to do all the updating work.
+![detergent terminal output on dev mode](/images/terminal-row-numbers.png)
 
-{% include "btt.njk" %}
-
-## Usage
-
-Let's say we want to put row numbers in front of each `console.log` statement and automatically update them:
-
-```js
-const fixRowNums = require("js-row-num");
-const source = `let filler = "z"; // 1st row
-filler = "z"; // 2nd row
-filler = "z"; // 3rd row
-filler = "z"; // 4th row
-filler = "z"; // 5th row
-console.log(
-  \`099 filler = \${filler} // 7th row
-\`);
-`;
-const res = fixRowNums(source);
-// =>
-// "let filler = "z"; // 1st row
-//  filler = "z"; // 2nd row
-//  filler = "z"; // 3rd row
-//  filler = "z"; // 4th row
-//  filler = "z"; // 5th row
-//  console.log(
-//    \`007 filler = \${filler} // 7th row
-//  \`);
-// "
-```
-
-Notice how the first number within `console.log` got updated from `099` to `007`.
+Notice numbers in front of each logged statement, `073` and `134` and so on. We casually deal with source files spanning thousands of lines.
 
 {% include "btt.njk" %}
 
 ## API
 
-API is simple: `string` in, `string` out. No options, everything beyond the 1st argument will be ignored.
+**{{ packageJsons["js-row-num"].lect.req }}(str, \[opts])**
+
+In other words, it's a function which takes two input arguments, second-one being optional (marked by square brackets).
 
 ### Optional Options Object
 

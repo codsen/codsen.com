@@ -5,7 +5,7 @@ title: chlu
 
 {% include "src/components/content/monorepo-2020.njk" %}
 
-## What it does
+## Purpose
 
 ![features](https://glcdn.githack.com/codsen/codsen/raw/master/packages/chlu-cli/media/features_comp.png)
 

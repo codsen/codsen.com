@@ -1,9 +1,11 @@
 ---
 layout: package
 title: csv-split-easy
+packages:
+  - csv-sort
 ---
 
-## Idea
+## Purpose
 
 Split a string representing a CSV file into an array of arrays, so that we can traverse it later.
 
@@ -29,7 +31,7 @@ Outside of the scope:
 
 ## API - Input
 
-**splitEasy(str[, opts])**
+**{{ packageJsons["csv-split-easy"].lect.req }}(str, \[opts])**
 
 In other words, it's a function which takes two input arguments, second one is optional (marked by brackets).
 
@@ -60,44 +62,9 @@ Here is it in one place:
 
 ### API - Output
 
-Returns an array of arrays. When there's nothing given, returns `[['']]`
+Returns an array of arrays (each depicting a row). When there's nothing given, returns `[['']]`
 
 There's always one array within the main array and there's always something there, at least an empty string.
-
-### For example
-
-```js
-const splitEasy = require("csv-split-easy");
-const fs = require("fs");
-const path = require("path");
-// let's say our CSV sits in the root:
-// its contents, let's say, are:
-// 'Product Name,Main Price,Discounted Price\nTestarossa (Type F110),"100,000","90,000"\nF50,"2,500,000","1,800,000"'
-const testCSVFile = fs.readFileSync(
-  path.join(__dirname, "./csv_test.csv"),
-  "utf8"
-);
-
-let source = splitEasy(testCSVFile);
-console.log("source = " + JSON.stringify(source, null, 4));
-// => [
-//        [
-//            "Product Name",
-//            "Main Price",
-//            "Discounted Price"
-//        ],
-//        [
-//            "Testarossa (Type F110)",
-//            "100000",
-//            "90000"
-//        ],
-//        [
-//            "F50",
-//            "2500000",
-//            "1800000"
-//        ]
-//    ]
-```
 
 {% include "btt.njk" %}
 

@@ -3,41 +3,19 @@ layout: package
 title: easy-replace
 ---
 
-## Quick Take
+## Purpose
 
-This program is an alternative to JS regex lookaheads and lookbehinds:
-
-```js
-const er = require("easy-replace");
-const res = er(
-  "&nBsp; NBsp &nbSP NbsP;",
-  {
-    leftOutsideNot: "",
-    leftOutside: "",
-    leftMaybe: ["&", "&amp;"],
-    searchFor: "nbsp",
-    rightMaybe: ";",
-    rightOutside: "",
-    rightOutsideNot: "",
-    i: {
-      searchFor: true,
-    },
-  },
-  "&nbsp;"
-);
-console.log(res);
-//=> '&nbsp; &nbsp; &nbsp; &nbsp;'
-```
+It's an alternative to JS regexes.
 
 {% include "btt.njk" %}
 
 ## API
 
-```js
-er(source_string, options_object, replacement_string);
-```
+**{{ packageJsons["easy-replace"].lect.req }}(source_string, options_object, replacement_string)**
 
 In other words, it's a "string-in, string-out" function with three input arguments, see them below.
+
+{% include "btt.njk" %}
 
 ## API - Input
 

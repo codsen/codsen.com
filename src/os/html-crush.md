@@ -6,10 +6,12 @@ packages:
   - ranges-apply
 ---
 
-## Purpose
+## Two Modes
 
-* Minify email template, reducing size to the least possible.
-* Remove indentations, keep line breaks (the opposite of [tabifier](http://tools.arantius.com/tabifier) / beautifiers).
+1. Only remove indentations (the opposite of [tabifier](http://tools.arantius.com/tabifier))
+2. Fully minify, removing all whitespace between tags
+
+{% include "btt.njk" %}
 
 ## Features
 
@@ -29,13 +31,23 @@ As a side priority, this application also takes into consideration **human-frien
 
 {% include "btt.njk" %}
 
-## API - Input
+## API
 
 This program exports a plain object where main function is under a key "crush". That's why you consume it like this:
 
 ```js
-import { crush, defaults, version } from "html-crush";
+import {{ packageJsons["html-crush"].lect.req }} from "html-crush";
 ```
+
+| Exported Key | Description |
+| ------------ | ---------------------- |
+| `crush`      | The main function          |
+| `defaults`   | Optional Options Object's [defaults](#optional-options-object) |
+| `version`   | As per current `package.json` — a string, for example, `"{{ packageJsons["html-crush"].version }}"` |
+
+{% include "btt.njk" %}
+
+## API - `crush()` - Input
 
 **crush(str, \[opts])** — in other words, function with two input arguments:
 
@@ -48,7 +60,7 @@ If supplied input arguments are of any other types, an error will be thrown.
 
 {% include "btt.njk" %}
 
-## API - Output
+## API - `crush()` - Output
 
 The function exported under key `crush` will return **a plain object** where you'll find log data, result string and corresponding string ranges of all actions performed:
 
@@ -56,7 +68,26 @@ The function exported under key `crush` will return **a plain object** where you
 | ---------- | ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
 | `log`      | Plain object                              | For example, `{ timeTakenInMilliseconds: 6, originalLength: 0, cleanedLength: 0, bytesSaved: 0, percentageReducedOfOriginal: 0 }` |
 | `ranges`   | Array of zero or more string range arrays | Result in [ranges](/ranges/) notation.                |
+| `applicableOpts`   | Plain object | Reports which options would have made a difference if enabled or disabled, considering the given input. |
 | `result`   | String                                    | The result as string.                                                                           |
+
+For example,
+
+```js
+{
+  log: {
+    timeTakenInMiliseconds: 7,
+    originalLength: 104,
+    cleanedLength: 92,
+    bytesSaved: 12,
+    percentageReducedOfOriginal: 12
+  },
+  ranges: null,
+  applicableOpts: { removeHTMLComments: false, removeCSSComments: false },
+  result: '<table width="100" border="0" cellpadding="0" cellspacing="0"><tr><td> hi\n' +
+    '</td></tr></table>'
+}
+```
 
 {% include "btt.njk" %}
 
@@ -184,7 +215,7 @@ Now, it's up to you how to distinguish "in progress" results and the final resul
 
 ## Example - using the `ranges` from the result
 
-We use [`ranges-apply`](/os/ranges-apply/) to render the result from gathered _ranges_ and a source string.
+We use [`ranges-apply`](/os/ranges-apply/) to render the result from gathered [_ranges_](/ranges/) and a source string.
 
 ```js
 const htmlCrush = require("html-crush");
@@ -200,4 +231,4 @@ console.log(result);
 console.log(rangesApply(sourceHtml, ranges));
 ```
 
-Both results above will be the same. The _ranges_ approach lets us process the string further and add more ranges, then later [merge](/os/ranges-merge/) them and [apply](/os/ranges-apply/) in one go.
+Both results above will be the same. The [_ranges_ approach](/ranges/) lets us process the string further and add more ranges, then later [merge](/os/ranges-merge/) them and [apply](/os/ranges-apply/) in one go.
