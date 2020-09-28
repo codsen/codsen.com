@@ -125,7 +125,7 @@ test("wraps all pre tags which have language-* class", () => {
 </body></html>`;
   const desired = `<!DOCTYPE html>
 <html><head></head><body>
-<div class="code-wrapper" rel="css"><pre class="language-css"><code>.title { color: red; }</code></pre></div>
+<div class="code-wrapper"><pre class="language-css" rel="css"><code>.title { color: red; }</code></pre></div>
 </body></html>`;
   expect(normaliseEol(contentParser(source, "file.html"))).toBe(
     normaliseEol(desired)

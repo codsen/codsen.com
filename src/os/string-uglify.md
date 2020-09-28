@@ -156,7 +156,7 @@ console.log(input2.map((val, i) => `${val} - ${output2[i]}`).join("\n"));
 // .accurate - .cw
 ```
 
-**[⬆ back to top](#)**
+{% include "btt.njk" %}
 
 ## Other features
 

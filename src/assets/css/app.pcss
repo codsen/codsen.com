@@ -573,9 +573,14 @@ p code, ul code, li code, td code, th code {
 
   background-color: $lighterGrey;
   border: $border;
+
+  .package-install & {
+    border-color: $textBright;
+  }
+
   @include darkTheme {
     background-color: $borderDark;
-    border-color: $borderDark;
+    border: none;
   }
 
   .package-notice & {
@@ -592,10 +597,31 @@ p code, ul code, li code, td code, th code {
 }
 
 /* sometimes whole code value is a link */
-a > code {
-  background-color: transparent;
-  border: none;
-  text-decoration: inherit;
+a {
+  & > code {
+    background-color: transparent;
+    border: 1px solid $textBright;
+    text-decoration: inherit;
+  }
+  @include darkTheme {
+    &:hover > code {
+      background-color: transparent;
+      text-decoration: none;
+    }
+  }
+}
+
+/* examples list - <code> within <a> */
+li a {
+  code {
+    border: 1px solid $borderGrey;
+    @include darkTheme {
+      border: none;
+    }
+  }
+  &:hover code {
+    border-color: $textBright;
+  }
 }
 
 kbd {
@@ -657,8 +683,8 @@ kbd {
 
 .ext-link {
   position: relative;
-  top: -0.5rem;
-  margin-left: 0.3rem;
+  top: -1rem;
+  margin-left: -0.3rem;
   cursor: help;
 }
 .button .ext-link path {
@@ -753,24 +779,34 @@ footer {
   a {
     text-decoration: underline;
     &:hover {
-      color: $blue;
+      background-color: $blue;
+      text-decoration: none;
+      path {
+        stroke: $black;
+      }
       @include darkTheme {
-        color: $darkRed;
+        color: $black;
+        background-color: $darkRed;
       }
     }
   }
 }
 
-main a {
+main a, main .open-source-container h3 {
   @include underline($green);
   &:hover {
-    @include underline($blue);
+    text-decoration: none;
+    background-color: $blue;
+    path {
+      stroke: $black;
+    }
   }
   @include darkTheme {
     @include underline($darkOrange);
     color: $darkerGrey;
     &:hover {
-      @include underline($darkRed);
+      color: $black;
+      background-color: $darkRed;
     }
   }
 }
@@ -1682,9 +1718,11 @@ open source at all. */
   }
 
   & > a:hover h2 span {
-    @include underline($green);
+    background-color: $blue;
+    color: $black;
+    text-decoration: none;
     @include darkTheme {
-      @include underline($darkOrange);
+      background-color: $darkOrange;
     }
   }
 
@@ -1724,12 +1762,12 @@ open source at all. */
     padding: 2rem 2rem 1.5rem;
   }
 
-  h3 a:hover {
+  /* h3 a:hover {
     color: $blue;
     @include darkTheme {
       color: $darkRed;
     }
-  }
+  } */
 
   .permalink {
     display: none;
@@ -1744,7 +1782,7 @@ open source at all. */
     }
 
     /* .article-publication-meta */
-    color: $textDark;
+    color: $textBright;
     time {
       color: $darkerGrey;
     }
@@ -1860,18 +1898,28 @@ open source at all. */
       border-bottom-color: $borderDark;
     }
   }
-  a:hover h3 {
-    color: $blue;
-    @include darkTheme {
-      color: inherit;
+  .open-source-title:hover {
+    text-decoration: none !important;
+    h3 {
+      @include darkTheme {
+        color: inherit;
+      }
     }
   }
   a {
     text-decoration: none;
+    &.open-source-title:hover {
+      background: transparent;
+    }
   }
   @include darkTheme {
     a {
       text-decoration: none;
+      &.open-source-title:hover {
+        color: $darkerGrey;
+        background: transparent;
+        text-decoration: none !important;
+      }
     }
   }
   h3 {
@@ -1881,6 +1929,13 @@ open source at all. */
     margin-bottom: 1rem;
     display: inline-block;
     z-index: 3;
+    &:hover {
+      color: $black;
+      @include darkTheme {
+        color: $black !important;
+      }
+      text-decoration: none !important;
+    }
   }
   p {
     font-size: 1.4rem;
@@ -2430,7 +2485,7 @@ open source at all. */
   article p, article .meta, article ul, article li, article div {
     /* all text is larger on single-page layouts */
     font-size: 2.3rem;
-    line-height: 3.9rem;
+    line-height: 1.69;
   }
 
   article .meta {
@@ -2684,6 +2739,10 @@ article, .package-body__content {
     background-color: $lighterGrey;
     @include darkTheme {
       background-color: #262626; /* 15% */
+    }
+
+    p {
+      font-size: 0.8em;
     }
 
     &:before {
@@ -3177,6 +3236,7 @@ article, .package-body__content {
   }
   @include darkTheme {
     a {
+      color: $darkRed;
       text-decoration: none;
     }
   }
@@ -3192,32 +3252,14 @@ article, .package-body__content {
       text-decoration: none;
     }
     &:hover {
-      color: $blue;
-      text-decoration: none;
+      /* color: $blue;
+      text-decoration: none; */
+
+
+
       .emoji {
         transition: transform .4s ease-in-out;
         transform: rotate(360deg);
-      }
-    }
-
-    @include darkTheme {
-      color: $darkRed;
-      sup {
-        color: $textDark;
-      }
-
-      &:after {
-        text-decoration: none;
-      }
-      &:hover {
-        color: $borderGrey;
-        sup {
-          color: $borderGrey;
-        }
-        text-decoration: none;
-        .emoji {
-          filter: brightness(1) grayscale(1);
-        }
       }
     }
   }
@@ -3262,10 +3304,17 @@ article, .package-body__content {
   .package-badges {
     a {
       text-decoration: none;
+      background: transparent;
+      &:hover {
+        background: transparent;
+      }
     }
     @include darkTheme {
       a {
         text-decoration: none;
+        &:hover {
+          background: transparent;
+        }
       }
     }
 
@@ -3543,7 +3592,14 @@ h1, h2, h3 {
   }
 
   font-weight: 900;
-  font-size: 24rem;
+  font-size: 16rem;
+  margin-top: -2rem;
+
+  @media (min-width: $mid) {
+    font-size: 24rem;
+    margin-top: 0;
+  }
+
   line-height: 10rem;
   margin-left: -7rem;
   position: absolute;
@@ -3684,12 +3740,15 @@ h1, h2, h3, h4, h5, h6 {
     .header-anchor {
       display: block;
       position: absolute;
+      background: transparent;
 
       &:hover {
         display: block;
         color: $yellow;
+        background: transparent;
         @include darkTheme {
           color: $darkerRed;
+          background: transparent;
         }
       }
 
@@ -3769,10 +3828,10 @@ body {
     }
   }
   @include darkTheme {
-    color: $darkerOrange;
+    color: $twentyFive;
     text-decoration: none;
     &:hover {
-      color: $darkRed;
+      /* color: $darkRed; */
       &:after {
         text-decoration: none;
       }
@@ -4230,6 +4289,47 @@ pre[class*="language-"] > code[class*="language-"] {
     max-width: none !important;
     text-align: center;
   }
+
+  .code-wrapper {
+    margin-bottom: -.1rem;
+  }
+}
+
+.examples-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+
+  font-size: 1.4rem;
+  line-height: 1.2;
+
+  a {
+    display: inline-block;
+    line-height: inherit;
+    &:hover {
+      text-decoration: none;
+    }
+    @include darkTheme {
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+.large-slash {
+  color: $lighterGrey;
+  @include darkTheme {
+    color: $lighterDark;
+  }
+
+  font-size: 2em;
+  font-weight: 900;
+  line-height: 0;
+  display: inline-block;
+  padding: 0 .3rem;
 }
 
 .centered-headings {
@@ -4246,6 +4346,72 @@ pre[class*="language-"] > code[class*="language-"] {
   h2 {
     max-width: none !important;
     text-align: center;
+  }
+}
+
+/* Articles List page */
+/* -------------------------------------------------------------------------- */
+
+.page-articles-list {
+  .list-container {
+    margin-top: 8rem;
+  }
+
+  figure {
+    text-align: center;
+    @media (min-width: $mid) {
+      float: left;
+      margin: 0 2rem 0 0;
+      text-align: left;
+    }
+    a {
+      display: inline-block;
+      height: 6rem;
+      width: 12rem;
+      &:hover {
+        background: none;
+      }
+      @include darkTheme {
+        &:hover {
+          background: none;
+        }
+      }
+    }
+    img {
+      height: 6rem;
+      width: 12rem;
+    }
+  }
+
+  li {
+    padding-bottom: 2rem;
+    border-bottom: 1px dashed $borderGrey;
+    @include darkTheme {
+      border-bottom-color: $borderDark;
+    }
+
+    margin-bottom: 2rem;
+    @media (min-width: $mid) {
+      margin-bottom: 3rem;
+    }
+
+    &:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    article {
+      padding: 0;
+
+      @media (min-width: $mid) {
+        display: flex;
+        flex-direction: row;
+
+        .article-contents-container {
+          flex: 1;
+        }
+      }
+    }
   }
 }
 

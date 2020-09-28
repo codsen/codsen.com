@@ -3,14 +3,29 @@ layout: list
 title: Articles List
 permalink: /articles/list/
 eleventyExcludeFromCollections: true
+extraContainerClass: page-articles-list
 ---
 <section class="two-thirds">
   <h1><span class="all-articles__all">All</span> <span class="all-articles__articles pr">posts<sup title="{{ collections.posts | length }} posts published" aria-label="{{ collections.posts | length }} posts published">Σ={{ collections.posts | length }}</sup></span></h1>
   <div class="mb list-container">
     <ol class="posts" reversed>
     {% for item in collections.posts | reverse %}
-      <li class="posts-entry">{{ item.data.type | upper }} —
-        <a class="posts-link" href="{{ item.url }}">{{ item.data.title }}</a>
+      <li class="posts-entry group">
+        <article>
+          {% if item.data.image %}
+            <figure class="post-img" itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject">
+              <a href="{{ item.url }}"><img width="" height="" src="/images/codsen-article-{{ item.data.image }}-s.png" class="post-image-thumbnail" alt="{{ item.data.title }}" itemprop="contentUrl"></a>
+            </figure>
+          {% endif -%}
+
+          <div class="article-contents-container">
+            <header class="article-publication-meta">
+            {%- if loop.first %}<span id="fresh" data-time="{{ item.date | iso }}"></span>{% endif %}
+            {{ item.data.type | upper }} &nbsp; <time datetime="{{ item.date | iso }}">{{ item.date | dateDisplay }}</time>
+            </header>
+            <a class="posts-link" href="{{ item.url }}">{{ item.data.title }}</a>
+          </div>
+        </article>
       </li>
     {% endfor %}
     </ol>

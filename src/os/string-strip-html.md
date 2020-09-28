@@ -68,7 +68,7 @@ Here is its API:
 | `allTagLocations`   | Array of zero or more arrays | For example, `[[0, 5], [30, 35]]`. If you `String.slice()` each pair, you'll get HTML tag values. |
 | `filteredTagLocations`   | Array of zero or more arrays | Only the tags that ended up stripped will be reported here. Takes into account `opts.ignoreTags` and `opts.onlyStripTags`, unlike `allTagLocations` above. For example, `[[0, 5], [30, 35]]`. |
 
-**[⬆ back to top](#)**
+{% include "btt.njk" %}
 
 ## Optional Options Object
 

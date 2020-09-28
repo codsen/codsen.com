@@ -33,22 +33,10 @@
         <div class="package-badges">
 
 
-          <a href="https://www.npmjs.com/package/{{ title }}" rel="nofollow noreferrer noopener">
-            <img src="https://img.shields.io/badge/-npm-blue?style=flat-square" alt="page on npm">
-          </a>
-          <a href="https://gitlab.com/codsen/codsen/tree/master/packages/{{ title }}" rel="nofollow noreferrer noopener">
-            <img src="https://img.shields.io/badge/-GitLab-blue?style=flat-square" alt="page on GitLab">
-          </a>
-          {# <a href="https://gitlab.com/codsen/codsen/tree/master/packages/{{ title }}" rel="nofollow noreferrer noopener">
+          <a href="https://www.npmjs.com/package/{{ title }}"><img src="https://img.shields.io/badge/-npm-blue?style=flat-square" alt="page on npm"></a><a href="https://gitlab.com/codsen/codsen/tree/master/packages/{{ title }}"><img src="https://img.shields.io/badge/-GitLab-blue?style=flat-square" alt="page on GitLab"></a><a href="https://npmcharts.com/compare/{{ title }}?interval=30" target="_blank"><img src="https://img.shields.io/npm/dm/{{ title }}.svg?style=flat-square" alt="Downloads per month"></a><a href="https://prettier.io" target="_blank"><img src="https://img.shields.io/badge/code_style-prettier-brightgreen.svg?style=flat-square" alt="Code style: prettier"></a><a href="https://gitlab.com/codsen/codsen/-/blob/master/LICENSE"><img src="https://img.shields.io/badge/licence-MIT-brightgreen.svg?style=flat-square" alt="MIT License"></a>
+          {# <a href="https://gitlab.com/codsen/codsen/tree/master/packages/{{ title }}">
             <img src="https://img.shields.io/badge/coverage-55%25-brightgreen.svg?style=flat-square" alt="Coverage">
           </a> #}
-          <a href="https://npmcharts.com/compare/{{ title }}?interval=30" rel="nofollow noreferrer noopener" target="_blank">
-            <img src="https://img.shields.io/npm/dm/{{ title }}.svg?style=flat-square" alt="Downloads per month">
-          </a>
-          <a href="https://prettier.io" rel="nofollow noreferrer noopener" target="_blank">
-            <img src="https://img.shields.io/badge/code_style-prettier-brightgreen.svg?style=flat-square" alt="Code style: prettier">
-          </a>
-          <img src="https://img.shields.io/badge/licence-MIT-brightgreen.svg?style=flat-square" alt="MIT License">
         </div>
       </div>
 
@@ -84,7 +72,18 @@
 
             {% if isCli %}
             <p>
-              Alternatively, CLI's can also be installed as local dependencies, but you then have to call them through package.json, through another program.
+              Then, call it from the command line using {% if packageJsons[title].bin | length > 1 -%}
+                one of the following keywords:
+              {%- else -%}
+                keyword:
+              {%- endif %}
+
+              {% highlight "bash" %}{% for key, val in packageJsons[title].bin %}{{ key }}
+{% endfor %}{% endhighlight %}
+            </p>
+
+            <p>
+              Alternatively, CLI's can also be installed as local dependencies, but you then have to call them through package.json, through npm script.
             </p>
             {% endif %}
 

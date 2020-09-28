@@ -62,7 +62,7 @@ module.exports = function (eleventyConfig) {
    * @link https://www.11ty.io/docs/filters/
    */
   // human friendly date format
-  eleventyConfig.addFilter("dateDisplay", require("./utils/filters/date.js"));
+  eleventyConfig.addFilter("dateDisplay", require("./utils/filters/dateDisplay.js"));
   // prepare search contents
   eleventyConfig.addFilter("squash", require("./utils/filters/squash.js"));
   // robot friendly date format for crawlers
