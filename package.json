@@ -26,14 +26,17 @@
     "----------- CLEAN -----------": "",
     "clean": "run-s clean:*",
     "clean:cache": "rimraf ./.cache",
-    "clean:dist": "rimraf ./dist",
     "clean:bundle": "rimraf ./bundle",
+    "clean:dist": "rimraf ./dist",
     "----------- ETC -----------": "",
-    "search": "node utils/scripts/fixSearchWorkerRoot.js",
     "hash": "delay 15 && node utils/scripts/fixDistWorkerHash.js",
-    "replace": "replace 'http://localhost:8080/' 'https://codsen.com/' . -r --include='dist/assets/**/*'",
     "links": "linkinator ./dist --recurse --silent --skip 'https://en.wikipedia.org|https://github.com/|https://www.npmjs.com/|https://gitlab.com/codsen/codsen/issues/'",
-    "test": "jest --watch"
+    "replace": "replace 'http://localhost:8080/' 'https://codsen.com/' . -r --include='dist/assets/**/*'",
+    "search": "node utils/scripts/fixSearchWorkerRoot.js",
+    "js:watch": "jest --watch",
+    "test:filters": "jest",
+    "test:vercel": "npm run build:eleventy && node utils/scripts/validateVercelJson.js",
+    "test": "run-p test:*"
   },
   "dependencies": {
     "@11ty/eleventy": "^0.11.0",

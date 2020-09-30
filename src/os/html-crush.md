@@ -62,7 +62,7 @@ If supplied input arguments are of any other types, an error will be thrown.
 
 ## API - `crush()` - Output
 
-The function exported under key `crush` will return **a plain object** where you'll find log data, result string and corresponding string ranges of all actions performed:
+The function exported under key `crush` will return **a plain object** where you'll find: the log data, result string and corresponding string ranges of all actions performed:
 
 | Key's name | Key value's type                          | Description                                                                                                                       |
 | ---------- | ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
@@ -76,7 +76,7 @@ For example,
 ```js
 {
   log: {
-    timeTakenInMiliseconds: 7,
+    timeTakenInMilliseconds: 7,
     originalLength: 104,
     cleanedLength: 92,
     bytesSaved: 12,

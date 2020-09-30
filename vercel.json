@@ -1,13 +1,238 @@
 {
   "redirects": [
     {
-      "source": "/articles/tag/",
-      "destination": "/articles/tag/all/",
+      "source": "/articles/tag",
+      "destination": "/articles/tag/all",
       "statusCode": 301
     },
     {
-      "source": "/wordpress/",
-      "destination": "/wordpress/wp-admin/",
+      "source": "/os/array-include-with-glob",
+      "destination": "/os/array-includes-with-glob",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/ast-delete-objects",
+      "destination": "/os/ast-delete-object",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/ast-get-objects",
+      "destination": "/os/ast-get-object",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/ast-lose-compare",
+      "destination": "/os/ast-loose-compare",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/codsen-tokeniser",
+      "destination": "/os/codsen-tokenizer",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/csv-split",
+      "destination": "/os/csv-split-easy",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/detect-is-html-or-xhtml",
+      "destination": "/os/detect-is-it-html-or-xhtml",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/email-all-chars-within-asci",
+      "destination": "/os/email-all-chars-within-ascii",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/email-homy",
+      "destination": "/os/email-homey",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/eslint-plugin-row-nums",
+      "destination": "/os/eslint-plugin-row-num",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/eslint-plugin-test-nums",
+      "destination": "/os/eslint-plugin-test-num",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/html-all-attributes",
+      "destination": "/os/html-all-known-attributes",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/html-entity-not-email-friendly",
+      "destination": "/os/html-entities-not-email-friendly",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/html-known-attributes",
+      "destination": "/os/html-all-known-attributes",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/is-char-suitable-for-attr-name",
+      "destination": "/os/is-char-suitable-for-html-attr-name",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/is-char-suitable-for-html-attr",
+      "destination": "/os/is-char-suitable-for-html-attr-name",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/is-html-opening",
+      "destination": "/os/is-html-tag-opening",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/is-tag-opening",
+      "destination": "/os/is-html-tag-opening",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/jrn",
+      "destination": "/os/js-row-num",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/js-row-number",
+      "destination": "/os/js-row-num",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/js-row-numbers",
+      "destination": "/os/js-row-num",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/js-row-nums",
+      "destination": "/os/js-row-num",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/json-variable",
+      "destination": "/os/json-variables",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/lerna-clean-changelog",
+      "destination": "/os/lerna-clean-changelogs",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/lerna-clean-changelog-cli",
+      "destination": "/os/lerna-clean-changelogs-cli",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/lerna-dep-link",
+      "destination": "/os/lerna-link-dep",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/lerna-link-deps",
+      "destination": "/os/lerna-link-dep",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/object-delete-keys",
+      "destination": "/os/object-delete-key",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/object-flaten-all-arrays",
+      "destination": "/os/object-flatten-all-arrays",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/object-flaten-referencing",
+      "destination": "/os/object-flatten-referencing",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/object-no-new-key",
+      "destination": "/os/object-no-new-keys",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/string-apostrophe",
+      "destination": "/os/string-apostrophes",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/string-apostrophies",
+      "destination": "/os/string-apostrophes",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/string-character-is-astral-surogate",
+      "destination": "/os/string-character-is-astral-surrogate",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/string-character-is-surrogate",
+      "destination": "/os/string-character-is-astral-surrogate",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/string-collapse-leading-white-space",
+      "destination": "/os/string-collapse-leading-whitespace",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/string-collapse-whitespace",
+      "destination": "/os/string-collapse-white-space",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/string-convert-index",
+      "destination": "/os/string-convert-indexes",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/string-extract-sass-var",
+      "destination": "/os/string-extract-sass-vars",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/string-extract-sass-variables",
+      "destination": "/os/string-extract-sass-vars",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/string-extract-scss-vars",
+      "destination": "/os/string-extract-sass-vars",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/string-indexes-of-plus",
+      "destination": "/os/str-indexes-of-plus",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/string-ranges-expander",
+      "destination": "/os/string-range-expander",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/string-split-by-white-space",
+      "destination": "/os/string-split-by-whitespace",
+      "statusCode": 301
+    },
+    {
+      "source": "/os/update-version",
+      "destination": "/os/update-versions",
+      "statusCode": 301
+    },
+    {
+      "source": "/wordpress",
+      "destination": "/wordpress/wp-admin",
       "statusCode": 301
     }
   ]
