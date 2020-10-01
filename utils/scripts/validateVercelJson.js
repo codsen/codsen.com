@@ -47,7 +47,7 @@ if (vercel && Array.isArray(vercel.redirects) && vercel.redirects.length) {
     const sourcePath = path.join("dist", redirectObj.source, "index.html");
     let fileFound = false;
     try {
-      // existence of template.html
+      // existence of "source" path
       fs.accessSync(sourcePath, fs.F_OK);
       fileFound = sourcePath;
     } catch (e) {
@@ -74,7 +74,7 @@ if (vercel && Array.isArray(vercel.redirects) && vercel.redirects.length) {
       "index.html"
     );
     try {
-      // existence of template.html
+      // existence of "destination" path
       fs.accessSync(destinationPath, fs.F_OK);
     } catch (e) {
       throw new Error(

@@ -80,13 +80,13 @@ module.exports = async () => {
   const externalPackages = [...new Set(p1.concat(p2))]
     .filter((pack) => !fileList.includes(pack))
     .sort();
-  console.log(
-    `${`\u001b[${33}m${`externalPackages`}\u001b[${39}m`} = ${JSON.stringify(
-      externalPackages,
-      null,
-      4
-    )}`
-  );
+  // console.log(
+  //   `${`\u001b[${33}m${`externalPackages`}\u001b[${39}m`} = ${JSON.stringify(
+  //     externalPackages,
+  //     null,
+  //     4
+  //   )}`
+  // );
 
   return Promise.all(
     externalPackages.map((p) =>
