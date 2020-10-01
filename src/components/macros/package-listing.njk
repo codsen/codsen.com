@@ -1,9 +1,13 @@
-{% macro packageListing(name, packageJson) %}
+{% macro packageListing(name, packageJson, extPackageDescr) %}
 <div class="content-row__package">
   <a href="{% if packageJson %}/os/{% else %}https://www.npmjs.com/package/{% endif %}{{ name }}"><span class="emoji">📦</span> {{ name }}{% if packageJson %} <sup>{{ packageJson.version }}</sup>{% endif %}</a>
-  {% if packageJson %}
+  {% if packageJson or extPackageDescr %}
   <div class="content-row__package__description">
-    {{ packageJson.description | formatCodeBits | safe }}
+    {% if extPackageDescr %}
+    {{ extPackageDescr | removeTrailingPunctuation }}
+    {% elif packageJson and packageJson.description %}
+    {{ packageJson.description | removeTrailingPunctuation | formatCodeBits | safe }}
+    {% endif %}
   </div>
   {% endif %}
 </div>

@@ -60,7 +60,7 @@
           <div class="content-row__packages content-row__packages-list">
           {# takes "packages" key from front-matter into consideration #}
           {% for package in packages %}
-            {{ packageListing(package, packageJsons[package]) }}
+            {{ packageListing(package, packageJsons[package], mentionedExternalPackages[package]) }}
           {% endfor %}
           </div>
         </div>

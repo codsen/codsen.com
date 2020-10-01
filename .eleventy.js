@@ -178,6 +178,11 @@ module.exports = function (eleventyConfig) {
     "decodeCurlies",
     require("./utils/filters/decodeCurlies.js")
   );
+  // used to normalise package.json descriptions:
+  eleventyConfig.addFilter(
+    "removeTrailingPunctuation",
+    require("./utils/filters/removeTrailingPunctuation.js")
+  );
 
   // determines what's the type of the article
   eleventyConfig.addFilter("calculateType", (arr) => {

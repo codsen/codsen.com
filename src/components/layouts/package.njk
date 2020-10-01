@@ -255,9 +255,8 @@
         <div class="package-extras__packages">
           <h2>Related packages:</h2>
           <div class="content-row__packages content-row__packages-list">
-          {# takes "packages" key from front-matter into consideration #}
           {% for package in compiledAssertionCounts.all | filterRelatedPackages(packages, packageCategories, title) %}
-            {{ packageListing(package, packageJsons[package]) }}
+            {{ packageListing(package, packageJsons[package], mentionedExternalPackages[package]) }}
           {% endfor %}
           </div>
         </div>
