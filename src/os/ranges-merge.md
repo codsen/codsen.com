@@ -11,7 +11,9 @@ title: ranges-merge
 
 ## API
 
-**{{ packageJsons["ranges-merge"].lect.req }}(arrOfRanges, \[opts])**
+::: api
+{{ packageJsons["ranges-merge"].lect.req }}(arrOfRanges, [opts])
+:::
 
 In other words, this library gives you a _function_, and you must feed _an array_ into its first argument and also if you wish, you can feed a second argument, a plain object (bracket in `[, opts]` means "optional").
 

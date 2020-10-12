@@ -60,7 +60,7 @@ This program saves you time from having to tackle all those possible error cases
 
 ## API
 
-**processCommaSeparated(str, \[opts])**
+**processCommaSeparated(str, [opts])**
 
 In other words, it's a function which takes two input arguments, second-one being optional (marked by square brackets).
 

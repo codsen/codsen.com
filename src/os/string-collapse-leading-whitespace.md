@@ -15,7 +15,9 @@ For example, [`ranges-push`](/os/ranges-push/) uses it to merge to-be-inserted c
 
 ## API
 
-**{{ packageJsons["string-collapse-leading-whitespace"].lect.req }}(str, \[lineBreakLimit])**
+::: api
+{{ packageJsons["string-collapse-leading-whitespace"].lect.req }}(str, [lineBreakLimit])
+:::
 
 In other words, it's a function which takes two input arguments, second one being optional (marked by square brackets).
 

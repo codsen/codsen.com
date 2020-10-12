@@ -11,6 +11,7 @@ const clone = require("lodash.clonedeep");
 const Prism = require("prismjs");
 const escape = require("markdown-escape");
 const prettier = require("prettier");
+const markdownitfence = require('markdown-it-fence');
 
 /**
  * Import site configuration
@@ -182,6 +183,13 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter(
     "removeTrailingPunctuation",
     require("./utils/filters/removeTrailingPunctuation.js")
+  );
+  eleventyConfig.addFilter(
+    "examplesExtractTotal",
+    (obj) => Object.keys(obj).reduce((acc, curr) => {
+      // it's the total of all sub-keys
+      return acc + (obj[curr] ? Object.keys(obj[curr]).length : 0)
+    }, 0)
   );
 
   // determines what's the type of the article
@@ -470,6 +478,14 @@ module.exports = function (eleventyConfig) {
     }
   );
 
+  // "package" layout API description field in monospace font
+  const apiBlock = (md, options) => {
+    return markdownitfence(md, 'api', {
+      marker: ':',
+      render: (tokens, idx) => (`<pre class="api">${tokens[idx].content.trim()}</pre>`)
+    })
+  }
+
   /**
    * Add Markdown plugins
    *
@@ -503,7 +519,8 @@ module.exports = function (eleventyConfig) {
           ? '<div class="box-beware">\n'
           : "</div>\n";
       },
-    });
+    })
+    .use(apiBlock);
 
   eleventyConfig.setLibrary("md", markdownLib);
 

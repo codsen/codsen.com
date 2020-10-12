@@ -24,7 +24,9 @@ It standardises the input strings a user has given:
 
 ## API
 
-**{{ packageJsons["util-array-object-or-both"].lect.req }}(str, \[opts])**
+::: api
+{{ packageJsons["util-array-object-or-both"].lect.req }}(str, [opts])
+:::
 
 In other words, it's a function which takes two input arguments, second-one being optional (marked by square brackets).
 

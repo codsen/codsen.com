@@ -13,7 +13,9 @@ It's a function which validates strings (first character of it), is it suitable 
 
 ## API - Input
 
-**{{ packageJsons["is-char-suitable-for-html-attr-name"].lect.req }}(str)**
+::: api
+{{ packageJsons["is-char-suitable-for-html-attr-name"].lect.req }}(str)
+:::
 
 In other words, function which takes one string argument:
 

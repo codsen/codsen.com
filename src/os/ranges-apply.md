@@ -15,7 +15,9 @@ packages:
 
 ## API
 
-**{{ packageJsons["ranges-apply"].lect.req }}(inputString, rangesArray, \[progressFn])**
+::: api
+{{ packageJsons["ranges-apply"].lect.req }}(inputString, rangesArray, [progressFn])
+:::
 
 | Input argument | Type                         | Obligatory? | Description                                                                                                                                                                                                                 |
 | -------------- | ---------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

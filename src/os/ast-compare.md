@@ -17,7 +17,7 @@ The default mode is similar to [Tap](https://node-tap.org/) asserts `t.match` an
 
 ## API
 
-**compare(bigObj, smallObj, \[opts])**
+**compare(bigObj, smallObj, [opts])**
 
 In other words, it's a function which takes three input arguments, third one being optional (marked by square brackets).
 

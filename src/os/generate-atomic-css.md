@@ -38,7 +38,7 @@ import {
 
 It's a function, takes two arguments: input string and optional options object:
 
-**genAtomic(str, \[originalOpts])**
+**genAtomic(str, [originalOpts])**
 
 {% include "btt.njk" %}
 

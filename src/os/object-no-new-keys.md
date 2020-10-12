@@ -13,7 +13,9 @@ For example, it can be used to look for any rogue keys in email template content
 
 ## API
 
-**{{ packageJsons["object-no-new-keys"].lect.req }}(input, reference, \[opts])**
+::: api
+{{ packageJsons["object-no-new-keys"].lect.req }}(input, reference, [opts])
+:::
 
 In other words, it's a function which takes two obligatory arguments and third, optional.
 

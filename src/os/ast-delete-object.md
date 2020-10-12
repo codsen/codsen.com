@@ -13,7 +13,7 @@ It deletes objects in AST if all given keys-value pairs are matched.
 
 ## API
 
-**deleteObj(input, objToDelete, \[options])**
+**deleteObj(input, objToDelete, [options])**
 
 In other words, it's a function which takes three input arguments, third-one being optional (marked by square brackets). It will not mutate the `input` AST.
 

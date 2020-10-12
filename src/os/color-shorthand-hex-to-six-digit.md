@@ -11,7 +11,9 @@ It's a best practice to avoid [shorthand](https://en.wikipedia.org/wiki/Web_colo
 
 ## API
 
-**{{ packageJsons["color-shorthand-hex-to-six-digit"].lect.req }}(something)**
+::: api
+{{ packageJsons["color-shorthand-hex-to-six-digit"].lect.req }}(something)
+:::
 
 - Input: anything
 - Output: same thing as input, only with hex codes converted

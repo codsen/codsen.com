@@ -25,7 +25,8 @@ module.exports = (value, outputPath) => {
          * Set the loading attribute to all
          * the images to be lazy loaded if supported
          */
-        image.setAttribute("loading", "lazy");
+        // DISABLED THIS BECAUSE OF TWITCHING:
+        // image.setAttribute("loading", "lazy");
         /**
          * Replace images with title with figure and figcaption
          */

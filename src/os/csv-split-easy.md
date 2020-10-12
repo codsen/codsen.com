@@ -31,7 +31,9 @@ Outside of the scope:
 
 ## API - Input
 
-**{{ packageJsons["csv-split-easy"].lect.req }}(str, \[opts])**
+::: api
+{{ packageJsons["csv-split-easy"].lect.req }}(str, [opts])
+:::
 
 In other words, it's a function which takes two input arguments, second one is optional (marked by brackets).
 

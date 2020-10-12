@@ -27,7 +27,7 @@ A set of JSON files might be normalised, but certain keys can have placeholder v
 
 ## `getKeyset()`
 
-**getKeyset(input, \[opts])**
+**getKeyset(input, [opts])**
 
 This function produces a reference object according to which you can normalise JSON files.
 
@@ -65,7 +65,7 @@ A promise of a plain object, which can be used in `enforceKeyset()` (and `enforc
 
 ## `getKeysetSync()`
 
-**getKeysetSync(input, \[opts])**
+**getKeysetSync(input, [opts])**
 
 Synchronous version of [`getKeyset()`](#getkeyset).
 

@@ -11,7 +11,9 @@ title: ranges-process-outside
 
 ## API
 
-**{{ packageJsons["ranges-process-outside"].lect.req }}(originalStr, originalRanges, cb, \[skipChecks])**
+::: api
+{{ packageJsons["ranges-process-outside"].lect.req }}(originalStr, originalRanges, cb, [skipChecks])
+:::
 
 In other words, it's a function which takes 4 arguments:
 

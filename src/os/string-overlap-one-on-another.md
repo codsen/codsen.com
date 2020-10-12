@@ -20,7 +20,9 @@ In essence,
 
 ## API
 
-**{{ packageJsons["string-overlap-one-on-another"].lect.req }}(str1, str2, [, opts])**
+::: api
+{{ packageJsons["string-overlap-one-on-another"].lect.req }}(str1, str2, [opts])
+:::
 
 ### API - Input
 

@@ -16,6 +16,8 @@ If you want to check _non-emptiness_ of complex nested trees of objects, arrays 
 
 ## API
 
-**{{ packageJsons["util-nonempty"].lect.req }}(something)**
+::: api
+{{ packageJsons["util-nonempty"].lect.req }}(something)
+:::
 
 It's a function: anything-in, boolean-out.

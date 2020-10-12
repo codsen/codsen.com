@@ -59,29 +59,11 @@ Rules:
 
 {% include "btt.njk" %}
 
-## Sorting by a certain column
-
-For example, let's sort this array by second element (column index = `1`):
-
-```js
-const {{ packageJsons["array-of-arrays-sort-by-col"].lect.req }} = require("array-of-arrays-sort-by-col");
-const input = [[1, 9, 0], [1], [1, 8, 2], [1, 7, 5]];
-const result = {{ packageJsons["array-of-arrays-sort-by-col"].lect.req }}(input, 1);
-console.log(
-  `${`\u001b[${33}m${`input`}\u001b[${39}m`} = ${JSON.stringify(
-    input,
-    null,
-    0
-  )}`
-);
-// => input = [[1, 7, 5], [1, 8, 2], [1, 9, 0], [1]],
-```
-
-{% include "btt.njk" %}
-
 ### API - Input
 
-**{{ packageJsons["array-of-arrays-sort-by-col"].lect.req }}(arr, \[index])**
+::: api
+{{ packageJsons["array-of-arrays-sort-by-col"].lect.req }}(arr, [index])
+:::
 
 In other words, it's a function which takes two input arguments:
 

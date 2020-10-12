@@ -16,7 +16,9 @@ This program helps with that.
 
 ## API
 
-**{{ packageJsons["ast-is-empty"].lect.req }}(something)**
+::: api
+{{ packageJsons["ast-is-empty"].lect.req }}(something)
+:::
 
 In other words, it's a function which takes one input argument which can be of any type.
 

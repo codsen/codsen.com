@@ -20,7 +20,9 @@ packages:
 
 ## API - Input
 
-**{{ packageJsons["string-strip-html"].lect.req }}(input, \[opts])**
+::: api
+{{ packageJsons["string-strip-html"].lect.req }}(input, [opts])
+:::
 
 In other words, it's a function which takes string and an optional options.
 
@@ -63,7 +65,7 @@ Here is its API:
 | Key's name | Key value's type                          | Description                                                                                                                       |
 | ---------- | ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
 | `log`      | Plain object                              | For example, `{ timeTakenInMilliseconds: 6 }` |
-| `result`   | String                                    | The string version where all ranges were applied to it.                                                                           |
+| `result`   | String                                    | The string output where all ranges were applied to it.                                                                           |
 | `ranges`   | [ranges](/ranges/): an array of one or more arrays containing from-to string index ranges OR `null` | For example, if characters from index `0` to `5` and `30` to `35` were deleted, that would be `[[0, 5], [30, 35]]`. Another example, if nothing was found, it would put here `null`.                |
 | `allTagLocations`   | Array of zero or more arrays | For example, `[[0, 5], [30, 35]]`. If you `String.slice()` each pair, you'll get HTML tag values. |
 | `filteredTagLocations`   | Array of zero or more arrays | Only the tags that ended up stripped will be reported here. Takes into account `opts.ignoreTags` and `opts.onlyStripTags`, unlike `allTagLocations` above. For example, `[[0, 5], [30, 35]]`. |
@@ -71,6 +73,8 @@ Here is its API:
 {% include "btt.njk" %}
 
 ## Optional Options Object
+
+`opts` is a plain object. Here are all its keys:
 
 | An Optional Options Object's key | Type of its value                                    | Default                      | Description                                                                                                                                                            |
 | -------------------------------- | ---------------------------------------------------- | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

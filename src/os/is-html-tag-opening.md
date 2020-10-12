@@ -16,7 +16,9 @@ Detect, is an opening bracket (`<`) a tag opening? Otherwise, it might be an un-
 
 ## API - Input
 
-**{{ packageJsons["is-html-tag-opening"].lect.req }}(str, idx)**
+::: api
+{{ packageJsons["is-html-tag-opening"].lect.req }}(str, idx)
+:::
 
 In other words, function which takes two arguments:
 

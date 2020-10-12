@@ -52,7 +52,9 @@ Second input argument can be subset of first-one, notice `b` values are of a dif
 
 ## API
 
-**{{ packageJsons["ast-loose-compare"].lect.req }}(bigObj, smallObj)**
+::: api
+{{ packageJsons["ast-loose-compare"].lect.req }}(bigObj, smallObj)
+:::
 
 In other words, it's a function which takes two input arguments, both obligatory.
 

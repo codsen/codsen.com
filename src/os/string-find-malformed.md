@@ -39,7 +39,7 @@ Another thing, not all characters are equal (sorry for a pun) - a whitespace sho
 
 ## API
 
-**strFindMalformed(str, refStr, cb, \[opts])**
+**strFindMalformed(str, refStr, cb, [opts])**
 
 In other words, above we say first three arguments are obligatory and fourth is optional (marked with square brackets).
 

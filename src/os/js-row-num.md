@@ -25,7 +25,9 @@ Notice numbers in front of each logged statement, `073` and `134` and so on. We 
 
 ## API
 
-**{{ packageJsons["js-row-num"].lect.req }}(str, \[opts])**
+::: api
+{{ packageJsons["js-row-num"].lect.req }}(str, [opts])
+:::
 
 In other words, it's a function which takes two input arguments, second-one being optional (marked by square brackets).
 

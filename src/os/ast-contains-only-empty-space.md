@@ -13,7 +13,9 @@ By the way, _weird things_ which don't belong to parsed structures (_functions_,
 
 ## API
 
-**{{ packageJsons["ast-contains-only-empty-space"].lect.req }}(something)**
+::: api
+{{ packageJsons["ast-contains-only-empty-space"].lect.req }}(something)
+:::
 
 Input - anything. Output - Boolean.
 

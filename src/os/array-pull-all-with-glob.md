@@ -13,7 +13,7 @@ For example, we use it in [email-comb](/os/email-comb/) to _whitelist_ CSS class
 
 ## API
 
-**pullAllWithGlob(sourceArray, removeThese, \[opts]);**
+**pullAllWithGlob(sourceArray, removeThese, [opts]);**
 
 In other words, it's a function which takes three input arguments, third-one being optional (marked by square brackets).
 

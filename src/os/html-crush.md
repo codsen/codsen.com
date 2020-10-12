@@ -42,25 +42,29 @@ import {{ packageJsons["html-crush"].lect.req }} from "html-crush";
 | Exported Key | Description |
 | ------------ | ---------------------- |
 | `crush`      | The main function          |
-| `defaults`   | Optional Options Object's [defaults](#optional-options-object) |
+| `defaults`   | Optional Options Object's [defaults](#api-crush-optional-options-object) |
 | `version`   | As per current `package.json` — a string, for example, `"{{ packageJsons["html-crush"].version }}"` |
 
 {% include "btt.njk" %}
 
-## API - `crush()` - Input
+### API - `crush()` - Input
 
-**crush(str, \[opts])** — in other words, function with two input arguments:
+::: api
+crush(str, [opts])
+:::
+
+In other words, a function with two input arguments:
 
 | Input argument position | We call it | Type | Obligatory? | Description                                        |
 | ----- | -------------- | ---------------- | ----------- | -------------------------------------------------- |
 | first | `str`          | String           | yes         | The input string of zero or more characters        |
-| second | `opts`         | Plain object     | no          | An Optional Options Object. See [below](/os/html-crush/#optional-options-object) for its API. |
+| second | `opts`         | Plain object     | no          | An Optional Options Object. See [below](#api-crush-optional-options-object) for its API. |
 
 If supplied input arguments are of any other types, an error will be thrown.
 
 {% include "btt.njk" %}
 
-## API - `crush()` - Output
+### API - `crush()` - Output
 
 The function exported under key `crush` will return **a plain object** where you'll find: the log data, result string and corresponding string ranges of all actions performed:
 
@@ -91,7 +95,7 @@ For example,
 
 {% include "btt.njk" %}
 
-### Optional Options Object
+### API - `crush()` - Optional Options Object
 
 | Options Object's key     | The type of its value                   | Default              | Description                                                                                                                                                                                                                                                                          |
 | ------------------------ | --------------------------------------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -202,7 +206,7 @@ Here it is, in one place, in case you want to copy-paste it somewhere:
 
 {% include "btt.njk" %}
 
-## `opts.reportProgressFunc`
+### API - `crush()` - `opts.reportProgressFunc`
 
 This feature is used in [a web worker](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers) setup. Basically, you pass the web worker the input (source, options) and it passes you one or more messages back. That can be one message, final result, but it can equally be many messages, for example, a sequence of natural numbers, each meaning progress percentage done so far, AND THEN, finally, full result.
 
@@ -213,22 +217,4 @@ If you set it to a function, that function will be fed a natural number string, 
 
 Now, it's up to you how to distinguish "in progress" results and the final result. We use a random string, which is unlikely to happen in the input and we append that secret random string in front of the percentage being passed. Then, front-end checks did result that came through have a secret random string in front or not. If so, it's progress. If not, it's a final result.
 
-## Example - using the `ranges` from the result
-
-We use [`ranges-apply`](/os/ranges-apply/) to render the result from gathered [_ranges_](/ranges/) and a source string.
-
-```js
-const htmlCrush = require("html-crush");
-const rangesApply = require("ranges-apply");
-const sourceHtml = `some text <strong>here</strong> and more text`;
-
-const { log, ranges, result } = htmlCrush(sourceHtml);
-
-// check the result string:
-console.log(result);
-
-// let's calculate same result by applying result ranges onto a source string:
-console.log(rangesApply(sourceHtml, ranges));
-```
-
-Both results above will be the same. The [_ranges_ approach](/ranges/) lets us process the string further and add more ranges, then later [merge](/os/ranges-merge/) them and [apply](/os/ranges-apply/) in one go.
+{% include "btt.njk" %}

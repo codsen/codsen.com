@@ -11,7 +11,13 @@ It's an alternative to JS regexes.
 
 ## API
 
-**{{ packageJsons["easy-replace"].lect.req }}(source_string, options_object, replacement_string)**
+::: api
+{{ packageJsons["easy-replace"].lect.req }}(
+  source_string,
+  options_object,
+  replacement_string
+)
+:::
 
 In other words, it's a "string-in, string-out" function with three input arguments, see them below.
 

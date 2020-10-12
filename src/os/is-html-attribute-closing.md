@@ -21,7 +21,9 @@ For healthy HTML code, however, finding the closing double quotes is a trivial t
 
 ## API - Input
 
-**{{ packageJsons["is-html-attribute-closing"].lect.req }}(str, idxOfAttrOpening, isThisClosingIdx)**
+::: api
+{{ packageJsons["is-html-attribute-closing"].lect.req }}(str, idxOfAttrOpening, isThisClosingIdx)
+:::
 
 In other words, function which takes three arguments:
 

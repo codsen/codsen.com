@@ -11,7 +11,9 @@ title: ranges-ent-decode
 
 ## API
 
-**{{ packageJsons["ranges-crop"].lect.req }}(str, \[opts])**
+::: api
+{{ packageJsons["ranges-crop"].lect.req }}(str, [opts])
+:::
 
 In other words, it's a function which takes a string and an optional options object.
 

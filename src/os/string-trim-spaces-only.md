@@ -10,7 +10,9 @@ packages:
 
 ## API
 
-**{{ packageJsons["string-trim-spaces-only"].lect.req }}(str, [opts])**
+::: api
+{{ packageJsons["string-trim-spaces-only"].lect.req }}(str, [opts])
+:::
 
 In other words, it's a function which takes two input arguments, second-one being optional (marked by square brackets).
 

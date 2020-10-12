@@ -11,7 +11,7 @@ tags:
   - linting
 ---
 
-We noticed [ESLint](https://github.com/eslint/eslint) also uses (some sort of) [_Ranges_](/ranges/).
+Well, sort of.
 
 ---
 

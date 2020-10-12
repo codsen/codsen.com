@@ -37,7 +37,9 @@ You see, the quickest, alternative (gung-ho) algorithm is to replace all digits 
 
 ## API
 
-**{{ packageJsons["array-group-str-omit-num-char"].lect.req }}(sourceArray, [opts])**
+::: api
+{{ packageJsons["array-group-str-omit-num-char"].lect.req }}(sourceArray, [opts])
+:::
 
 In other words, that variable you imported, "`{{ packageJsons["array-group-str-omit-num-char"].lect.req }}`" (or "`brambles`" or whatever) is a **function** which consumes two input arguments.
 

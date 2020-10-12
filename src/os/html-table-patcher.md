@@ -25,7 +25,9 @@ The third one is the version taken straight from `package.json`
 
 ## `patcher()` API - Input
 
-**{{ packageJsons["html-table-patcher"].lect.req }}(str, \[opts])**
+::: api
+{{ packageJsons["html-table-patcher"].lect.req }}(str, [opts])
+:::
 
 | Input argument | Key value's type | Obligatory? | Description                                        |
 | -------------- | ---------------- | ----------- | -------------------------------------------------- |

@@ -5,6 +5,8 @@ title: regex-empty-conditional-comments
 
 ## API
 
-**{{ packageJsons["regex-empty-conditional-comments"].lect.req }}()**
+::: api
+{{ packageJsons["regex-empty-conditional-comments"].lect.req }}()
+:::
 
 In other words, it's a function which returns a RegExp object.

@@ -11,7 +11,7 @@ It consumes array of arrays and produces a [trie](https://en.wikipedia.org/wiki/
 
 ## API
 
-**generateAst (input, \[opts])**
+**generateAst (input, [opts])**
 
 ### API - Input
 

@@ -23,7 +23,7 @@ title: chlu
 
 ## API - Input
 
-**chlu(changelogContents, \[gitTags, packageJsonContents])**
+**chlu(changelogContents, [gitTags, packageJsonContents])**
 
 In other words, it is _a string-in, string-out_ function.
 

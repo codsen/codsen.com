@@ -20,9 +20,9 @@ That's what this program is about — it is a string value lookup helper.
 
 Both exported functions have the same API:
 
-**left(str, \[, idx])**
+**left(str, [, idx])**
 
-**right(str, \[, idx])**
+**right(str, [, idx])**
 
 On both, the first input argument is a string, the optional second (marked by brackets above) is a starting index. We "look" to the left or to the right of that index, then report a first non-whitespace character's index on that side. In absence, we return `null`.
 
@@ -59,9 +59,9 @@ Imagine, you are "located" at the index of dot ".", `47`. In this case, `chompLe
 
 Both exported functions have the same API:
 
-**chompLeft(str, idx, \[opts], char1, char2, char3...)**
+**chompLeft(str, idx, [opts], char1, char2, char3...)**
 
-**chompRight(str, idx, \[opts], char1, char2, char3...)**
+**chompRight(str, idx, [opts], char1, char2, char3...)**
 
 You can pass a plain object - options - as the third argument, or you can omit it.
 
@@ -138,9 +138,9 @@ side of given index, disregarding the whitespace.
 
 Both exported functions have the same API:
 
-**leftSeq(str, idx, \[opts], str1ToMatch, str2ToMatch, str3ToMatch... )**
+**leftSeq(str, idx, [opts], str1ToMatch, str2ToMatch, str3ToMatch... )**
 
-**rightSeq(str, idx, \[opts], str1ToMatch, str2ToMatch, str3ToMatch... )**
+**rightSeq(str, idx, [opts], str1ToMatch, str2ToMatch, str3ToMatch... )**
 
 Above, square brackets mean options are optional, you can omit them.
 
@@ -200,9 +200,9 @@ Program reports any whitespace gap ranges it encountered and also indexes of lef
 
 Both exported functions have the same API.
 
-**leftStopAtNewLines(str, \[, idx])**
+**leftStopAtNewLines(str, [, idx])**
 
-**rightStopAtNewLines(str, \[, idx])**
+**rightStopAtNewLines(str, [, idx])**
 
 On both, the first input argument is a string, the optional second (marked by brackets above) is a starting index.
 

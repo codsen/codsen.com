@@ -18,7 +18,9 @@ It's used in ASCII-restricted places where encoding is too unwieldy, for example
 
 ## API
 
-**{{ packageJsons["string-unfancy"].lect.req }}(str)**
+::: api
+{{ packageJsons["string-unfancy"].lect.req }}(str)
+:::
 
 Caveat: if the input is not a `string` it will `throw`.
 

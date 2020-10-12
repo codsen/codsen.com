@@ -42,16 +42,47 @@ When collapsing, _only spaces_ are collapsed. Non-space whitespace within text w
 
 ## API
 
-**collapse (string, \[opts])**
+::: api
+{{ packageJsons["string-collapse-white-space"].lect.req }}(str, [opts])
+:::
 
-Input:
+In other words, it's a function which takes two input arguments, second-one being optional (marked by square brackets).
 
-- the first argument - string only or will `throw`.
-- the second argument - optional options object. Anything else than `undefined`, `null` or a plain object will `throw`.
+### API - Input
+
+| Input argument | Type                                            | Obligatory? | Description                                                                                                      |
+| -------------- | ----------------------------------------------- | ----------- | ---------------------------------------------------------------------------------------------------------------- |
+| `str`          | String | yes         | Source string to work upon |
+| `opts`        | Something _falsy_ or a Plain object | no          | The Optional Options Object, see below for its API |
 
 {% include "btt.njk" %}
 
-### Optional Options Object's API:
+### API - Output
+
+Function returns a plain object, for example:
+
+```js
+{
+  result: "abc click me def",
+  ranges: [
+    [3, 6, " "],
+    [14, 18, " "],
+  ]
+}
+```
+
+It has the following keys:
+
+| Key's name | Key value's type                          | Description                                                                                                                       |
+| ---------- | ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `result`   | String                                    | The string output where all ranges were applied to it.                                                                           |
+| `ranges`   | [ranges](/ranges/): an array of one or more arrays containing from-to string index ranges OR `null` | For example, if characters from index `0` to `5` and `30` to `35` were deleted, that would be `[[0, 5], [30, 35]]`. Another example, if nothing was found, it would put here `null`.                |
+
+{% include "btt.njk" %}
+
+### Optional Options Object
+
+`opts` is a plain object. Here are all its keys:
 
 | `options` object's key         | Type                   | Obligatory? | Default | Description                                                                                                                                                                         |
 | ------------------------------ | ---------------------- | ----------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -61,21 +92,20 @@ Input:
 | `trimnbsp`                     | Boolean                | no          | `false` | when trimming, do we delete non-breaking spaces (if set to `true`, answer would be "yes"). This setting also affects `trimLines` setting above.                                     |
 | `recogniseHTML`                | Boolean                | no          | `true`  | if `true`, the space directly within recognised 118 HTML tag brackets will be collapsed tightly: `< div >` -> `<div>`. It will not touch any other brackets such as string `a > b`. |
 | `removeEmptyLines`             | Boolean                | no          | `false` | if any line can be trimmed to empty string, it will be removed.                                                                                                                     |
-| `returnRangesOnly`             | Boolean                | no          | `false` | if enabled, ranges array (array of arrays) or `null` (if there was nothing to collapse) will be returned instead                                                                    |
 | `limitConsecutiveEmptyLinesTo` | Natural number or zero | no          | `0`     | Set to 1 or more to allow that many blank lines between content                                                                                                                     |
 
-**Defaults**:
+Here is the Optional Options Object in one place (in case you ever want to copy it whole):
 
 ```js
 {
-  trimStart: true, // otherwise, leading whitespace will be collapsed to a single space
-  trimEnd: true, // otherwise, trailing whitespace will be collapsed to a single space
-  trimLines: false, // activates trim per-line basis
-  trimnbsp: false, // non-breaking spaces are trimmed too
-  recogniseHTML: true, // collapses whitespace around HTML brackets
-  removeEmptyLines: false, // if line trim()'s to an empty string, it's removed
-  returnRangesOnly: false, // if on, only ranges array is returned
-  limitConsecutiveEmptyLinesTo: 0 // zero lines are allowed (if opts.removeEmptyLines is on)
+  trimStart: true,
+  trimEnd: true,
+  trimLines: false,
+  trimnbsp: false,
+  recogniseHTML: true,
+  removeEmptyLines: false,
+  returnRangesOnly: false,
+  limitConsecutiveEmptyLinesTo: 0,
 }
 ```
 

@@ -66,7 +66,9 @@ Also, we use it in small cases where `Object.assign` is not suitable, for exampl
 
 ## API
 
-**{{ packageJsons["object-merge-advanced"].lect.req }}(input1, input2, \[{ options }])**
+::: api
+{{ packageJsons["object-merge-advanced"].lect.req }}(input1, input2, [options])
+:::
 
 ### API - Input
 

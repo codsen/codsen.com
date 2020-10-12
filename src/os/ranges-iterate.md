@@ -11,7 +11,9 @@ title: ranges-iterate
 
 ## API
 
-**{{ packageJsons["ranges-iterate"].lect.req }}(str, ranges, cb\[, offset])**
+::: api
+{{ packageJsons["ranges-iterate"].lect.req }}(str, ranges, cb, [offset])
+:::
 
 In other words, this library gives you a synchronous _function_ (exported as a default) and you must feed three obligatory arguments and fourth, optional (marked with square brackets).
 

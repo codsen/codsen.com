@@ -17,7 +17,9 @@ If you map that into desired values array and run it again, this time putting de
 
 ## API
 
-**{{ packageJsons["ast-get-values-by-key"].lect.req }}(input, whatToFind, replacement)**
+::: api
+{{ packageJsons["ast-get-values-by-key"].lect.req }}(input, whatToFind, replacement)
+:::
 
 - If two arguments are given, it's **getter**. You'll receive an array of zero or more plain objects with keys: `val` and `path`, where `path` follows [`object-path`](https://www.npmjs.com/package/object-path) notation.
 

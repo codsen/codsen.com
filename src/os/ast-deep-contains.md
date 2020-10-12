@@ -181,7 +181,9 @@ The order in which backslashes will be reported does not matter, plus Linter mig
 
 ## API
 
-**{{ packageJsons["ast-deep-contains"].lect.req }}(tree1, tree2, cb, errCb\[, opts])**
+::: api
+{{ packageJsons["ast-deep-contains"].lect.req }}(tree1, tree2, cb, errCb, [opts])
+:::
 
 in other words, it's a function which takes 5 input arguments:
 

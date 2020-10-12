@@ -18,7 +18,9 @@ In later releases, we would like to be able to recognise and fix any offset colu
 
 ## API - Input
 
-**{{ packageJsons["csv-sort"].lect.req }}(str)**
+::: api
+{{ packageJsons["csv-sort"].lect.req }}(str)
+:::
 
 In other words, it's a function which takes one input argument, string (CSV contents).
 

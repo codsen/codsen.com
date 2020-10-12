@@ -11,7 +11,9 @@ We need it to test [detergent](/os/detergent/) — it has 11 options and we want
 
 ## API
 
-**{{ packageJsons["object-boolean-combinations"].lect.req }}(inputObject, \[overrideObject])**
+::: api
+{{ packageJsons["object-boolean-combinations"].lect.req }}(inputObject, [overrideObject])
+:::
 
 In other words, it's a function which takes two input arguments, second one being optional (marked by square brackets).
 

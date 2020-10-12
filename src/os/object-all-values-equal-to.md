@@ -7,7 +7,9 @@ packages:
 
 ## API
 
-**{{ packageJsons["object-all-values-equal-to"].lect.req }}(input, value)**
+::: api
+{{ packageJsons["object-all-values-equal-to"].lect.req }}(input, value)
+:::
 
 In other words, it's a function which takes two input arguments, both obligatory.
 

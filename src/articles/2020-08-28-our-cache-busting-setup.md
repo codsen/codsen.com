@@ -12,7 +12,7 @@ tags:
   - meta
 ---
 
-Cache busting is necessary because browsers cache the resources, namely, CSS and JS files, and if we update the website, visitors might not see their latest versions.
+Cache busting is necessary because browsers cache the static resources, namely, CSS and JS files, and if we update the website, visitors might not see their latest versions.
 
 In theory, implementing web workers should solve the cache busting problem, and there are [Eleventy plugins](https://www.npmjs.com/package/eleventy-plugin-pwa) for that, but, we decided not to enable the PWA setup until we test it properly.
 

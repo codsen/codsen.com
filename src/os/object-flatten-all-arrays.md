@@ -11,7 +11,9 @@ Recursively traverse the deeply-cloned input and merge all plain objects within 
 
 ## API
 
-**{{ packageJsons["object-flatten-all-arrays"].lect.req }}(input[, options])**
+::: api
+{{ packageJsons["object-flatten-all-arrays"].lect.req }}(input, [options])
+:::
 
 In other words, it's a function which takes two input arguments, second-one being optional (marked by square brackets).
 
