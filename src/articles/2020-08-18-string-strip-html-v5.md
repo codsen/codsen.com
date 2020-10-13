@@ -1,5 +1,5 @@
 ---
-title: string-strip-html v.5 and Lessons Learned
+title: "`string-strip-html` v.5 and Lessons Learned"
 date: '2020-08-18'
 image: "001"
 packages:

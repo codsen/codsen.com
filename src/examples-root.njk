@@ -30,7 +30,7 @@ extraContainerClass: page-examples centered-headings
       <li><a href="#quick-take">Quick Take</a></li>
       {% if packageExamples[packageName] and (packageExamples[packageName] | extractNonQuickTakeExamples | length) %}
           {% for example in packageExamples[packageName] | extractNonQuickTakeExamples %}
-              <li><a href="#{{ example.title | slugify }}">{{ example.title | titleProper | formatTags | safe }}</a></li>
+              <li><a href="#{{ example.title | slugify }}">{{ example.title | mdInline | titleProper | safe }}</a></li>
           {% endfor %}
       {% endif %}
     </ul>
@@ -46,7 +46,7 @@ extraContainerClass: page-examples centered-headings
 
     {% if packageExamples[packageName] and (packageExamples[packageName] | extractNonQuickTakeExamples | length) %}
       {% for example in packageExamples[packageName] | extractNonQuickTakeExamples %}
-      {{ heading(example.title | titleProper | formatTags | safe, 2) }}
+      {{ heading(example.title | mdInline | titleProper | safe, 2) }}
       <pre class="language-js"><code class="language-js">{{ example.content | decodeCurlies | prism | safe }}</code></pre>
       <div class="examples-actions"><a href="https://gitlab.com/codsen/codsen/-/blob/master/packages/{{ packageName }}/examples/{{ example.file }}">edit</a> <span class="large-slash">/</span> <a href="/examples-help/">help</a></div>
 

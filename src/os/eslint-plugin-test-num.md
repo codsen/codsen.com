@@ -1,71 +1,47 @@
 ---
 layout: package
 title: eslint-plugin-test-num
+packages:
+  - tap
 ---
-
-## Idea
-
-The proper way to write unit tests is to put a identifier number in the test's title and in the test's message and **to automatically maintain both.**
-
-![bunch of numbers to maintain](https://glcdn.githack.com/codsen/codsen/raw/master/packages/eslint-plugin-test-num/media/msg_00.png)
-
-That's a lot of numbers to update manually, isn't it?
-
-{% include "btt.njk" %}
 
 ## Purpose
 
-Consider the same failing test:
+Giving unique number for each unit test allows us to find it quicker. Compare:
 
-```js
-t.true(api.hasOwnProperty("rules"));
-```
+![no message in a test](/images/eslint-plugin-test-num_msg_01.png)
 
-[node-tap](https://node-tap.org/) terminal output will be:
+vs
 
-![no message in a test](https://glcdn.githack.com/codsen/codsen/raw/master/packages/eslint-plugin-test-num/media/msg_01.png)
+![text message](/images/eslint-plugin-test-num_msg_02.png)
 
-```js
-t.true(api.hasOwnProperty("rules"), "some message");
-```
+vs
 
-terminal output:
+![unique identifier number](/images/eslint-plugin-test-num_msg_03.png)
 
-![text message](https://glcdn.githack.com/codsen/codsen/raw/master/packages/eslint-plugin-test-num/media/msg_02.png)
+For example, here's a real-life terminal output, [`codsen-parser`](/os/codsen-parser/) unit tests, [tap](https://www.npmjs.com/package/tap) unit test runner:
 
-```js
-t.true(api.hasOwnProperty("rules"), "02");
-```
+![unit tests with numbers](/images/codsen-article-test-num.png)
 
-terminal output:
+We can quickly identify tests `11`, `12`, `13`, `14` and `15` by a number. If we used test's descriptions as the only means to identify it, it would be way harder to find their location.
 
-![unique identifier number](https://glcdn.githack.com/codsen/codsen/raw/master/packages/eslint-plugin-test-num/media/msg_03.png)
+But notice there were **104 tests** above!
 
-Which output from those above do you prefer?
+{% include "btt.njk" %}
 
-We prefer the last-one.
+## Idea
 
-When there are more failing tests, problem is exaggerated:
+Let's put an identifier number in the test's title and in the test's message:
 
-![test roundup](https://glcdn.githack.com/codsen/codsen/raw/master/packages/eslint-plugin-test-num/media/msg_04.png)
+![bunch of numbers to maintain](/images/eslint-plugin-test-num_msg_00.png)
 
-Above, we can easily find test `01` by searching, but what are those other two unit tests?!?
-
-How are we supposed to look for `"some message"`? Are we supposed to copy a message from terminal and search for it in the code?
-
-Or are we supposed to memorise the message, scroll up many screens in the terminal and look for it visually? What if there are many identical messages from multiple failing unit tests?
-
-Mind you, at the moment, this monorepo has 825,202 total assertions done in unit tests, with a median `50` across currently 114 packages...
-
-There are lots of tests here!
-
-**The proper way to write unit tests is to put an indentifier number in the title and in the message of each test and to automatically maintain both. That unique identifier is the main reference for a given test.**
-
-This ESLint plugin automatically updates these numbers.
+This is an ESLint rule which automatically updates those numbers.
 
 {% include "btt.njk" %}
 
 ## Setup
+
+See our [current ESLint config](https://gitlab.com/codsen/codsen/-/blob/master/.eslintrc.json).
 
 First, make sure `eslint` itself is installed among the dev dependencies. "`i`" below means `install`, "`-D`" below means "dev dependency" (as opposed to a normal dependency). Quick refresher — when you publish an npm package and somebody installs it, its dev dependencies don't get installed when they `npm i` your package. That's the essence of how dev and normal dependencies differ.
 
@@ -200,4 +176,3 @@ Both are the same thing.
 Check out: [`eslint-plugin-row-num`](/os/eslint-plugin-row-num/) - it updates `console.log` row numbers so you know where exactly did that `console.log` came from. It's especially relevant when you Rollup your programs and tests are ran against a file different from source from which `console.log` originate.
 
 {% include "btt.njk" %}
-

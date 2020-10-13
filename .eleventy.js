@@ -184,6 +184,12 @@ module.exports = function (eleventyConfig) {
     "removeTrailingPunctuation",
     require("./utils/filters/removeTrailingPunctuation.js")
   );
+  // when in article we want to mention which packages of ours use
+  // dependency X, we use this filter:
+  eleventyConfig.addFilter(
+    "allPackagesThatUseDepX",
+    require("./utils/filters/allPackagesThatUseDepX.js")
+  );
   eleventyConfig.addFilter(
     "examplesExtractTotal",
     (obj) => Object.keys(obj).reduce((acc, curr) => {

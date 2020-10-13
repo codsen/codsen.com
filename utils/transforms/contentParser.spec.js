@@ -22,7 +22,7 @@ test("sets image lazy loading to one image", () => {
 </article></main></body></html>`;
   const desired = `<!DOCTYPE html>
 <html><head></head><body><main><article>
-<img src="spacer.gif" width="1" height="1" alt="test spacer" loading="lazy">
+<img src="spacer.gif" width="1" height="1" alt="test spacer">
 </article></main></body></html>`;
   expect(normaliseEol(contentParser(source, "file.html"))).toBe(
     normaliseEol(desired)
@@ -36,7 +36,7 @@ test("sets image lazy loading to two images", () => {
 </article></main></body></html>`;
   const desired = `<!DOCTYPE html>
 <html><head></head><body><main><article>
-<img src="spacer1.gif" width="1" height="1" alt="test spacer" loading="lazy"><img src="spacer2.gif" width="1" height="1" alt="test spacer" loading="lazy">
+<img src="spacer1.gif" width="1" height="1" alt="test spacer"><img src="spacer2.gif" width="1" height="1" alt="test spacer">
 </article></main></body></html>`;
   expect(normaliseEol(contentParser(source, "file.html"))).toBe(
     normaliseEol(desired)
@@ -47,14 +47,14 @@ test("respects existing loading attributes", () => {
   const source = `<!DOCTYPE html>
 <html><head></head><body><main><article>
 <img src="spacer1.gif" width="1" height="1">
-<img src="spacer2.gif" width="1" height="1" loading="lazy">
+<img src="spacer2.gif" width="1" height="1">
 <img src="spacer3.gif" width="1" height="1">
 </article></main></body></html>`;
   const desired = `<!DOCTYPE html>
 <html><head></head><body><main><article>
-<img src="spacer1.gif" width="1" height="1" loading="lazy">
-<img src="spacer2.gif" width="1" height="1" loading="lazy">
-<img src="spacer3.gif" width="1" height="1" loading="lazy">
+<img src="spacer1.gif" width="1" height="1">
+<img src="spacer2.gif" width="1" height="1">
+<img src="spacer3.gif" width="1" height="1">
 </article></main></body></html>`;
   expect(normaliseEol(contentParser(source, "file.html"))).toBe(
     normaliseEol(desired)
@@ -71,7 +71,7 @@ test("sets title and figure and figcaption to an XHTML markup image", () => {
 </article></main></body></html>`;
   const desired = `<!DOCTYPE html>
 <html><head></head><body><main><article>
-<figure class="figure"><img src="spacer.gif" width="1" height="1" loading="lazy"><figcaption><small>xity</small></figcaption></figure>
+<figure class="figure"><img src="spacer.gif" width="1" height="1"><figcaption><small>xity</small></figcaption></figure>
 </article></main></body></html>`;
   expect(normaliseEol(contentParser(source, "file.html"))).toBe(
     normaliseEol(desired)

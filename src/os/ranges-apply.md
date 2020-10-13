@@ -16,7 +16,11 @@ packages:
 ## API
 
 ::: api
-{{ packageJsons["ranges-apply"].lect.req }}(inputString, rangesArray, [progressFn])
+{{ packageJsons["ranges-apply"].lect.req }}(
+  inputString,
+  rangesArray,
+  [progressFn]
+)
 :::
 
 | Input argument | Type                         | Obligatory? | Description                                                                                                                                                                                                                 |
@@ -25,9 +29,6 @@ packages:
 | `rangesArray`       | Array of zero or more arrays - OR - `null`                | yes         | [Ranges](/ranges/) to apply onto the string |
 | `progressFn`         | Function or something _falsy_                 | no          | Provide a callback function to report the progress - numbers `0` to `100` will be fed into it as the program advances. |
 
-::: tip
-Check out [ranges-push](/os/ranges-push/) which helps to manage the `rangesArray`. It has methods to add and retrieve the ranges. Also, it helps in cases where ranges overlap and helps to maintain the sorting order.
-:::
 
 ## API - Output
 
@@ -35,9 +36,13 @@ Function returns an amended string.
 
 {% include "btt.njk" %}
 
+::: tip
+Check out [ranges-push](/os/ranges-push/) which helps to manage the `rangesArray`. It has methods to add and retrieve the ranges. Also, it helps in cases where ranges overlap and helps to maintain the sorting order.
+:::
+
 ## The algorithm
 
-We `array.reduce` your given ranges array, slicing the input string accordingly.
+We `array.reduce()` your given ranges array, slicing the input string accordingly. If given ranges is not array but `null` (meaning absence of ranges), same string is returned.
 
 The main thing is unit tests and edge case scenarios. Also, fancy optional features (upcoming) like using character enumeration counting emoji as one character.
 

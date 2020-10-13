@@ -13,7 +13,7 @@
     </figure>
   {% endif -%}
   <h3>
-    <a href="{{ article.url }}">{{ article.data.title }}</a>
+    <a href="{{ article.url }}">{{ article.data.title | mdInline | titleProper | safe }}</a>
   </h3>
   <div class="article-content">
     {# excerpt will come as raw markdown code, we need to render #}

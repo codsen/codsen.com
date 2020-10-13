@@ -58,7 +58,7 @@
               </p>
             {% endif %}
 
-            <h3>Install globally, via&nbsp;npm</h3>
+            <h3>Install {% if isCli %}globally, {% endif %}via&nbsp;npm</h3>
 
             {% if isCli %}
             <p>
@@ -89,40 +89,46 @@
 
 {% if (not isCli) %}
 
-            {% if packageJsons[title].lect.defaultExported %}
+            {% if packageJsons[title].lect.defaultExported and packageJsons[title].lect.req %}
             <p>
               The <em><a href="https://exploringjs.com/es6/ch_modules.html#_default-exports-one-per-module">default</a></em> is exported, so instead of "<code>{{ packageJsons[title].lect.req }}</code>" below, you can name the consumed function however you want.
             </p>
             {% endif %}
 
-            <p>Consume via a <code>require()</code>:</p>
-            {% highlight "js" %}
-              const {{ packageJsons[title].lect.req }} = require("{{ title }}");
-            {% endhighlight %}
-            <p>or as an ES Module:</p>
-            {% highlight "js" %}
-              import {{ packageJsons[title].lect.req }} from "{{ title }}";
-            {% endhighlight %}
+            {% if packageJsons[title].lect.req %}
 
-            <h3>Install as a script, via&nbsp;CDN</h3>
 
-            <p>Put this in your HTML:</p>
+                <p>Consume via a <code>require()</code>:</p>
+                {% highlight "js" %}
+                  const {{ packageJsons[title].lect.req }} = require("{{ title }}");
+                {% endhighlight %}
+                <p>or as an ES Module:</p>
+                {% highlight "js" %}
+                  import {{ packageJsons[title].lect.req }} from "{{ title }}";
+                {% endhighlight %}
 
-            {% highlight "html" %}
-              <script src="https://cdn.jsdelivr.net/npm/{{ title }}/dist/{{ title }}.umd.js">
-            {% endhighlight %}
+                <h3>Install as a script, via&nbsp;CDN</h3>
 
-            <p>
-              Then, you&rsquo;ll get a global variable <code>{{ title | packageGlobal }}</code> in your <a href="https://developer.mozilla.org/en-US/docs/Glossary/Global_object">Global object</a> and you consume it like&nbsp;this:
-            </p>
-            {% highlight "js" %}
-              const {{ packageJsons[title].lect.req }} = {{ title | packageGlobal }};
-            {% endhighlight %}
+                <p>Put this in your HTML:</p>
 
-            {% if packageJsons[title].lect.req | singleFuncExported %}
-            <p>
-              This <code>{{ packageJsons[title].lect.req }}</code> is your main function. See its API in the main section.
-            </p>
+                {% highlight "html" %}
+                  <script src="https://cdn.jsdelivr.net/npm/{{ title }}/dist/{{ title }}.umd.js">
+                {% endhighlight %}
+
+                <p>
+                  Then, you&rsquo;ll get a global variable <code>{{ title | packageGlobal }}</code> in your <a href="https://developer.mozilla.org/en-US/docs/Glossary/Global_object">Global object</a> and you consume it like&nbsp;this:
+                </p>
+                {% highlight "js" %}
+                  const {{ packageJsons[title].lect.req }} = {{ title | packageGlobal }};
+                {% endhighlight %}
+
+                {% if packageJsons[title].lect.req | singleFuncExported %}
+                <p>
+                  This <code>{{ packageJsons[title].lect.req }}</code> is your main function. See its API in the main section.
+                </p>
+                {% endif %}
+
+
             {% endif %}
 
 {% endif %}

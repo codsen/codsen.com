@@ -7,13 +7,15 @@ title: is-media-descriptor
 
 We are talking about so-called _media descriptors_ ([older spec](https://www.w3.org/TR/html4/types.html#type-media-descriptors), [newer spec - CSS MQ Level 4, draft at the moment](https://drafts.csswg.org/mediaqueries/)), for example, the part `screen and (color), projection and (color)` in both HTML and CSS:
 
-```
+```html
 <link media="screen and (color), projection and (color)" rel="stylesheet" href="example.css">
 
 <link media="screen and (color), projection and (color)" rel="stylesheet" href="example.css" />
 
 <?xml-stylesheet media="screen and (color), projection and (color)" rel="stylesheet" href="example.css" ?>
+```
 
+```css
 @import url(example.css) screen and (color), projection and (color);
 
 @media screen and (color), projection and (color) { ... }

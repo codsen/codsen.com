@@ -31,7 +31,7 @@
     {% if title %}
 
         <header{% if not image %} class="extra-mt"{% endif %}>
-          <h1>{{ title | titleProper }}</h1>
+          <h1>{{ title | mdInline | titleProper | safe }}</h1>
           {% if page.url | rootUrl == "/articles/" %}
             <div class="meta">
         			by <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person"><a href="/author/royrevelt/" itemprop="url"> <span itemprop="name">Roy Revelt</span></a></span> &mdash; posted on <span class="posted-on"><time datetime="{{ page.date | iso }}">{{ page.date | dateDisplay }}</time></span>

@@ -24,7 +24,7 @@ packages:
 {{ packageJsons["string-strip-html"].lect.req }}(input, [opts])
 :::
 
-In other words, it's a function which takes string and an optional options.
+In other words, it's a function which takes a string and an optional options.
 
 | Input argument | Type         | Obligatory? | Description                                        |
 | -------------- | ------------ | ----------- | -------------------------------------------------- |
@@ -80,7 +80,7 @@ Here is its API:
 | -------------------------------- | ---------------------------------------------------- | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `ignoreTags`                     | Array of zero or more strings                        | `[]`                         | These tags will not be removed                                                                                                                                         |
 | `onlyStripTags`                  | Array of zero or more strings                        | `[]`                         | If one or more tag names are given here, only these tags will be stripped, nothing else                                                                                |
-| `stripTogetherWithTheirContents` | Array of zero or more strings, or _something falsy_ | `['script', 'style', 'xml']` | These tags will be removed from the opening tag up to closing tag, including content in-between opening and closing tags. Set it to something _falsy_ to turn it off. |
+| `stripTogetherWithTheirContents` | Array of zero or more strings, or _something falsy_ | `['script', 'style', 'xml']` | These tags will be removed from the opening tag up to closing tag, including content in-between opening and closing tags. Set it to something _falsy_ to turn it off. You can set it to `["*"]` to include all tags. |
 | `skipHtmlDecoding`               | Boolean                                              | `false`                      | By default, all escaped HTML entities for example `&pound;` input will be recursively decoded before HTML-stripping. You can turn it off here if you don't need it.    |
 | `trimOnlySpaces`                 | Boolean                                              | `false`                      | Used mainly in automated setups. It ensures non-spaces are not trimmed from the outer edges of a string.                                                               |
 | `dumpLinkHrefsNearby`            | Plain object or something _falsy_                   | `false`                      | Used to customise the output of link URL's: to enable the feature, also customise the URL location and wrapping.                                                       |
@@ -142,9 +142,9 @@ Behind the scenes, this program operates on [ranges](/ranges/). The result strin
 
 > `Hi&nbsp;` &rarr; `Hi&nbsp;` instead of `Hi&nbsp;` &rarr; `Hi`
 
-In automated setups, a single string value can be split over multiple JSON paths. In those cases, joining spaces or non-breaking spaces are intended and often placed around the values. Normally, we would treat surrounding whitespace as rogue, but not in these cases.
+In automated setups, a single string value can be split over multiple JSON paths. In those cases, joining spaces or non-breaking spaces are intended and often placed around the values. Normally, we would treat surrounding whitespace as a rogue, but not in these cases.
 
-This setting allows to distinguish between the two cases.
+This setting allows us to distinguish between the two cases.
 
 For example, imagine we "stitch" the sentence: `Hi John! Welcome to our club.` out of three pieces: `Hi` + `John` + `! + Welcome to our club.`. In this case, spaces between the chunks would be added by your templating engine. Now, imagine, the text is of a quite large `font-size`, and there's a risk of words wrapping at wrong places. A client asks you to ensure that `Hi` and `John` are **never split between the lines**.
 
@@ -232,9 +232,19 @@ Setting `opts.dumpLinkHrefsNearby` is off by default; you need to turn it on, pa
 
 Sometimes you want to strip only certain HTML tag or tags. It would be impractical to ignore all other known HTML tags and leave those you want. Option `opts.onlyStripTags` allows inverting the setting: whatever tags you list will be the only tags removed.
 
-`opts.onlyStripTags` is an array. When a program starts, it will filter out any empty strings and strings that can be `String.trim()`'ed to zero-length string. It's necessary because a presence on just one string in `opts.onlyStripTags` will switch this application to `delete-only-these` mode and it would be bad if empty, falsy or whitespace string value would accidentally cause it.
+`opts.onlyStripTags` is an array. When a program starts, it will filter out any empty strings and strings that can be `String.trim()`'ed to a zero-length string. It's necessary because a presence on just one string in `opts.onlyStripTags` will switch this application to `delete-only-these` mode and it would be bad if empty, falsy or whitespace string value would accidentally cause it.
 
 This option can work in combination with `opts.ignoreTags`. Any tags listed in `opts.ignoreTags` will be removed from the tags, listed in `opts.onlyStripTags`. If there was one or more tag listed in `opts.onlyStripTags`, the `delete-only-these` mode will be on and will be respected, even if there will be no tags to remove because all were excluded in `opts.onlyStripTags`.
+
+{% include "btt.njk" %}
+
+### `opts.stripTogetherWithTheirContents`
+
+This program not only strips HTML and returns a string. It also returns string index locations of removals. This way, you can use this program to extract ranges of indexes which would later be used to skip operations on a string.
+
+For example, npm package [`title`](https://www.npmjs.com/package/title) capitalises the titles as per _The Chicago Manual of Style_. But if input source can contain HTML code, we need to skip processing the HTML tags.
+
+The idea is, it sets `opts.stripTogetherWithTheirContents` to `["*"]` — asterisk or wildcard meaning to "strip" all paired tags (including `<code>`/`</code>` in titles, for example). Then we take the locations of all tags and supplement it with locations of what's been whitelisted (using [`ranges-regex`](/os/ranges-regex/)). Finally, we [invert](/os/ranges-invert/) the ranges and supplement them with replacement value, third array element, coming from `title`. Here's [the source code](/os/string-strip-html/examples/#title-case-with-tag-skipping).
 
 {% include "btt.njk" %}
 
@@ -337,10 +347,6 @@ console.log(ranges);
 
 Speaking scientifically, it works from lexer-level, it's a _scanerless_ parser.
 
-In simple language, this program does not use parsing and AST trees. It processes the input string as text. Whatever the algorithm doesn't understand — errors, broken code, non-HTML, etc — it skips.
+In simple language, this program does not use parsing and AST trees. It processes the input string as text. Whatever the algorithm doesn't understand — errors, broken code, non-HTML, etc. — it skips.
 
 {% include "btt.njk" %}
-
-## Quality dependencies
-
-We use only our own or very popular dependencies: [`ent`](https://www.npmjs.com/package/ent) is by [substack](https://www.npmjs.com/~substack) himself and [`lodash`](https://www.npmjs.com/package/lodash) is, well, The Lodash. All other dependencies are our own.
