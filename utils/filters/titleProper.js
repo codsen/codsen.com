@@ -5,7 +5,16 @@ const invertRanges = require("ranges-invert");
 const rangesRegex = require("ranges-regex");
 
 function tagAwareTitle(str) {
-  const whitelist = ["eslint", "readme", "npm"];
+  const whitelist = [
+    "eslint",
+    "readme",
+    "npm",
+    "json",
+    "svg",
+    "xml",
+    "css",
+    "rss",
+  ];
 
   const { filteredTagLocations } = stripHtml(str, {
     stripTogetherWithTheirContents: ["*"],

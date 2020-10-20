@@ -244,7 +244,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
     // else
     return ` That makes Codsen ${yDiff}\u00A0year${yDiff < 2 ? "" : "s"}${
-      mDiff ? `, ${mDiff}\u00A0months` : ""
+      mDiff ? `, ${mDiff}\u00A0month${mDiff < 2 ? "" : "s"}` : ""
     } and ${dDiff}\u00A0day${dDiff < 2 ? "" : "s"}\u00A0old.`;
   }
 
