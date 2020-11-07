@@ -24,8 +24,14 @@ In theory, high surrogate goes first, low surrogate goes second [source](https:/
 ## API
 
 Two functions, same API:
-**isHighSurrogate(str)**
-**isLowSurrogate(str)**
+
+:::api
+isHighSurrogate(str)
+:::
+
+:::api
+isLowSurrogate(str)
+:::
 
 **Input**: zero or more characters, where `charCodeAt(0)` will be evaluated.
 **Output**: Boolean

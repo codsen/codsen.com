@@ -5,7 +5,7 @@ title: json-variables
 
 ## Purpose
 
-It lets you DRY the plain objects (JSON files contents) - any special marker in any value can reference other values by path. As a result, there's only one reference of each value, even though, values are used in many places. That's [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) concept.
+It lets you DRY the plain objects (JSON files contents) — any special marker in any value can reference other values by path. As a result, there's only one reference of each value, even though, values are used in many places. That's [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) concept.
 
 {% include "btt.njk" %}
 
@@ -13,7 +13,7 @@ It lets you DRY the plain objects (JSON files contents) - any special marker in 
 
 - [`object-path`](https://www.npmjs.com/package/object-path) notation (arrays use dots too: `data.array.1` instead of `data.array[1]`)
 - `*_data` keys to dump the data nearby (customiseable naming pattern)
-- Detects existing [heads and tails](/os/string-find-heads-tails/) - it won't wrap twice
+- Detects existing [heads and tails](/os/string-find-heads-tails/) — it won't wrap twice
 - Battle-tested, used in production to manage email templates
 
 {% include "btt.njk" %}

@@ -58,7 +58,7 @@ An amended string is returned.
 
 ## Testing
 
-Besides regular unit tests, we went great lengths to ensure this program works as intended. We took all `package.json's in this monorepo ({{ compiledAssertionCounts.totalPackageCount }} in total), then took every single leaf path in every package.json and amended and deleted it two ways:
+Besides regular unit tests, we went great lengths to ensure this program works as intended. We took all {{ compiledAssertionCounts.totalPackageCount }} `package.json`'s in this monorepo, then took every single leaf path in every package.json and amended and deleted it two ways:
 
 - editing it directly, using this program, string-in, string-out
 - editing using [`object-path`](https://www.npmjs.com/package/object-path), plain-object-in, plain-object-out, then stringify

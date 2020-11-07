@@ -15,7 +15,7 @@ title: ranges-invert
 | `strLen`       | Integer number               | yes         | Algorithm needs to know the length of the reference string to calculate the inverted last slice's ending index.                                                                                                             |
 | `opts`         | Plain object                 | no          | Optional options go here.                                                                                                                                                                                                   |
 
-**Output**: array of zero or more arrays (so-called _ranges_) where each consists of two or more natural number (or zero) indexes.
+**Output**: `null` OR array of zero or more arrays (so-called [_ranges_](/ranges/)) where each consists of two or more natural number (or zero) indexes.
 
 This package does not mutate the input array, instead it creates and returns a new array with ranges inverted.
 

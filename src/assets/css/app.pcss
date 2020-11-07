@@ -596,7 +596,7 @@ input[type="submit"] {
   }
 }
 
-p code, ul code, li code, td code, th code {
+p code, ul code, li code, td code, th code, .package-description code {
   padding: 0.3rem 0.6rem;
   /* display: inline-block; */
   padding: 0.2rem 0.5rem;
@@ -2696,8 +2696,9 @@ pre[class*='language-'] {
 }
 
 .package-body__extras {
-  @include darkTheme {
-    p > code {
+  p > code {
+    display: inline-block;
+    @include darkTheme {
       background-color: $textDark;
       color: $black;
     }

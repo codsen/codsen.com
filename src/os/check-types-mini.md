@@ -34,7 +34,7 @@ let res = yourFunction(1, { placeholderEnabled: "zzz" }); // <---  notice opts k
 
 ## Idea
 
-Imagine you have a library where you let users set the options object which comes as one of the input arguments.
+Imagine you have a library where you let users set the options object, which comes as one of the input arguments.
 
 Here's a challenge: how do you check (and throw) errors easily, when users set your options to wrong things?
 
@@ -60,19 +60,19 @@ The only drawback is, this program will affect the _performance_ - that's why ma
 
 ## API
 
-**checkTypes(obj[, ref^, opts])**
+::: api
+checkTypes(obj, [ref, opts])
+:::
 
-Use it by calling its function. You don't need to assign it to anything - good outcome is nothing happens, bad outcode is error thrown.
+In other words, it's a function which takes three input arguments, second and third-one optional.
 
-Technically speaking, the main and only job of `check-types-mini` is to _throw_ errors when your library's consumers are using it wrongly. Error messages can be customised:
+The main and only job of `check-types-mini` is to _throw_ errors when your library's consumers are using it wrongly. Error messages can be customised:
 
 | Input argument | Type         | Obligatory? | Description                                 |
 | -------------- | ------------ | ----------- | ------------------------------------------- |
 | `obj`          | Plain object | yes         | Options object after user's customisation   |
 | `ref`          | Plain object | no^         | Default options - used to compare the types |
 | `opts`         | Plain object | no          | Optional options go here.                   |
-
-^`ref` can be `null` or `undefined` if all keys are set via `opts.schema` (see below).
 
 {% include "btt.njk" %}
 
@@ -81,8 +81,8 @@ Technically speaking, the main and only job of `check-types-mini` is to _throw_ 
 | `options` object's key | Type                       | Obligatory? | Default                                                                                                          | Description                                                                                                                                                                                                                                                                                                |
 | ---------------------- | -------------------------- | ----------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `ignoreKeys`           | Array or String            | no          | `[]` (empty array)                                                                                               | Instructs to skip all and any checks on keys, specified in this array. Put them as strings.                                                                                                                                                                                                                |
-| `ignorePaths`          | Array or String            | no          | `[]` (empty array)                                                                                               | Instructs to skip all and any checks on keys which have given [object-path](https://github.com/mariocasciaro/object-path) notation-style path(s) within the `obj`. Similar thing to `opts.ignoreKeys` above, but unique (because simply key names can appear in multiple places whereas paths are unique). |
-| `acceptArrays`         | Boolean                    | no          | `false`                                                                                                          | If it's set to `true`, value can be array of elements, same type as reference.                                                                                                                                                                                                                             |
+| `ignorePaths`          | Array or String            | no          | `[]` (empty array)                                                                                               | Instructs to skip all and any checks on keys which have given [object-path](https://github.com/mariocasciaro/object-path) notation-style path(s) within the `obj`. A similar thing to `opts.ignoreKeys` above, but unique (because simply key names can appear in multiple places whereas paths are unique). |
+| `acceptArrays`         | Boolean                    | no          | `false`                                                                                                          | If it's set to `true`, value can be an array of elements, the same type as reference.                                                                                                                                                                                                                             |
 | `acceptArraysIgnore`   | Array of strings or String | no          | `[]` (empty array)                                                                                               | If you want to ignore `acceptArrays` on certain keys, pass them in an array here.                                                                                                                                                                                                                          |
 | `enforceStrictKeyset`  | Boolean                    | no          | `true`                                                                                                           | If it's set to `true`, your object must not have any unique keys that reference object (and/or `schema`) does not have.                                                                                                                                                                                    |
 | `schema`               | Plain object               | no          | `{}`                                                                                                             | You can set arrays of types for each key, overriding the reference object. This allows you more precision and enforcing multiple types.                                                                                                                                                                    |
@@ -110,11 +110,11 @@ Here are all defaults in one place:
 
 The common pattern is,
 
-1.  a) Define defaults object. Later it will be used to validate user's options, PLUS, if that's not enough, you can allow users to provide **arrays** of the matching type (set `opts.acceptArrays` to `true`)
-1.  b) Alternatively, you can skip defaults object and provide schema for each key via `opts.schema`. Just stick an object there, as a value, with all keys. Put allowed types in an array.
+1.  a) Define a defaults object. Later it will be used to validate user's options, PLUS, if that's not enough, you can allow users to provide **arrays** of the matching type (set `opts.acceptArrays` to `true`)
+1.  b) Alternatively, you can skip defaults object and provide a schema for each key via `opts.schema`. Just stick an object there, as a value, with all keys. Put allowed types in an array.
 1.  `Object.assign` cloned defaults onto the options object that comes from the input.
 1.  call `check-types-mini` with the above.
-1.  If input types mismatch, error will be `throw`n.
+1.  If input types mismatch, an error will be `throw`n.
 
 ```js
 const checkTypes = require("check-types-mini");
@@ -140,9 +140,9 @@ let res = yourFunction(1, { placeholder: "zzz" });
 // =>> [TypeError: 'newLibrary/yourFunction(): [THROW_ID_01] opts.placeholder was customised to "zzz" which is not boolean but string']
 ```
 
-Sometimes you want to accept either value of certain type (like `string`) or array of those (like array of strings).
+Sometimes you want to accept either value of certain type (like `string`) or array of those (like an array of strings).
 
-For example, if somebody sneaks in array with strings and one `null`, you want to `throw`.
+For example, if somebody sneaks in an array with strings and one `null`, you want to `throw`.
 
 For these cases set `opts.acceptArrays` to `true`.
 
@@ -274,7 +274,7 @@ All the type values you put into `opts.schema` _are not validated_, on purpose, 
 
 At first, we aimed to put `check-types-mini` on every npm package that uses options. Then, we became aware of _JS performance_ and started to remove strict input validation, especially in case of booleans and one-level plain objects.
 
-When the program has complex input object and you want to validate it, `check-types-mini` is your best friend.
+When the program has a complex input object, and you want to validate it, `check-types-mini` is your best friend.
 
 For example, [`ast-monkey`](/os/ast-monkey/) _has_ complex options and needs validation help.
 

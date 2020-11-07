@@ -12,6 +12,10 @@ const whitelistChunk = [
   "alt",
   "img",
   "console.log",
+  "npm-check-updates",
+  "json-comb",
+  "indexOf",
+  "commitizen",
 ];
 
 module.exports = (str) => {

@@ -1,6 +1,9 @@
 ---
 layout: package
 title: arrayiffy-if-string
+packages:
+  - arrify
+  - check-types-mini
 ---
 
 ## Purpose
@@ -17,7 +20,9 @@ Also, check out [`check-types-mini`](/os/check-types-mini).
 
 ## API
 
-**arrayiffy(something)**
+:::api
+arrayiffy(something)
+:::
 
 In other words, it's a function which takes one input argument.
 

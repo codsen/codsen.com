@@ -4,14 +4,13 @@ const fs = require("fs");
 const markdownIt = require("markdown-it");
 const mdcont = require("markdown-it-container");
 const compiledAssertionCounts = require("./src/_data/prod/compiledAssertionCounts.js");
-const uslug = require("uslug");
-const uslugify = (s) => uslug(s);
 const arrayShuffle = require("array-shuffle");
 const clone = require("lodash.clonedeep");
 const Prism = require("prismjs");
 const escape = require("markdown-escape");
 const prettier = require("prettier");
 const markdownitfence = require('markdown-it-fence');
+const slugify = require("./utils/filters/slugify.js");
 
 /**
  * Import site configuration
@@ -22,13 +21,13 @@ const config = require("./src/_data/config.json");
  * Import hash value from the root
  */
 const hash = String(fs.readFileSync("hash.txt", "utf8")).trim();
-console.log(
-  `ELEVENTY CONFIG ${`\u001b[${33}m${`hash`}\u001b[${39}m`} = ${JSON.stringify(
-    hash,
-    null,
-    4
-  )}`
-);
+// console.log(
+//   `ELEVENTY CONFIG ${`\u001b[${33}m${`hash`}\u001b[${39}m`} = ${JSON.stringify(
+//     hash,
+//     null,
+//     4
+//   )}`
+// );
 
 module.exports = function (eleventyConfig) {
   /**
@@ -190,6 +189,16 @@ module.exports = function (eleventyConfig) {
     "allPackagesThatUseDepX",
     require("./utils/filters/allPackagesThatUseDepX.js")
   );
+  // "8" -> "eight"
+  eleventyConfig.addFilter(
+    "toWords",
+    require("./utils/filters/toWords.js")
+  );
+  // "8" -> "eighth"
+  eleventyConfig.addFilter(
+    "toOrdinal",
+    require("./utils/filters/toOrdinal.js")
+  );
   eleventyConfig.addFilter(
     "examplesExtractTotal",
     (obj) => Object.keys(obj).reduce((acc, curr) => {
@@ -245,15 +254,6 @@ module.exports = function (eleventyConfig) {
       file: key,
       ...newClonedObj[key],
     }));
-  });
-
-  // diy slugify
-  eleventyConfig.addFilter("slugify", (str) => {
-    if (str.endsWith(".js")) {
-      // remove .js - needed for codsen.com/os/ example file-page slugs
-      str = str.replace(/\.js/, "");
-    }
-    return str.toLowerCase().replace(/\s+/g, "-");
   });
   // for explorations
   eleventyConfig.addFilter("dump", function (code) {
@@ -504,7 +504,7 @@ module.exports = function (eleventyConfig) {
       permalink: true,
       permalinkBefore: true,
       permalinkSymbol: "§",
-      slugify: uslugify,
+      slugify,
     })
     .use(require("markdown-it-implicit-figures"), {
       dataType: false, // <figure data-type="image">, default: false

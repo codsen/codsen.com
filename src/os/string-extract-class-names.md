@@ -7,9 +7,12 @@ packages:
 
 ## API
 
-```js
-extract(inputString, [returnRangesInstead]);
-```
+:::api
+extract(
+  inputString,
+  [returnRangesInstead]
+)
+:::
 
 In other words, it's a function which takes two input arguments. Brackets mean that argument is optional.
 

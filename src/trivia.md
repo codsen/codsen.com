@@ -15,8 +15,8 @@ extraContainerClass: page-trivia
 This website is static and follows [Indieweb](https://indieweb.org/) principles:
 
 * We own our data, and it's **open-sourced** — for example, we won't post Medium — and our "Now" [column](/) and RSS are our Twitter.
-* We bring our **tooling** to client work — for example, [detergent](/os/detergent/) or [email-comb](/os/email-comb/) — that's _selfdogfooding_. By the way, [`string-strip-html`](/os/string-strip-html/) is powering multiple Nunjucks filters here — we didn't expect that but it became handy on this website!
-* We believe in choosing a **right tool for a job** — no matter is it a client project or a pet project — for example, we won't switch [Detergent.io](https://detergent.io) from vanilla JS to React/Redux only to practice it — visitors experience is more important!
+* We use our **tooling**, here, in client work — everywhere. That's _selfdogfooding_. By the way, [`string-strip-html`](/os/string-strip-html/) is powering multiple Nunjucks filters here!
+* We believe in choosing a **right tool for a job** — no matter is it a client project or a pet project. Sometimes it's React but sometimes it's vanilla JS.
 * We believe static websites can still be **data-driven** — this website consumes a dozen external data sources — without Gatsby or Contentful — only HTML and CSS and a bit of vanilla JS! Try our search function, for example.
 * We believe in **plurality** — we moved away from GitHub, GitLab is our place now.
 

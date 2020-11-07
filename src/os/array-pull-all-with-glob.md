@@ -1,6 +1,9 @@
 ---
 layout: package
 title: array-pull-all-with-glob
+packages:
+  - lodash.pullall
+  - globby
 ---
 
 ## Purpose
@@ -13,9 +16,17 @@ For example, we use it in [email-comb](/os/email-comb/) to _whitelist_ CSS class
 
 ## API
 
-**pullAllWithGlob(sourceArray, removeThese, [opts]);**
+:::api
+pullAllWithGlob(
+  sourceArray,
+  removeThese,
+  [opts]
+)
+:::
 
 In other words, it's a function which takes three input arguments, third-one being optional (marked by square brackets).
+
+{% include "btt.njk" %}
 
 ### API - Input
 
@@ -54,3 +65,5 @@ When unused, Optional Options Object can be also passed as a `null` or `undefine
 | Type  | Description                            |
 | ----- | -------------------------------------- |
 | Array | Array of strings with elements removed |
+
+{% include "btt.njk" %}

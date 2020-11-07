@@ -65,7 +65,7 @@ Here's how we use it ourselves.
 
 In short, GitLab CI calls package.json script and it cleanses the changelogs before npm package is published to npm and all builds are comitted from CI to git.
 
-Have a look at our GitLab CI yml:
+Have a look at our [GitLab CI yml](https://gitlab.com/codsen/codsen/-/blob/master/.gitlab-ci.yml):
 
 ```yml
 {{ gitlabCIConfig | safe }}

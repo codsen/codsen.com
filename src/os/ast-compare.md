@@ -3,6 +3,8 @@ layout: package
 title: ast-compare
 packages:
   - ast-loose-compare
+  - ast-delete-object
+  - lodash.ismatch
 ---
 
 ## Purpose
@@ -17,7 +19,13 @@ The default mode is similar to [Tap](https://node-tap.org/) asserts `t.match` an
 
 ## API
 
-**compare(bigObj, smallObj, [opts])**
+:::api
+compare(
+  bigObj,
+  smallObj,
+  [opts]
+)
+:::
 
 In other words, it's a function which takes three input arguments, third one being optional (marked by square brackets).
 
@@ -29,7 +37,7 @@ It returns a boolean. This library will not mutate the input arguments.
 
 | Input argument | Type                            | Obligatory? | Description                         |
 | -------------- | ------------------------------- | ----------- | ----------------------------------- |
-| `bigObj`       | Array or Plain object or String | yes         | Super set, larger thing.            |
+| `bigObj`       | Array or Plain object or String | yes         | Superset, larger thing.            |
 | `smallObj`     | Array or Plain object or String | yes         | A set of the above, smaller thing.  |
 | `opts`         | Plain object                    | no          | A plain object containing settings. |
 
@@ -59,7 +67,7 @@ It returns a boolean. This library will not mutate the input arguments.
 
 {% include "btt.njk" %}
 
-## opts.verboseWhenMismatches
+## `opts.verboseWhenMismatches`
 
 Sometimes you just want a yes/no answer is something a subset or equal to something. But sometimes, the whole point of comparison is to inform the user _exactly what_ is mismatching. In the latter cases, set `opts.verboseWhenMismatches` to `true`. When there is no match, instead of Boolean `false` the main function will return **a string** with an explanatory message.
 
@@ -73,7 +81,7 @@ We want to check, does a deeply-nested array of objects/strings/arrays (for exam
 
 {% include "btt.njk" %}
 
-## Differences from \_.isMatch
+## Differences from `_.isMatch`
 
 > "Partial comparisons will match empty array and empty object source values against any array or object value, respectively." — [Lodash documentation](https://lodash.com/docs/4.16.4#isMatch)
 

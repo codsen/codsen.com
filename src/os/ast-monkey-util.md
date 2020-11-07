@@ -17,7 +17,9 @@ Conceptually, we'd use [`ast-monkey-traverse`](/os/ast-monkey-traverse/), identi
 
 ## API - `pathNext`
 
-**pathNext(str)**
+:::api
+pathNext(str)
+:::
 
 It takes (a string) path and increments the last digit:
 
@@ -36,7 +38,9 @@ console.log(pathNext("9.children.1.children.0"));
 
 ## API - `pathPrev`
 
-**pathPrev(str)**
+:::api
+pathPrev(str)
+:::
 
 It takes (a string) path and decrements the last digit:
 
@@ -55,7 +59,9 @@ console.log(pathPrev("9.children.1.children.2"));
 
 ## API - `pathUp`
 
-**pathUp(str)**
+:::api
+pathUp(str)
+:::
 
 It takes (a string) path and goes "one level" up, discarding the last two path parts:
 

@@ -53,19 +53,15 @@ This package exports a plain object: `{ comb, defaults, version }`:
 - Key `defaults` has a value, a plain object, which is defaults of the main function
 - Key `version` is a string, for example, "2.0.12" and mirrors same key `package.json`
 
-```js
-comb(str, [options]);
-```
-
 {% include "btt.njk" %}
 
 ### API - Input
 
 The main function `comb` which you require/import
 
-```js
-import { comb } from "email-comb";
-```
+:::api
+comb(str, [options])
+:::
 
 takes two input arguments:
 
@@ -73,23 +69,6 @@ takes two input arguments:
 | -------------- | ------------ | ----------- | ----------------------------------------- |
 | str            | String       | yes         | Your HTML file contents, as string        |
 | options        | Plain object | no          | Any options, as a plain object, see below |
-
-For example,
-
-```js
-// Require it first. You get a function which you can feed with strings:
-const { comb } = require("email-comb");
-// Let's define a string to work upon:
-const html = '<html>zzz</html><body class="class-1">zzz</body>';
-// Assign a new string to the output of this library:
-const { result } = comb(html, {
-  whitelist: [".class-1", "#id-1", ".module-*"],
-});
-// Log its result:
-console.log("result = " + JSON.stringify(result, null, 4));
-```
-
-{% include "btt.njk" %}
 
 ### API - Optional Options Object
 

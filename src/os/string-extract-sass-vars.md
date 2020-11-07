@@ -7,17 +7,17 @@ packages:
 
 ## API
 
-```js
-extractVars(inputString, [opts]);
-```
+:::api
+extractVars(str, [opts])
+:::
 
-In other words, it is a function which takes two input arguments, string and an optional options object (above, those square brackets mean "optional").
+In other words, it is a function which takes two input arguments, a string and an optional options object (above, those square brackets mean "optional").
 
 ### API - Input
 
 | Input argument          | Type         | Obligatory? | Description       |
 | ----------------------- | ------------ | ----------- | ----------------- |
-| inputString             | String       | yes         | String to process |
+| str                     | String       | yes         | String to process |
 | optional options object | Plain object | no          | See below         |
 
 For example, a typical input for this program:

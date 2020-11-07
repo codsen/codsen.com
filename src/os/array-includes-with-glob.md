@@ -47,13 +47,15 @@ You can also query multiple values and request that ANY (default behaviour) or A
 
 ## API
 
-```js
+:::api
 includesWithGlob(
-  source, // input - an array of strings or a single string
-  whatToFind, // what to look for - can contain wildcards, "*"'s, can be array of strings or a single string
-  options
-);
-```
+  source,
+  whatToFind,
+  [options]
+)
+:::
+
+In other words, it's a function which takes three input arguments, third-one optional.
 
 {% include "btt.njk" %}
 

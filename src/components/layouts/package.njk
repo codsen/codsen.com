@@ -91,7 +91,7 @@
 
             {% if packageJsons[title].lect.defaultExported and packageJsons[title].lect.req %}
             <p>
-              The <em><a href="https://exploringjs.com/es6/ch_modules.html#_default-exports-one-per-module">default</a></em> is exported, so instead of "<code>{{ packageJsons[title].lect.req }}</code>" below, you can name the consumed function however you want.
+              The <em><a href="https://exploringjs.com/es6/ch_modules.html#_default-exports-one-per-module">default</a></em> is exported, so instead of <code>{{ packageJsons[title].lect.req }}</code> below, you can name the consumed function however you want.
             </p>
             {% endif %}
 
@@ -201,13 +201,19 @@
             {{ heading("Examples", 2) }}
             <ul>
             {% for example in packageExamples[title] | extractNonQuickTakeExamples %}
-              <li><a href="/os/{{ title }}/examples/#{{ example.title | slugify }}"><span class="screen-reader-text">program example: </span>{{ example.title | titleProper | formatTags | mdInline | safe }}</a></li>
+              <li><a href="/os/{{ title }}/examples/#{{ example.title | slugify }}"><span class="screen-reader-text">program example: </span>{{ example.title | mdInline | titleProper | safe }}</a></li>
             {% endfor %}
             </ul>
             {% include "btt.njk" %}
           {% endif %}
 
           {{ content | safe }}
+
+          {{ heading("Changelog", 2) }}
+          <p>
+            See it <a href="https://gitlab.com/codsen/codsen/-/blob/master/packages/{{ title }}/CHANGELOG.md">in the monorepo</a>, on GitLab.
+          </p>
+          {% include "btt.njk" %}
 
           {{ heading("Licence", 2) }}
           <p>

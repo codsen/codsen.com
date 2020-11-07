@@ -13,7 +13,7 @@ tags:
 
 ---
 
-**First reason**, it allows to get or set values by path, no matter how deep and no matter if any levels the destination path is missing.
+**First reason**, it allows to get or set values by path, no matter how deep and no matter if any levels of the destination path are missing.
 
 Before [optional chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining), if we tried to access non-existing keys in an object, deeper than one absent level, an error would be thrown:
 
@@ -43,7 +43,7 @@ assert.equal(extracted4, undefined);
 
 While [Optional chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining) can substitute the `object-path` method `.get`, other methods, such as `.delete` or `.has` don't have a native JS equivalent.
 
-That's the **second reason** — other `object-path` methods would warrant a 3rd party library.
+That's the **second reason** — `object-path` does what native JS solutions can't do.
 
 But that was plain objects. The fun part is _arrays_.
 

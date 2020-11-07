@@ -54,6 +54,7 @@ That's a different approach from the old way, mutating string over and over usin
  - [`ranges-regex`](#ranges-regex)
  - [`ranges-ent-decode`](#ranges-ent-decode)
  - [`ranges-invert`](#ranges-invert)
+ - [`ranges-offset`](#ranges-offset)
  - [`ranges-is-index-within`](#ranges-is-index-within)
  - [`ranges-iterate`](#ranges-iterate)
  - [`ranges-process-outside`](#ranges-process-outside)
@@ -132,6 +133,15 @@ That's a different approach from the old way, mutating string over and over usin
 <pre class="language-js"><code class="language-js">{{ packageExamples['ranges-invert']['_quickTake.js'].content | decodeCurlies | prism | safe }}</code></pre>
 
 <a href="/os/ranges-invert/" class="button">See the package</a>
+{% include "btt.njk" %}
+
+## ranges-offset
+
+{% include "src/components/content/tldr-ranges-offset.md" %}
+
+<pre class="language-js"><code class="language-js">{{ packageExamples['ranges-offset']['_quickTake.js'].content | decodeCurlies | prism | safe }}</code></pre>
+
+<a href="/os/ranges-offset/" class="button">See the package</a>
 {% include "btt.njk" %}
 
 ## ranges-is-index-within

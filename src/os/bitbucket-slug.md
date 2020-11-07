@@ -24,6 +24,19 @@ There are only two dependencies: [ent](https://www.npmjs.com/package/ent) to dec
 
 {% include "btt.njk" %}
 
+## API
+
+:::api
+bSlug(str)
+:::
+
+**Input:** string.
+**Output:** string.
+
+If the input is `undefined` or `null` or not a string - empty string will be returned.
+
+{% include "btt.njk" %}
+
 ## Competition
 
 Whoever wonders, no, [slugify](https://github.com/sindresorhus/slugify) on npm won't match the BitBucket heading slug generation API. There are peculiarities which differ.
@@ -31,26 +44,3 @@ Whoever wonders, no, [slugify](https://github.com/sindresorhus/slugify) on npm w
 This library, on another hand, is aiming to match BitBucket spec as close as possible. Our unit tests are pinning the output of this library against the BitBucket-rendered HTML.
 
 {% include "btt.njk" %}
-
-## Usage
-
-```js
-const bSlug = require("bitbucket-slug");
-
-const res1 = bSlug(`## So-called "music"`);
-console.log("res1 = " + JSON.stringify(res1, null, 4));
-// => "markdown-header-so-called-music"
-
-// works with encoded HTML:
-const res2 = bSlug("## Some Lithuanian - Ąžuolynas");
-console.log("res2 = " + JSON.stringify(res2, null, 4));
-// => "markdown-header-some-lithuanian-azuolynas"
-```
-
-{% include "btt.njk" %}
-
-## API
-
-API is simple: `string` in, `string` out.
-
-If the input is `undefined` or `null` or not a string - empty string will be returned.

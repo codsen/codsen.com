@@ -20,13 +20,17 @@ This program is a converter that converts between the two systems, it's based on
 
 This program exports two functions:
 
-**nativeToUnicode(str, indexes)**
+:::api
+nativeToUnicode(str, indexes)
+:::
 
 It converts JS native indexes to indexes (used in let's say `String.slice()`), based on grapheme count.
 
 ... and ...
 
-**unicodeToNative(str, indexes)**
+:::api
+unicodeToNative(str, indexes)
+:::
 
 It converts grapheme count-based indexes to JS native indexes.
 

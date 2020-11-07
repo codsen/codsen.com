@@ -20,7 +20,11 @@ See [this](https://mathiasbynens.be/notes/javascript-unicode) article about Unic
 ## API
 
 ::: api
-{{ packageJsons["str-indexes-of-plus"].lect.req }}(str, searchValue, [fromIndex])
+{{ packageJsons["str-indexes-of-plus"].lect.req }}(
+  str,
+  searchValue,
+  [fromIndex]
+)
 :::
 
 In other words, it's a _function_ which takes three arguments, third one is optional (marked by square brackets).

@@ -13,9 +13,17 @@ It deletes objects in AST if all given keys-value pairs are matched.
 
 ## API
 
-**deleteObj(input, objToDelete, [options])**
+:::api
+deleteObj(
+  input,
+  objToDelete,
+  [options]
+)
+:::
 
 In other words, it's a function which takes three input arguments, third-one being optional (marked by square brackets). It will not mutate the `input` AST.
+
+{% include "btt.njk" %}
 
 ### API - Input
 
@@ -50,6 +58,8 @@ Defaults in one place:
 ### API - Output
 
 This library will return the clone of first input argument with relevant elements deleted.
+
+{% include "btt.njk" %}
 
 ## `opts.matchKeysStrictly`
 

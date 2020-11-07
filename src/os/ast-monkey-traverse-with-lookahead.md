@@ -33,7 +33,7 @@ You can't delete or change values of AST in this program.
 
 {% include "btt.njk" %}
 
-#### innerObj in the callback
+## `innerObj` in the callback
 
 When you call `traverse2()` like this:
 

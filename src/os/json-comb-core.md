@@ -27,7 +27,9 @@ A set of JSON files might be normalised, but certain keys can have placeholder v
 
 ## `getKeyset()`
 
-**getKeyset(input, [opts])**
+:::api
+getKeyset(input, [opts])
+:::
 
 This function produces a reference object according to which you can normalise JSON files.
 
@@ -65,7 +67,9 @@ A promise of a plain object, which can be used in `enforceKeyset()` (and `enforc
 
 ## `getKeysetSync()`
 
-**getKeysetSync(input, [opts])**
+:::api
+getKeysetSync(input, [opts])
+:::
 
 Synchronous version of [`getKeyset()`](#getkeyset).
 
@@ -89,6 +93,14 @@ Synchronous version of [`getKeyset()`](#getkeyset).
 A plain object, which can be used in [`enforceKeyset()`](#enforcekeyset) or sync [`enforceKeysetSync()`](#enforcekeysetsync).
 
 ## `enforceKeyset()`
+
+:::api
+enforceKeyset(
+  input,
+  schema,
+  [opts]
+)
+:::
 
 Reads an input plain object and a keyset schema object and normalises the input plain object, adding any missing keys.
 
@@ -118,6 +130,14 @@ A clone of an input object, with the same key set as the `schema` object.
 
 ## `enforceKeysetSync()`
 
+:::api
+enforceKeysetSync(
+  input,
+  schema,
+  [opts]
+)
+:::
+
 Reads an input plain object and a keyset schema object and normalises the input plain object, adding any missing keys.
 
 ### API - input
@@ -144,6 +164,10 @@ A clone of an input object, with the same key set as the `schema` object.
 
 ## `noNewKeysSync()`
 
+:::api
+noNewKeysSync(input, schema)
+:::
+
 Reads an array and a reference keyset object, returns an array of zero or more keys that are in the array, but not in keyset.
 
 Practically this is handy to tame the JSON's that we don't/can't normalise. At least we can ensure there are no new keys. For example, all data mapping files could be validated through `noNewKeysSync()`.
@@ -166,6 +190,13 @@ An array of zero or more paths.
 {% include "btt.njk" %}
 
 ## `findUnusedSync()`
+
+:::api
+findUnusedSync(
+  input,
+  [options]
+)
+:::
 
 Reads a set of objects (array of plain objects, probably parsed JSON files) and tells, are there any keys throughout the whole set that has only the placeholder values. You can customise the placeholder value via an optional options object.
 
@@ -194,6 +225,10 @@ An array of zero or more paths leading to keys which are either missing or have 
 {% include "btt.njk" %}
 
 ## `sortAllObjectsSync()`
+
+:::api
+sortAllObjectsSync(input)
+:::
 
 This method sorts objects (no matter how deeply-nested), and it will sort objects within arrays within objects and so on. For example, you can input an array which has some plain objects within, and those objects will be sorted.
 

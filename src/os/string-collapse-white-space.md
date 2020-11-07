@@ -5,41 +5,6 @@ packages:
   - detergent
 ---
 
-## Whitespace Collapsing
-
-Take string. First **trim** the outsides, then **collapse** two and more spaces into one.
-
-```js
-'    aaa    bbbb    ' -> 'aaa bbbb'
-```
-
-When trimming, any whitespace will be collapsed, including tabs, line breaks and so on.
-When collapsing, _only spaces_ are collapsed. Non-space whitespace within text won't be collapsed.
-
-```js
-'   \t\t\t   aaa     \t     bbbb  \t\t\t\t  ' -> 'aaa \t bbbb'
-```
-
-(Optional, on by default) **Collapse** more aggressively within recognised **HTML tags**:
-
-```js
-'text <   span   >    contents   <  /  span   > more text' -> 'text <span> contents </span> more text'
-```
-
-(Optional, off by default) **Trim** each line:
-
-```js
-'   aaa   \n   bbb   ' -> 'aaa\nbbb'
-```
-
-(Optional, off by default) Delete empty or whitespace-only rows:
-
-```js
-'a\n\n\nb' -> 'a\nb'
-```
-
-{% include "btt.njk" %}
-
 ## API
 
 ::: api
@@ -88,11 +53,12 @@ It has the following keys:
 | ------------------------------ | ---------------------- | ----------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `trimStart`                    | Boolean                | no          | `true`  | if `false`, leading whitespace will be just collapsed. That might a single space, for example, if there are bunch of leading spaces.                                                |
 | `trimEnd`                      | Boolean                | no          | `true`  | if `false`, trailing whitespace will be just collapsed.                                                                                                                             |
-| `trimLines`                    | Boolean                | no          | `false` | if `true`, every line will be trimmed (spaces, tabs, line breaks of all kinds will be deleted, also non-breaking spaces, if `trimnbsp` is set to `true`)                            |
+| `trimLines`                    | Boolean                | no          | `false` | if `true`, every line will be trimmed (all whitespace characters except line breaks CR and LF will be deleted, also non-breaking spaces will be deleted, if `trimnbsp` is set to `true`)                            |
 | `trimnbsp`                     | Boolean                | no          | `false` | when trimming, do we delete non-breaking spaces (if set to `true`, answer would be "yes"). This setting also affects `trimLines` setting above.                                     |
-| `recogniseHTML`                | Boolean                | no          | `true`  | if `true`, the space directly within recognised 118 HTML tag brackets will be collapsed tightly: `< div >` -> `<div>`. It will not touch any other brackets such as string `a > b`. |
 | `removeEmptyLines`             | Boolean                | no          | `false` | if any line can be trimmed to empty string, it will be removed.                                                                                                                     |
 | `limitConsecutiveEmptyLinesTo` | Natural number or zero | no          | `0`     | Set to 1 or more to allow that many blank lines between content                                                                                                                     |
+| `enforceSpacesOnly` | Boolean | no          | `false`     | If enabled, not only consecutive space character chunks will be collapsed but any whitespace character chunks (except line breaks). |
+| `cb` | Function | no          | see below     | All output and every whitespace chunk (including single spaces) is fed to it. Whatever you return, gets written to resulting [ranges](/ranges/). |
 
 Here is the Optional Options Object in one place (in case you ever want to copy it whole):
 
@@ -102,35 +68,21 @@ Here is the Optional Options Object in one place (in case you ever want to copy 
   trimEnd: true,
   trimLines: false,
   trimnbsp: false,
-  recogniseHTML: true,
   removeEmptyLines: false,
-  returnRangesOnly: false,
   limitConsecutiveEmptyLinesTo: 0,
+  enforceSpacesOnly: false,
+  cb: ({ suggested, whiteSpaceStartsAt, whiteSpaceEndsAt, str }) => suggested,
 }
 ```
 
 {% include "btt.njk" %}
 
-## Algorithm
+## `opts.cb`
 
-Traverse the string once, gather a list of ranges indicating white space indexes, delete them all in one go and return the new string.
+This program implements a callback interface - every reported range is fed to the callback. The default callback is `({ suggested }) => suggested` but you can tweak it.
 
-This library traverses the string _only once_ and performs the deletion _only once_. It recognises Windows, Unix and Linux line endings.
+See [examples](/os/string-collapse-white-space/examples/).
 
-Optionally (on by default), it can recognise (X)HTML tags (any out of 118) and for example collapse `< div..` → `<div..`.
-
-This algorithm **does not use regexes**.
-
-{% include "btt.njk" %}
-
-## Smart bits
-
-There are some sneaky false-positive cases, for example:
-
-`Equations: a < b and c > d, for example.`
-
-Notice the part `< b and c >` almost matches the HTML tag description - it's wrapped with brackets, starts with legit HTML tag name (one out of 118, for example, `b`) and even space follows it. The current version of the algorithm will detect false-positives by counting amount of space, equal, double quote and line break characters within suspected tag (string part between the brackets).
-
-**The plan is**: if there are spaces, this means this suspect tag has got attributes. In that case, there has to be at least one equal sign or equal count of unescaped double quotes. Otherwise, nothing will be collapsed/deleted from that particular tag.
+When nothing is to be removed, callback will ping `suggested` key value as `null`. You can still return any string index range and it will be deleted (array of two elements) or replaced (array of three elements). Learn more about [ranges](/ranges/) notation.
 
 {% include "btt.njk" %}
