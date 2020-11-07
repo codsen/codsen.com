@@ -21,23 +21,18 @@
 // in the interdeps.json array and reports the name key of it, where the
 // given package is among values in the "imports" key value array.
 
+const interdeps = require("../../src/_data/dev/interdeps.json");
+
 module.exports = (str) => {
-  const env = process.env.ELEVENTY_ENV;
-  if (env === "dev") {
-    /* eslint global-require: 0 */
-    const interdeps = require("../../src/_data/dev/interdeps.json");
-    for (let i = 0, len = interdeps.length; i < len; i++) {
-      // traverse the array of plain objects, return name key of the first
-      // encountered consumer
-      if (
-        Array.isArray(interdeps[i].imports) &&
-        interdeps[i].imports.includes(str)
-      ) {
-        return interdeps[i].name;
-      }
+  for (let i = 0, len = interdeps.length; i < len; i++) {
+    // traverse the array of plain objects, return name key of the first
+    // encountered consumer
+    if (
+      Array.isArray(interdeps[i].imports) &&
+      interdeps[i].imports.includes(str)
+    ) {
+      return interdeps[i].name;
     }
   }
-  // prod or seed
-
   return str;
 };
