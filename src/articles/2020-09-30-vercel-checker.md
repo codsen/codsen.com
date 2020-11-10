@@ -69,7 +69,7 @@ We are going to check the following things:
 
 The check script relies on having access to the _production build_ of the website because we are checking, do files exist on `dist/` folder. We don't publish, risk google bot crawling errors and then check. We check right after the build, using npm scripts, intending to run the checks on GitLab CI (and fail to publish if any errors are found).
 
-This checking functionality could be part of a [vercel CLI](https://www.npmjs.com/package/vercel), but to do URL-validation checks, vercel CLI would need some information: where is the `dist` build folder. Even then, CLI would be triggered form npm scripts, from `package.json`, so we're back to square one. You can't escape npm scripts.
+This checking functionality could be part of a [vercel CLI](https://www.npmjs.com/package/vercel), but to do URL-validation checks, vercel CLI would need some information — where is the `dist` build folder. Even then, CLI would be triggered from npm scripts, from `package.json`, so we're back to square one. You can't escape npm scripts.
 
 Some checks could be part of vercel CLI though, checks for redirect URL length, or misspelt keys.
 

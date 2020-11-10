@@ -244,7 +244,7 @@ This program not only strips HTML and returns a string. It also returns string i
 
 For example, npm package [`title`](https://www.npmjs.com/package/title) capitalises the titles as per _The Chicago Manual of Style_. But if input source can contain HTML code, we need to skip processing the HTML tags.
 
-The idea is, it sets `opts.stripTogetherWithTheirContents` to `["*"]` — asterisk or wildcard meaning to "strip" all paired tags (including `<code>`/`</code>` in titles, for example). Then we take the locations of all tags and supplement it with locations of what's been whitelisted (using [`ranges-regex`](/os/ranges-regex/)). Finally, we [invert](/os/ranges-invert/) the ranges and supplement them with replacement value, third array element, coming from `title`. Here's [the source code](/os/string-strip-html/examples/#title-case-with-tag-skipping).
+The idea is, it sets `opts.stripTogetherWithTheirContents` to `["*"]` — asterisk or wildcard meaning to "strip" all paired tags (including `<code>`/`</code>` in titles, for example). Then we take the locations of all tags and supplement it with locations of what's been whitelisted (using [`ranges-regex`](/os/ranges-regex/)). Finally, we [invert](/os/ranges-invert/) the ranges and supplement them with replacement value, third array element, coming from `title`. Here's [the source code](/os/string-strip-html/examples/#set-the-title-case-using-title-package).
 
 {% include "btt.njk" %}
 

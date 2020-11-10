@@ -26,6 +26,9 @@
 {% set codsenMr %}
 {% include "svg-codsen-mr.njk" %}
 {% endset %}
+{% set codsenHandshake %}
+{% include "svg-codsen-handshake.njk" %}
+{% endset %}
 
 {# kickers #}
 {% set codsenWow %}
@@ -35,7 +38,7 @@
 {# set up arrays #}
 {# ------------- #}
 {% set logos = [codsen1, codsen2] | shuffle %}
-{% set others = [codsenOk, codsenMr] | shuffle %}
+{% set others = [codsenOk, codsenMr, codsenHandshake] | shuffle %}
 {% set kickers = [codsenWow] | shuffle %}
 {% set finalStickers = [] %}
 
