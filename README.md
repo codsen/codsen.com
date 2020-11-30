@@ -6,11 +6,9 @@ This website was designed in Photoshop, except _SVG's_ which were done in Illust
 
 It was coded on [Eleventy](https://www.11ty.dev/), using [Nunjucks](https://mozilla.github.io/nunjucks/) as a templating language.
 
-GitLab CI automatically deploys _master_ branch to [Vercel](https://vercel.com).
-
 ## Licence
 
-All our packages are licenced under [MIT](https://gitlab.com/codsen/codsen/-/blob/master/LICENSE).
+All our packages are licenced under [MIT](https://git.sr.ht/~royston/codsen/tree/master/LICENSE).
 
 The code of this website is licenced under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
