@@ -15,6 +15,7 @@ packages:
 - Can be used to generate Email Text versions. Puts URL links.
 - It can detect and skip false positives, for example, `a < b and c > d`.
 - Enabled-by-default but optional Recursive HTML Decoding — nothing will escape!
+- It won't strip JSP tags
 
 {% include "btt.njk" %}
 

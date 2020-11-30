@@ -4,6 +4,7 @@ title: Roy Revelt
 permalink: /author/royrevelt/
 extraContainerClass: layout-page-about
 ---
+
 {% from "macros/heading.njk" import heading %}
 
 <div role="presentation" class="separator">
@@ -18,7 +19,7 @@ extraContainerClass: layout-page-about
   <div class="page-about-container__contents">
     {{ heading("Roy Revelt", 1) }}
     <p>
-      MA, MSc<br>director of Codsen Ltd
+      MA, MSc
     </p>
     <hr>
     <div class="page-about-container__content">

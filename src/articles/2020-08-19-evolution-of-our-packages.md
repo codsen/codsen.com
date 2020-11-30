@@ -1,6 +1,6 @@
 ---
 title: Evolution of Our npm Packages, From a README Perspective
-date: '2020-08-19'
+date: "2020-08-19"
 image: "002"
 packages:
   - detergent
@@ -40,13 +40,13 @@ All README's still manually-written though.
 
 At one moment, it popped to our mind that, actually, we _can_ generate fresh and replace specific chapters in README, then put this on a script and run it often.
 
-For that, we created a CLI [`lect`](/os/lect/). There is only [one config](https://gitlab.com/codsen/codsen/-/blob/master/packages/.lectrc.json) in the `/packages/` root, plus each `package.json` can have their own, per-package settings.
+For that, we created a CLI [`lect`](/os/lect/). There is only [one config](https://git.sr.ht/~royston/codsen/tree/master/packages/.lectrc.json) in the `/packages/` root, plus each `package.json` can have their own, per-package settings.
 
 This approach is different from Mr&nbsp;Schlinkert's [`verb`](https://www.npmjs.com/package/verb) which keeps README contents in a separate file, `.verb.md` and renders that into README.md each time.
 
 With time we added more and more automation features to `lect`, automating the maintenance of auxiliary files: `.npmignore`, `.npmrc`, `.prettierignore`, `LICENSE`, even `rollup.config.js`.
 
-For example, glance at [`email-comb`](https://gitlab.com/codsen/codsen/-/blob/master/packages/email-comb/rollup.config.js) Rollup config. It's generated.
+For example, glance at [`email-comb`](https://git.sr.ht/~royston/codsen/tree/master/packages/email-comb/rollup.config.js) Rollup config. It's generated.
 
 ## Level 5 — `lerna` monorepo, `commitizen`
 
@@ -58,8 +58,8 @@ Conceptually, Lerna does three things for us:
 
 We're pretty sure we're using it in strange ways, but it does solve our technical challenges. Namely:
 
-* **Cohesion within an ecosystem of packages**. In other words, if you code up a new feature on one package, how do you check, did you break anything up and down-stream dependency-wise? Manually, it's tedious: either symlink or copy-paste builds into `node_modules` of another package, run its tests, then restore things as they were. In a monorepo, that's automated. Plus, we can `lerna run test` — run `test` script inside each monorepo package. Think Mr&nbsp;Bahmutov's [dont-break](https://github.com/bahmutov/dont-break) but within monorepo boundaries and automated.
-* **`node_modules` duplication and sheer gluttony**. If not in monorepo, each package is a standalone folder with its `node_modules` which `np` wipes and installs again. We calculated there were gigabytes of dependencies wiped and downloaded each time — laptop being pretty much unusable, burning fans for the duration of whole release (an hour or so).
+- **Cohesion within an ecosystem of packages**. In other words, if you code up a new feature on one package, how do you check, did you break anything up and down-stream dependency-wise? Manually, it's tedious: either symlink or copy-paste builds into `node_modules` of another package, run its tests, then restore things as they were. In a monorepo, that's automated. Plus, we can `lerna run test` — run `test` script inside each monorepo package. Think Mr&nbsp;Bahmutov's [dont-break](https://github.com/bahmutov/dont-break) but within monorepo boundaries and automated.
+- **`node_modules` duplication and sheer gluttony**. If not in monorepo, each package is a standalone folder with its `node_modules` which `np` wipes and installs again. We calculated there were gigabytes of dependencies wiped and downloaded each time — laptop being pretty much unusable, burning fans for the duration of whole release (an hour or so).
 
 At the moment of writing, our 115 packages monorepo root `node_modules` has 1,107 dependency folders, weighing only 191 MB. That's a tiny size by `node_modules` standards.
 
@@ -73,7 +73,7 @@ Even though CI is at GitLab and repo sits at GitLab, there is no internal "rabbi
 
 During the Christmas of 2018, with a couple of spare weeks at hand, we decided to put up the monorepo onto our GitLab CI. It went successfully, although there were a few accidental semver bumps because of `commitizen` and initial misconfiguration.
 
-See our current GitLab CI config `yml` script [here](https://gitlab.com/codsen/codsen/-/blob/master/.gitlab-ci.yml). We don't publish CI session data because of potential security issues if secrets leak there, but our CI script is public, and you can save lots of time by referencing it.
+See our current GitLab CI config `yml` script [here](https://git.sr.ht/~royston/codsen/tree/master/.gitlab-ci.yml). We don't publish CI session data because of potential security issues if secrets leak there, but our CI script is public, and you can save lots of time by referencing it.
 
 From a user perspective, CI is fantastic because it ports all the npm publishing up from the user's laptop to CI servers. We `git push` to GitLab and get on with our day, getting an email from GitLab if pipeline failed or an email from npm if packages got published.
 

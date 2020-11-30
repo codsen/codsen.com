@@ -48,7 +48,7 @@ extraContainerClass: page-examples centered-headings
       {% for example in packageExamples[packageName] | extractNonQuickTakeExamples %}
       {{ heading(example.title | mdInline | titleProper, 2) | safe }}
       <pre class="language-js"><code class="language-js">{{ example.content | decodeCurlies | prism | safe }}</code></pre>
-      <div class="examples-actions"><a href="https://gitlab.com/codsen/codsen/-/blob/master/packages/{{ packageName }}/examples/{{ example.file }}">edit</a> <span class="large-slash">/</span> <a href="/examples-help/">help</a></div>
+      <div class="examples-actions"><a href="https://git.sr.ht/~royston/codsen/tree/master/packages/{{ packageName }}/examples/{{ example.file }}">edit</a> <span class="large-slash">/</span> <a href="/examples-help/">help</a></div>
 
       {% if not loop.last %}
       {% include "btt.njk" %}

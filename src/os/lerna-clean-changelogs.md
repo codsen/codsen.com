@@ -87,5 +87,6 @@ This package performs the following cleaning steps:
 
 5. If existing, pre-lerna changelog entries use dashes to note list items, those dashes are updated to match `conventional-changelog` notation using asterisks.
 
+6. On Sourcehut, links are generated with plural, `/commits/`, for example: `https://git.sr.ht/~royston/codsen/commits/39a9f57fd3` which lead to 404. This program replaces `/commits/` with `/commit/` if it detects a matching `git.sr.ht/`-domain URL.
 
 {% include "btt.njk" %}

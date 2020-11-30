@@ -1,14 +1,11 @@
 /* eslint no-underscore-dangle: 0 */
 
-// pulls live "dependencyStats.json" from
-// https://gitlab.com/codsen/codsen/-/blob/master/stats/dependencyStats.json
-
 const axios = require("axios");
 const pacote = require("pacote");
 const pMap = require("p-map");
 const saveData = require("../../../utils/scripts/saveData.js");
 
-const listOfPackageNamesUrl = `https://gitlab.com/codsen/codsen/-/raw/master/stats/compiledAssertionCounts.json`;
+const listOfPackageNamesUrl = `https://git.sr.ht/~royston/codsen/blob/master/stats/compiledAssertionCounts.json`;
 
 module.exports = () => {
   return new Promise((resolve, reject) => {

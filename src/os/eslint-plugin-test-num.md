@@ -41,7 +41,7 @@ This is an ESLint rule which automatically updates those numbers.
 
 ## Setup
 
-See our [current ESLint config](https://gitlab.com/codsen/codsen/-/blob/master/.eslintrc.json).
+See our [current ESLint config](https://git.sr.ht/~royston/codsen/tree/master/.eslintrc.json).
 
 First, make sure `eslint` itself is installed among the dev dependencies. "`i`" below means `install`, "`-D`" below means "dev dependency" (as opposed to a normal dependency). Quick refresher — when you publish an npm package and somebody installs it, its dev dependencies don't get installed when they `npm i` your package. That's the essence of how dev and normal dependencies differ.
 

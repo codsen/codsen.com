@@ -1,13 +1,10 @@
 /* eslint no-underscore-dangle: 0 */
 
-// pulls live "dependencyStats.json" from
-// https://gitlab.com/codsen/codsen/-/blob/master/stats/dependencyStats.json
-
 const axios = require("axios");
 const pMap = require("p-map");
 const saveData = require("../../../utils/scripts/saveData.js");
 
-const listOfPackageNamesUrl = `https://gitlab.com/codsen/codsen/-/raw/master/stats/compiledAssertionCounts.json`;
+const listOfPackageNamesUrl = `https://git.sr.ht/~royston/codsen/blob/master/stats/compiledAssertionCounts.json`;
 
 module.exports = () => {
   return new Promise((resolve, reject) => {
@@ -17,7 +14,7 @@ module.exports = () => {
         pMap(Object.keys(response.data.all), (packageName) => {
           return axios
             .get(
-              `https://gitlab.com/codsen/codsen/-/raw/master/packages/${packageName}/examples/api.json`
+              `https://git.sr.ht/~royston/codsen/blob/master/packages/${packageName}/examples/api.json`
             )
             .then((received) => {
               return [packageName, received.data];

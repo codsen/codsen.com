@@ -38,7 +38,7 @@ This application performs the following cleaning steps on all encountered `chang
    ## 2.9.1 (2018-12-27)
    ```
 
-   Diff links that changelog generator produces are not universal between GitLab, GitHub and BitBucket and sometimes there are bugs in them.
+   The diff links are not universal (across Sourcehut, GitLab, GitHub and BitBucket to name few) so it's more future-proof to remove them.
 
 3. Remove `h1` headings and turn them into `h2`, with the exception of the first, main heading of the changelog.
 
@@ -56,19 +56,18 @@ This application performs the following cleaning steps on all encountered `chang
 
    (notice how a second `#` character is added, beside link being removed)
 
-
 {% include "btt.njk" %}
 
 ## The proof of the pudding is in the eating
 
 Here's how we use it ourselves.
 
-In short, GitLab CI calls package.json script and it cleanses the changelogs before npm package is published to npm and all builds are comitted from CI to git.
+In short, sourcehut CI calls package.json script and it cleanses the changelogs before npm package is published to npm and all builds are comitted from CI to git.
 
-Have a look at our [GitLab CI yml](https://gitlab.com/codsen/codsen/-/blob/master/.gitlab-ci.yml):
+Have a look at our [sourcehut CI yml](https://git.sr.ht/~royston/codsen/tree/master/.build.yml):
 
 ```yml
-{{ gitlabCIConfig | safe }}
+{ { ciConfig | safe } }
 ```
 
 There's a line:
@@ -77,7 +76,7 @@ There's a line:
 - npm run pub:vers
 ```
 
-That's how CI calls npm script. By the way, "lerna-clean-changelogs-cli" can be called at all because our monorepo root [package.json](https://gitlab.com/codsen/codsen/-/blob/master/package.json) has it as a dev-dependency:
+That's how CI calls npm script. By the way, "lerna-clean-changelogs-cli" can be called at all because our monorepo root [package.json](https://git.sr.ht/~royston/codsen/tree/master/package.json) has it as a dev-dependency:
 
 ```
 "devDependencies": {

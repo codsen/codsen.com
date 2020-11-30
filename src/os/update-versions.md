@@ -7,30 +7,7 @@ packages:
 
 ## Quick Take
 
-Update all dependencies on all packages in a monorepo — or single repo — to be the latest as per npm. It's opinionated and not for everybody.
-
-## Two kinds of workflows
-
-From the point of dependency updating, roughly speaking, there are two groups:
-
-- **program ecosystems sensitive to dependency updates** — front-end web development in general; SPA's like React, Angular and Vue
-- **program ecosystems not sensitive to dependency updates** — Open Source JS packages in general; pure JS programs; monorepos of such programs
-
-_This program is aimed at the second group._
-
-The first group, React devs especially, typically use `npm outdated` and update dependencies manually, one-by-one, running test suite after each update. Web page setups are prone to breaking when dependencies are updated.
-
-Notice how [`create-react-app`](https://github.com/facebook/create-react-app) uses fixed deps (no caret `^`) and gives instructions on how to update. Front-end world is fragile! This program is probably not very suitable to update SPA's.
-
-Even this humble website, running on Eleventy, can't make use of `upd` — some PostCSS plugins have been breaking lately after updating, the website wouldn't even build.
-
-On the other side of the spectrum, real JS programs (not web page SPA's), are very stable dependency-wise. In the last year, in our [monorepo](https://gitlab.com/codsen/codsen) of {{ compiledAssertionCounts.all | objectKeys | length }} JS packages, there were maybe a couple of occasions that we had to actually patch up something after `upd` updated all dependencies.
-
-This updating CLI is a _gung-ho_ updater of all dependencies in `package.json`.
-
-We've received requests to implement a wizard-like interface, to ask a user which deps to update and so on. But that's the wrong tool for those cases.
-
-{% include "btt.njk" %}
+Update all dependencies of all packages in a monorepo — or single repo — to be the latest as per npm.
 
 ## What `update-versions` does
 

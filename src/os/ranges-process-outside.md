@@ -17,12 +17,12 @@ title: ranges-process-outside
 
 In other words, it's a function which takes 4 arguments:
 
-| Input argument | Type         | Obligatory? | Description                                                                  |
-| -------------- | ------------ | ----------- | ---------------------------------------------------------------------------- |
-| `originalStr`  | string        | yes         | Source string |
-| `originalRanges`  | `null` or _ranges_ - array of arrays        | yes         | String indexes outside these ranges will be processed (fed to callback function) |
-| `cb`         | function | yes          | Callback function you provide (like in `Array.forEach`) |
-| `skipChecks`         | boolean | no          | By default checks are performed upon inputs but you can turn that off to boost the performance |
+| Input argument   | Type                                 | Obligatory? | Description                                                                                    |
+| ---------------- | ------------------------------------ | ----------- | ---------------------------------------------------------------------------------------------- |
+| `originalStr`    | string                               | yes         | Source string                                                                                  |
+| `originalRanges` | `null` or _ranges_ - array of arrays | yes         | String indexes outside these ranges will be processed (fed to callback function)               |
+| `cb`             | function                             | yes         | Callback function you provide (like in `Array.forEach`)                                        |
+| `skipChecks`     | boolean                              | no          | By default checks are performed upon inputs but you can turn that off to boost the performance |
 
 ## Callback `cb`
 
@@ -46,11 +46,11 @@ This `(idx) => { gather.push(idx); }` above is the callback function (as [arrow]
 
 It's API is the following:
 
-| Input argument | Type         | Description |
-| -------------- | ------------ | ----------- |
-| `fromIdx`      | String index: natural number or zero | Starting index of the chunk programs pings you |
-| `toIdx`        | String index: natural number or zero | Ending index of the chunk programs pings you |
-| `offsetValueCb`        | Function or something _falsy_ | Callback function to bump the indexes in the loop that pings you all this. See [below](#offsetvaluecb-api) for more. |
+| Input argument  | Type                                 | Description                                                                                                          |
+| --------------- | ------------------------------------ | -------------------------------------------------------------------------------------------------------------------- |
+| `fromIdx`       | String index: natural number or zero | Starting index of the chunk programs pings you                                                                       |
+| `toIdx`         | String index: natural number or zero | Ending index of the chunk programs pings you                                                                         |
+| `offsetValueCb` | Function or something _falsy_        | Callback function to bump the indexes in the loop that pings you all this. See [below](#offsetvaluecb-api) for more. |
 
 ## `offsetValueCb` API
 
@@ -83,6 +83,6 @@ The third argument in the callback `cb` (the arrow function `(fromIdx, toIdx, of
 
 For example, [Detergent](/os/detergent/) processes HTML code. A string with bunch of invisible characters are detected and their from-to ranges are pushed to _ranges_ being gathered. While processing the input further, [Detergent](/os/detergent/) avoids processing the characters booked for deletion (marked by _ranges_). It uses this program to work on everything in-between the ranges (invisible character locations). Now, Detergent detects a named HTML entity: `&nbsp;`. Once it stumbles on its first character, the ampersand `&`, it does what it has to do and it needs to skip 6 characters further.
 
-This skipping is performed by this callback. You can see it in action [here](https://gitlab.com/codsen/codsen/-/blob/master/packages/detergent/src/main.js#L884).
+This skipping is performed by this callback. You can see it in action [here](https://git.sr.ht/~royston/codsen/tree/master/packages/detergent/src/main.js#L884).
 
-`offsetBy` is a function which is passed to `processCharacter()` module, an imported function from a file nearby, [processCharacter.js](https://gitlab.com/codsen/codsen/-/blob/master/packages/detergent/src/processCharacter.js). Now, `processCharacter()` can initiate the [skipping](https://gitlab.com/codsen/codsen/-/blob/master/packages/detergent/src/processCharacter.js#L497) of any characters taking more than single character's length, like CRLF line breaks or encoded entities.
+`offsetBy` is a function which is passed to `processCharacter()` module, an imported function from a file nearby, [processCharacter.js](https://git.sr.ht/~royston/codsen/tree/master/packages/detergent/src/processCharacter.js). Now, `processCharacter()` can initiate the [skipping](https://git.sr.ht/~royston/codsen/tree/master/packages/detergent/src/processCharacter.js#L497) of any characters taking more than single character's length, like CRLF line breaks or encoded entities.

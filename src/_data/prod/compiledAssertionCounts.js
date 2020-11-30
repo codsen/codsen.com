@@ -1,10 +1,7 @@
-// pulls live "dependencyStats.json" from
-// https://gitlab.com/codsen/codsen/-/blob/master/stats/dependencyStats.json
-
 const axios = require("axios");
 const saveData = require("../../../utils/scripts/saveData.js");
 
-const url = `https://gitlab.com/codsen/codsen/-/raw/master/stats/compiledAssertionCounts.json`;
+const url = `https://git.sr.ht/~royston/codsen/blob/master/stats/compiledAssertionCounts.json`;
 
 module.exports = () => {
   return new Promise((resolve, reject) => {
