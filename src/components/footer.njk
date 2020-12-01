@@ -30,7 +30,11 @@
       {% if editOn[page.url] %}
         {% set editUrl = editOn[page.url] %}
       {% elif page.url !== "/os/" and page.url | rootUrl == "/os/" %}
-        {% set editUrl = "https://git.sr.ht/~royston/codsen.com/tree/master/src/os/" + title + ".md" %}
+        {% if title %}
+          {% set editUrl = "https://git.sr.ht/~royston/codsen.com/tree/master/src/os/" + title + ".md" %}
+        {% else %}
+          {% set editUrl = editOn['/examples/'] %}
+        {% endif %}
       {% elif page.url | goUpUrl == "/articles/tag/" and page.url !== "/articles/tag/" %}
         {% set editUrl = "https://git.sr.ht/~royston/codsen.com/tree/master/src/tags.njk" %}
       {% endif %}
