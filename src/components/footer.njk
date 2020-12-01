@@ -14,7 +14,7 @@
       Trivia
     </h3>
     <p>
-      This website is built on <a href="https://www.11ty.dev/" target="_blank" rel="nofollow noreferrer noopener">Eleventy</a>. This&nbsp;page was generated on {{ site.buildTime | dateDisplay('LLL d, yyyy - HH:mm') }} on GitLab&nbsp;CI. See&nbsp;more in <a href="/trivia/">Trivia</a> section.
+      This website is built on <a href="https://www.11ty.dev/" target="_blank" rel="nofollow noreferrer noopener">Eleventy</a>. This&nbsp;page was generated on {{ site.buildTime | dateDisplay('LLL d, yyyy - HH:mm') }} on <a href="https://git.sr.ht/~royston/codsen.com" target="_blank" rel="nofollow noreferrer noopener">Sourcehut&nbsp;CI</a>. See&nbsp;more in <a href="/trivia/">Trivia</a> section.
     </p>
     <p>
       Cache-busting hash: {{ cacheBusting.hash }}
@@ -25,17 +25,17 @@
       Activities
     </h3>
     <p>
-      {% set editUrl = editOnGitLab["/"] %}
-      {# if URL is known, pick it straight from src/_data/editOnGitLab.json #}
-      {% if editOnGitLab[page.url] %}
-        {% set editUrl = editOnGitLab[page.url] %}
+      {% set editUrl = editOn["/"] %}
+      {# if URL is known, pick it straight from src/_data/editOn.json #}
+      {% if editOn[page.url] %}
+        {% set editUrl = editOn[page.url] %}
       {% elif page.url !== "/os/" and page.url | rootUrl == "/os/" %}
-        {% set editUrl = "https://gitlab.com/codsen/codsen.com/-/tree/master/src/os/" + title + ".md" %}
+        {% set editUrl = "https://git.sr.ht/~royston/codsen.com/tree/master/src/os/" + title + ".md" %}
       {% elif page.url | goUpUrl == "/articles/tag/" and page.url !== "/articles/tag/" %}
-        {% set editUrl = "https://gitlab.com/codsen/codsen.com/-/blob/master/src/tags.njk" %}
+        {% set editUrl = "https://git.sr.ht/~royston/codsen.com/tree/master/src/tags.njk" %}
       {% endif %}
 
-      <span class="emoji">✍️</span> <a href="{{ editUrl }}" target="_blank">Edit this page</a> on GitLab<br>
+      <span class="emoji">✍️</span> <a href="{{ editUrl }}" target="_blank">Edit this page</a> on Sourcehut<br>
       <span class="emoji">💘</span> Check out the <a href="https://indieweb.org/principles" target="_blank" rel="nofollow noreferrer noopener">Indieweb</a><br>
       {# <span class="emoji">⬇️</span> Download some <a href="/freebies/">freebies</a> #}
     </p>

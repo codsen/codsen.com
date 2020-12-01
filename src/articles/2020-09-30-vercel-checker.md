@@ -56,14 +56,14 @@ Vercel server-side redirects are set in a [config file](https://vercel.com/docs/
 
 We are going to check the following things:
 
-  - read, check, sort and overwrite the `vercel.json` with redirects sorted by the `source` key
-  - validate the `source` URL, to ensure it _does not exist_ (otherwise, what's the point of redirect?)
-  - validate the `destination` URL, to ensure it exists (so that we're redirecting to a real page)
-  - JSON schema should be validated, at least rudimentary, to make sure only three keys: `source`, `destination` and `statusCode` are in each object
-  - `source` should not equal `destination` (but that's covered by validations that `destination` exist and `source` does not; if so, it can't be the same thing)
-  - ensure redirect count is less than 1024
-  - there are 4K line limit too but such check is irrelevant, our URL's won't go as long
-  - ensure URL's are _relative_, there should be no domain (or even `http` substring anywhere)
+- read, check, sort and overwrite the `vercel.json` with redirects sorted by the `source` key
+- validate the `source` URL, to ensure it _does not exist_ (otherwise, what's the point of redirect?)
+- validate the `destination` URL, to ensure it exists (so that we're redirecting to a real page)
+- JSON schema should be validated, at least rudimentary, to make sure only three keys: `source`, `destination` and `statusCode` are in each object
+- `source` should not equal `destination` (but that's covered by validations that `destination` exist and `source` does not; if so, it can't be the same thing)
+- ensure redirect count is less than 1024
+- there are 4K line limit too but such check is irrelevant, our URL's won't go as long
+- ensure URL's are _relative_, there should be no domain (or even `http` substring anywhere)
 
 ## Implementation
 
@@ -75,6 +75,6 @@ Some checks could be part of vercel CLI though, checks for redirect URL length, 
 
 We will create an internal Node script file, triggered by `package.json` during builds. It will be run during CI builds too.
 
-Here's how we set it up — we create `utils/scripts/validateVercelJson.js` [file](https://gitlab.com/codsen/codsen.com/-/blob/master/utils/scripts/validateVercelJson.js), put the _shebang line_ `#!/usr/bin/env node` at the top, set the permissions `chmod +x utils/scripts/validateVercelJson.js` and wire up a new script in [package.json](https://gitlab.com/codsen/codsen.com/-/blob/master/package.json): `"test:vercel": "node utils/scripts/validateVercelJson.js",`. The `node ...` call is so-called _Node repl_; it's just calling Node as a CLI program, in a terminal, executing another JS file. If all pass, nothing happens; if an error occurs, an error is thrown, the build would fail (also we want this to happen on GitLab CI pipelines).
+Here's how we set it up — we create `utils/scripts/validateVercelJson.js` [file](https://git.sr.ht/~royston/codsen.com/tree/master/utils/scripts/validateVercelJson.js), put the _shebang line_ `#!/usr/bin/env node` at the top, set the permissions `chmod +x utils/scripts/validateVercelJson.js` and wire up a new script in [package.json](https://git.sr.ht/~royston/codsen.com/tree/master/package.json): `"test:vercel": "node utils/scripts/validateVercelJson.js",`. The `node ...` call is so-called _Node repl_; it's just calling Node as a CLI program, in a terminal, executing another JS file. If all pass, nothing happens; if an error occurs, an error is thrown, the build would fail (also we want this to happen on GitLab CI pipelines).
 
-It's hard to explain all eight checks in writing due to sheer code amount, plus the code will likely change over time, so head to GitLab and see the current, live validator script [`validateVercelJson.js`](https://gitlab.com/codsen/codsen.com/-/blob/master/utils/scripts/validateVercelJson.js) and the live [`vercel.json`](https://gitlab.com/codsen/codsen.com/-/blob/master/vercel.json). They're public and open-source!
+It's hard to explain all eight checks in writing due to sheer code amount, plus the code will likely change over time, so head to GitLab and see the current, live validator script [`validateVercelJson.js`](https://git.sr.ht/~royston/codsen.com/tree/master/utils/scripts/validateVercelJson.js) and the live [`vercel.json`](https://git.sr.ht/~royston/codsen.com/tree/master/vercel.json). They're public and open-source!

@@ -1,0 +1,15 @@
+{
+  "/": "https://git.sr.ht/~royston/codsen.com/tree/master/src/index.njk",
+  "/404.html": "https://git.sr.ht/~royston/codsen.com/tree/master/src/404.njk",
+  "/articles/": "https://git.sr.ht/~royston/codsen.com/tree/master/src/articles.njk",
+  "/articles/list/": "https://git.sr.ht/~royston/codsen.com/tree/master/src/articles-list.njk",
+  "/articles/tag/all/": "https://git.sr.ht/~royston/codsen.com/tree/master/src/tags.njk",
+  "/contacts/": "https://git.sr.ht/~royston/codsen.com/tree/master/src/contacts.njk",
+  "/freebies/": "https://git.sr.ht/~royston/codsen.com/tree/master/src/freebies.md",
+  "/licences/": "https://git.sr.ht/~royston/codsen.com/tree/master/src/licences.md",
+  "/os/": "https://git.sr.ht/~royston/codsen.com/tree/master/src/components/layouts/os.njk",
+  "/ranges/": "https://git.sr.ht/~royston/codsen.com/tree/master/src/ranges.md",
+  "/tooling/": "https://git.sr.ht/~royston/codsen.com/tree/master/src/tooling.md",
+  "/trivia/": "https://git.sr.ht/~royston/codsen.com/tree/master/src/trivia.md",
+  "/wordpress/wp-admin/": "https://git.sr.ht/~royston/codsen.com/tree/master/src/wp-admin.njk"
+}
