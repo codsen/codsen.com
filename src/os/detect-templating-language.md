@@ -7,6 +7,10 @@ packages:
   - stristri
 ---
 
+## Supported templating languages:
+
+- Nunjucks/Jinja/Liquid family
+- JSP (Java Server Pages)
 ## API
 
 ::: api

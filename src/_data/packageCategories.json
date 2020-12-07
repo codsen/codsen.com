@@ -19,7 +19,8 @@
     "ast-monkey-util",
     "json-comb-core",
     "json-variables",
-    "object-merge-advanced"
+    "object-merge-advanced",
+    "object-boolean-combinations"
   ],
   "stringLibsList": [
     "edit-package-json",
@@ -44,8 +45,10 @@
   "htmlLibsList": [
     "emlint",
     "html-crush",
+    "stristri",
     "string-strip-html",
     "detect-is-it-html-or-xhtml",
+    "detect-templating-language",
     "html-table-patcher",
     "is-html-tag-opening",
     "is-html-attribute-closing",

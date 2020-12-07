@@ -34,68 +34,65 @@ svg
 let link = svg.append("g").selectAll(".link");
 let node = svg.append("g").selectAll(".node");
 
-d3.json(
-  "https://cdn.statically.io/gl/codsen/codsen/master/stats/interdeps.json",
-  (error, classes) => {
-    if (error) throw error;
+d3.json("/assets/REPLACE_WITH_HASH_URL/js/interdeps.json", (error, classes) => {
+  if (error) throw error;
 
-    const root = packageHierarchy(classes).sum((d) => {
-      return d.size;
-    });
+  const root = packageHierarchy(classes).sum((d) => {
+    return d.size;
+  });
 
-    cluster(root);
+  cluster(root);
 
-    link = link
-      .data(packageImports(root.leaves()))
-      .enter()
-      .append("path")
-      .each((d) => {
-        (d.source = d[0]), (d.target = d[d.length - 1]);
-      })
-      .attr("class", "link")
-      .attr("d", line);
+  link = link
+    .data(packageImports(root.leaves()))
+    .enter()
+    .append("path")
+    .each((d) => {
+      (d.source = d[0]), (d.target = d[d.length - 1]);
+    })
+    .attr("class", "link")
+    .attr("d", line);
 
-    node = node
-      .data(root.leaves())
-      .enter()
-      .append("a")
-      .attr("href", (d) => {
-        return `/os/${d.data.key}`;
-      })
-      .append("text")
-      .attr("class", "node")
-      .attr("dy", "0.31em")
-      .attr("transform", (d) => {
-        return `rotate(${d.x - 90})translate(${d.y + 8},0)${
-          d.x < 180 ? "" : "rotate(180)"
-        }`;
-      })
-      .attr("text-anchor", (d) => {
-        return d.x < 180 ? "start" : "end";
-      })
-      .text((d) => {
-        // shorten the labels
-        if (d.data.key.length > 22) {
-          let val = d.data.key;
-          let count = 0;
-          while (val.length > 22 && count < 10) {
-            count++;
-            val = val
-              .split("-")
-              // remove last chunk
-              .filter((v, i, a) => i !== a.length - 1)
-              .join("-");
-          }
-          return `${vipLibs.includes(d.data.key) ? "⭐ " : ""}${val}...`;
+  node = node
+    .data(root.leaves())
+    .enter()
+    .append("a")
+    .attr("href", (d) => {
+      return `/os/${d.data.key}`;
+    })
+    .append("text")
+    .attr("class", "node")
+    .attr("dy", "0.31em")
+    .attr("transform", (d) => {
+      return `rotate(${d.x - 90})translate(${d.y + 8},0)${
+        d.x < 180 ? "" : "rotate(180)"
+      }`;
+    })
+    .attr("text-anchor", (d) => {
+      return d.x < 180 ? "start" : "end";
+    })
+    .text((d) => {
+      // shorten the labels
+      if (d.data.key.length > 22) {
+        let val = d.data.key;
+        let count = 0;
+        while (val.length > 22 && count < 10) {
+          count++;
+          val = val
+            .split("-")
+            // remove last chunk
+            .filter((v, i, a) => i !== a.length - 1)
+            .join("-");
         }
-        return `${vipLibs.includes(d.data.key) ? "⭐ " : ""}${d.data.key}`;
-      })
-      .on("mouseover", mouseovered)
-      .on("mouseout", mouseouted)
-      .append("title")
-      .text((d) => d.data.key);
-  }
-);
+        return `${vipLibs.includes(d.data.key) ? "⭐ " : ""}${val}...`;
+      }
+      return `${vipLibs.includes(d.data.key) ? "⭐ " : ""}${d.data.key}`;
+    })
+    .on("mouseover", mouseovered)
+    .on("mouseout", mouseouted)
+    .append("title")
+    .text((d) => d.data.key);
+});
 
 function mouseovered(d) {
   node.each((n) => {
