@@ -4,6 +4,7 @@ title: string-strip-html
 packages:
   - detergent
   - ranges-invert
+  - stristri
 ---
 
 ## Features
@@ -16,6 +17,8 @@ packages:
 - It can detect and skip false positives, for example, `a < b and c > d`.
 - Enabled-by-default but optional Recursive HTML Decoding — nothing will escape!
 - It won't strip JSP tags
+
+PS. We have [`stristri`](/os/stristri/) which also strips HTML. It can strip not only HTML but also CSS, text and templating tags. But it has less granular control over whitespace.
 
 {% include "btt.njk" %}
 

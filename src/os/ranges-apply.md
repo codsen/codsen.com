@@ -17,18 +17,17 @@ packages:
 
 ::: api
 {{ packageJsons["ranges-apply"].lect.req }}(
-  inputString,
-  rangesArray,
-  [progressFn]
+inputString,
+rangesArray,
+[progressFn]
 )
 :::
 
-| Input argument | Type                         | Obligatory? | Description                                                                                                                                                                                                                 |
-| -------------- | ---------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `inputString`  | String | yes         | Provide an array of ranges to invert. Ranges do not have to be [sorted](/os/ranges-sort/) or [merged](/os/ranges-merge/). |
-| `rangesArray`       | Array of zero or more arrays - OR - `null`                | yes         | [Ranges](/ranges/) to apply onto the string |
-| `progressFn`         | Function or something _falsy_                 | no          | Provide a callback function to report the progress - numbers `0` to `100` will be fed into it as the program advances. |
-
+| Input argument | Type                                       | Obligatory? | Description                                                                                                               |
+| -------------- | ------------------------------------------ | ----------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `inputString`  | String                                     | yes         | Provide an array of ranges to invert. Ranges do not have to be [sorted](/os/ranges-sort/) or [merged](/os/ranges-merge/). |
+| `rangesArray`  | Array of zero or more arrays - OR - `null` | yes         | [Ranges](/ranges/) to apply onto the string                                                                               |
+| `progressFn`   | Function or something _falsy_              | no          | Provide a callback function to report the progress - numbers `0` to `100` will be fed into it as the program advances.    |
 
 ## API - Output
 
@@ -43,8 +42,6 @@ Check out [ranges-push](/os/ranges-push/) which helps to manage the `rangesArray
 ## The algorithm
 
 We `array.reduce()` your given ranges array, slicing the input string accordingly. If given ranges is not array but `null` (meaning absence of ranges), same string is returned.
-
-The main thing is unit tests and edge case scenarios. Also, fancy optional features (upcoming) like using character enumeration counting emoji as one character.
 
 {% include "btt.njk" %}
 

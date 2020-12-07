@@ -229,11 +229,6 @@
       "source": "/os/update-version",
       "destination": "/os/update-versions",
       "statusCode": 308
-    },
-    {
-      "source": "/wordpress",
-      "destination": "/wordpress/wp-admin",
-      "statusCode": 308
     }
   ]
 }

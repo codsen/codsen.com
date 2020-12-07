@@ -830,12 +830,6 @@ footer {
     display: none;
   }
 
-  @media (min-width: $mid) {
-    section {
-      padding: 0 1rem 1rem !important;
-    }
-  }
-
   a {
     text-decoration: underline;
     &:hover {
@@ -874,9 +868,16 @@ main .open-source-container h3 {
 
 body > .container,
 footer {
-  /* width: 100%; */
   max-width: $max;
   margin: 0 auto;
+}
+
+body > .container {
+  width: 100%;
+}
+
+footer {
+  /* width: 100%; */
 }
 
 .layout-list {
@@ -1597,7 +1598,7 @@ svg {
   footer {
     flex-direction: row;
     section {
-      padding: 1rem 3rem 1rem 1rem;
+      padding: 1rem 4rem 1rem 1rem;
       flex: 1;
       p {
         max-width: 45rem;
@@ -3063,7 +3064,7 @@ article,
         left: 33%;
         margin-top: 10rem;
         width: calc(50vw + 16%);
-        max-width: 85vmin;
+        max-width: 90vmin;
         min-width: 67%;
 
         /* fixed ratio-related chunk starts: */
