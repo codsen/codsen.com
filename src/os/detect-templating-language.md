@@ -1,0 +1,34 @@
+---
+layout: package
+title: detect-templating-language
+packages:
+  - regex-is-jsp
+  - regex-is-jinja-nunjucks
+  - stristri
+---
+
+## API
+
+::: api
+{{ packageJsons["detect-templating-language"].lect.req }}(str)
+:::
+
+In other words, it's a function which takes a string and returns a plain object.
+
+## API - Output
+
+A plain object is returned, for example,
+
+```js
+{ 
+  name: "Nunjucks" 
+}
+```
+
+If templating language is not detected, `null` is set:
+
+```js
+{ 
+  name: null
+}
+```
