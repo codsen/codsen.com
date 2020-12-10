@@ -6,6 +6,7 @@ packages:
   - stristri
 ---
 
+{% raw %}
 ## Purpose
 
 Nunjucks and Jinja templating languages' syntax is mostly the same. There are certain code patterns which are Jinja-specific, mostly coming from Python functionality. This program, a regex, matches those patterns.
@@ -22,9 +23,11 @@ Nunjucks and Jinja templating languages' syntax is mostly the same. There are ce
 
   `'%.2f'|format(...`
 
-Often Python-specific features can be patched to make code render in Nunjucks. 
+Often Python-specific features can be patched to make code render in Nunjucks.
 
 This is not a definite detection tool but rather a minimal, fun attempt to programmatically distinguish between the two languages.
+
+{% endraw %}
 
 ## API
 
