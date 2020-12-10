@@ -16,12 +16,12 @@ packages:
 
 `detergent` prepares text for placing into HTML, especially, _email-template_ HTML:
 
-- deletes invisible Unicode characters (like ETX)
-- collapses whitespace
+- deletes invisible Unicode characters (like [ETX](http://www.fileformat.info/info/unicode/char/0003/index.htm))
+- [collapses](/os/string-collapse-white-space) whitespace
 - trims
 - prevents [widow words](https://en.wikipedia.org/wiki/Widows_and_orphans)
 - recursively decodes entities and encodes it back, preferring _named_ HTML entities over _numeric_-ones, switching to _numeric_ for entities which [don't render correctly](/os/html-entities-not-email-friendly/) across email clients
-- optionally strips HTML (with optional granular control over which tags exactly)
+- optionally [strips HTML](/os/string-strip-html) (with optional granular control over which tags exactly)
 - improves English grammar style: converts [M- and N-dashes](http://practicaltypography.com/hyphens-and-dashes.html) [apostrophes](http://practicaltypography.com/apostrophes.html) and [curly quotes](http://practicaltypography.com/straight-and-curly-quotes.html)
 
 Extra features are:

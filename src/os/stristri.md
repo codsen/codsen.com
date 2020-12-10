@@ -4,7 +4,6 @@ title: stristri
 packages:
   - codsen-tokenizer
   - string-strip-html
-  - ranges-merge
 ---
 
 ## Features
@@ -41,11 +40,10 @@ The `{{ packageJsons["stristri"].lect.req }}()` function will return **a plain o
 
 ```js
 {
+  log: {
+    timeTakenInMilliseconds: 23
+  },
   result: "abc click me def",
-  ranges: [
-    [3, 6, " "],
-    [14, 18, " "],
-  ],
   applicableOpts: {
     html: true,
     css: false,
@@ -62,8 +60,8 @@ Here is its API:
 
 | Key's name       | Key value's type                                                                         | Description                                                                                                |
 | ---------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| `result`         | String                                                                                   | The string output where all ranges were applied to it.                                                     |
-| `ranges`         | [ranges](/ranges/): all string amendment operations that were done to achieve the result |
+| `log`            | Plain object                                                                             | Various statistics                                                                                         |
+| `result`         | String                                                                                   | The result.                                                     |
 | `applicableOpts` | Plain object, only boolean keys from `opts`                                              | Tells which options object keys would have made a difference for this string input, if toggled differently |
 | `templatingLang` | Plain object                                                                             | Pipes the output of [`detect-templating-language`](/os/detect-templating-language/)                        |
 
@@ -79,6 +77,9 @@ Here is its API:
 | `css`                            | Boolean           | `true`  | Should we strip head CSS style tags, CSS rules and ar-rules inside |
 | `text`                           | Boolean           | `false` | Should we strip text                                               |
 | `templatingTags`                 | Boolean           | `false` | Should we strip any templating tags (like Nunjucks)                |
+| `templatingTags`                 | `null` or Function           | `null` | Pass a function, progress value, `0`-`100` will be passed to it |
+| `reportProgressFuncFrom`                 | Natural number \[0; 100] | `0` | Starting progress percentage |
+| `reportProgressFuncTo`                 | Natural number \[0; 100] | `100` | Ending progress percentage |
 
 The Optional Options Object is not validated; please take care of what values and of what type you pass.
 
@@ -90,13 +91,10 @@ Here is the Optional Options Object in one place (in case you ever want to copy 
   css: true,
   text: false,
   templatingTags: false,
+  reportProgressFunc: null,
+  reportProgressFuncFrom: 0,
+  reportProgressFuncTo: 100,
 }
 ```
-
-{% include "btt.njk" %}
-
-### Using ranges from the output
-
-The _ranges_ from the output are compatible with [range-ecosystem libraries](/ranges/) like [`ranges-apply`](/os/ranges-apply/).
 
 {% include "btt.njk" %}

@@ -7,7 +7,18 @@ packages:
 
 ## Purpose
 
-It's used to generate an array of all possible variations, `2^n`, of `n` boolean options object keys:
+It's used to generate an array of all possible variations, `2^n`, of `n` boolean options object keys.
+
+Input (key values don't matter as long as key are booleans):
+
+```json
+{
+  "oodles": true,
+  "crambles": false
+}
+```
+
+Output:
 
 ```json
 [
