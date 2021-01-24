@@ -19,8 +19,7 @@ blocks:
       jobs:
         - name: Publish
           commands:
-            # set up...
             - npm i
-            - pwd
-            - ls
-            - git status
+            - npm run build
+            - npm run tests
+            - wrangler publish
