@@ -34,15 +34,15 @@ This library does such object "flattening".
 
 ## API
 
-**ofr(plainObject, referenceObject\[, options])**
+:::api
+flattenReferencing(
+  plainObject, 
+  referenceObject,
+  [options]
+)
+:::
 
 Returns a new plain object, flattened according to your supplied reference object.
-
-```js
-const ofr = require("object-flatten-referencing");
-const res = ofr(plainObject, referenceObject, options);
-console.log("res = " + JSON.stringify(res, null, 4));
-```
 
 {% include "btt.njk" %}
 
@@ -201,7 +201,7 @@ const reference = {
   title: "Welcome",
   name: "John",
 };
-mergedDataFile = ofr(mergedDataFile, reference, {
+mergedDataFile = flattenReferencing(mergedDataFile, reference, {
   wrapHeadsWith: "${",
   wrapTailsWith: "}",
 });

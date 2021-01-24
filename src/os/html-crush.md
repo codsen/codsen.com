@@ -36,14 +36,14 @@ As a side priority, this application also takes into consideration **human-frien
 This program exports a plain object where main function is under a key "crush". That's why you consume it like this:
 
 ```js
-import {{ packageJsons["html-crush"].lect.req }} from "html-crush";
+import {{ crush }} from "html-crush";
 ```
 
 | Exported Key | Description |
 | ------------ | ---------------------- |
 | `crush`      | The main function          |
 | `defaults`   | Optional Options Object's [defaults](#api-crush-optional-options-object) |
-| `version`   | As per current `package.json` — a string, for example, `"{{ packageJsons["html-crush"].version }}"` |
+| `version`    | As per current `package.json` — a string, for example, `"3.0.3"` |
 
 {% include "btt.njk" %}
 

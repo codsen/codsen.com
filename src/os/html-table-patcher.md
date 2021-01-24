@@ -5,28 +5,28 @@ title: html-table-patcher
 
 ## Idea
 
-When we make email templates, sooner or later, we have to add conditional logic around table tags. If this, show that row, if that, show another column, and so on. As a result, when we try to preview HTML in the browser, all the logic is placed at the wrong place, at the top, making it hard to visually QA.
+ESP template tags (anything, from Mailchimp to Salesforce) or templating languages (like Nunjucks), when previewed in browser, appear at wrong places. It's because templating tags are often placed between `table`, `tr` or `td` tags.
 
-This program patches table structures, creating cells as needed and placing the code in those cells so that when you preview, templating literals are in the correct places.
+This program patches table structures, so you can visually check them easier:
 
-It is another helper tool to QA email campaigns.
+![patching HTML tables](/images/package-html-table-patcher-idea.png)
 
 {% include "btt.njk" %}
 
 ## API
 
-This package exports a plain object with three keys: `{ patcher, defaults, version }`.
+When you `import { patcher, defaults, version } from "html-table-patcher"`, you get three things:
 
-The first-one has a value which is the main function.
-The second one is the defaults (plain) object.
-The third one is the version taken straight from `package.json`
+- `patcher` is the main function.
+- `defaults` is the plain object, default options.
+- `version` is string, coming straight from `package.json`
 
 {% include "btt.njk" %}
 
 ## `patcher()` API - Input
 
 ::: api
-{{ packageJsons["html-table-patcher"].lect.req }}(str, [opts])
+patcher(str, [opts])
 :::
 
 | Input argument | Key value's type | Obligatory? | Description                                        |

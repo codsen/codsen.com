@@ -21,7 +21,7 @@ It lets you DRY the plain objects (JSON files contents) — any special marker i
 ## API
 
 ::: api
-{{ packageJsons["json-variables"].lect.req }}(inputObj, [opts])
+jVar(inputObj, [opts])
 :::
 
 In other words, the main export is a function which takes two input arguments, `inputObj` and optional plain object `opts` (square brackets above mean "optional").

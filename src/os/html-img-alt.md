@@ -25,7 +25,7 @@ The main USP of this library is that **it does not parse the HTML**. It will nev
 ## API
 
 ::: api
-{{ packageJsons["html-img-alt"].lect.req }}(str, [opts])
+alts(str, [opts])
 :::
 
 In other words, it's a function which takes two input arguments, second-one being optional (marked by square brackets).

@@ -3,6 +3,14 @@ layout: package
 title: eslint-plugin-row-num
 ---
 
+## Idea
+
+It's an ESLint plugin which automatically updates row numbers inside every `console.log`:
+
+![idea](/images/package-eslint-plugin-row-num-idea.gif)
+
+{% include "btt.njk" %}
+
 ## Setup
 
 First, make sure `eslint` itself is installed among the dev dependencies. "`i`" below means `install`, "`-D`" below means "dev dependency" (as opposed to a normal dependency). Quick refresher — when you publish an npm package and somebody installs it, its dev dependencies don't get installed when they `npm i` your package. That's the point of separating dev and normal dependencies.

@@ -25,7 +25,7 @@ PS. We have [`stristri`](/os/stristri/) which also strips HTML. It can strip not
 ## API - Input
 
 ::: api
-{{ packageJsons["string-strip-html"].lect.req }}(input, [opts])
+stripHtml(input, [opts])
 :::
 
 In other words, it's a function which takes a string and an optional options.
@@ -41,7 +41,7 @@ If input arguments are supplied have any other types, an error will be `throw`n.
 
 ## API - Output
 
-The `{{ packageJsons["string-strip-html"].lect.req }}()` function will return **a plain object**, for example:
+The `stripHtml()` function will return **a plain object**, for example:
 
 ```js
 {
@@ -118,21 +118,21 @@ Here is the Optional Options Object in one place (in case you ever want to copy 
 The _ranges_ from the output are compatible with [range-ecosystem libraries](/ranges/) like [`ranges-apply`](/os/ranges-apply/):
 
 ```js
-const {{ packageJsons["string-strip-html"].lect.req }} = require("string-strip-html");
-const {{ packageJsons["ranges-apply"].lect.req }} = require("ranges-apply");
+const { stripHtml } = require("string-strip-html");
+const { rApply } = require("ranges-apply");
 
 const input = `    <div>
   something
 </div>
 `;
-const { result, ranges } = {{ packageJsons["string-strip-html"].lect.req }}(input);
+const { result, ranges } = stripHtml(input);
 console.log(ranges);
 // => [[0, 12], [21, 32]]
 console.log(result);
 // => "something"
 
 // apply ranges onto string:
-const finalResultStr = {{ packageJsons["ranges-apply"].lect.req }}(input, ranges);
+const finalResultStr = rApply(input, ranges);
 // you'll get same thing:
 console.log(finalResultStr);
 // => "something"
@@ -275,7 +275,7 @@ const cb = ({
   rangesArr.push(deleteFrom, deleteTo, insert);
   // you might want to do something different, depending on "tag" contents.
 };
-const { result } = {{ packageJsons["string-strip-html"].lect.req }}("abc<hr>def", { cb });
+const { result } = stripHtml("abc<hr>def", { cb });
 console.log(result);
 ```
 
@@ -300,12 +300,12 @@ const cb = ({
 }) => {
   rangesArr.push(deleteFrom, deleteTo, insert);
 };
-const res1 = {{ packageJsons["string-strip-html"].lect.req }}("abc<hr>def", { cb });
+const res1 = stripHtml("abc<hr>def", { cb });
 console.log(res1);
 // => "abc def"
 
 // you can request ranges instead:
-const res2 = {{ packageJsons["string-strip-html"].lect.req }}("abc<hr>def", { cb });
+const res2 = stripHtml("abc<hr>def", { cb });
 console.log(res2);
 // => [[3, 7, " "]]
 ```
@@ -319,7 +319,7 @@ In the example below, we are going to use one of the keys of the `tag`, the `tag
 For example, considering input with some rogue whitspace, `<div >abc</ div>`, replace all `div` with `tralala`, minding the closing slash:
 
 ```js
-const {{ packageJsons["string-strip-html"].lect.req }} = require("string-strip-html");
+const stripHtml = require("string-strip-html");
 // define a callback as a separate variable if you are going to use it multiple times:
 const cb = ({
   tag,
@@ -335,7 +335,7 @@ const cb = ({
     `<${tag.slashPresent ? "/" : ""}tralala>`
   );
 };
-const { result, ranges} = {{ packageJsons["string-strip-html"].lect.req }}("<div >abc</ div>", { cb });
+const { result, ranges} = stripHtml("<div >abc</ div>", { cb });
 console.log(result);
 // => "<tralala>abc</tralala>"
 console.log(ranges);

@@ -7,7 +7,7 @@ title: chlu
 
 ## Purpose
 
-![features](https://glcdn.githack.com/codsen/codsen/raw/master/packages/chlu-cli/media/features_comp.png)
+![features](/images/package-chlu-cli-features_comp.png)
 
 **7 main features (see above):**
 

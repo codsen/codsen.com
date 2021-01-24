@@ -12,7 +12,7 @@ title: ranges-crop
 ## API
 
 ::: api
-{{ packageJsons["ranges-crop"].lect.req }}(arr, strLen)
+rCrop(arr, strLen)
 :::
 
 | Input argument | Type                         | Obligatory? | Description                                                                                                                                                                                                                 |

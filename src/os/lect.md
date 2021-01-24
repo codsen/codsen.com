@@ -9,7 +9,7 @@ It's an opinionated npm libraries maintenance CLI app.
 
 Before we migrated README's to [codsen.com](https://codsen.com), it used to replace README's chapters, suitable for automation: installation instructions, badges and so on.
 
-Since the migration, Nunjucks on Eleventy does the job, `lect` only generates placeholder README's and all auxiliary files:
+`lect` generates the placeholder README's and all auxiliary files:
 
 - `rollup.config.json`
 - `.prettierignore`

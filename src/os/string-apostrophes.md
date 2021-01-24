@@ -24,9 +24,9 @@ When you consume this package,
 
 ```js
 // Common JS:
-const {{ packageJsons["string-apostrophes"].lect.req }} = require("string-apostrophes");
+const { convertOne, convertAll } = require("string-apostrophes");
 // ES Modules:
-import {{ packageJsons["string-apostrophes"].lect.req }} from "string-apostrophes";
+import { convertOne, convertAll } from "string-apostrophes";
 ```
 
 you get two functions: [`convertAll()`](#convertall) and [`convertOne()`](#convertone).

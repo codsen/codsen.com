@@ -9,7 +9,7 @@ packages:
 ## API
 
 ::: api
-{{ packageJsons["regex-is-jsp"].lect.req }}()
+isJSP()
 :::
 
 In other words, it's a function which returns a RegExp object.

@@ -39,7 +39,7 @@ When `object-merge-advanced` merges two _objects_, it will recursively traverse 
 
 There are ten possible combinations: 10 types of first input (object #1) and ten types of second input (object #2): non-empty (full) object, empty object, non-empty array, empty array, non-empty string, empty string, number, boolean, `undefined` and `null`.
 
-![matching algorithm](https://glcdn.githack.com/codsen/codsen/raw/master/packages/object-merge-advanced/media/object-merge-advanced_algorithm.png)
+![matching algorithm](/images/package-object-merge-advanced-algorithm.png)
 
 A large number in the centre of a square shows which value prevails.
 
@@ -67,7 +67,7 @@ Also, we use it in small cases where `Object.assign` is not suitable, for exampl
 ## API
 
 ::: api
-{{ packageJsons["object-merge-advanced"].lect.req }}(
+mergeAdvanced(
   input1,
   input2,
   [options]
@@ -107,8 +107,8 @@ Here are all defaults in one place:
 {
   cb: null,
   mergeObjectsOnlyWhenKeysetMatches: true,
-  ignoreKeys: undefined,
-  hardMergeKeys: undefined,
+  ignoreKeys: [],
+  hardMergeKeys: [],
   mergeArraysContainingStringsToBeEmpty: false,
   oneToManyArrayObjectMerge: false,
   hardMergeEverything: false,
@@ -117,8 +117,8 @@ Here are all defaults in one place:
   dedupeStringsInArrayValues: false,
   mergeBoolsUsingOrNotAnd: true,
   useNullAsExplicitFalse: false,
+  hardArrayConcatKeys: [],
   hardArrayConcat: false,
-  hardArrayConcatKeys: undefined,
 }
 ```
 
@@ -158,7 +158,7 @@ Callback is very powerful — you could pretty much use it instead of all the op
 For example, `opts.ignoreEverything` would be the same as returning the first argument in the callback instead of third. You can name arguments (`inputArg1` and others) any way you like, only _their order_ matters.
 
 ```js
-{{ packageJsons["object-merge-advanced"].lect.req }}(
+mergeAdvanced(
   {
     ...
   },
@@ -177,7 +177,7 @@ For example, `opts.ignoreEverything` would be the same as returning the first ar
 Also, `opts.hardMergeEverything` setting would be the same as returning callback's second argument in every case:
 
 ```js
-{{ packageJsons["object-merge-advanced"].lect.req }}(
+mergeAdvanced(
   {
     ...
   },
@@ -202,7 +202,7 @@ For example, we want to hard-merge (meaning, when values clash, second argument'
 We use the _callback_, passing it in the options. Inside, we check the types and instead of suggested result (third argument), we return the second argument - value from the second argument:
 
 ```js
-const res = {{ packageJsons["object-merge-advanced"].lect.req }}(
+const res = mergeAdvanced(
   {
     // input #1
     a: {
@@ -256,7 +256,7 @@ Another example, we want to **wrap** the values of what was merged with double c
 Easy:
 
 ```js
-const res = {{ packageJsons["object-merge-advanced"].lect.req }}(
+const res = mergeAdvanced(
   {
     a: {
       b: "old value for b",
@@ -322,7 +322,7 @@ You are fine with `y` from `obj2` overwriting `x` BUT you want values `a` and `b
 To illustrate the case, I'll put the key deeper to show you how the paths work:
 
 ```js
-const res = {{ packageJsons["object-merge-advanced"].lect.req }}(
+const res = mergeAdvanced(
   {
     x: {
       key: "a", // <------- concatenate this
@@ -418,7 +418,7 @@ const obj2 = {
   ],
 };
 
-const res1 = {{ packageJsons["object-merge-advanced"].lect.req }}(object1, object2);
+const res1 = mergeAdvanced(object1, object2);
 
 console.log("res1 = " + JSON.stringify(res1, null, 4));
 // => {
@@ -440,7 +440,7 @@ console.log("res1 = " + JSON.stringify(res1, null, 4));
 but if you turn off the safeguard, `{ mergeObjectsOnlyWhenKeysetMatches: false }` each object within an array is merged no matter their differences in the keysets:
 
 ```js
-const res2 = {{ packageJsons["object-merge-advanced"].lect.req }}(object1, object2, {
+const res2 = mergeAdvanced(object1, object2, {
   mergeObjectsOnlyWhenKeysetMatches: false,
 });
 console.log("res2 = " + JSON.stringify(res2, null, 4));

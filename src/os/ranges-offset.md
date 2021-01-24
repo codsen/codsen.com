@@ -6,12 +6,12 @@ title: ranges-offset
 ## API
 
 ::: api
-{{ packageJsons["ranges-offset"].lect.req }}(arr, offset)
+rOffset(rangesArr, offset)
 :::
 
 | Input argument | Type                         | Obligatory? | Description                                                                                                                                                                                                                 |
 | -------------- | ---------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `arr`  | null or Array of one or more arrays | no         | Provide an array of ranges to invert. Ranges do not have to be [sorted](/os/ranges-sort/) or [merged](/os/ranges-merge/). |
+| `arr`  | null or Array of one or more arrays ([Ranges](/ranges/)) | no         | Provide an array of ranges to invert. Ranges do not have to be [sorted](/os/ranges-sort/) or [merged](/os/ranges-merge/). |
 | `offset`       | Integer number               | no         | This number will be added to each index of every range.  |
 
 **Output**:

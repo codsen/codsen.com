@@ -38,7 +38,9 @@ import {
 
 It's a function, takes two arguments: input string and optional options object:
 
-**genAtomic(str, [originalOpts])**
+:::api
+genAtomic(str, [opts])
+:::
 
 {% include "btt.njk" %}
 
@@ -208,7 +210,7 @@ On a basic level, you can turn off heads/tails (set `opts.includeHeadsAndTails` 
 
 Each line which contains `$$$` will be repeated, from default `0` to `500` or within the range you set:
 
-```css
+```
 .pb$$$ { padding-bottom: $$$px !important; } | 5 | 10
 ```
 

@@ -14,7 +14,7 @@ It splits the string by _whitespace_ — definition of "whitespace" being "anyth
 ## API
 
 ::: api
-{{ packageJsons["string-split-by-whitespace"].lect.req }}(str, [opts])
+splitByW(str, [opts])
 :::
 
 In other words, it's a function which takes two input arguments, second-one being optional (marked by square brackets).

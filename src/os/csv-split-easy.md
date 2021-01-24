@@ -32,7 +32,7 @@ Outside of the scope:
 ## API - Input
 
 ::: api
-{{ packageJsons["csv-split-easy"].lect.req }}(str, [opts])
+splitEasy(str, [opts])
 :::
 
 In other words, it's a function which takes two input arguments, second one is optional (marked by brackets).

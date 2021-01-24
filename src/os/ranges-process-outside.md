@@ -12,7 +12,12 @@ title: ranges-process-outside
 ## API
 
 ::: api
-{{ packageJsons["ranges-process-outside"].lect.req }}(originalStr, originalRanges, cb, [skipChecks])
+rProcessOutside(
+  originalStr, 
+  originalRanges, 
+  cb, 
+  [skipChecks]
+)
 :::
 
 In other words, it's a function which takes 4 arguments:
@@ -29,9 +34,9 @@ In other words, it's a function which takes 4 arguments:
 This program operates in a callback fashion, just like `Array.prototype.forEach()`, for example:
 
 ```js
-const {{ packageJsons["ranges-process-outside"].lect.req }} = require("ranges-process-outside");
+const { rProcessOutside } = require("ranges-process-outside");
 const gather = [];
-{{ packageJsons["ranges-process-outside"].lect.req }}(
+rProcessOutside(
   "abcdefghij",
   [[0, 5]],
   (idx) => {
@@ -61,9 +66,9 @@ A callback inside a callback!
 For example, skip one character:
 
 ```js
-const {{ packageJsons["ranges-process-outside"].lect.req }} = require("ranges-process-outside");
+const { rProcessOutside } = require("ranges-process-outside");
 const gather = [];
-processOutside(
+rProcessOutside(
   "abcdefghij",
   [[0, 5]],
   (fromIdx, toIdx, offsetValueCb) => {

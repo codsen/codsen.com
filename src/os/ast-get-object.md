@@ -12,7 +12,7 @@ It is a helper function to extract plain objects by certain key-value pairs (if 
 ## API
 
 ::: api
-{{ packageJsons["ast-get-object"].lect.req }}(
+getObj(
   input,
   keyValPairObj,
   [replacementContentsArr]

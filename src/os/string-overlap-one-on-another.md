@@ -21,7 +21,7 @@ In essence,
 ## API
 
 ::: api
-{{ packageJsons["string-overlap-one-on-another"].lect.req }}(str1, str2, [opts])
+overlap(str1, str2, [opts])
 :::
 
 ### API - Input

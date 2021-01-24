@@ -22,7 +22,7 @@ For healthy HTML code, however, finding the closing double quotes is a trivial t
 ## API - Input
 
 ::: api
-{{ packageJsons["is-html-attribute-closing"].lect.req }}(
+isAttrClosing(
   str,
   idxOfAttrOpening,
   isThisClosingIdx

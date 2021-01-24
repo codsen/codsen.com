@@ -12,7 +12,7 @@ It's a best practice to avoid [shorthand](https://en.wikipedia.org/wiki/Web_colo
 ## API
 
 ::: api
-{{ packageJsons["color-shorthand-hex-to-six-digit"].lect.req }}(something)
+conv(something)
 :::
 
 - Input: anything

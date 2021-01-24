@@ -40,6 +40,10 @@ We are going to use it ourselves to compile stats of all our unit tests.
 
 ## API
 
+:::api
+parseTap(str|Stream)
+:::
+
 API depends on what you give as an input:
 
 - if you (synchronously) provide a `string`, you'll (synchronously) receive a plain object
@@ -72,7 +76,7 @@ In real-world scenarios, async is preferred so this program takes _stream_, and 
 ```js
 const fs = require("fs");
 const path = require("path");
-const parseRawTap = require("tap-parse-string-to-object");
+const { parseTap } = require("tap-parse-string-to-object");
 
 // notice we put this async IIFE to be able to await the promise:
 (async () => {
@@ -118,7 +122,7 @@ ok 1 - UMD build works fine # time=10.033ms
   );
 
   // 4. a promise (which we await) is returned and it yields a plain object:
-  const result = await parse(contentsAsStream);
+  const result = await parseTap(contentsAsStream);
   console.log(JSON.stringify(result, null, 4));
   // => {
   //      ok: true,

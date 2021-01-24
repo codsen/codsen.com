@@ -20,9 +20,13 @@ That's what this program is about — it is a string value lookup helper.
 
 Both exported functions have the same API:
 
-**left(str, [, idx])**
+:::api
+left(str, [idx])
+:::
 
-**right(str, [, idx])**
+:::api
+right(str, [idx])
+:::
 
 On both, the first input argument is a string, the optional second (marked by brackets above) is a starting index. We "look" to the left or to the right of that index, then report a first non-whitespace character's index on that side. In absence, we return `null`.
 
@@ -59,9 +63,27 @@ Imagine, you are "located" at the index of dot ".", `47`. In this case, `chompLe
 
 Both exported functions have the same API:
 
-**chompLeft(str, idx, [opts], char1, char2, char3...)**
+:::api
+chompLeft(
+  str, 
+  idx, 
+  [opts], 
+  char1, 
+  char2, 
+  char3
+)
+:::
 
-**chompRight(str, idx, [opts], char1, char2, char3...)**
+:::api
+chompRight(
+  str, 
+  idx, 
+  [opts], 
+  char1, 
+  char2, 
+  char3
+)
+:::
 
 You can pass a plain object - options - as the third argument, or you can omit it.
 
@@ -110,20 +132,20 @@ console.log(res2);
 // => 2
 
 // mode 1 - stops at first space met, in this case at first "b"
-const res3 = chompLeft("a\n  b c b c  x y", 12, { mode: "1" }, "b", "c");
+const res3 = chompLeft("a\n  b c b c  x y", 12, { mode: 1 }, "b", "c");
 console.log(res3);
 // => 4
 // PS. "\n" counts as length of one
 
 // mode 2 - chomps all whitespace except newlines
 // in this case it stops to the right of \n, index 2:
-const res4 = chompLeft("a\n  b c b c  x y", 12, { mode: "2" }, "b", "c");
+const res4 = chompLeft("a\n  b c b c  x y", 12, { mode: 2 }, "b", "c");
 // => 2
 
 // mode 3 - hungriest of all whitespace chomps - chomps until it meets
 // edge of a string or non-whitespace character (one which String.trim()'s
 // to non-zero length character):
-const res5 = chompLeft("a\n  b c b c  x y", 12, { mode: "3" }, "b", "c");
+const res5 = chompLeft("a\n  b c b c  x y", 12, { mode: 3 }, "b", "c");
 // => 1
 ```
 
@@ -138,9 +160,27 @@ side of given index, disregarding the whitespace.
 
 Both exported functions have the same API:
 
-**leftSeq(str, idx, [opts], str1ToMatch, str2ToMatch, str3ToMatch... )**
+:::api
+leftSeq(
+  str, 
+  idx, 
+  [opts], 
+  str1ToMatch, 
+  str2ToMatch, 
+  str3ToMatch
+)
+:::
 
-**rightSeq(str, idx, [opts], str1ToMatch, str2ToMatch, str3ToMatch... )**
+:::api
+rightSeq(
+  str, 
+  idx, 
+  [opts], 
+  str1ToMatch, 
+  str2ToMatch, 
+  str3ToMatch
+)
+:::
 
 Above, square brackets mean options are optional, you can omit them.
 
@@ -200,9 +240,13 @@ Program reports any whitespace gap ranges it encountered and also indexes of lef
 
 Both exported functions have the same API.
 
-**leftStopAtNewLines(str, [, idx])**
+:::api
+leftStopAtNewLines(str, [idx])
+:::
 
-**rightStopAtNewLines(str, [, idx])**
+:::api
+rightStopAtNewLines(str, [idx])
+:::
 
 On both, the first input argument is a string, the optional second (marked by brackets above) is a starting index.
 

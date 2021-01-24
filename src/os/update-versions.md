@@ -7,7 +7,9 @@ packages:
 
 ## Quick Take
 
-Update all dependencies of all packages in a monorepo — or single repo — to be the latest as per npm.
+Update all dependencies of all packages in a monorepo — or single repo — to be the latest as per npm:
+
+![calling upd](/images/package-update-versions-upd.gif)
 
 ## What `update-versions` does
 

@@ -5,17 +5,9 @@ title: email-all-chars-within-ascii-cli
 
 ## Quick Take
 
-Call on one file:
+Checks for unencoded or invisible characters, checks each line length.
 
-![ran on one file](https://glcdn.githack.com/codsen/codsen/raw/master/packages/email-all-chars-within-ascii-cli/media/mov1.gif)
-
-Call just the application and it will let you choose a file from that folder:
-
-![ran without any arguments](https://glcdn.githack.com/codsen/codsen/raw/master/packages/email-all-chars-within-ascii-cli/media/mov2.gif)
-
-Call on multiple files all at once:
-
-![ran on multiple files all at once](https://glcdn.githack.com/codsen/codsen/raw/master/packages/email-all-chars-within-ascii-cli/media/mov3.gif)
+![use](/images/package-email-all-chars-within-ascii-cli-1.gif)
 
 {% include "btt.njk" %}
 
@@ -23,11 +15,7 @@ Call on multiple files all at once:
 
 Once installed, call it on a file:
 
-`withinascii YOURFILE.html` or
-
-`tinaturner "templates/YOURFILE.html"`
-
-Whichever is easier for you to remember.
+`ascii YOURFILE.html`
 
 ## Idea
 

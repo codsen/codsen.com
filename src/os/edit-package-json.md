@@ -21,7 +21,9 @@ There are two methods: `set()` and `del()`:
 
 ### .set()
 
-**set(source, path, val)**
+:::api
+set(source, path, val)
+:::
 
 | Input argument | Type     | Obligatory? | Description                                                                                                            |
 | -------------- | -------- | ----------- | ---------------------------------------------------------------------------------------------------------------------- |
@@ -43,7 +45,9 @@ To repeat, `set()` can't create new paths yet, it's still in a _baby_ state. `se
 
 ### .del()
 
-**del(source, path)**
+:::api
+del(source, path)
+:::
 
 | Input argument | Type   | Obligatory? | Description                                                                                                         |
 | -------------- | ------ | ----------- | ------------------------------------------------------------------------------------------------------------------- |

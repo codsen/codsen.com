@@ -5,6 +5,8 @@ title: js-row-num-cli
 
 ## Use it
 
+![in terminal](/images/package-js-row-num-cli-update-console-log-row-number.gif)
+
 Once installed, call it typing `jsrownum` or `jrn` in your terminal, like this:
 
 ```bash

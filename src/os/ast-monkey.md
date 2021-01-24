@@ -39,23 +39,23 @@ A single HTML tag `<td>a</td>` can be parsed into an AST (see the [playground](h
 
 ## The challenge
 
-Operations on AST's — Abstract Syntax Trees — or anything deeply nested are difficult. **The main problem** is going "up the branch": querying the parent and sibling nodes.
+Operations on AST's — Abstract Syntax Trees — or anything deeply nested are difficult. 
 
-**Second problem**, AST's get VERY BIG very quickly. A single tag, `<td>a</td>`, 10 characters produced 398 characters of AST above.
+**The main problem** is going "up the branch" — querying the parent and sibling nodes.
 
-**The first problem**, the "Going up", is often solved by putting circular references in the parsed tree, notice `"parent": "[Circular ~.0]",` in the tree above. This way, you can query `.parent` like `tag.nestedTag.parent[2]`. Problem is, a) it's not standard JSON, you can't even `JSON.stringify` (specialised stringification packages do exist); b) so what that you "dipped" to some branch and went back up — it's only a _tactical_ move and nothing _strategical_.
+**Second problem**, AST's get VERY BIG very quickly. A single tag, `<td>a</td>`, 10 characters produced 398 characters of AST above. Enormous inputs are very hard to reason about, especially to troubleshoot, printed trees don't fit into screen.
 
-This program goes another way, it uses indexing and "breadcrumb" paths. For example, you traverse and find that node you want is index `58`, whole path being `[2, 14, 16, 58]`. You save the path down. After the traversal is done, you fetch the monkey to delete the bloody index `58`. You can also use a `for` loop on breadcrumb index array, `[2, 14, 16, 58]` and fetch and check parent `16` and grandparent `14`. Lots of possibilities. Method [.find()](#find) searches using key or value or both, and method [.get()](#get) searches using a known index. That's the strategy.
+**The first problem**, the "Going up", is often solved by putting circular references in the parsed tree, like `"parent": "[Circular ~.0]",` in the example above. The first drawback of using circular references is that it's not standard JSON, you can't even `JSON.stringify` (specialised stringification [packages](https://www.npmjs.com/package/json-stringify-safe) do exist) — everything from the algorithm up to the unit test runner are affected. The second drawback of circular references is that while they make it easier to query things, they also make it harder to amend things — you have to amend "circular extras" as well (or hope renderer will be OK, but that's only for small operations).
 
-By the way, **the second problem**, the AST size challenge, is something we have to live with. Parsers that don't use circular paths produce smaller trees. From practice, it's handy to evaluate AST's visually, using GUI applications, such as https://astexplorer.net/
+This program doesn't rely on circular references. It uses indexing of "breadcrumb" paths. For example, you traverse and find that node you want is index `58`, whole path being `[2, 14, 16, 58]`. You save the path down. After the traversal is done, you fetch the monkey to delete the index `58`. You can also use a `for` loop on breadcrumb index array, `[2, 14, 16, 58]` and fetch and check parent `16` and grandparent `14`. Lots of possibilities. Method [.find()](#find) searches using key or value or both, and method [.get()](#get) searches using a known index. That's the strategy.
 
 {% include "btt.njk" %}
 
 ## Idea
 
-Conceptually, we use two systems to fetch paths:
+Conceptually, we use two systems to mark paths in AST:
 
-1. Our unique, number-based indexing system — each encountered node is numbered, for example, `58` (along with "breadcrumb" path, an array of integers, for example, `[2, 14, 16, 58]`). If you know the number you can get monkey to fetch you the node at that number.
+1. Our unique, number-based indexing system — each encountered node is numbered, for example, `58` (along with "breadcrumb" path, an array of integers, for example, `[2, 14, 16, 58]`). If you know the number you can get monkey to fetch you the node at that number or make amends on it.
 2. [object-path](https://www.npmjs.com/package/object-path) notation, as in `foo.1.bar` (instead of `foo[1].bar`). The dot marking system is also powerful, it is used in many our programs, althouh it has some shortcomings ([no dots in key names](https://github.com/mariocasciaro/object-path/issues/96), for example).
 
 [Traversal](#traverse) function will report both ways.

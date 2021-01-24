@@ -8,7 +8,7 @@ title: csv-sort
 - Sorts rows in correct order that follows the double-entry format.
 - Trims the empty columns and rows (so-called 2D-Trim^).
 
-![2D trim of a CSV contents](https://glcdn.githack.com/codsen/codsen/raw/63d7dc7cee9c957d3dc51d14af99b557c081a250/packages/csv-sort/media/img2.png)
+![2D trim of a CSV contents](/images/package-csv-sort-img2.png)
 
 In later releases, we would like to be able to recognise and fix any offset columns caused by misinterpreted commas as values.
 
@@ -19,7 +19,7 @@ In later releases, we would like to be able to recognise and fix any offset colu
 ## API - Input
 
 ::: api
-{{ packageJsons["csv-sort"].lect.req }}(str)
+sort(str)
 :::
 
 In other words, it's a function which takes one input argument, string (CSV contents).

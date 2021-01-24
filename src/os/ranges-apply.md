@@ -16,10 +16,10 @@ packages:
 ## API
 
 ::: api
-{{ packageJsons["ranges-apply"].lect.req }}(
-inputString,
-rangesArray,
-[progressFn]
+rApply(
+  inputString,
+  rangesArray,
+  [progressFn]
 )
 :::
 

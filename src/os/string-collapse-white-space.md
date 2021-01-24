@@ -8,7 +8,7 @@ packages:
 ## API
 
 ::: api
-{{ packageJsons["string-collapse-white-space"].lect.req }}(str, [opts])
+collapse(str, [opts])
 :::
 
 In other words, it's a function which takes two input arguments, second-one being optional (marked by square brackets).

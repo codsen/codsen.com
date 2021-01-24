@@ -30,7 +30,7 @@ STRENGTHS:
 
 WEAKNESSES:
 
-- This is typical for non-parsing programs — broken code normally breaks parsers and when using parser-based programs, that's how you find out something's wrong with your code. EmailComb, being a non-parsing program, will never break! That means, you have to find other means (like _linters_) to detect, is your code broken. This might be a strength or a weakness, depends how you look at it.
+- Broken code causes parsers _throw_ errors — that's how you find out something's wrong with your code in parser-based programs. But EmailComb, being a non-parsing program, will never _throw_! That means, you have to find other means (like _linters_) to detect, is your code broken. This might be a strength or a weakness, depends how you look at it.
 - **Does not support external stylesheets** or JS injecting more classes (because it's an email development-oriented tool)
 
 COMPETITORS:

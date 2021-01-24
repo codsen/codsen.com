@@ -39,7 +39,12 @@ There are few rules:
 ## API
 
 ::: api
-{{ packageJsons["string-find-heads-tails"].lect.req }}(str, heads, tails, [fromIndex])
+strFindHeadsTails(
+  str, 
+  heads, 
+  tails, 
+  [fromIndex]
+)
 :::
 
 In other words, it's a function which takes four input arguments, last-one optional (marked with square brackets).

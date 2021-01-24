@@ -18,7 +18,7 @@ If this library will encounter two things that contain only _empty things_, it w
 For example these two are deemed to be equal:
 
 ```js
-{{ packageJsons["ast-loose-compare"].lect.req }}(
+looseCompare(
   {
     a: "a",
     b: "\n \n\n",
@@ -34,7 +34,7 @@ For example these two are deemed to be equal:
 Second input argument can be subset of first-one, notice `b` values are of a different type, yet both contain only _empty space_:
 
 ```js
-{{ packageJsons["ast-loose-compare"].lect.req }}(
+looseCompare(
   {
     a: "a",
     b: [[["\n \n\n"]]],
@@ -53,7 +53,7 @@ Second input argument can be subset of first-one, notice `b` values are of a dif
 ## API
 
 ::: api
-{{ packageJsons["ast-loose-compare"].lect.req }}(bigObj, smallObj)
+looseCompare(bigObj, smallObj)
 :::
 
 In other words, it's a function which takes two input arguments, both obligatory.

@@ -6,7 +6,7 @@ title: ranges-sort
 ## API
 
 ::: api
-{{ packageJsons["ranges-sort"].lect.req }}(arr, [opts])
+rSort(arr, [opts])
 :::
 
 In other words, this library gives you a _function_ and you must feed an array into its first argument and also if you wish, you can feed a second argument, the _Optional Options Object_ (bracket in `[, opts]` means "optional").

@@ -12,7 +12,7 @@ It's an alternative to JS regexes.
 ## API
 
 ::: api
-{{ packageJsons["easy-replace"].lect.req }}(
+er(
   source_string,
   options_object,
   replacement_string

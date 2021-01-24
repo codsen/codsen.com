@@ -20,7 +20,7 @@ If you want to delete any nested objects that contain certain `key`/`value` pair
 ## API
 
 ::: api
-{{ packageJsons["object-delete-key"].lect.req }}(input, options)
+deleteKey(input, options)
 :::
 
 In other words, it's a function which takes two input arguments, both obligatory.

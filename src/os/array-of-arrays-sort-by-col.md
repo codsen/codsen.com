@@ -62,7 +62,7 @@ Rules:
 ### API - Input
 
 ::: api
-{{ packageJsons["array-of-arrays-sort-by-col"].lect.req }}(arr, [index])
+sortByCol(arr, [index])
 :::
 
 In other words, it's a function which takes two input arguments:

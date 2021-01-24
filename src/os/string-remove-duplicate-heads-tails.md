@@ -46,10 +46,7 @@ You can configure `heads` and `tails` to be whatever you like, single string or 
 ## API
 
 :::api
-removeDuplicateHeadsTails(
-  str,
-  [opts]
-)
+remDup(str, [opts])
 :::
 
 In other words, it's a function which takes two input arguments, second-one optional.

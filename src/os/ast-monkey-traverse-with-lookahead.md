@@ -15,12 +15,12 @@ Instead of bloating [`ast-monkey-traverse`](/os/ast-monkey-traverse/) and slowin
 
 ## API
 
-`traverse2()` is a function. It traverses AST tree given to it in the first input argument. You use it via a callback (arrow function `(key, val, innerObj, stop) => {...}` below for example), similar way to `Array.forEach()`:
+`traverse()` is a function. It traverses AST tree given to it in the first input argument. You use it via a callback (arrow function `(key, val, innerObj, stop) => {...}` below for example), similar way to `Array.forEach()`:
 
 ```js
-const traverse2 = require("ast-monkey-traverse-with-lookahead");
+const { traverse } = require("ast-monkey-traverse-with-lookahead");
 var ast = [{ a: "a", b: "b" }];
-traverse2(ast, (key, val, innerObj, stop) => {
+traverse(ast, (key, val, innerObj, stop) => {
   console.log(`key = ${JSON.stringify(key, null, 4)}`);
   console.log(`val = ${JSON.stringify(val, null, 4)}`);
   console.log(`innerObj = ${JSON.stringify(innerObj, null, 4)}`);
@@ -35,10 +35,10 @@ You can't delete or change values of AST in this program.
 
 ## `innerObj` in the callback
 
-When you call `traverse2()` like this:
+When you call `traverse()` like this:
 
 ```js
-traverse2(input, function (key, val, innerObj, stop) {
+traverse(input, function (key, val, innerObj, stop) {
   ...
 })
 ```
@@ -50,8 +50,8 @@ you get four variables:
 - `innerObj`
 - `stop` - set `stop.now = true;` to stop the traversal
 
-If `traverse2()` is currently traversing a plain object, going each key/value pair, `key` will be the object's current key and `val` will be the value.
-If `traverse2()` is currently traversing an array, going through all elements, a `key` will be the current element and `val` will be `null`.
+If `traverse()` is currently traversing a plain object, going each key/value pair, `key` will be the object's current key and `val` will be the value.
+If `traverse()` is currently traversing an array, going through all elements, a `key` will be the current element and `val` will be `null`.
 
 | `innerObj` object's key | Type                                                      | Description                                                                                                                                                                                                                                                                                                                                           |
 | ----------------------- | --------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -264,10 +264,10 @@ Notice how `innerObj.next` is reporting one set from the future, as you requeste
 Here's how to stop the traversal. Let's gather all the traversed paths first. By the way, paths are marked in [object-path](https://www.npmjs.com/package/object-path) notation (arrays use dots too, `a.1.b` instead of `a[1].b`).
 
 ```js
-const traverse2 = require("ast-monkey-traverse-with-lookahead");
+const { traverse } = require("ast-monkey-traverse-with-lookahead");
 const input = { a: "1", b: { c: "2" } };
 const gathered = [];
-traverse2(input, (key1, val1, innerObj) => {
+traverse(input, (key1, val1, innerObj) => {
   const current = val1 !== undefined ? val1 : key1;
   gathered.push(innerObj.path);
   return current;
@@ -281,10 +281,10 @@ All paths were gathered: `["a", "b", "b.c"]`.
 Now let's make the monkey to stop at the path "b":
 
 ```js
-const traverse2 = require("ast-monkey-traverse-with-lookahead");
+const { traverse } = require("ast-monkey-traverse-with-lookahead");
 const input = { a: "1", b: { c: "2" } };
 const gathered = [];
-traverse2(input, (key1, val1, innerObj, stop) => {
+traverse(input, (key1, val1, innerObj, stop) => {
   const current = val1 !== undefined ? val1 : key1;
   gathered.push(innerObj.path);
   if (innerObj.path === "b") {

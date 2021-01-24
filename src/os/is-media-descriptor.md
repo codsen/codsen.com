@@ -38,7 +38,7 @@ Conceptually, CSS spec is very permissive, if it doesn't like something it inval
 ## API - Input
 
 ::: api
-{{ packageJsons["is-media-descriptor"].lect.req }}(str, opts)
+isMediaD(str, opts)
 :::
 
 In other words, a function which takes a string and options, a plain object.

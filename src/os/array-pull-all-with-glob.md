@@ -17,7 +17,7 @@ For example, we use it in [email-comb](/os/email-comb/) to _whitelist_ CSS class
 ## API
 
 :::api
-pullAllWithGlob(
+pull(
   sourceArray,
   removeThese,
   [opts]
@@ -32,7 +32,7 @@ In other words, it's a function which takes three input arguments, third-one bei
 
 | Input argument | Type                                      | Obligatory? | Description                                                                          |
 | -------------- | ----------------------------------------- | ----------- | ------------------------------------------------------------------------------------ |
-| `sourceArray`  | Array                                     | yes         | Source array of strings                                                              |
+| `sourceArray`  | Array of zero or more strings | yes         | Source array of zero or more strings                                                              |
 | `removeThese`  | Array of zero or more strings or a string | yes         | Array of zero or more strings or a single string to be removed from the source array |
 | `otps`         | Plain object                              | no          | An Optional Options Object. See its API below.                                       |
 

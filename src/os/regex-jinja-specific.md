@@ -32,7 +32,7 @@ This is not a definite detection tool but rather a minimal, fun attempt to progr
 ## API
 
 ::: api
-{{ packageJsons["regex-jinja-specific"].lect.req }}()
+isJinjaSpecific()
 :::
 
 In other words, it's a function which returns a RegExp object.

@@ -54,7 +54,7 @@ Our packages don't use this library directly, there is a higher-level package [`
 ## API - Input
 
 ::: api
-{{ packageJsons["object-boolean-combinations"].lect.req }}(
+combinations(
   inputObject,
   [overrideObject]
 )
@@ -80,7 +80,7 @@ Program returns an array of plain objects.
 Sometimes you want to override the object keys, for example, in the a settings object, we want to override all `a` and `b` keys to be only `true` (`1`). This reduces the object combinations from `2^3 = 8` to: `2^(3-2) = 2^1 = 2`:
 
 ```js
-const combinations = require("object-boolean-combinations");
+const { combinations } = require("object-boolean-combinations");
 const test = combinations(
   { a: false, b: false, c: false },
   { a: true, b: true } // <----- Override. These values will be on all combinations.

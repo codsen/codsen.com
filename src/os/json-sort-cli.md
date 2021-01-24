@@ -3,6 +3,12 @@ layout: package
 title: json-sort-cli
 ---
 
+## Idea
+
+![the idea of json-sort-cli](package-json-sort-cli-quick-take.gif)
+
+{% include "btt.njk" %}
+
 ## Use it
 
 Once installed, either call `jsonsort` or `sortjson` with file name, folder name or a list thereof, with or without flags:

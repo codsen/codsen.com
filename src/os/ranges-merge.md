@@ -12,7 +12,7 @@ title: ranges-merge
 ## API
 
 ::: api
-{{ packageJsons["ranges-merge"].lect.req }}(
+rMerge(
   arrOfRanges,
   [opts]
 )
@@ -55,7 +55,7 @@ Consider this example (notice an arrow function in the second input argument):
 
 ```js
 console.log(
-  {{ packageJsons["ranges-merge"].lect.req }}(
+  rMerge(
     [
       [1, 5],
       [11, 15],
@@ -147,8 +147,8 @@ Mode `2` is the same to `1` except clashing "insert" values are resolved by dele
 For example,
 
 ```js
-const {{ packageJsons["ranges-process-outside"].lect.req }} = require("ranges-merge");
-const res1 = {{ packageJsons["ranges-merge"].lect.req }}(
+const { rMerge } = require("ranges-merge");
+const res1 = rMerge(
   [
     [3, 4, "aaa"],
     [3, 12, "zzz"],
@@ -158,7 +158,7 @@ const res1 = {{ packageJsons["ranges-merge"].lect.req }}(
 console.log(res1);
 // => [[3, 12, "aaazzz"]]
 
-const res2 = {{ packageJsons["ranges-merge"].lect.req }}(
+const res2 = rMerge(
   [
     [3, 4, "aaa"],
     [3, 12, "zzz"],

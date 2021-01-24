@@ -17,7 +17,7 @@ This program helps with that.
 ## API
 
 ::: api
-{{ packageJsons["ast-is-empty"].lect.req }}(something)
+isEmpty(something)
 :::
 
 In other words, it's a function which takes one input argument which can be of any type.

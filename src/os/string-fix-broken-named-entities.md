@@ -21,17 +21,16 @@ There is a decoding function; the algorithm is aware of numeric HTML entities as
 
 ## API - Input
 
+:::api
+fixEnt(str, [opts])
+:::
+
 The `fixEnt` you required/imported is a function and it has two input arguments:
 
 | Input argument | Type         | Obligatory? | Description                                        |
 | -------------- | ------------ | ----------- | -------------------------------------------------- |
 | `input`        | String       | yes         | String, hopefully HTML code                        |
 | `opts`         | Plain object | no          | The Optional Options Object, see below for its API |
-
-For example:
-
-```js
-const fixEnt = require("string-fix-broken-named-entities");
 
 ```
 

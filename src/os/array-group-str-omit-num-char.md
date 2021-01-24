@@ -38,10 +38,8 @@ You see, the quickest, alternative (gung-ho) algorithm is to replace all digits 
 ## API
 
 ::: api
-{{ packageJsons["array-group-str-omit-num-char"].lect.req }}(sourceArray, [opts])
+groupStr(sourceArray, [opts])
 :::
-
-In other words, that variable you imported, "`{{ packageJsons["array-group-str-omit-num-char"].lect.req }}`" (or "`brambles`" or whatever) is a **function** which consumes two input arguments.
 
 {% include "btt.njk" %}
 
@@ -64,7 +62,7 @@ A non-empty array (with at least one string inside) will yield a plain object: s
 For example:
 
 ```js
-console.log({{ packageJsons["array-group-str-omit-num-char"].lect.req }}(["a1-1", "a2-2", "b3-3", "c4-4"]));
+console.log(groupStr(["a1-1", "a2-2", "b3-3", "c4-4"]));
 // {
 //   "a*-*": 2,
 //   "b3-3": 1,

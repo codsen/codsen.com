@@ -11,6 +11,14 @@ title: ranges-is-index-within
 
 ### API - Input
 
+:::api
+isIndexWithin(
+  idx, 
+  ranges, 
+  [opts]
+)
+:::
+
 | Input argument | Type                                 | Obligatory? | Description                                          |
 | -------------- | ------------------------------------ | ----------- | ---------------------------------------------------- |
 | `index`        | Natural number                       | yes         | The natural number index you're checking             |

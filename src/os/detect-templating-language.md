@@ -14,7 +14,7 @@ packages:
 ## API
 
 ::: api
-{{ packageJsons["detect-templating-language"].lect.req }}(str)
+detectLang(str)
 :::
 
 In other words, it's a function which takes a string and returns a plain object.

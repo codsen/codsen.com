@@ -73,7 +73,7 @@ Conceptually, this program tells **if a given string is not messed up** from the
 ## API - Input
 
 ::: api
-{{ packageJsons["is-relative-uri"].lect.req }}(str, opts)
+isRel(str, opts)
 :::
 
 In other words, a function which takes a string and options, a plain object.

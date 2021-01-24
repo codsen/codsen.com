@@ -34,6 +34,14 @@ module.exports = () => {
               delete amendedPkg._hasShrinkwrap;
               delete amendedPkg._id;
               return amendedPkg;
+            })
+            .catch((e) => {
+              console.log(`_data/prod/packageJsons.js: ${e}`);
+              // that's probably a unpublished package:
+              return {
+                name: packageName,
+                version: "",
+              };
             });
         })
       )

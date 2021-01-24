@@ -12,7 +12,7 @@ title: ranges-regex
 ## API
 
 ::: api
-{{ packageJsons["ranges-regex"].lect.req }}(
+rRegex(
   regexp,
   str,
   [replacement]

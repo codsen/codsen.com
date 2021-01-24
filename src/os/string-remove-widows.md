@@ -36,7 +36,7 @@ This program is used by [`detergent`](/os/detergent/).
 When you `require`/`import`, you get three things:
 
 ```js
-const {{ packageJsons["string-remove-widows"].lect.req }} = require("string-remove-widows");
+const { removeWidows, defaults, version } = require("string-remove-widows");
 ```
 
 `removeWidows` is a function which does all the work.
@@ -103,7 +103,7 @@ Function `removeWidows` returns a plain object; you pick the values from it:
 | Key in a returned object | Key value's type                      | Description                                       |
 | ------------------------ | ------------------------------------- | ------------------------------------------------- |
 | `res`                    | String                                | Processed string                                  |
-| `ranges`                 | Array of zero or more ranges (arrays) | Calculated ranges used to produce the `res`       |
+| `ranges`                 | Null or Array of one or more [Ranges](/ranges/) (arrays) | Same Ranges used to produce the `res`       |
 | `log`                    | Plain object                          | See its format below                              |
 | `whatWasDone`            | Plain object                          | Was it widow removal or just decoding performed ? |
 
@@ -116,7 +116,7 @@ for example, here's how the output could look like:
     [21, 27, "&nbsp;"]
   ],
   log: {
-    timeTakenInMiliseconds: 42
+    timeTakenInMilliseconds: 42
   },
   whatWasDone: {
     removeWidows: true,

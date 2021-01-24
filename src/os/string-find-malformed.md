@@ -39,7 +39,14 @@ Another thing, not all characters are equal (sorry for a pun) - a whitespace sho
 
 ## API
 
-**strFindMalformed(str, refStr, cb, [opts])**
+::: api
+findMalformed(
+  str, 
+  refStr, 
+  cb, 
+  [opts]
+)
+:::
 
 In other words, above we say first three arguments are obligatory and fourth is optional (marked with square brackets).
 
@@ -83,10 +90,11 @@ The third input argument is a callback function that you supply. When a result i
 For example:
 
 ```js
+import { findMalformed } from "string-find-malformed";
 // we create an empty array to dump the results into
 const gathered = [];
 // we call the function
-strFindMalformed(
+findMalformed(
   // first input argument: source
   "abcdef",
   // second input argument: what to look for but mangled
@@ -127,8 +135,12 @@ Returns an array of zero or more plain objects, each having format:
 }
 ```
 
+{% include "btt.njk" %}
+
 ## Further Ideas
 
 Nobody would mistype "owned" as "ewned" — "fat finger" errors occur on vicinity keys, in this case, "o" can be mistyped with "i" or "p" because those keys are near. Key "e" is far, it's unrealistic.
 
 In this light, _Levenshtein distance_ is not strictly suited for purpose. Alternative version of it should be written, where algorithm considers both distance AND neighbouring keys and evaluates accordingly.
+
+{% include "btt.njk" %}

@@ -20,7 +20,7 @@ PS. We have [`string-strip-html`](/os/string-strip-html/) which also strips HTML
 ## API - Input
 
 ::: api
-{{ packageJsons["stristri"].lect.req }}(input, [opts])
+stri(input, [opts])
 :::
 
 In other words, it's a function which takes a string and an optional options.
@@ -36,7 +36,7 @@ If input arguments are supplied have any other types, an error will be `throw`n.
 
 ## API - Output
 
-The `{{ packageJsons["stristri"].lect.req }}()` function will return **a plain object**, for example:
+The `stri()` function will return **a plain object**, for example:
 
 ```js
 {

@@ -12,7 +12,7 @@ title: ranges-ent-decode
 ## API
 
 ::: api
-{{ packageJsons["ranges-crop"].lect.req }}(str, [opts])
+rEntDecode(str, [opts])
 :::
 
 In other words, it's a function which takes a string and an optional options object.

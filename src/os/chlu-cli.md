@@ -23,7 +23,7 @@ Chlu works on both **GitLab**, **Bitbucket** and **GitHub** repositories.
 
 ## What it does
 
-![features](https://glcdn.githack.com/codsen/codsen/raw/master/packages/chlu-cli/media/features_comp.png)
+![features](/images/package-chlu-cli-features_comp.png)
 
 **7 main features (see above):**
 

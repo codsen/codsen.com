@@ -20,7 +20,7 @@ $ csvsort --help
 
 **like this:**
 
-![calling directly on a file](https://glcdn.githack.com/codsen/codsen/raw/63d7dc7cee9c957d3dc51d14af99b557c081a250/packages/csv-sort-cli/media/example1.gif)
+![calling directly on a file](/images/package-csv-sort-cli-example1.gif)
 
 {% include "btt.njk" %}
 
@@ -34,7 +34,7 @@ $ csvsort # omit the file's name, but you can include -o/--overwrite flag
 
 omit the file name and `csv-sort-cli` will offer a list of CSV files in the current folder to choose from:
 
-![calling without specifying a file name](https://glcdn.githack.com/codsen/codsen/raw/63d7dc7cee9c957d3dc51d14af99b557c081a250/packages/csv-sort-cli/media/example2.gif)
+![calling without specifying a file name](/images/package-csv-sort-cli-example2.gif)
 
 You can even try it without installing — use `npx`:
 
@@ -48,13 +48,13 @@ $ npx csv-sort-cli YOURFILE.csv
 
 1.  It **sorts CSV file rows** to correspond to the [double-entry bookkeeping](https://en.wikipedia.org/wiki/Double-entry_bookkeeping_system) principles:
 
-![double bookkeeping example](https://glcdn.githack.com/codsen/codsen/raw/63d7dc7cee9c957d3dc51d14af99b557c081a250/packages/csv-sort/media/img1.png)
+![double bookkeeping example](/images/package-csv-sort-img1.png)
 
 Sometimes internet banking CSV's have rows in a wrong order, especially when entries are on the _same date_. This library helps to sort the rows in correct order.
 
 2.  As a bonus, it will **trim** the empty columns/rows:
 
-![2D trim of a CSV contents](https://glcdn.githack.com/codsen/codsen/raw/63d7dc7cee9c957d3dc51d14af99b557c081a250/packages/csv-sort/media/img2.png)
+![2D trim of a CSV contents](/images/package-csv-sort-img2.png)
 
 3.  Not to mention, the our custom CSV parser [`csv-split-easy`](/os/csv-split-easy/) used here will ensure that all CSV cell _contents_ are trimmed, and there are no empty rows between the content rows. It also accepts any commas as content if the cell is wrapped with a double quotes.
 

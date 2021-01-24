@@ -1,7 +1,7 @@
 ---
 layout: package
 title: test-mixer
-packages: 
+packages:
   - object-boolean-combinations
 ---
 
@@ -9,7 +9,7 @@ packages:
 
 It's used to generate an array of all possible combinations of options object boolean settings.
 
-[`detergent`](/os/detergent/) has 12 boolean toggles — that's `2^12 = 4096` variations to test for each input.
+[`detergent`](/os/detergent/) has 12 boolean toggles — that's `2^12 = 4096` variations to test for each input. This program generates those options variations.
 
 [`string-collapse-white-space`](/os/string-collapse-white-space/) has 6 boolean toggles — that's `2^6 = 64` variations to test for each input.
 
@@ -20,7 +20,7 @@ And so on.
 ## API - Input
 
 ::: api
-{{ packageJsons["test-mixer"].lect.req }}(
+mixer(
   objWithFixedKeys,
   [defaultsObj]
 )
@@ -37,7 +37,7 @@ In other words, it's a function which takes two input arguments, second one bein
 
 ## API - Output
 
-Program returns an array of zero or plain objects.
+Program returns an array of zero or more plain objects.
 
 {% include "btt.njk" %}
 
@@ -69,7 +69,7 @@ Let's say, we test [detergent](/os/detergent). It has the following default opts
 Imagine, we're testing how detergent strips HTML, setting, `opts.stripHtml`.
 
 ```js
-// 😱 eleven other boolean opts settings were left out, 4095 other combinations!
+// 😱 eleven other boolean opts settings were left out, 2^12 - 1 = 4095 other combinations!
 import tap from "tap";
 const { det } = require("detergent");
 tap.test(`01`, (t) => {
@@ -89,14 +89,15 @@ Here's the proper way:
 // ✅
 import tap from "tap";
 const { det, opts } = require("detergent");
-import testMixer from "text-mixer";
+import { mixer as testMixer } from "text-mixer";
 
 // we create a wrapper to skip writing the second input argument again and again
 const mixer = (ref) => testMixer(ref, opts);
 
 tap.test(`01`, (t) => {
+  // 2^11 = 2048 variations:
   mixer({
-    stripHtml: false, // <--- pinned setting
+    stripHtml: false, // <--- will be the same across all generated objects
   }).forEach((opt, n) => {
     t.equal(
       det(t, n, `text <a>text</a> text`, opt).res,
@@ -104,8 +105,9 @@ tap.test(`01`, (t) => {
       JSON.stringify(opt, null, 4)
     );
   });
+  // another 2^11 = 2048 variations:
   mixer({
-    stripHtml: true, // <--- pinned setting
+    stripHtml: true,
   }).forEach((opt, n) => {
     t.equal(
       det(t, n, `text <a>text</a> text`, opt).res,
@@ -116,9 +118,5 @@ tap.test(`01`, (t) => {
   t.end();
 });
 ```
-
-Above, we assert that on all `2^11=2048` setting variations where `opts.stripHtml === false`, input `text <a>text</a> text` yields `text <a>text</a> text`.
-
-Then, we assert that with setting `opts.stripHtml === true`, tags are stripped, in all other `2^11=2048` possible setting combinations.
 
 {% include "btt.njk" %}

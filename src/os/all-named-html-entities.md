@@ -17,10 +17,15 @@ This package exports a plain object with 11 keys:
 | `entEndsWith`                  | plain object       | all named HTML entities, grouped by last character, then by second-to-last                                          |
 | `entStartsWithCaseInsensitive` | plain object       | all named HTML entities, grouped by first character, then by second, both case-insensitive                          |
 | `entEndsWithCaseInsensitive`   | plain object       | all named HTML entities, grouped by last character, then by second-to-last, both case insensitive                   |
+| `brokenNamedEntities`          | plain object       | key-value pairs of common mistyped named HTML entities and their corrections                                        |
+| `uncertain`                    | plain object       | all named HTML entities which could be interpreted as words if entity was malformed (missing ampersand for example) |
+| `allNamedEntitiesSetOnly`      | Set                | Set of all named entities, think of array of strings, only unique and faster. Case sensitive list.                  |
+| `allNamedEntitiesSetOnlyCaseInsensitive` | Set      | Set of all named entities, think of array of strings, only unique and faster. Case in-sensitive list.                  |
 | `decode`                       | function           | decodes named HTML entities (`&...;` format)                                                                        |
 | `minLength`                    | integer            | length of the shortest of all named HTML entities (currently `2`)                                                   |
 | `maxLength`                    | integer            | length of the longest of all named HTML entities (currently `31`)                                                   |
-| `uncertain`                    | plain object       | all named HTML entities which could be interpreted as words if entity was malformed (missing ampersand for example) |
+| `version`                      | string             | as per package.json, for example, `1.4.0` |
+
 
 {% include "btt.njk" %}
 

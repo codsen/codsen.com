@@ -3,6 +3,8 @@ layout: package
 title: check-types-mini
 ---
 
+ℹ️ **2021 update** ℹ️ — we migrated our codebase to TypeScript so options object validation is now automated. We'll aim to maintain this package.
+
 ## Purpose
 
 Saves time in Options object validation, at expense of your program's perf:
@@ -38,7 +40,7 @@ Imagine you have a library where you let users set the options object, which com
 
 Here's a challenge: how do you check (and throw) errors easily, when users set your options to wrong things?
 
-Answer: this library.
+Answer: this library. [**2021 edit**: - or TypeScript].
 
 **Features:**
 
@@ -279,5 +281,13 @@ When the program has a complex input object, and you want to validate it, `check
 For example, [`ast-monkey`](/os/ast-monkey/) _has_ complex options and needs validation help.
 
 But for one-level-deep options objects, `check-types-mini` is an overkill (unless you don't care about perf).
+
+{% include "btt.njk" %}
+
+## 2021 update
+
+We don't need `check-types-mini` any more!
+
+We rewrote all programs in this monorepo in TypeScript, so now they're shipped with type definitons. This relieves from manual type checks — even if your program which consumes any Codsen packages is not in TypeScript, modern code editors would still pick up the type definitions and show alerts in the UI if you tried to set up wrong input parameters.
 
 {% include "btt.njk" %}

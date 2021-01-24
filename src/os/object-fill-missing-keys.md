@@ -11,7 +11,13 @@ This library fills missing keys in a plain object according to a supplied refere
 
 ## API
 
-**fillMissingKeys(incompleteObj, schemaObj, [opts])**
+:::api
+fillMissingKeys(
+  incompleteObj, 
+  schemaObj, 
+  [opts]
+)
+:::
 
 In other words, it's a function which takes three input arguments, third one being optional (marked by square brackets).
 

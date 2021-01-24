@@ -8,11 +8,7 @@ packages:
 
 ## The Purpose
 
-It's easy to check what's on the left/right of a given string index:
-
-```
-
-```
+It is used for checking, does a certain substring exist on the left or on the right of a given index. Where [`string-left-right`](/os/string-left-right) reports the index of a first non-whitespace character on either side of a given index, this library checks, is a certain string located on the either side of a given index.
 
 ## The API
 

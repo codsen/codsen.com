@@ -26,7 +26,7 @@ Existing regex-based solutions like [ietf-language-tag-regex](https://www.npmjs.
 ## API
 
 ::: api
-{{ packageJsons["is-language-code"].lect.req }}(\[str])
+isLangCode([str])
 :::
 
 In other words, a function which takes a string.

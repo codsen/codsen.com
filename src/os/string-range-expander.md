@@ -15,7 +15,9 @@ This program is used to manage the whitespace in the string index selections. Le
 
 ## API
 
-**expand(opts)**
+:::api
+expander(opts)
+:::
 
 In other words, it's a function which takes a single input argument.
 

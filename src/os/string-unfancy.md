@@ -19,7 +19,7 @@ It's used in ASCII-restricted places where encoding is too unwieldy, for example
 ## API
 
 ::: api
-{{ packageJsons["string-unfancy"].lect.req }}(str)
+unfancy(str)
 :::
 
 Caveat: if the input is not a `string` it will `throw`.

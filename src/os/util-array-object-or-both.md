@@ -25,7 +25,7 @@ It standardises the input strings a user has given:
 ## API
 
 ::: api
-{{ packageJsons["util-array-object-or-both"].lect.req }}(str, [opts])
+arrObjOrBoth(str, [opts])
 :::
 
 In other words, it's a function which takes two input arguments, second-one being optional (marked by square brackets).
@@ -66,7 +66,7 @@ Returns one of three possible string values: `"array"` or `"object"` or `"any"`.
 
 ```js
 // require this library:
-const arrObjOrBoth = require('util-array-object-or-both')
+const { arrObjOrBoth } = require('util-array-object-or-both')
 // and friends:
 const clone = require('lodash.clonedeep')
 const checkTypes = require('check-types-mini')

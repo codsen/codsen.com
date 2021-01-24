@@ -20,7 +20,7 @@ See [this](https://mathiasbynens.be/notes/javascript-unicode) article about Unic
 ## API
 
 ::: api
-{{ packageJsons["str-indexes-of-plus"].lect.req }}(
+strIndexesOfPlus(
   str,
   searchValue,
   [fromIndex]

@@ -18,7 +18,7 @@ This library is well-tested and is being used in commercial projects.
 ## API
 
 ::: api
-{{ packageJsons["object-set-all-values-to"].lect.req }}(input, value)
+setAllValuesTo(input, value)
 :::
 
 In other words, it's a function which takes two input arguments, both obligatory.

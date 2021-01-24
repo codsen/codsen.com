@@ -69,9 +69,9 @@ Here is reduced example based on [`codsen-tokenizer`](/os/codsen-tokenizer/) tes
 ```js
 const t = require("tap");
 import ct from "codsen-tokenizer";
-import deepContains from "ast-deep-contains";
+import { deepContains } from "ast-deep-contains";
 
-test("01.01 — text-tag-text", (t) => {
+test("01.01 - text-tag-text", (t) => {
   const gathered = [];
   ct("  <a>z", (obj) => {
     gathered.push(obj);
@@ -126,7 +126,7 @@ Behold - a program flags up two backslashes on a void HTML tag — the first bac
 ```js
 const t = require("tap");
 import { Linter } from "emlint";
-import deepContains from "ast-deep-contains"; // <------------ this program
+import { deepContains } from "ast-deep-contains"; // <------------ this program
 import { applyFixes } from "t-util/util";
 
 const BACKSLASH = "\u005C";
@@ -182,7 +182,13 @@ The order in which backslashes will be reported does not matter, plus Linter mig
 ## API
 
 ::: api
-{{ packageJsons["ast-deep-contains"].lect.req }}(tree1, tree2, cb, errCb, [opts])
+deepContains(
+  tree1, 
+  tree2, 
+  cb, 
+  errCb, 
+  [opts]
+)
 :::
 
 in other words, it's a function which takes 5 input arguments:
@@ -192,7 +198,7 @@ in other words, it's a function which takes 5 input arguments:
 | `tree1`        | reference AST, can be superset of `tree2`   | yes         | Array, object or nested thereof                                                                                        |
 | `tree2`        | AST being checked, can be subset of `tree1` | yes         | Array, object or nested thereof                                                                                        |
 | `cb`           | function                                    | yes         | This function will be called with pairs, of values from each path. Think `t.is` of AVA. See API below.                 |
-| `errCb`        | function                                    | yes         | If path does not exist on `tree1`, this callback function will be called with a message string. Think `t.fail` of AVA. |
+| `errCb`        | function                                    | yes         | If path does not exist on `tree1`, this callback function will be called with a message string. Think `t.fail` of [tap](https://www.npmjs.com/package/tap) or [ava](https://www.npmjs.com/package/ava). |
 | `opts`         | Plain object                                | no          | Optional plain object containing settings, see API below.                                                              |
 
 Program returns `undefined` because it's operated by callbacks.

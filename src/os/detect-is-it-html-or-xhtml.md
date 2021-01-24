@@ -12,7 +12,7 @@ It is a function which detects, does given string resemble XHTML or HTML. The fo
 ### API - Input
 
 ::: api
-{{ packageJsons["detect-is-it-html-or-xhtml"].lect.req }}(str)
+detectIsItHTMLOrXhtml(str)
 :::
 
 In other words, it's a function which takes one input argument, a string.

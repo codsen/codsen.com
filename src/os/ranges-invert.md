@@ -6,7 +6,7 @@ title: ranges-invert
 ## API
 
 ::: api
-{{ packageJsons["ranges-invert"].lect.req }}(arr, strLen, [opts])
+rInvert(arr, strLen, [opts])
 :::
 
 | Input argument | Type                         | Obligatory? | Description                                                                                                                                                                                                                 |
