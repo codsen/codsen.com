@@ -1,0 +1,17 @@
+# name of your Worker script
+name = "codsen-com"
+
+type = "javascript"
+
+# api_token (env var CF_API_TOKEN) - set through CI env
+# account_id (env var CF_ACCOUNT_ID) - set through CI env
+# zone_id (env var CF_ZONE_ID) - set through CI env
+
+#worker will be deployed to your workers.dev
+workers_dev = true
+
+route = "codsen.com/*"
+
+[site]
+bucket = "./dist"
+entry-point = "workers-site"

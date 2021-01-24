@@ -1,0 +1,28 @@
+version: v1.0
+name: CODSEN.COM
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+blocks:
+  - name: Publish the website
+    task:
+      secrets:
+        - name: codsen.com CF
+      prologue:
+        commands:
+          - nvm install node
+          - node --version
+          - npm --version
+          - npm i @cloudflare/wrangler -g
+          - checkout
+      jobs:
+        - name: Publish
+          commands:
+            # set up...
+            - pwd
+            - ls
+            # - npm run fresh
+            # - npm run info
+            # - npm run readme:generate
+            # - git status
