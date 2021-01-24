@@ -72,7 +72,7 @@ Here's how we use it ourselves.
 
 In short, sourcehut CI calls package.json script and it cleanses the changelogs before npm package is published to npm and all builds are comitted from CI to git.
 
-Have a look at our [sourcehut CI yml](https://git.sr.ht/~royston/codsen/tree/master/.build.yml):
+Have a look at our [sourcehut CI yml](https://github.com/codsen/codsen/blob/main/.build.yml):
 
 ```yml
 { { ciConfig | safe } }
@@ -84,7 +84,7 @@ There's a line:
 - npm run pub:vers
 ```
 
-That's how CI calls npm script. By the way, "lerna-clean-changelogs-cli" can be called at all because our monorepo root [package.json](https://git.sr.ht/~royston/codsen/tree/master/package.json) has it as a dev-dependency:
+That's how CI calls npm script. By the way, "lerna-clean-changelogs-cli" can be called at all because our monorepo root [package.json](https://github.com/codsen/codsen/blob/main/package.json) has it as a dev-dependency:
 
 ```
 "devDependencies": {

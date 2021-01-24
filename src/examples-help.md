@@ -15,6 +15,6 @@ At the time of writing, native Node _ES Modules_ support is still flaky, using p
 
 1. If you `git clone` the monorepo and `npm i` and then `cd` into the package's folder, you can execute each example file using a _Node repl_, for example: `node -r esm leave-only-html.js`. If there are no errors, nothing should happen — asserts succeeded!
 
-2. The `package.json` of each program has an npm script `test:examples` which calls the [example test runner](https://git.sr.ht/~royston/codsen/tree/master/scripts/test-examples.js) which gives some UI in the terminal, you get feedback of each example testing outcome. To run it, `cd` into a package's folder in cloned monorepo and `npm run test:examples`.
+2. The `package.json` of each program has an npm script `test:examples` which calls the [example test runner](https://github.com/codsen/codsen/blob/main/scripts/test-examples.js) which gives some UI in the terminal, you get feedback of each example testing outcome. To run it, `cd` into a package's folder in cloned monorepo and `npm run test:examples`.
 3. You can use [CodeSandbox](https://codesandbox.io/) — copy-paste the example code into the sandbox, manually adding all imported dependencies.
 4. You could use [Runkit](https://runkit.com/), but it doesn't support ES Modules (`import`), so you'd have to replace all imports with CommonJS equivalents, with `const foo = require("bar")`.

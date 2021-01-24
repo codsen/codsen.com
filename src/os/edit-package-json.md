@@ -69,6 +69,6 @@ Besides regular unit tests, we went great lengths to ensure this program works a
 
 Every single path edit matched! By the way, we ended up with {{ compiledAssertionCounts.all['edit-package-json'] | thousandSeparator }} asserts.
 
-See the source of the [test file](https://git.sr.ht/~royston/codsen/tree/master/packages/edit-package-json/test/synthetic-test.js).
+See the source of the [test file](https://github.com/codsen/codsen/blob/main/packages/edit-package-json/test/synthetic-test.js).
 
 {% include "btt.njk" %}

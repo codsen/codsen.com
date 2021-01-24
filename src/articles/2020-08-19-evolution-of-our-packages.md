@@ -40,13 +40,13 @@ All README's still manually-written though.
 
 At one moment, it popped to our mind that, actually, we _can_ generate fresh and replace specific chapters in README, then put this on a script and run it often.
 
-For that, we created a CLI [`lect`](/os/lect/). There is only [one config](https://git.sr.ht/~royston/codsen/tree/master/packages/.lectrc.json) in the `/packages/` root, plus each `package.json` can have their own, per-package settings.
+For that, we created a CLI [`lect`](/os/lect/). There is only [one config](https://github.com/codsen/codsen/blob/main/packages/.lectrc.json) in the `/packages/` root, plus each `package.json` can have their own, per-package settings.
 
 This approach is different from Mr&nbsp;Schlinkert's [`verb`](https://www.npmjs.com/package/verb) which keeps README contents in a separate file, `.verb.md` and renders that into README.md each time.
 
 With time we added more and more automation features to `lect`, automating the maintenance of auxiliary files: `.npmignore`, `.npmrc`, `.prettierignore`, `LICENSE`, even `rollup.config.js`.
 
-For example, glance at [`email-comb`](https://git.sr.ht/~royston/codsen/tree/master/packages/email-comb/rollup.config.js) Rollup config. It's generated.
+For example, glance at [`email-comb`](https://github.com/codsen/codsen/blob/main/packages/email-comb/rollup.config.js) Rollup config. It's generated.
 
 ## Level 5 — `lerna` monorepo, `commitizen`
 
@@ -73,7 +73,7 @@ Even though CI is at GitLab and repo sits at GitLab, there is no internal "rabbi
 
 During the Christmas of 2018, with a couple of spare weeks at hand, we decided to put up the monorepo onto our GitLab CI. It went successfully, although there were a few accidental semver bumps because of `commitizen` and initial misconfiguration.
 
-See our current GitLab CI config `yml` script [here](https://git.sr.ht/~royston/codsen/tree/master/.gitlab-ci.yml). We don't publish CI session data because of potential security issues if secrets leak there, but our CI script is public, and you can save lots of time by referencing it.
+See our current GitLab CI config `yml` script [here](https://github.com/codsen/codsen/blob/main/.gitlab-ci.yml). We don't publish CI session data because of potential security issues if secrets leak there, but our CI script is public, and you can save lots of time by referencing it.
 
 From a user perspective, CI is fantastic because it ports all the npm publishing up from the user's laptop to CI servers. We `git push` to GitLab and get on with our day, getting an email from GitLab if pipeline failed or an email from npm if packages got published.
 

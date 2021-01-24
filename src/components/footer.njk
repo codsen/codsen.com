@@ -14,7 +14,7 @@
       Trivia
     </h3>
     <p>
-      This website is built on <a href="https://www.11ty.dev/" target="_blank" rel="nofollow noreferrer noopener">Eleventy</a>. This&nbsp;page was generated on {{ site.buildTime | dateDisplay('LLL d, yyyy - HH:mm') }} on <a href="https://git.sr.ht/~royston/codsen.com" target="_blank" rel="nofollow noreferrer noopener">Sourcehut&nbsp;CI</a>. See&nbsp;more in <a href="/trivia/">Trivia</a> section.
+      This website is built on <a href="https://www.11ty.dev/" target="_blank" rel="nofollow noreferrer noopener">Eleventy</a>. This&nbsp;page was generated on {{ site.buildTime | dateDisplay('LLL d, yyyy - HH:mm') }} on <a href="https://semaphoreci.com/" target="_blank" rel="nofollow noreferrer noopener">Semaphore&nbsp;CI</a>. There's no web server &mdash; it runs off a Cloudflare worker, straight from CDN edge. See&nbsp;more in <a href="/trivia/">Trivia</a> section.
     </p>
     <p>
       Cache-busting hash: {{ cacheBusting.hash }}
@@ -31,12 +31,12 @@
         {% set editUrl = editOn[page.url] %}
       {% elif page.url !== "/os/" and page.url | rootUrl == "/os/" %}
         {% if title %}
-          {% set editUrl = "https://git.sr.ht/~royston/codsen.com/tree/master/src/os/" + title + ".md" %}
+          {% set editUrl = "https://github.com/codsen/codsen.com/tree/main/src/os/" + title + ".md" %}
         {% else %}
           {% set editUrl = editOn['/examples/'] %}
         {% endif %}
       {% elif page.url | goUpUrl == "/articles/tag/" and page.url !== "/articles/tag/" %}
-        {% set editUrl = "https://git.sr.ht/~royston/codsen.com/tree/master/src/tags.njk" %}
+        {% set editUrl = "https://github.com/codsen/codsen.com/tree/main/src/tags.njk" %}
       {% endif %}
 
       <span class="emoji">✍️</span> <a href="{{ editUrl }}" target="_blank">Edit this page</a> on Sourcehut<br>
@@ -49,7 +49,7 @@
     </p>
     <h3>Licence(s)</h3>
     <p>
-      See licences of all 3rd party bits <a href="/licences/" title="3rd-party licences">here</a>.<br>All our {% if page.url !== "/os/" %}<a href="/os/">{% endif %}open source{% if page.url !== "/os/" %}</a>{% endif %} packages are under <a href="https://git.sr.ht/~royston/codsen/tree/master/LICENSE">MIT licence</a>.<br>
+      See licences of all 3rd party bits <a href="/licences/" title="3rd-party licences">here</a>.<br>All our {% if page.url !== "/os/" %}<a href="/os/">{% endif %}open source{% if page.url !== "/os/" %}</a>{% endif %} packages are under <a href="https://github.com/codsen/codsen/blob/main/LICENSE">MIT licence</a>.<br>
       {# Downloadable <a href="/freebies/">freebies</a> section are <strong>Public Domain</strong>.<br> #}
       The rest on this website is under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="nofollow noreferrer noopener">CC BY-NC-SA 4.0</a>.<br><span class="wild"></span>
     </p>
