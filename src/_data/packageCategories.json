@@ -28,7 +28,8 @@
     "str-indexes-of-plus",
     "bitbucket-slug",
     "email-all-chars-within-ascii",
-    "js-row-num"
+    "js-row-num",
+    "line-column-mini"
   ],
   "cliAppsList": [
     "json-comb",

@@ -12,7 +12,7 @@ The existing index-to line/column conversion program, popular and fast [`line-co
 
 - Didn't support `CR` ([old Mac](https://en.wikipedia.org/wiki/Newline#Representation)) line endings, only `CRLF` (Windows) and `LF` (modern Mac)
 - Didn't include type definitions natively...
-- ... and counterpart definitions on `@types/line-column` were [wrong](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/0b5bfba2994c91a099cd5bcfd984f6c4c39228e5/types/line-column/index.d.ts#L59 - notice missing `LineColumnInfo` export)
+- ... and counterpart definitions on `@types/line-column` were [wrong](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/0b5bfba2994c91a099cd5bcfd984f6c4c39228e5/types/line-column/index.d.ts#L59) (notice the missing `LineColumnInfo` export)
 - It was converting both ways, index-to line/column and line/column-to index, which, the source being not in ES modules, meant the unused functions would end up bundled too
 
 No support for `CR` line endings was a blocker because we will use this program on [`emlint`](/os/emlint) which is meant to catch such things.
