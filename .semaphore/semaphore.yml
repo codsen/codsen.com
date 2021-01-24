@@ -20,9 +20,7 @@ blocks:
         - name: Publish
           commands:
             # set up...
+            - npm i
             - pwd
             - ls
-            # - npm run fresh
-            # - npm run info
-            # - npm run readme:generate
-            # - git status
+            - git status
