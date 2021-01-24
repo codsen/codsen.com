@@ -1,7 +1,7 @@
 const axios = require("axios");
 const saveData = require("../../../utils/scripts/saveData.js");
 
-const url = `https://git.sr.ht/~royston/codsen/blob/master/stats/compiledAssertionCounts.json`;
+const url = `https://raw.githubusercontent.com/codsen/codsen/main/stats/compiledAssertionCounts.json`;
 
 module.exports = () => {
   return new Promise((resolve, reject) => {

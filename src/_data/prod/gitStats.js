@@ -1,10 +1,7 @@
-// pulls live "gitStats.json" from
-// https://git.sr.ht/~royston/codsen/tree/master/stats/gitStats.json
-
 const axios = require("axios");
 const saveData = require("../../../utils/scripts/saveData.js");
 
-const url = `https://git.sr.ht/~royston/codsen/blob/master/stats/gitStats.json`;
+const url = `https://raw.githubusercontent.com/codsen/codsen/main/stats/gitStats.json`;
 
 module.exports = () => {
   return new Promise((resolve, reject) => {

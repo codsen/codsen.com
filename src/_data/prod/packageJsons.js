@@ -5,7 +5,7 @@ const pacote = require("pacote");
 const pMap = require("p-map");
 const saveData = require("../../../utils/scripts/saveData.js");
 
-const listOfPackageNamesUrl = `https://git.sr.ht/~royston/codsen/blob/master/stats/compiledAssertionCounts.json`;
+const listOfPackageNamesUrl = `https://raw.githubusercontent.com/codsen/codsen/main/stats/compiledAssertionCounts.json`;
 
 module.exports = () => {
   return new Promise((resolve, reject) => {

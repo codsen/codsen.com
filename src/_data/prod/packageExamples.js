@@ -4,7 +4,7 @@ const axios = require("axios");
 const pMap = require("p-map");
 const saveData = require("../../../utils/scripts/saveData.js");
 
-const listOfPackageNamesUrl = `https://git.sr.ht/~royston/codsen/blob/master/stats/compiledAssertionCounts.json`;
+const listOfPackageNamesUrl = `https://raw.githubusercontent.com/codsen/codsen/main/stats/compiledAssertionCounts.json`;
 
 module.exports = () => {
   return new Promise((resolve, reject) => {
@@ -14,7 +14,7 @@ module.exports = () => {
         pMap(Object.keys(response.data.all), (packageName) => {
           return axios
             .get(
-              `https://git.sr.ht/~royston/codsen/blob/master/packages/${packageName}/examples/api.json`
+              `https://raw.githubusercontent.com/codsen/codsen/main/packages/${packageName}/examples/api.json`
             )
             .then((received) => {
               return [packageName, received.data];
