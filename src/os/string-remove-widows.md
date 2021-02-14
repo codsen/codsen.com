@@ -241,7 +241,7 @@ Sometimes input string can contain HTML tags. We didn't go that far as to code u
 `opts.tagRanges` accepts known HTML tag ranges (or, in fact, any "black spots" to skip):
 
 ```js
-const strip = require("string-strip-html");
+const { stripHtml } = require("string-strip-html");
 const { removeWidows } = require("string-remove-widows");
 
 const input = `something in front here <a style="display: block;">x</a> <b style="display: block;">y</b>`;

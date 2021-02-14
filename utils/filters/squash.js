@@ -1,5 +1,5 @@
-const unfancy = require("string-unfancy");
-const stripHtml = require("string-strip-html");
+const { unfancy } = require("string-unfancy");
+const { stripHtml } = require("string-strip-html");
 
 /**
  * Make a search index string by removing duplicated words

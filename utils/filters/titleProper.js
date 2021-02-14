@@ -1,8 +1,8 @@
 const title = require("title");
-const stripHtml = require("string-strip-html");
-const applyRanges = require("ranges-apply");
-const invertRanges = require("ranges-invert");
-const rangesRegex = require("ranges-regex");
+const { stripHtml } = require("string-strip-html");
+const { rApply } = require("ranges-apply");
+const { rInvert } = require("ranges-invert");
+const { rRegex } = require("ranges-regex");
 
 function tagAwareTitle(str) {
   const whitelist = [
@@ -26,10 +26,10 @@ function tagAwareTitle(str) {
   //     4
   //   )}`
   // );
-  const inverted = invertRanges(
+  const inverted = rInvert(
     filteredTagLocations.concat(
       whitelist.reduce((acc, curr) => {
-        const rangesFindings = rangesRegex(new RegExp(curr, "gi"), str);
+        const rangesFindings = rRegex(new RegExp(curr, "gi"), str);
         if (rangesFindings) {
           return acc.concat(rangesFindings);
         }
@@ -50,7 +50,7 @@ function tagAwareTitle(str) {
     // take inverted ranges, for example, [[3, 4], [10, 15]]
     // and add third element, replacement, which is same character
     // indexes only processed through "title":
-    return applyRanges(
+    return rApply(
       str,
       inverted.map(([from, to]) => [from, to, title(str.slice(from, to))])
     );

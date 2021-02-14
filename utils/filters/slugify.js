@@ -1,4 +1,4 @@
-const stripHtml = require("string-strip-html");
+const { stripHtml } = require("string-strip-html");
 const markdownIt = require("markdown-it");
 const uslug = require("uslug");
 

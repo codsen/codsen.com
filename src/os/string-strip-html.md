@@ -319,7 +319,7 @@ In the example below, we are going to use one of the keys of the `tag`, the `tag
 For example, considering input with some rogue whitspace, `<div >abc</ div>`, replace all `div` with `tralala`, minding the closing slash:
 
 ```js
-const stripHtml = require("string-strip-html");
+const { stripHtml } = require("string-strip-html");
 // define a callback as a separate variable if you are going to use it multiple times:
 const cb = ({
   tag,
