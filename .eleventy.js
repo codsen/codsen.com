@@ -1,6 +1,7 @@
 const contentParser = require("./utils/transforms/contentParser.js");
 const htmlMinTransform = require("./utils/transforms/htmlmin.js");
 const fs = require("fs");
+const path = require("path");
 const markdownIt = require("markdown-it");
 const mdcont = require("markdown-it-container");
 const compiledAssertionCounts = require("./src/_data/prod/compiledAssertionCounts.js");
@@ -9,7 +10,7 @@ const clone = require("lodash.clonedeep");
 const Prism = require("prismjs");
 const escape = require("markdown-escape");
 const prettier = require("prettier");
-const markdownitfence = require('markdown-it-fence');
+const markdownitfence = require("markdown-it-fence");
 const slugify = require("./utils/filters/slugify.js");
 
 /**
@@ -62,7 +63,10 @@ module.exports = function (eleventyConfig) {
    * @link https://www.11ty.io/docs/filters/
    */
   // human friendly date format
-  eleventyConfig.addFilter("dateDisplay", require("./utils/filters/dateDisplay.js"));
+  eleventyConfig.addFilter(
+    "dateDisplay",
+    require("./utils/filters/dateDisplay.js")
+  );
   // prepare search contents
   eleventyConfig.addFilter("squash", require("./utils/filters/squash.js"));
   // robot friendly date format for crawlers
@@ -190,20 +194,16 @@ module.exports = function (eleventyConfig) {
     require("./utils/filters/allPackagesThatUseDepX.js")
   );
   // "8" -> "eight"
-  eleventyConfig.addFilter(
-    "toWords",
-    require("./utils/filters/toWords.js")
-  );
+  eleventyConfig.addFilter("toWords", require("./utils/filters/toWords.js"));
   // "8" -> "eighth"
   eleventyConfig.addFilter(
     "toOrdinal",
     require("./utils/filters/toOrdinal.js")
   );
-  eleventyConfig.addFilter(
-    "examplesExtractTotal",
-    (obj) => Object.keys(obj).reduce((acc, curr) => {
+  eleventyConfig.addFilter("examplesExtractTotal", (obj) =>
+    Object.keys(obj).reduce((acc, curr) => {
       // it's the total of all sub-keys
-      return acc + (obj[curr] ? Object.keys(obj[curr]).length : 0)
+      return acc + (obj[curr] ? Object.keys(obj[curr]).length : 0);
     }, 0)
   );
 
@@ -486,11 +486,12 @@ module.exports = function (eleventyConfig) {
 
   // "package" layout API description field in monospace font
   const apiBlock = (md, options) => {
-    return markdownitfence(md, 'api', {
-      marker: ':',
-      render: (tokens, idx) => (`<pre class="api">${tokens[idx].content.trim()}</pre>`)
-    })
-  }
+    return markdownitfence(md, "api", {
+      marker: ":",
+      render: (tokens, idx) =>
+        `<pre class="api">${tokens[idx].content.trim()}</pre>`,
+    });
+  };
 
   /**
    * Add Markdown plugins
@@ -535,6 +536,51 @@ module.exports = function (eleventyConfig) {
    * https://www.11ty.dev/docs/ignores/#opt-out-of-using-.gitignore
    */
   eleventyConfig.setUseGitIgnore(false);
+
+  /**
+   * Cache-busting challenge: dist/<hash folder name>/assets needs to be set
+   * for all asset consumption calls, also inside cross-references between files
+   */
+  eleventyConfig.on("afterBuild", () => {
+    // 1. the search function
+
+    const hash = String(fs.readFileSync("hash.txt", "utf8")).trim();
+    const appJsContents = fs.readFileSync(
+      path.resolve(`dist/assets/${hash}/js/app.js`),
+      "utf8"
+    );
+
+    fs.writeFileSync(
+      path.resolve(`dist/assets/${hash}/js/app.js`),
+      appJsContents.replace(/REPLACE_WITH_HASH_URL/, hash)
+    );
+
+    console.log(
+      `utils/scripts/fixDistWorkerHash.js: ${`\u001b[${34}m${`Wrote`}\u001b[${39}m`} dist/assets/${hash}/js/app.js`
+    );
+
+    // 2. /os/ homepage interdeps chart JSON
+
+    fs.copyFileSync(
+      "./src/_data/dev/interdeps.json",
+      `./dist/assets/${hash}/js/interdeps.json`
+    );
+
+    // 2. replace the hash placeholder in interdeps.js
+    const interdepsJsContents = fs.readFileSync(
+      path.resolve(`dist/assets/${hash}/js/interdeps.js`),
+      "utf8"
+    );
+
+    fs.writeFileSync(
+      path.resolve(`dist/assets/${hash}/js/interdeps.js`),
+      interdepsJsContents.replace(/REPLACE_WITH_HASH_URL/, hash)
+    );
+
+    console.log(
+      `utils/scripts/fixDistWorkerHash.js: ${`\u001b[${34}m${`Copied`}\u001b[${39}m`} dist/assets/${hash}/js/interdeps.json`
+    );
+  });
 
   /**
    * Make the seed target act like prod

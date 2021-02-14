@@ -11,6 +11,7 @@
   "tableClass": ["tables-wrapper"],
   "codeClass": ["code-wrapper"],
   "figureClass": ["figure"],
+  "issueLink": "https://github.com/codsen/codsen/issues/new/choose",
   "paths": {
     "src": "src",
     "blogdir": "articles",
