@@ -69,7 +69,7 @@
     "number-to-words": "^1.2.4",
     "p-map": "^4.0.0",
     "pacote": "^11.2.2",
-    "parcel": "^2.0.0-nightly.592",
+    "parcel": "2.0.0-nightly.540",
     "parse-github-url": "^1.0.2",
     "postcss": "^8.2.4",
     "postcss-color-mix": "^1.1.0",
