@@ -32,8 +32,6 @@ The `fixEnt` you required/imported is a function and it has two input arguments:
 | `input`        | String       | yes         | String, hopefully HTML code                        |
 | `opts`         | Plain object | no          | The Optional Options Object, see below for its API |
 
-```
-
 {% include "btt.njk" %}
 
 ### Optional Options Object

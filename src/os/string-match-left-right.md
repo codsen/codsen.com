@@ -41,15 +41,16 @@ Returns Boolean `false` or value of the string that was matched, that is,
 
 ### Optional Options Object's API:
 
-| `options` object's key    | Type                                                           | Default     | Description                                                                                                                                                                                                                                                                                                                                                                                        |
-| ------------------------- | -------------------------------------------------------------- | ----------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `i`                       | Boolean                                                                  | `false`     | If `false`, it's case sensitive. If `true`, it's insensitive.                                                                                                                                                                                                                                                                                                                                      |
+| `options` object's key    | Type    | Default | Description |
+| ------------------------- | ------- | ------- | ----------- |
+| `i`                       | Boolean | `false` | If `false`, it's case sensitive. If `true`, it's insensitive. |
 | `cb`                      | Function                                                                 | `undefined` | If you feed a function to this key, that function will be called with the remainder of the string. Which side, it depends on which side method (left side for `matchLeft` and `matchLeftIncl` and others for right accordingly) is being called. The result of this callback will be joined using "AND" logical operator to calculate the final result. We use `cb` mainly to check for whitespace. |
 | `trimBeforeMatching`      | Boolean                                                                  | `false`     | If set to `true`, there can be whitespace before what's being checked starts. Basically, this means, substring can begin (when using right side methods) or end (when using left side methods) with a whitespace.                                                                                                                                                                                  |
 | `trimCharsBeforeMatching` | String or Array of zero or more strings, each 1 character-long           | `[]`        | If set to `true`, similarly like `trimBeforeMatching` will remove whitespace, this will remove any characters you provide in an array. For example, useful when checking for tag names to the right of `<`, with or without closing slash, `<div` or `</div`.                                                                                                                                      |
 | `maxMismatches` | Natural number or zero           | `0`        | It's like Levenshtein distance - how many characters can mismatch to yield false result? |
 | `firstMustMatch` | Boolean           | `false`        | When `opts.maxMismatches` is enabled, you can enforce that the first character must match. |
 | `lastMustMatch` | Boolean           | `false`        | When `opts.maxMismatches` is enabled, you can enforce that the last character must match. |
+
 
 Here it is with defaults, in one place, ready for copying:
 
