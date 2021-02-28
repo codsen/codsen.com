@@ -206,6 +206,8 @@ module.exports = function (eleventyConfig) {
       return acc + (obj[curr] ? Object.keys(obj[curr]).length : 0);
     }, 0)
   );
+  // used to simplify ALT attribute values:
+  eleventyConfig.addFilter("unfancy", require("./utils/filters/unfancy.js"));
 
   // determines what's the type of the article
   eleventyConfig.addFilter("calculateType", (arr) => {

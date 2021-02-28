@@ -9,7 +9,7 @@
   </header>
   {% if article.data.image %}
     <figure class="post-img" itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject">
-      <a href="{{ article.url }}"><img width="" height="" src="/images/codsen-article-{{ article.data.image }}-m.png" class="post-image-thumbnail" alt="{{ article.data.title }}" itemprop="contentUrl"></a>
+      <a href="{{ article.url }}"><img width="" height="" src="/images/codsen-article-{{ article.data.image }}-m.png" class="post-image-thumbnail" alt="{{ article.data.title | unfancy }}" itemprop="contentUrl"></a>
     </figure>
   {% endif -%}
   <h3>

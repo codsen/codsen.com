@@ -8,11 +8,11 @@ packages:
 
 ## Idea
 
-Convert typographically-correct characters (like curly quotes or m-dashes) to their basic counterparts (like apostrophes or hyphens).
+Convert [typographically-correct](https://practicaltypography.com/what-is-good-typography.html) characters (like [curly quotes](https://practicaltypography.com/straight-and-curly-quotes.html) or [m-dashes](https://practicaltypography.com/hyphens-and-dashes.html)) to their basic counterparts (like apostrophes or hyphens).
 
 It's the opposite of [`detergent`](/os/detergent/) and [`string-apostrophes`](/os/string-apostrophes/).
 
-It's used in ASCII-restricted places where encoding is too unwieldy, for example, image `alt` attribute values in email templates.
+It's used in ASCII-restricted places where encoding is too unwieldy, for example, image `alt` attribute values in email templates. Or stripping down the formatted markdown value, removing backticks and so on.
 
 {% include "btt.njk" %}
 

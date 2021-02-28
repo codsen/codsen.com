@@ -14,6 +14,7 @@ function tagAwareTitle(str) {
     "xml",
     "css",
     "rss",
+    "vs",
   ];
 
   const { filteredTagLocations } = stripHtml(str, {
