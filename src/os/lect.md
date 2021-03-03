@@ -7,16 +7,16 @@ title: lect
 
 It's an opinionated npm libraries maintenance CLI app.
 
-Before we migrated README's to [codsen.com](https://codsen.com), it used to replace README's chapters, suitable for automation: installation instructions, badges and so on.
+`lect` generates many files for each monorepo package:
 
-`lect` generates the placeholder README's and all auxiliary files:
-
+- `README.md`
 - `rollup.config.json`
 - `.prettierignore`
 - `.npmignore`
+- `tsconfig.json`
 - `.npmrc`
 - `LICENCE`
-
-The `babel.config.js` sits in a monorepo root so it doesn't need managing — there's only one file anyway. Same with `.prettierrc` and `.gitignore`.
+- compiles the examples API, `/packages/*/examples/api.json` 
+- [Semaphore CI](https://semaphoreci.com/) build script
 
 {% include "btt.njk" %}
