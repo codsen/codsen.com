@@ -4,7 +4,7 @@
 const axios = require("axios");
 const saveData = require("../../../utils/scripts/saveData.js");
 
-const url = `https://github.com/codsen/codsen.com/blob/main/.semaphore/semaphore.yml`;
+const url = `https://raw.githubusercontent.com/codsen/codsen/main/.semaphore/semaphore.yml`;
 
 module.exports = () => {
   return new Promise((resolve, reject) => {

@@ -20,7 +20,7 @@
   {% set pageDesc = metaDesc %}
 {% endif %}
 
-<title>{{ pageTitle }}</title>
+<title>{{ pageTitle | unfancy }}</title>
 
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -31,7 +31,7 @@
 <meta name="theme-color" content="#ffffff">
 
 <meta property="og:site_name" content="Codsen"/>
-<meta property="og:title" content="{{ title }}">
+<meta property="og:title" content="{{ title | unfancy }}">
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://codsen.com{{ page.url }}">
 
@@ -41,29 +41,29 @@
 
 
 {% if page.url and image %}
-  <meta property="og:image:width" content="1200"> {# 1146 would be ideal #}
-  <meta property="og:image:height" content="600">
-  <meta property="og:description" content="{{ page.excerpt | md | strip | trimPunctuation }}">
-  <meta name="description" content="{{ page.excerpt | md | strip | trimPunctuation }}"/>
-  <meta name="twitter:description" content="{{ page.excerpt | md | strip | trimPunctuation }}"/>
+<meta property="og:image:width" content="1200"> {# 1146 would be ideal #}
+<meta property="og:image:height" content="600">
+<meta property="og:description" content="{{ page.excerpt | md | strip | trimPunctuation }}">
+<meta name="description" content="{{ page.excerpt | md | strip | trimPunctuation }}"/>
+<meta name="twitter:description" content="{{ page.excerpt | md | strip | trimPunctuation }}"/>
 
-  <meta property="og:title" content="{{ title }}">
-  <meta property="og:image" content="https://codsen.com/images/codsen-article-{{ image }}-l.png">
+<meta property="og:title" content="{{ title | unfancy }}">
+<meta property="og:image" content="https://codsen.com/images/codsen-article-{{ image }}-l.png">
 
-  <meta name="twitter:card" content="summary_large_image"/>
-  <meta property="og:image" content="https://codsen.com/images/codsen-article-{{ image }}-l.png"/>
-  <meta name="twitter:image" content="https://codsen.com/images/codsen-article-{{ image }}-l.png"/>
-  <meta property="og:image:alt" content="Page image for article {{ pageTitle }}"/>
-  <meta name="twitter:image:alt" content="Page image for article {{ pageTitle }}"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta property="og:image" content="https://codsen.com/images/codsen-article-{{ image }}-l.png"/>
+<meta name="twitter:image" content="https://codsen.com/images/codsen-article-{{ image }}-l.png"/>
+<meta property="og:image:alt" content="Page image for article {{ title | unfancy }}"/>
+<meta name="twitter:image:alt" content="Page image for article {{ title | unfancy }}"/>
 {% else %}
-  <meta property="og:image" content="https://codsen.com/cover.png"/>
-  <meta name="twitter:image" content="https://codsen.com/cover.png"/>
+<meta property="og:image" content="https://codsen.com/cover.png"/>
+<meta name="twitter:image" content="https://codsen.com/cover.png"/>
 
-  <meta property="og:description" content="Codsen is all about web and email development.">
-  <meta name="description" content="Codsen is all about web and email development."/>
-  <meta name="twitter:description" content="Codsen is all about web and email development."/>
+<meta property="og:description" content="Codsen is all about web and email development.">
+<meta name="description" content="Codsen is all about web and email development."/>
+<meta name="twitter:description" content="Codsen is all about web and email development."/>
 {% endif %}
 
 {% if config.paymentPointer %}
-  <meta name="monetization" content="{{ config.paymentPointer }}"/>
+<meta name="monetization" content="{{ config.paymentPointer }}"/>
 {% endif %}
