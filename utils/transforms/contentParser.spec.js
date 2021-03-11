@@ -142,46 +142,46 @@ test("does not touch pre tags without language class", () => {
   );
 });
 
-// adds noopener rel values on anchor hrefs
+// adds noreferrer rel values on anchor hrefs
 // -----------------------------------------------------------------------------
 
-test("adds both noreferrer and noopener when neither exists", () => {
+test("adds noreferrer when it's absent", () => {
   const source = `<!DOCTYPE html>
 <html><head></head><body>
 <a href="http://xity-starter.netlify.app/">click me</a>
 </body></html>`;
   expect(contentParser(source, "file.html")).toEqual(
-    expect.stringContaining(`rel="noopener noreferrer"`)
+    expect.stringContaining(`rel="noreferrer"`)
   );
 });
 
-test("adds both noreferrer and noopener on empty rel", () => {
+test("adds both noreferrer on empty rel", () => {
   const source = `<!DOCTYPE html>
 <html><head></head><body>
 <a href="https://xity-starter.netlify.app/" rel="">click me</a>
 </body></html>`;
   expect(contentParser(source, "file.html")).toEqual(
-    expect.stringContaining(`rel="noopener noreferrer"`)
+    expect.stringContaining(`rel="noreferrer"`)
   );
 });
 
-test("adds both noreferrer and noopener on rel with a whitespace value", () => {
+test("adds noreferrer on rel with a whitespace value", () => {
   const source = `<!DOCTYPE html>
 <html><head></head><body>
 <a href="http://xity-starter.netlify.app/" rel=" ">click me</a>
 </body></html>`;
   expect(contentParser(source, "file.html")).toEqual(
-    expect.stringContaining(`rel="noopener noreferrer"`)
+    expect.stringContaining(`rel="noreferrer"`)
   );
 });
 
-test("adds both noreferrer and noopener on rel without a value", () => {
+test("adds both noreferrer on rel without a value", () => {
   const source = `<!DOCTYPE html>
 <html><head></head><body>
 <a href="https://xity-starter.netlify.app/" rel>click me</a>
 </body></html>`;
   expect(contentParser(source, "file.html")).toEqual(
-    expect.stringContaining(`rel="noopener noreferrer"`)
+    expect.stringContaining(`rel="noreferrer"`)
   );
 });
 
@@ -189,26 +189,6 @@ test("adds only noreferrer when rel noopener exists", () => {
   const source = `<!DOCTYPE html>
 <html><head></head><body>
 <a href="http://xity-starter.netlify.app/" rel="noopener">click me</a>
-</body></html>`;
-  expect(contentParser(source, "file.html")).toEqual(
-    expect.stringContaining(`rel="noopener noreferrer"`)
-  );
-});
-
-test("adds only noopener when rel noreferrer exists", () => {
-  const source = `<!DOCTYPE html>
-<html><head></head><body>
-<a href="https://xity-starter.netlify.app/" rel="noreferrer">click me</a>
-</body></html>`;
-  expect(contentParser(source, "file.html")).toEqual(
-    expect.stringContaining(`rel="noopener noreferrer"`)
-  );
-});
-
-test("does not add noopener or noreferrer when both exist", () => {
-  const source = `<!DOCTYPE html>
-<html><head></head><body>
-<a href="http://xity-starter.netlify.app/" rel="noopener noreferrer">click me</a>
 </body></html>`;
   expect(contentParser(source, "file.html")).toEqual(
     expect.stringContaining(`rel="noopener noreferrer"`)

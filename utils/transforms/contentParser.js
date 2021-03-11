@@ -159,7 +159,7 @@ module.exports = (value, outputPath) => {
                   .split(/\s+/)
                   .filter((relValStr) => relValStr.trim())
                   .map((relValStr) => relValStr.toLowerCase())
-                  .concat(["noopener", "noreferrer"])
+                  .concat(["noreferrer"])
                   .sort()
               ),
             ].join(" ")
