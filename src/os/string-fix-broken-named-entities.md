@@ -265,7 +265,6 @@ const result = fixEnt(
   {
     progressFn: (percentageDone) => {
       // console.log(`percentageDone = ${percentageDone}`);
-      t.ok(typeof percentageDone === "number");
       count++;
     },
   }
