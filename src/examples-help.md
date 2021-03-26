@@ -10,7 +10,7 @@ title: How to Try Code Examples
 If you want to tinker with examples, you have many options on how to run the code:
 
 ::: tip
-At the time of writing, native Node _ES Modules_ support is still flaky, using plain repl call like `node leave-only-html.js` would not work — we have to use [`esm`](https://www.npmjs.com/package/esm) which we call via `-r` flag like this: `node -r esm leave-only-html.js`.
+At the time of writing, native Node _ES Modules_ support is still flaky, using plain repl call like `node leave-only-html.js` might not work — use [`esm`](https://www.npmjs.com/package/esm) which we call via `-r` flag like this: `node -r esm leave-only-html.js`.
 :::
 
 1. If you `git clone` the monorepo and `npm i` and then `cd` into the package's folder, you can execute each example file using a _Node repl_, for example: `node -r esm leave-only-html.js`. If there are no errors, nothing should happen — asserts succeeded!

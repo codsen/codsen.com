@@ -427,8 +427,18 @@ input[type="submit"] {
   box-shadow: none;
 }
 
+.highlighted {
+  padding: 0.1rem 0.3rem;
+  background-color: $yellow;
+  @include darkTheme {
+    background-color: $darkerOrange;
+    color: #a7a7a7; /* 65% */
+  }
+}
+
 /* https://yoksel.github.io/url-encoder/ */
 .button,
+#app button,
 input[type="submit"] {
   mask-image: url("data:image/svg+xml,%3Csvg height='35' viewBox='0 0 216 35' width='216' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m32.619 33.645c-3.933 1.057-19.62-1.917-23.499-.083-1.892.894-3.984.104-5.941-.788-.494-.225-1.18305532-1.252197-1.35305532-2.257197-.895-5.279-1.14355137-10.8836299-.75455137-16.5046299.2-2.885 2.84353916-10.09910722 4.19653916-10.58510722 9.44800003-3.392 17.97106753-1.63006588 27.46006753-1.64306588 8.539-.012 17.847 1.002 26.408-.001.32-.037 18.876-.156 22.658-.005 6.354.254 15.968.21966667 28.842-.103 9.867-.132 58.174.057 61.036-.005 5.969-.131 33.12.623 38.083-.043 1.048-.14 2.267-.088 3.288.222.806.245 1.972 1.26 1.272 4.33-.176.22-3.378 17.662-2.688 19.549-.46 3.993-.845 8.602-2.942 8.433-1.357-.11-19.454-.009-22.645.004-6.645.026-47.221-.741-49.965-.554-1.86.126-11.079.166-13.61.176-.672.003-9.345.601-11.872.198-2.885-.461-5.67-.225-8.512-.207-3.878.026-38.002-.084-41.294.034-1.6.057-13.178-.616-16.5.143-3.763.859-7.924-1.315-11.668-.31z' fill='%23000000' fill-rule='evenodd'/%3E%3C/svg%3E");
 
@@ -561,6 +571,7 @@ input[type="submit"] {
   padding: 2rem;
   margin-bottom: 2.1rem;
   font-family: monospace;
+  line-height: 1.1;
   & > p {
     margin-bottom: 0 !important;
   }
@@ -3423,6 +3434,7 @@ article,
   display: none;
 }
 
+.layout-play .content-main__inner,
 .layout-package .content-main__inner {
   padding: 1rem;
 
@@ -3509,6 +3521,10 @@ article,
     font-size: 1.6rem;
     padding: 3rem 3.3rem;
   }
+
+  .arrow_left-back {
+    padding: 3rem 3.1rem;
+  }
 }
 
 .package-next {
@@ -3569,9 +3585,10 @@ article,
     }
 
     p[class^="show-"] img {
-      width: 100%;
+      max-width: 40rem;
+      max-height: 20rem;
+      width: auto;
       height: auto;
-      max-width: 43.8rem;
     }
 
     & > [class^="show-"] {
@@ -4602,6 +4619,55 @@ pre[class*="language-"] > code[class*="language-"] {
           flex: 1;
         }
       }
+    }
+  }
+}
+
+/* playground apps */
+/* -------------------------------------------------------------------------- */
+
+#app {
+  button {
+    font-size: 1.8rem;
+  }
+}
+
+.playground-app {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-content: space-between;
+
+  & > div,
+  & > div > textarea {
+    width: 100%;
+  }
+
+  & > div > textarea {
+    height: 40rem;
+  }
+
+  & > div {
+    margin: 0 1rem;
+    &:first-child {
+      margin-left: 0;
+    }
+    &:first-last {
+      margin-right: 0;
+    }
+  }
+
+  textarea {
+    border: 0;
+    background-color: $lighterGrey;
+    @include darkTheme {
+      color: $darkWhite;
+      background-color: $borderDark;
+    }
+
+    font-family: "Roboto Mono", monospace;
+    &:focus {
+      outline: none !important;
     }
   }
 }

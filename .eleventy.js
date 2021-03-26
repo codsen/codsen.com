@@ -371,6 +371,10 @@ module.exports = function (eleventyConfig) {
     "tagListSortedByCount",
     require("./utils/collections/tagListSortedByCount.js")
   );
+  eleventyConfig.addCollection(
+    "packagesWithPlayground",
+    require("./utils/collections/packagesWithPlayground.js")
+  );
 
   /**
    * Override BrowserSync Server options

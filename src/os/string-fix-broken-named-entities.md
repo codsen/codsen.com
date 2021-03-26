@@ -36,12 +36,13 @@ The `fixEnt` you required/imported is a function and it has two input arguments:
 
 ### Optional Options Object
 
-| An Optional Options Object's key | Type of its value | Default   | Description                                                                                                                                              |
-| -------------------------------- | ----------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `decode`                         | Boolean           | `false`   | Fixed values are normally put as HTML-encoded. Set to `true` to get raw characters instead.                                                              |
-| `cb`                             | Function          | see below | Callback function which gives you granular control of the program's output                                                                               |
-| `entityCatcherCb`                | Function          | `null`    | If you set a function here, every encountered entity will be passed to it, see a dedicated chapter below                                                 |
-| `progressFn`                     | Function          | `null`    | Used in web worker setups. You pass a function and it gets called once for each natural number `0` to `99`, meaning a percentage of the work done so far |
+| An Optional Options Object's key | Type of its value  | Default   | Description                                                                                                                                              |
+| -------------------------------- | ------------------ | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `decode`                         | Boolean            | `false`   | Fixed values are normally put as HTML-encoded. Set to `true` to get raw characters instead.                                                              |
+| `cb`                             | Function or `null` | see below | Callback function which gives you granular control of the program's output                                                                               |
+| `entityCatcherCb`                | Function or `null` | `null`    | If you set a function here, every encountered entity will be passed to it, see a dedicated chapter below                                                 |
+| `textAmpersandCatcherCb`         | Function or `null` | `null`    | Each raw text ampersand's index will be pinged to this function. See more [below](#optstextampersandcatchercb). |
+| `progressFn`                     | Function or `null` | `null`    | Used in web worker setups. You pass a function and it gets called once for each natural number `0` to `99`, meaning a percentage of the work done so far. See more [below](#optsprogressfn). |
 
 Here it is in one place:
 
@@ -235,6 +236,16 @@ console.log(
 );
 // => [[2, 8]]
 ```
+
+{% include "btt.njk" %}
+
+## `opts.textAmpersandCatcherCb`
+
+Sometimes input string can contain ampersands-as-text and ampersands-as-part-of-entities.
+
+For example, consider a string `abc&&nbsp;&xyz`. What do you see here? There's one named HTML entity, `&nbsp;`, surrounded by two raw text ampersands. This callback, `opts.textAmpersandCatcherCb` can be used to catch raw ampersands, probably with aim to HTML-encode them. Specifically, this option would call your function twice, with numbers `3` and `10`, positions of raw ampersands.
+
+See the [supplied example](examples/#sift-raw-ampersands-in-a-string-from-broken-character-references) where broken entity is fixed and raw text ampersands are encoded, all within the same string, all done using this program.
 
 {% include "btt.njk" %}
 

@@ -1,0 +1,113 @@
+<h2>{{ packageName }} <sup title="current version is {{ packageJsons[packageName].version }}" aria-label="current version is {{ packageJsons[packageName].version }}">{{ packageJsons[packageName].version }}</sup></h2>
+<div id="app">
+  <div class="playground-app">
+    <div>
+      <h3>Put a string:</h3>
+      <textarea ref="in" v-model="text1" placeholder="put some code here"></textarea>
+    </div>
+    <div>
+      <h3>Output ranges:</h3>
+      <textarea ref="out" v-model="text2" readonly></textarea>
+    </div>
+    <div>
+      <h3>Applied ranges:</h3>
+      <textarea ref="applied" v-model="text3" readonly></textarea>
+    </div>
+  </div>
+  <p>
+    Reported non-entity, raw ampersand locations: <span class="highlighted">{% raw %}{{ ampLocations }}{% endraw %}</span>.
+  </p>
+  <p>
+    TIP: you can use the callback <code>opts.cb</code> and retrieve way more than just <a href="/ranges/">ranges</a>! See the <a href="/os/string-fix-broken-named-entities/#optscb-a-callback-function">readme section</a>.
+  </p>
+  <p>
+    <h3>Example presets</h3>
+    <button v-on:click="example1">broken nbsp</button>
+    <button v-on:click="example2">double encoding</button>
+    <button v-on:click="example3">raw semi's</button>
+  </p>
+</div>
+
+{# ---------------------------------------------- #}
+
+<script>
+  window.addEventListener("load", pageFullyLoaded, false);
+  function pageFullyLoaded(e) {
+    // Vue.config.productionTip = false;
+    if (Vue && stringFixBrokenNamedEntities && rangesApply) {
+      function isStr(something) {
+        return typeof something === "string";
+      }
+      function isObj(something) {
+        return typeof isObj === "object";
+      }
+      const { fixEnt } = stringFixBrokenNamedEntities;
+      const { rApply } = rangesApply;
+      const myStorage = window.localStorage;
+      const storageKey = "codsen_play_{{ packageName }}";
+      window.Event = new Vue();
+      new Vue({
+        el: "#app",
+        data: {
+          text1: "",
+        },
+        mounted: function () {
+          const retrieved = myStorage.getItem(storageKey);
+          if (typeof retrieved === "string" && retrieved.length) {
+            this.text1 = retrieved;
+          } else {
+            this.text1 = "";
+          }
+          this.$refs.in.focus();
+        },
+        computed: {
+          text2: function () {
+            if (typeof this.text1 === "string") {
+              return JSON.stringify(fixEnt(this.text1), null, 4);
+            }
+            return "";
+          },
+          text3: function () {
+            if (typeof this.text1 === "string") {
+              return rApply(this.text1, fixEnt(this.text1));
+            }
+            return "";
+          },
+          ampLocations: function () {
+            if (typeof this.text1 === "string") {
+              const gathered = [];
+              fixEnt(this.text1, {
+                textAmpersandCatcherCb: idx => {
+                  gathered.push(idx);
+                }
+              })
+              return gathered.length ? gathered : "none";
+            }
+            return "";
+          }
+        },
+        watch: {
+          text1: function () {
+            // dump the input into the local storage:
+            if (isStr(this.text1) && this.text1.length) {
+              myStorage.setItem(storageKey, this.text1);
+            } else {
+              myStorage.setItem(storageKey, "");
+            }
+          },
+        },
+        methods: {
+          example1: function(event) {
+            this.text1 = `abc &nsp; xyz`
+          },
+          example2: function(event) {
+            this.text1 = `double&amp;nbsp;encoding`
+          },
+          example3: function(event) {
+            this.text1 = `&pund; & &pond; & &poud;`
+          },
+        }
+      });
+    }
+  }
+</script>

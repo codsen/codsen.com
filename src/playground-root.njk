@@ -1,0 +1,19 @@
+---
+layout: play
+pagination:
+    data: collections.packagesWithPlayground
+    size: 1
+    alias: packageName
+permalink: "/os/{{ packageName }}/play/"
+extraContainerClass: playground__{{ packageName }}
+---
+<div class="package-nav">
+  <div class="package-back">
+    <a href="/os/{{ packageName }}/" class="arrow_left arrow_left-back">back</a>
+  </div>
+</div>
+
+
+{% set contents = "src/playgrounds/" + packageName + ".njk" %}
+{% include contents %}
+

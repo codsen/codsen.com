@@ -113,32 +113,15 @@ Here is the Optional Options Object in one place (in case you ever want to copy 
 
 {% include "btt.njk" %}
 
-### Using ranges from the output
+### Using Ranges from the output
 
 The _ranges_ from the output are compatible with [range-ecosystem libraries](/ranges/) like [`ranges-apply`](/os/ranges-apply/):
 
 ```js
-const { stripHtml } = require("string-strip-html");
-const { rApply } = require("ranges-apply");
-
-const input = `    <div>
-  something
-</div>
-`;
-const { result, ranges } = stripHtml(input);
-console.log(ranges);
-// => [[0, 12], [21, 32]]
-console.log(result);
-// => "something"
-
-// apply ranges onto string:
-const finalResultStr = rApply(input, ranges);
-// you'll get same thing:
-console.log(finalResultStr);
-// => "something"
+{{ packageExamples['string-strip-html']['minimal-ranges.js'].content | decodeCurlies | safe }}
 ```
 
-Behind the scenes, this program operates on [ranges](/ranges/). The result string you see is rendered from ranges, at the time of returning.
+Behind the scenes, this program actually operates on [Ranges](/ranges/). It returns string in the output for convenience, to save your time, so you don't have to use [`ranges-apply`](/os/ranges-apply/).
 
 {% include "btt.njk" %}
 
@@ -283,66 +266,33 @@ The `tag` key contains all the internal data for the particular tag which is bei
 
 {% include "btt.njk" %}
 
-### cb() example one
+### cb() example
 
-The point of this callback interface is to pass the action of pushing of ranges to a user, as opposed to a program. The program will suggest you what it would push to final ranges array, but it's up to you to perform the pushing.
+The point of this callback interface is to pass the action of pushing of ranges to a user, as opposed to a program. The program will suggest you what it would push to final ranges array `rangesArr`, but it's up to you to perform the pushing.
 
-Below, the program "does nothing", that is, you push what it proposes, "proposedReturn" array:
+Below, the callback "does nothing", it pushes what is proposed by default, `proposedReturn`, then we prove it still works by not pushing anything, which makes the program do nothing:
 
 ```js
-const cb = ({
-  tag,
-  deleteFrom,
-  deleteTo,
-  insert,
-  rangesArr,
-  proposedReturn,
-}) => {
-  rangesArr.push(deleteFrom, deleteTo, insert);
-};
-const res1 = stripHtml("abc<hr>def", { cb });
-console.log(res1);
-// => "abc def"
-
-// you can request ranges instead:
-const res2 = stripHtml("abc<hr>def", { cb });
-console.log(res2);
-// => [[3, 7, " "]]
+{{ packageExamples['string-strip-html']['cb-which-does-nothing.js'].content | decodeCurlies | safe }}
 ```
 
-{% include "btt.njk" %}
+You could add more logic, conditionally push only certain ranges, tweak the ranges that get pushed and so on.
 
-### cb() example two
-
-In the example below, we are going to use one of the keys of the `tag`, the `tag.slashPresent` which tells is there a closing slash on this tag or not.
-
-For example, considering input with some rogue whitspace, `<div >abc</ div>`, replace all `div` with `tralala`, minding the closing slash:
+`tag` contains all the info program has gathered for currently stripped tag, it looks like this:
 
 ```js
-const { stripHtml } = require("string-strip-html");
-// define a callback as a separate variable if you are going to use it multiple times:
-const cb = ({
-  tag,
-  deleteFrom,
-  deleteTo,
-  // insert,
-  rangesArr,
-  // proposedReturn
-}) => {
-  rangesArr.push(
-    deleteFrom,
-    deleteTo,
-    `<${tag.slashPresent ? "/" : ""}tralala>`
-  );
-};
-const { result, ranges} = stripHtml("<div >abc</ div>", { cb });
-console.log(result);
-// => "<tralala>abc</tralala>"
-console.log(ranges);
-// => [
-//      [0, 6, "<tralala>"],
-//      [9, 16, "</tralala>"]
-//    ]
+{
+  "attributes": [],
+  "lastOpeningBracketAt": 3,
+  "slashPresent": false,
+  "leftOuterWhitespace": 3,
+  "onlyPlausible": false,
+  "nameStarts": 4,
+  "nameContainsLetters": true,
+  "nameEnds": 6,
+  "name": "hr",
+  "lastClosingBracketAt": 6
+}
 ```
 
 {% include "btt.njk" %}

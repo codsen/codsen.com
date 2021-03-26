@@ -16,5 +16,9 @@
     "url": "https://htmlcrush.com",
     "dark": "/images/site-crush-dark.png",
     "light": "/images/site-crush-light.png"
+  },
+  "string-fix-broken-named-entities": {
+    "dark": "/images/play-string-fix-broken-named-entities-dark.png",
+    "light": "/images/play-string-fix-broken-named-entities-light.png"
   }
 }

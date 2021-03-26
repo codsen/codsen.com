@@ -14,6 +14,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/what-input@5.2.6/dist/what-input.min.js" defer></script>
     <script src="/assets/{{ cacheBusting.hash }}/js/app.js" defer></script>
+    {% block headscripts %}{% endblock headscripts %}
   </head>
   <body id="page-top">
     <a href="#skiplink-content" id="skiplink-top" class="skiplink skiplink-fn">Skip to Content</a>
@@ -31,5 +32,6 @@
       {% block content %}{% endblock content %}
     </div>
     {% include "footer.njk" %}
+    {% block footerScripts %}{% endblock footerScripts %}
   </body>
 </html>
