@@ -219,7 +219,7 @@ But, when encoded entities are requested, it's just a matter of sticking in the 
 
 ## `opts.entityCatcherCb`
 
-If broken entities are pinged to `opts.cb()` callback, all healthy entities are pinged to `opts.entityCatcherCb`. It's either one of another:
+If broken entities are pinged to `opts.cb()` callback, all healthy entities are pinged to `opts.entityCatcherCb`. It's either one or another:
 
 ```js
 const inp1 = "y &nbsp; z &nsp;";
@@ -251,9 +251,11 @@ See the [supplied example](examples/#sift-raw-ampersands-in-a-string-from-broken
 
 ## `opts.progressFn`
 
-In web worker setups, a worker can return "in progress" values. When we put this package into a web worker, this callback function under `opts.progress` will be called with a string, containing a natural number, showing the percentage of the work done so far.
+The purpose of web workers is to offload the CPU-heavy calculations to a separate CPU thread. It makes the UI responsive during calculations; the web app does not freeze. They're pretty simple to implement; check the [examples on MDN](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers). For example, this website's search function is on a web worker. [Detergent](https://detergent.io) uses one, [Email-Comb](https://emailcomb.com) uses one. It's a no-brainer.
 
-It's hard to show minimal worker application here but at least here's how the pinging progress works from the side of this npm package:
+In web worker setups, a worker can return "in progress" values. When we put this package into a web worker, this callback function under `opts.progress` will be called with a string containing a natural number, showing the percentage of the work done so far.
+
+It's hard to show a minimal worker application here but at least here's how the pinging progress works from the side of this npm package:
 
 ```js
 // let's define a variable on a higher scope:

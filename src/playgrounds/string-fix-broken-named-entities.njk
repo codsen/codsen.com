@@ -15,7 +15,10 @@
     </div>
   </div>
   <p>
-    Reported non-entity, raw ampersand locations: <span class="highlighted">{% raw %}{{ ampLocations }}{% endraw %}</span>.
+    Reported <a href="/os/string-fix-broken-named-entities/#optsentitycatchercb">healthy entity</a> locations: <span class="highlighted">{% raw %}{{ healthyEntityLocations }}{% endraw %}</span>.
+  </p>
+  <p>
+    Reported non-entity, <a href="/os/string-fix-broken-named-entities/#optstextampersandcatchercb">raw ampersand</a> locations: <span class="highlighted">{% raw %}{{ ampLocations }}{% endraw %}</span>.
   </p>
   <p>
     TIP: you can use the callback <code>opts.cb</code> and retrieve way more than just <a href="/ranges/">ranges</a>! See the <a href="/os/string-fix-broken-named-entities/#optscb-a-callback-function">readme section</a>.
@@ -45,18 +48,19 @@
       const { rApply } = rangesApply;
       const myStorage = window.localStorage;
       const storageKey = "codsen_play_{{ packageName }}";
+      const initial = `&poud; & &pound;`;
       window.Event = new Vue();
       new Vue({
         el: "#app",
         data: {
-          text1: "",
+          text1: initial,
         },
         mounted: function () {
           const retrieved = myStorage.getItem(storageKey);
           if (typeof retrieved === "string" && retrieved.length) {
             this.text1 = retrieved;
           } else {
-            this.text1 = "";
+            this.text1 = initial;
           }
           this.$refs.in.focus();
         },
@@ -78,6 +82,18 @@
               const gathered = [];
               fixEnt(this.text1, {
                 textAmpersandCatcherCb: idx => {
+                  gathered.push(idx);
+                }
+              })
+              return gathered.length ? gathered : "none";
+            }
+            return "";
+          },
+          healthyEntityLocations: function () {
+            if (typeof this.text1 === "string") {
+              const gathered = [];
+              fixEnt(this.text1, {
+                entityCatcherCb: idx => {
                   gathered.push(idx);
                 }
               })
