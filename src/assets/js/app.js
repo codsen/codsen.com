@@ -47,32 +47,36 @@ window.addEventListener("DOMContentLoaded", () => {
   // -----------------------------------------------------------------------------
 
   function updateUI() {
-    if (htmlEl && navButton) {
-      // tackle menu/search which both are mutually exclusive:
-      if (codsenOpts && codsenOpts.searchExpanded) {
-        // add class to the body
-        htmlEl.setAttribute("data-search-expanded", "true");
-        searchButton.setAttribute("aria-expanded", "true");
+    if (htmlEl) {
+      if (navButton) {
+        // mini header doesn't have a nav button!
 
-        // if search is expanded, collapse the nav
-        htmlEl.setAttribute("data-menu-expanded", "false");
-        navButton.setAttribute("aria-expanded", "false");
+        // tackle menu/search which both are mutually exclusive:
+        if (codsenOpts && codsenOpts.searchExpanded) {
+          // add class to the body
+          htmlEl.setAttribute("data-search-expanded", "true");
+          searchButton.setAttribute("aria-expanded", "true");
 
-        // focus on the text input
-        searchInputField.focus();
-      } else if (codsenOpts && codsenOpts.menuExpanded) {
-        // add class to the body
-        htmlEl.setAttribute("data-menu-expanded", "true");
-        navButton.setAttribute("aria-expanded", "true");
+          // if search is expanded, collapse the nav
+          htmlEl.setAttribute("data-menu-expanded", "false");
+          navButton.setAttribute("aria-expanded", "false");
 
-        // if nav is expanded, collapse the search
-        htmlEl.setAttribute("data-search-expanded", "false");
-        searchButton.setAttribute("aria-expanded", "false");
-      } else {
-        htmlEl.setAttribute("data-menu-expanded", "false");
-        htmlEl.setAttribute("data-search-expanded", "false");
-        navButton.setAttribute("aria-expanded", "false");
-        searchButton.setAttribute("aria-expanded", "false");
+          // focus on the text input
+          searchInputField.focus();
+        } else if (codsenOpts && codsenOpts.menuExpanded) {
+          // add class to the body
+          htmlEl.setAttribute("data-menu-expanded", "true");
+          navButton.setAttribute("aria-expanded", "true");
+
+          // if nav is expanded, collapse the search
+          htmlEl.setAttribute("data-search-expanded", "false");
+          searchButton.setAttribute("aria-expanded", "false");
+        } else {
+          htmlEl.setAttribute("data-menu-expanded", "false");
+          htmlEl.setAttribute("data-search-expanded", "false");
+          navButton.setAttribute("aria-expanded", "false");
+          searchButton.setAttribute("aria-expanded", "false");
+        }
       }
 
       // tackle dark mode, which is independent:
@@ -262,8 +266,8 @@ window.addEventListener("DOMContentLoaded", () => {
   // search
   // -----------------------------------------------------------------------------
 
+  // close search if ESC is pressed
   // if (searchInputField) {
-  //   // close search if ESC is pressed
   //   searchInputField.onkeydown = (evt) => {
   //     evt = evt || window.event;
   //     let isEscape = false;
@@ -293,7 +297,7 @@ window.addEventListener("DOMContentLoaded", () => {
     // console.log(`293 app.js: posting to worker`);
     setWebWorker();
     myWorker.postMessage(searchInputField.value.trim());
-  } else {
+  } else if (searchInputField) {
     searchInputField.value = "";
   }
 
@@ -378,16 +382,6 @@ function setWebWorker() {
   );
 
   myWorker.onmessage = (e) => {
-    // if (typeof e === "object" && Array.isArray(e.data)) {
-    //   // console.log(
-    //   //   `365 app.js: received ${`\u001b[${33}m${`e.data`}\u001b[${39}m`} = ${JSON.stringify(
-    //   //     e.data,
-    //   //     null,
-    //   //     4
-    //   //   )}`
-    //   // );
-    // }
-
     const { data } = e;
     wipeSearchContents();
 
@@ -532,7 +526,7 @@ function setWebWorker() {
 
 window.addEventListener("load", () => {
   // console.log("354 app.js: page is fully loaded");
-  if (window.Worker) {
+  if (window.Worker && document.querySelector("button.search-toggle")) {
     // when page loads and if worker API is supported,
     // make the search button visible
     document.querySelector("button.search-toggle").style.display = "block";

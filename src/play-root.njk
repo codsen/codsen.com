@@ -1,0 +1,17 @@
+---
+layout: page
+permalink: "/os/play/"
+extraContainerClass: playground__root
+---
+{% from "macros/package-listing.njk" import packageListing %}
+<h1><span class="pr">Playgrounds<sup title="{{ collections.packagesWithPlayground | length }} in total" aria-label="{{ collections.packagesWithPlayground | length }} playgrounds in total">Σ={{ collections.packagesWithPlayground | length }}</sup></span></h1>
+
+<div class="content-row__container">
+  <div class="content-row__packages content-row__packages-list">
+    {% for package in collections.packagesWithPlayground %}
+      <div class="package-listing-container">
+      {{ packageListing(package, packageJsons[package], null, true, webapps[package]) }}
+      </div>
+    {% endfor %}
+  </div>
+</div>

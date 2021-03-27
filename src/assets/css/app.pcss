@@ -289,6 +289,14 @@ sub {
   text-decoration-color: $color;
 }
 
+@mixin hyphenate {
+  hyphens: auto;
+  hyphenate-limit-chars: 6 3 3;
+  hyphenate-limit-lines: 2;
+  hyphenate-limit-last: always;
+  hyphenate-limit-zone: 8%;
+}
+
 /* https://stackoverflow.com/a/45820289/3943954 */
 @mixin on-hover {
   @media (hover: hover) and (pointer: fine) {
@@ -351,8 +359,8 @@ body {
   margin: 0;
   @media (min-width: $narrow) {
     padding: 1rem;
+    width: calc(100% - 2rem);
   }
-  width: calc(100% - 2rem);
   height: 100%;
   min-height: 100vh;
   display: flex;
@@ -361,11 +369,8 @@ body {
   background-color: $borderGrey;
 
   /* hyphenation for small screens only */
-  hyphens: auto;
-  hyphenate-limit-chars: 6 3 3;
-  hyphenate-limit-lines: 2;
-  hyphenate-limit-last: always;
-  hyphenate-limit-zone: 8%;
+
+  @include hyphenate;
   @media (min-width: $mid) {
     hyphens: none;
   }
@@ -393,6 +398,15 @@ body {
     .container {
       background-color: $surfaceDark;
     }
+  }
+}
+
+.package-listing-container {
+  padding: 1rem;
+  margin-bottom: 2rem;
+  background-color: $lighterGrey;
+  @include darkTheme {
+    background-color: $lighterDark;
   }
 }
 
@@ -428,6 +442,7 @@ input[type="submit"] {
 }
 
 .highlighted {
+  display: inline-block;
   padding: 0.1rem 0.3rem;
   background-color: $yellow;
   @include darkTheme {
@@ -517,6 +532,14 @@ input[type="submit"] {
 
 .mt20 {
   margin-top: 2rem;
+}
+
+.mb20 {
+  margin-bottom: 2rem;
+}
+
+.mr20 {
+  margin-right: 2rem;
 }
 
 .tal {
@@ -717,6 +740,21 @@ kbd {
 
 .dib {
   display: inline-block;
+}
+
+.dn {
+  display: none;
+}
+
+@media (min-width: $mid) {
+  .min-mid-dn {
+    display: none !important;
+  }
+}
+@media (max-width: $mid) {
+  .max-mid-dn {
+    display: none !important;
+  }
 }
 
 .ptb10 {
@@ -1697,6 +1735,20 @@ svg {
 
 .search-field {
   font-size: 2rem;
+}
+
+/* mini header */
+/* -------------------------------------------------------------------------- */
+
+header .package-back {
+  @media (min-width: $narrow) {
+    position: absolute;
+    top: 1rem;
+    left: 2rem;
+  }
+  @media (min-width: $mid) {
+    left: 3rem;
+  }
 }
 
 /* home page */
@@ -3584,11 +3636,43 @@ article,
       margin: 0 0 3.1rem 1rem;
     }
 
-    p[class^="show-"] img {
-      max-width: 40rem;
-      max-height: 20rem;
-      width: auto;
-      height: auto;
+    a.show-dark-only,
+    a.show-light-only {
+      img {
+        width: 100%;
+        max-width: 30rem;
+        height: auto;
+      }
+    }
+
+    @media (min-width: $mid) {
+      a.show-dark-only,
+      a.show-light-only {
+        float: right;
+        img {
+          margin-right: 1rem;
+          max-width: 20rem;
+          width: auto;
+          height: auto;
+        }
+      }
+    }
+
+    @media (min-width: $thousand) {
+      /* it will be very narrow here! */
+      /* take measures! */
+      @include hyphenate;
+      a.show-dark-only,
+      a.show-light-only {
+        float: right;
+        img {
+          margin-left: 1rem;
+          margin-right: 1rem;
+          max-width: 20rem;
+          width: auto;
+          height: auto;
+        }
+      }
     }
 
     & > [class^="show-"] {
@@ -4639,27 +4723,35 @@ pre[class*="language-"] > code[class*="language-"] {
 .playground-app {
   width: 100%;
   display: flex;
-  flex-direction: row;
+
+  flex-direction: column;
   align-content: space-between;
   margin-bottom: 1rem;
+  & > div > textarea {
+    height: 20rem;
+  }
+
+  @media (min-width: 800px) {
+    flex-direction: row;
+    align-content: space-between;
+    margin-bottom: 1rem;
+    & > div > textarea {
+      height: 40rem;
+    }
+    & > div {
+      margin: 0 1rem;
+      &:first-child {
+        margin-left: 0;
+      }
+      &:first-last {
+        margin-right: 0;
+      }
+    }
+  }
 
   & > div,
   & > div > textarea {
     width: 100%;
-  }
-
-  & > div > textarea {
-    height: 40rem;
-  }
-
-  & > div {
-    margin: 0 1rem;
-    &:first-child {
-      margin-left: 0;
-    }
-    &:first-last {
-      margin-right: 0;
-    }
   }
 
   textarea {
@@ -4675,6 +4767,39 @@ pre[class*="language-"] > code[class*="language-"] {
       outline: none !important;
     }
   }
+
+  h3 {
+    font-size: 2.2rem;
+    font-weight: 900;
+    font-style: italic;
+    line-height: 1.2;
+    letter-spacing: normal;
+    margin-bottom: 0 !important;
+    padding: 1rem 2rem;
+    color: $textBright;
+    @include darkTheme {
+      color: $darkWhite;
+    }
+  }
+}
+
+h3 a {
+  color: $borderGrey;
+  &:hover {
+    color: $textBright;
+  }
+  @include darkTheme {
+    color: $darkYellow;
+    &:hover {
+      color: $textDark;
+    }
+  }
+  font-size: 1.2rem !important;
+  font-weight: normal;
+  font-style: normal;
+  position: relative;
+  top: -1rem;
+  font-family: monospace;
 }
 
 /* etc */

@@ -44,23 +44,31 @@
         <aside class="package-body__extras">
           <div class="package-install">
             {% if webapps[title] %}
-              <h3>Try it in a {% if webapps[title].url %}web app{% else %}playground{% endif %}</h3>
+            <div class="group mb20">
+              {% set label = "Try it in a " %}
+              {% if webapps[title].url %}
+                {% set label = label + "web app" %}
+              {% else %}
+                {% set label = label + "playground" %}
+              {% endif %}
+              <h3 class="min-mid-dn">{{ label }}</h3>
+              
               {% set url = "play" %}
+              {% if webapps[title].dark and webapps[title].light %}
+                {% set alt = "test" + title + "program online" %}
+                <a class="no-ext-link-icon show-dark-only" href="{{ url }}"><img src="{{ webapps[title].dark }}" width="300" alt="{{ alt }}"/></a>
+                <a class="no-ext-link-icon show-light-only" href="{{ url }}"><img src="{{ webapps[title].light }}" width="300" alt="{{ alt }}"/></a>
+              {% endif %}
+              <h3 class="max-mid-dn">{{ label }}</h3>
+              
               {% if webapps[title].url %}
                 {% set url = webapps[title].url %}
               {% endif %}
 
-              {% if webapps[title].dark and webapps[title].light %}
-                <p class="show-dark-only">
-                  <a class="no-ext-link-icon" href="{{ url }}"><img src="{{ webapps[title].dark }}" width="438" height="250" alt="{{ title }} web app"/></a>
-                </p>
-                <p class="show-light-only">
-                  <a class="no-ext-link-icon" href="{{ url }}"><img src="{{ webapps[title].light }}" width="438" height="250" alt="test {{ title }} program online"/></a>
-                </p>
-              {% endif %}
               <p>
                 <a class="button" href="{{ url }}"{% if webapps[title].url %} target="_blank"{% endif %}>Open{% if webapps[title].label %} {{ webapps[title].label }}{% endif %}</a>
               </p>
+            </div>
             {% endif %}
 
             <h3>Install {% if isCli %}globally, {% endif %}via&nbsp;npm</h3>

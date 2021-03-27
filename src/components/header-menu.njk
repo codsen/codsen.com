@@ -1,0 +1,21 @@
+<div class="menu-container">
+  <ul id="primary-menu" class="menu-list">
+    {% for item in navigation.items %}
+      {% set relExternal = '' %}
+      {% set isCurrent = '' %}
+
+      {% if item.external %}
+        {% set relExternal = ' rel="external" target="_blank"' %}
+      {% endif %}
+
+      {% if page.url == item.url or ((page.url | rootUrl) == item.url) %}
+        {% set isCurrent = ' aria-current="page"' %}
+      {% endif %}
+
+      <li class="menu-item menu-item-{{ item.text | slugify }}">
+        <a href="{{ item.url }}"{{ relExternal | safe }}{{ isCurrent | safe }} itemprop="url">
+          <span itemprop="name">{{ item.text }}</span></a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>

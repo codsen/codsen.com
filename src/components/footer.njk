@@ -32,6 +32,8 @@
       {% elif page.url !== "/os/" and page.url | rootUrl == "/os/" %}
         {% if title %}
           {% set editUrl = "https://github.com/codsen/codsen.com/tree/main/src/os/" + title + ".md" %}
+        {% elif permalink == '/os/{{ packageName }}/play/' %}
+          {% set editUrl = "https://github.com/codsen/codsen.com/blob/main/src/playgrounds/" + packageName + ".njk" %}
         {% else %}
           {% set editUrl = editOn['/examples/'] %}
         {% endif %}
@@ -40,7 +42,9 @@
       {% endif %}
 
       <span class="emoji">✍️</span> <a href="{{ editUrl }}" target="_blank">Edit this page</a> on GitHub<br>
+      <span class="emoji">🐛</span> See a bug or a typo? <a href="https://github.com/codsen/codsen.com/issues/new" target="_blank">Raise an issue</a><br>
       <span class="emoji">💘</span> Check out the <a href="https://indieweb.org/principles" target="_blank" rel="nofollow noreferrer noopener">Indieweb</a><br>
+      <span class="emoji">😎</span> Check out <a href="http://www.catb.org/~esr/faqs/hacker-howto.html" target="_blank" rel="nofollow noreferrer noopener">How to be a hacker</a><br>
       {# <span class="emoji">⬇️</span> Download some <a href="/freebies/">freebies</a> #}
     </p>
     <h3>Cookies</h3>

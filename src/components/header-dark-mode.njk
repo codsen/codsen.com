@@ -1,0 +1,15 @@
+<div class="dark-mode-toggle-container" data-controller="theme-switcher">
+
+    <button aria-pressed="false" data-target="theme-switcher.auto" data-theme-name="auto" aria-label="Set automatic theme">
+      {% include "src/components/svg-icon-auto.njk" %}
+    </button>
+
+    <button aria-pressed="true" data-target="theme-switcher.light" data-theme-name="light" aria-label="Set light theme">
+      {% include "src/components/svg-icon-light.njk" %}
+    </button>
+
+    <button aria-pressed="false" data-target="theme-switcher.dark" data-theme-name="dark" aria-label="Set dark theme">
+      {% include "src/components/svg-icon-dark.njk" %}
+    </button>
+
+</div>

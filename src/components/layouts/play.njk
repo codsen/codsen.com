@@ -1,40 +1,23 @@
 {% extends 'layouts/base.njk' %}
 
 {% block headscripts %}
-
-<script async src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
-<script async src="https://cdn.jsdelivr.net/npm/{{ packageName }}/dist/{{ packageName }}.dev.umd.js"></script>
-{%- if packageName == "string-fix-broken-named-entities" -%}
-  <script async src="https://cdn.jsdelivr.net/npm/ranges-apply/dist/ranges-apply.dev.umd.js"></script>
-{% endif %}
-
+  <script async src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+  <script async src="https://cdn.jsdelivr.net/npm/{{ packageName }}/dist/{{ packageName }}.dev.umd.js"></script>
+  {# any extras: #}
+  {%- if packageName == "string-fix-broken-named-entities" -%}
+    <script async src="https://cdn.jsdelivr.net/npm/ranges-apply/dist/ranges-apply.dev.umd.js"></script>
+  {% endif %}
 {% endblock %}
 
 {% block content %}
-  {% include "header.njk" %}
-  <hr>
+  {% include "header-mini.njk" %}
   <main class="content-main layout-play{% if extraContainerClass %} {{ extraContainerClass }}{% endif %}" data-role="main" id="skiplink-content" tabindex="-1">
     <div class="content-main__inner">
       <article>
         {{ content | safe }}
-        
-        <div class="package-extras">
-          <div class="package-extras__articles">
-            <h3>See the Vue.js + Nunjucks source of this page</h3>
-            <p>
-              <a class="button" href="https://github.com/codsen/codsen.com/blob/main/src/playgrounds/{{ packageName }}.njk" target="_blank">It's on GitHub!</a>
-            </p>
-            <p>
-              We're consuming <a href="https://cdn.jsdelivr.net/npm/vue@2.6.12">Vue</a> and <a href="https://cdn.jsdelivr.net/npm/{{ packageName }}/dist/{{ packageName }}.umd.js">{{ packageName }}</a> as scripts, from jsDelivr CDN. You can do it too!
-            </p>
-          </div>
-
-          <div class="package-extras__packages">
-            <h3>Please</h3>
-            <p>If you see any problems on this page, anything strange, suspicious, illogical, unreasonable, inefficient or erroneous &mdash; pleeease &mdash; <a href="https://github.com/codsen/codsen/issues/new/choose">raise a quick GitHub issue</a>. It scores you one green contribution square 🟩 on your GitHub timeline and also one good karma brownie point! A win-win! 👍🍻🍻🍻🤩🤩❤️ </p>
-          </div>
-        </div>
-        
+        <p>
+        <strong>PS.</strong> See the <a href="https://github.com/codsen/codsen.com/blob/main/src/playgrounds/{{ packageName }}.njk" target="_blank">source of this page on GitHub</a>, Vue.js is driving the UI, both Vue and this program are coming as <code>&lt;script&gt;</code>s from jsDelivr.
+        </p>
       </article>
     </div>
   </main>

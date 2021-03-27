@@ -1,6 +1,22 @@
-{% macro packageListing(name, packageJson, extPackageDescr) %}
-<div class="content-row__package">
-  <a href="{% if packageJson %}/os/{% else %}https://www.npmjs.com/package/{% endif %}{{ name }}"><span class="emoji">📦</span> {{ name }}{% if packageJson %} <sup>{{ packageJson.version }}</sup>{% endif %}</a>
+{% macro packageListing(name, packageJson, extPackageDescr, linkToPlayground, webapp) %}
+
+{% set urlPrefix = "https://www.npmjs.com/package/" %}
+{% if packageJson %}{% set urlPrefix = "/os/" %}{% endif %}
+{% set url = urlPrefix + name %}
+{% if linkToPlayground %}{% set url = url + "/play" %}{% endif %}
+
+<div class="content-row__package group">
+  
+  {% if webapp and webapp.dark and webapp.light %}
+    {% set alt = "test" + name + "program online" %}
+    <div class="dib fl mr20">
+      <a class="no-ext-link-icon show-dark-only" href="{{ url }}"><img src="{{ webapp.dark }}" width="100" alt="{{ alt }}"/></a>
+      <a class="no-ext-link-icon show-light-only" href="{{ url }}"><img src="{{ webapp.light }}" width="100" alt="{{ alt }}"/></a>
+    </div>
+  {% endif %}
+
+  <a href="{{ url }}"><span class="emoji">📦</span> {{ name }}{% if packageJson %} <sup>{{ packageJson.version }}</sup>{% endif %}</a>
+  
   {% if packageJson or extPackageDescr %}
   <div class="content-row__package__description">
     {% if extPackageDescr %}
@@ -10,5 +26,6 @@
     {% endif %}
   </div>
   {% endif %}
+
 </div>
 {% endmacro %}

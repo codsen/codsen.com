@@ -1,34 +1,26 @@
 <h2>{{ packageName }} <sup title="current version is {{ packageJsons[packageName].version }}" aria-label="current version is {{ packageJsons[packageName].version }}">{{ packageJsons[packageName].version }}</sup></h2>
 <div id="app">
+  <button v-on:click="example4">initial</button> <button v-on:click="example1">broken nbsp</button> <button v-on:click="example2">double encoding</button> <button v-on:click="example3">raw semi's</button>
   <div class="playground-app">
     <div>
-      <h3>Put a string:</h3>
+      <h3>Put a string</h3>
       <textarea ref="in" v-model="text1" placeholder="put some code here"></textarea>
     </div>
     <div>
-      <h3>Output ranges:</h3>
+      <h3>Program returns Ranges <a href="/ranges/">???</a></h3>
       <textarea ref="out" v-model="text2" readonly></textarea>
     </div>
     <div>
-      <h3>Applied ranges:</h3>
+      <h3>Applied Ranges <a href="/os/ranges-apply/">???</a></h3>
       <textarea ref="applied" v-model="text3" readonly></textarea>
     </div>
   </div>
   <p>
-    Reported <a href="/os/string-fix-broken-named-entities/#optsentitycatchercb">healthy entity</a> locations: <span class="highlighted">{% raw %}{{ healthyEntityLocations }}{% endraw %}</span>.
-  </p>
-  <p>
-    Reported non-entity, <a href="/os/string-fix-broken-named-entities/#optstextampersandcatchercb">raw ampersand</a> locations: <span class="highlighted">{% raw %}{{ ampLocations }}{% endraw %}</span>.
+    Reported <a href="/os/string-fix-broken-named-entities/#optsentitycatchercb">healthy entity</a> locations: <span class="highlighted">{% raw %}{{ healthyEntityLocations }}{% endraw %}</span>. Reported non-entity, <a href="/os/string-fix-broken-named-entities/#optstextampersandcatchercb">raw ampersand</a> locations: <span class="highlighted">{% raw %}{{ ampLocations }}{% endraw %}</span>.
   </p>
   <p>
     <strong>TIP:</strong> you can use the callback <code>opts.cb</code> and retrieve way more than just <a href="/ranges/">ranges</a>! See the <a href="/os/string-fix-broken-named-entities/#optscb-a-callback-function">readme section</a>.<br/>
     <strong>TIP #2:</strong> we're using the same string indexing principles as in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/slice"><code>String.prototype.slice()</code></a>.
-  </p>
-  <p>
-    <h3>Example presets</h3>
-    <button v-on:click="example1">broken nbsp</button>
-    <button v-on:click="example2">double encoding</button>
-    <button v-on:click="example3">raw semi's</button>
   </p>
 </div>
 
@@ -122,6 +114,9 @@
           },
           example3: function(event) {
             this.text1 = `&pund; & &pond; & &poud;`
+          },
+          example4: function(event) {
+            this.text1 = initial
           },
         }
       });
