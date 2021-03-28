@@ -49,6 +49,7 @@ The `stri()` function will return **a plain object**, for example:
     css: false,
     text: true,
     templatingTags: false,
+    js: false,
   },
   templatingLang: {
     name: "Nunjucks"
@@ -77,9 +78,10 @@ Here is its API:
 | `css`                            | Boolean           | `true`  | Should we strip head CSS style tags, CSS rules and ar-rules inside |
 | `text`                           | Boolean           | `false` | Should we strip text                                               |
 | `templatingTags`                 | Boolean           | `false` | Should we strip any templating tags (like Nunjucks)                |
-| `templatingTags`                 | `null` or Function           | `null` | Pass a function, progress value, `0`-`100` will be passed to it |
-| `reportProgressFuncFrom`                 | Natural number \[0; 100] | `0` | Starting progress percentage |
-| `reportProgressFuncTo`                 | Natural number \[0; 100] | `100` | Ending progress percentage |
+| `js`                             | Boolean           | `true`  | Should we strip any JS code                                        |
+| `reportProgressFunc`             | `null` or Function | `null` | Pass a function, progress value, `0`-`100` will be passed to it |
+| `reportProgressFuncFrom`         | Natural number \[0; 100] | `0` | Starting progress percentage |
+| `reportProgressFuncTo`           | Natural number \[0; 100] | `100` | Ending progress percentage |
 
 The Optional Options Object is not validated; please take care of what values and of what type you pass.
 
@@ -91,6 +93,7 @@ Here is the Optional Options Object in one place (in case you ever want to copy 
   css: true,
   text: false,
   templatingTags: false,
+  js: true,
   reportProgressFunc: null,
   reportProgressFuncFrom: 0,
   reportProgressFuncTo: 100,
