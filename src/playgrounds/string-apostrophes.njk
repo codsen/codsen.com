@@ -1,0 +1,116 @@
+<h2>{{ packageName }} <sup title="current version is {{ packageJsons[packageName].version }}" aria-label="current version is {{ packageJsons[packageName].version }}">{{ packageJsons[packageName].version }}</sup></h2>
+<div id="app">
+  <ul class="toggles">
+    <li class="convertApostrophes">
+      <input class="tgl" id="convertApostrophes" type="checkbox" v-model="convertApostrophes"><label id="convertApostrophesLabel" class="tgl-btn" for="convertApostrophes"></label>
+      <span class="label"><span v-if="convertApostrophes">Enabled</span><span v-else>Disabled</span> (<code>opts.convertApostrophes === <span v-if="convertApostrophes">true</span><span v-else>false</span></code>)</span>
+    </li>
+    <li class="convertEntities">
+      <input v-bind:disabled="!convertApostrophes" class="tgl" id="convertEntities" type="checkbox" v-model="convertEntities"><label id="convertEntitiesLabel" class="tgl-btn" for="convertEntities"></label>
+      <span v-bind:class="{ strikethrough: !convertApostrophes, label: true }"><span v-if="convertEntities">Do</span><span v-else>Don&rsquo;t</span> HTML-Encode (<code>opts.convertEntities === <span v-if="convertEntities">true</span><span v-else>false</span></code>)</span>
+    </li>
+  </ul>
+  
+  presets: <button v-on:click="example4">initial</button> <button v-on:click="example1">double</button> <button v-on:click="example2">leading</button> <button v-on:click="example3">quoting+citing</button>
+  <div class="playground-app">
+    <div>
+      <h3>Put a string</h3>
+      <textarea ref="in" v-model="text1" placeholder="put some code here"></textarea>
+    </div>
+    <div>
+      <h3>Program returns a string</h3>
+      <textarea ref="out" v-model="text2" readonly></textarea>
+    </div>
+    <div>
+      <h3>and Ranges <a href="/ranges/">???</a></h3>
+      <textarea ref="applied" v-model="text3" readonly></textarea>
+    </div>
+  </div>
+  <p>
+    <strong>TIP:</strong> check out <a href="https://practicaltypography.com/straight-and-curly-quotes.html">Butterick&rsquo;s Practical Typography</a><br/>
+    <strong>TIP #2:</strong> the <a href="https://detergent.io">detergent.io</a>, a comprehensive text preparation tool, uses this program
+  </p>
+</div>
+
+{# ---------------------------------------------- #}
+
+<script>
+  window.addEventListener("load", pageFullyLoaded, false);
+  function pageFullyLoaded(e) {
+    // Vue.config.productionTip = false;
+    if (Vue && stringApostrophes) {
+      function isStr(something) {
+        return typeof something === "string";
+      }
+      function isObj(something) {
+        return typeof isObj === "object";
+      }
+      const { convertAll } = stringApostrophes;
+      const myStorage = window.localStorage;
+      const storageKey = "codsen_play_{{ packageName }}";
+      const initial = `In the '60s, rock 'n' roll`;
+      window.Event = new Vue();
+      new Vue({
+        el: "#app",
+        data: {
+          text1: initial,
+          convertApostrophes: true,
+          convertEntities: false,
+        },
+        mounted: function () {
+          const retrieved = myStorage.getItem(storageKey);
+          if (typeof retrieved === "string" && retrieved.length) {
+            this.text1 = retrieved;
+          } else {
+            this.text1 = initial;
+          }
+          this.$refs.in.focus();
+        },
+        computed: {
+          text2: function () {
+            if (typeof this.text1 === "string") {
+              return convertAll(this.text1, {
+                convertApostrophes: this.convertApostrophes,
+                convertEntities: this.convertEntities,
+              }).result;
+            }
+            return "";
+          },
+          text3: function () {
+            if (typeof this.text1 === "string") {
+              return JSON.stringify(convertAll(this.text1, {
+                convertApostrophes: this.convertApostrophes,
+                convertEntities: this.convertEntities,
+              }).ranges, null, 4);
+            }
+            return "";
+          },
+        },
+        watch: {
+          text1: function () {
+            // dump the input into the local storage:
+            if (isStr(this.text1) && this.text1.length) {
+              myStorage.setItem(storageKey, this.text1);
+            } else {
+              myStorage.setItem(storageKey, "");
+            }
+          },
+        },
+        methods: {
+          example1: function(event) {
+            this.text1 = `this is "citation"`
+          },
+          example2: function(event) {
+            this.text1 = `'Twas the night`
+          },
+          example3: function(event) {
+            this.text1 = `"Hello," said the spider. "'Shelob' is my name."`
+          },
+          example4: function(event) {
+            this.text1 = initial
+          },
+        }
+      });
+    }
+  }
+</script>

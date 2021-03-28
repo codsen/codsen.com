@@ -23,7 +23,7 @@ This website is static and follows [Indieweb](https://indieweb.org/) principles:
   {% include "svg-codsen-ok.njk" %}
 </div>
 
-Our [npm packages](/os/) have {{ packageExamples | examplesExtractTotal | toWords }} examples posted here — all automatically tested and validated. {{ collections.packagesWithPlayground | length | toWords | capitalize }} package {% if collections.packagesWithPlayground | length > 1 %}have{% else %}has{% endif %} a testing [playground](/os/play/).
+Our [npm packages](/os/) have {{ packageExamples | examplesExtractTotal | toWords }} examples posted here — all automatically tested and validated. {{ collections.packagesWithPlayground | length | toWords | capitalize }} package{% if collections.packagesWithPlayground | length > 1 %}s{% endif %} {% if collections.packagesWithPlayground | length > 1 %}have{% else %}has{% endif %} a testing [playground](/os/play/).
 
 <div role="presentation" class="separator">
   {% include "svg-codsen-star-small.njk" %}

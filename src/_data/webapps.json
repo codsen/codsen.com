@@ -17,6 +17,10 @@
     "dark": "/images/site-crush-dark.png",
     "light": "/images/site-crush-light.png"
   },
+  "string-apostrophes": {
+    "dark": "/images/play-string-apostrophes-dark.png",
+    "light": "/images/play-string-apostrophes-light.png"
+  },
   "string-fix-broken-named-entities": {
     "dark": "/images/play-string-fix-broken-named-entities-dark.png",
     "light": "/images/play-string-fix-broken-named-entities-light.png"

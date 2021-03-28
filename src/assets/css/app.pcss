@@ -441,6 +441,16 @@ input[type="submit"] {
   box-shadow: none;
 }
 
+ul.toggles {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.strikethrough {
+  text-decoration: line-through;
+}
+
 .highlighted {
   display: inline-block;
   padding: 0.1rem 0.3rem;
@@ -4798,6 +4808,118 @@ pre[class*="language-"] > code[class*="language-"] {
       position: relative;
       top: -1rem;
       font-family: monospace;
+    }
+  }
+}
+
+/* toggle radio buttons */
+/* -------------------------------------------------------------------------- */
+
+/* toggle button */
+.tgl {
+  display: none;
+
+  /* add default box-sizing for this scope */
+  &,
+  &:after,
+  &:before,
+  & *,
+  & *:after,
+  & *:before,
+  & + .tgl-btn {
+    box-sizing: border-box;
+    &::selection {
+      background: none;
+    }
+  }
+
+  + .tgl-btn {
+    outline: 0;
+    display: inline-block;
+    width: 2.4em;
+    height: 1.2em;
+    position: relative;
+    top: 0.5rem;
+    cursor: pointer;
+    user-select: none;
+    &:after,
+    &:before {
+      position: relative;
+      display: block;
+      content: "";
+      width: 50%;
+      height: 100%;
+    }
+
+    &:after {
+      left: 0;
+    }
+
+    &:before {
+      display: none;
+    }
+  }
+
+  &:checked + .tgl-btn:after {
+    left: 50%;
+  }
+
+  &:disabled + .tgl-btn {
+    cursor: not-allowed;
+  }
+  &:disabled + .tgl-btn:after {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* styling: */
+
+  + .tgl-btn {
+    background: $borderGrey;
+    &:hover {
+      background: $blue;
+    }
+    @include darkTheme {
+      background: $textDark;
+      &:hover {
+        background: $darkYellow;
+      }
+    }
+
+    border-radius: 2em;
+    padding: 2px;
+    transition: all 0.2s ease;
+    &:after {
+      border-radius: 50%;
+      background: #fff;
+      @include darkTheme {
+        background: #000;
+      }
+      transition: all 0.2s ease;
+    }
+  }
+
+  &:checked + .tgl-btn {
+    background: $green;
+    &:hover {
+      background: $blue;
+    }
+    @include darkTheme {
+      background: $darkOrange;
+      &:hover {
+        background: $darkYellow;
+      }
+    }
+  }
+
+  &:disabled + .tgl-btn {
+    &:hover {
+      background: $borderGrey;
+    }
+    @include darkTheme {
+      &:hover {
+        background: $textDark;
+      }
     }
   }
 }
