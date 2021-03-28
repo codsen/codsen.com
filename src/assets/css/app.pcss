@@ -4780,26 +4780,26 @@ pre[class*="language-"] > code[class*="language-"] {
     @include darkTheme {
       color: $darkWhite;
     }
-  }
-}
 
-h3 a {
-  color: $borderGrey;
-  &:hover {
-    color: $textBright;
-  }
-  @include darkTheme {
-    color: $darkYellow;
-    &:hover {
-      color: $textDark;
+    a {
+      color: $borderGrey;
+      &:hover {
+        color: $textBright;
+      }
+      @include darkTheme {
+        color: $darkYellow;
+        &:hover {
+          color: $black;
+        }
+      }
+      font-size: 1.2rem !important;
+      font-weight: normal;
+      font-style: normal;
+      position: relative;
+      top: -1rem;
+      font-family: monospace;
     }
   }
-  font-size: 1.2rem !important;
-  font-weight: normal;
-  font-style: normal;
-  position: relative;
-  top: -1rem;
-  font-family: monospace;
 }
 
 /* etc */
