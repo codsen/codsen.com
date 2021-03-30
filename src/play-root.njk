@@ -1,17 +1,41 @@
 ---
-layout: page
+layout: list
 permalink: "/os/play/"
 extraContainerClass: playground__root
 ---
 {% from "macros/package-listing.njk" import packageListing %}
-<h1><span class="pr">Playgrounds<sup title="{{ collections.packagesWithPlayground | length }} in total" aria-label="{{ collections.packagesWithPlayground | length }} playgrounds in total">Σ={{ collections.packagesWithPlayground | length }}</sup></span></h1>
-
-<div class="content-row__container">
-  <div class="content-row__packages content-row__packages-list">
-    {% for package in collections.packagesWithPlayground %}
-      <div class="package-listing-container">
-      {{ packageListing(package, packageJsons[package], null, true, webapps[package]) }}
-      </div>
-    {% endfor %}
+<section class="two-thirds">
+  <h1><span class="all-articles__all">All</span> <span class="all-articles__articles pr">playgrounds<sup title="{{ collections.packagesWithPlayground | length }} playgrounds published" aria-label="{{ collections.packagesWithPlayground | length }} playgrounds published">Σ={{ collections.packagesWithPlayground | length }}</sup></span></h1>
+  
+  <div class="content-row__container">
+    <div class="content-row__packages content-row__packages-list mt40">
+      {% for package in collections.packagesWithPlayground %}
+        <div class="package-listing-container">
+        {{ packageListing(package, packageJsons[package], null, true, webapps[package]) }}
+        </div>
+      {% endfor %}
+    </div>
   </div>
-</div>
+
+</section>
+<aside class="one-third">
+  <section>
+    <ul class="no-styling">
+      <li>
+        <a href="/os/">&larr; Open Source homepage</a>
+      </li>
+      <li>
+        <a href="/articles/tag/all/">All tags</a>
+      </li>
+      <br/>
+      <li>
+        <a href="/articles/list/">All articles</a>
+      </li>
+      <li>
+        <a href="/os/examples/">All package examples</a>
+      </li>
+    </ul>
+    {% include "sidebar_rss_contents.njk" %}
+    {% include "svg-codsen-handshake.njk" %}{% include "svg-codsen-2.njk" %}
+  </section>
+</aside>

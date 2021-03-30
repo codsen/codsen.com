@@ -11,7 +11,7 @@
     </li>
   </ul>
   
-  presets: <button v-on:click="example4">initial</button> <button v-on:click="example1">double</button> <button v-on:click="example2">leading</button> <button v-on:click="example3">quoting+citing</button>
+  presets: <button v-on:click="example0">initial</button> <button v-on:click="example1">double</button> <button v-on:click="example2">leading</button> <button v-on:click="example3">quoting+citing</button>
   <div class="playground-app">
     <div>
       <h3>Put a string</h3>
@@ -28,7 +28,7 @@
   </div>
   <p>
     <strong>TIP:</strong> check out <a href="https://practicaltypography.com/straight-and-curly-quotes.html">Butterick&rsquo;s Practical Typography</a><br/>
-    <strong>TIP #2:</strong> the <a href="https://detergent.io">detergent.io</a>, a comprehensive text preparation tool, uses this program
+    <strong>TIP #2:</strong> the <a href="https://detergent.io">detergent.io</a>, a comprehensive text-preparation tool, uses this program
   </p>
 </div>
 
@@ -97,6 +97,9 @@
           },
         },
         methods: {
+          example0: function(event) {
+            this.text1 = initial
+          },
           example1: function(event) {
             this.text1 = `this is "citation"`
           },
@@ -105,9 +108,6 @@
           },
           example3: function(event) {
             this.text1 = `"Hello," said the spider. "'Shelob' is my name."`
-          },
-          example4: function(event) {
-            this.text1 = initial
           },
         }
       });

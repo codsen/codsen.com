@@ -441,6 +441,7 @@ input[type="submit"] {
   box-shadow: none;
 }
 
+ul.no-styling,
 ul.toggles {
   list-style-type: none;
   padding: 0;
@@ -542,6 +543,10 @@ input[type="submit"] {
 
 .mt20 {
   margin-top: 2rem;
+}
+
+.mt40 {
+  margin-top: 4rem;
 }
 
 .mb20 {
@@ -842,6 +847,21 @@ blockquote {
   }
 }
 
+/* tables where they're used for tabular data */
+table.presentation {
+  tr {
+    td {
+      border: 0;
+      padding: 0;
+      border: 0;
+      outline: 0;
+      font-size: 100%;
+      vertical-align: baseline;
+      background: transparent;
+    }
+  }
+}
+
 /* body */
 /* -------------------------------------------------------------------------- */
 
@@ -906,7 +926,8 @@ footer {
 }
 
 main a,
-main .open-source-container h3 {
+main .open-source-container h3,
+.examples__root .list-container a {
   @include underline($green);
   &:hover {
     text-decoration: none;
@@ -2589,9 +2610,9 @@ open source at all. */
     margin-bottom: 2rem;
   }
 
-  ul {
+  /* ul {
     padding-left: 2rem;
-  }
+  } */
 }
 
 @media (min-width: $mid) {
@@ -3464,6 +3485,9 @@ article,
     a {
       color: $darkRed;
       text-decoration: none;
+    }
+    a.button {
+      color: $black;
     }
   }
 }
@@ -4661,60 +4685,59 @@ pre[class*="language-"] > code[class*="language-"] {
 .page-articles-list {
   .list-container {
     margin-top: 8rem;
-  }
-
-  figure {
-    text-align: center;
-    @media (min-width: $mid) {
-      float: left;
-      margin: 0 2rem 0 0;
-      text-align: left;
-    }
-    a {
-      display: inline-block;
-      height: 6rem;
-      width: 12rem;
-      &:hover {
-        background: none;
+    figure {
+      text-align: center;
+      @media (min-width: $mid) {
+        float: left;
+        margin: 0 2rem 0 0;
+        text-align: left;
       }
-      @include darkTheme {
+      a {
+        display: inline-block;
+        height: 6rem;
+        width: 12rem;
         &:hover {
           background: none;
         }
+        @include darkTheme {
+          &:hover {
+            background: none;
+          }
+        }
+      }
+      img {
+        height: 6rem;
+        width: 12rem;
       }
     }
-    img {
-      height: 6rem;
-      width: 12rem;
-    }
-  }
 
-  li {
-    padding-bottom: 2rem;
-    border-bottom: 1px dashed $borderGrey;
-    @include darkTheme {
-      border-bottom-color: $borderDark;
-    }
+    li {
+      padding-bottom: 2rem;
+      border-bottom: 1px dashed $borderGrey;
+      @include darkTheme {
+        border-bottom-color: $borderDark;
+      }
 
-    margin-bottom: 2rem;
-    @media (min-width: $mid) {
-      margin-bottom: 3rem;
-    }
-
-    &:last-child {
-      border-bottom: none;
-      margin-bottom: 0;
-    }
-
-    article {
-      padding: 0;
-
+      margin-bottom: 2rem;
       @media (min-width: $mid) {
-        display: flex;
-        flex-direction: row;
+        margin-bottom: 3rem;
+      }
 
-        .article-contents-container {
-          flex: 1;
+      &:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+      }
+
+      article {
+        padding: 0;
+
+        @media (min-width: $mid) {
+          display: flex;
+          flex-direction: row;
+
+          .article-contents-container {
+            flex: 1;
+          }
         }
       }
     }
@@ -4809,6 +4832,74 @@ pre[class*="language-"] > code[class*="language-"] {
       position: relative;
       top: -1rem;
       font-family: monospace;
+    }
+  }
+}
+
+/* lift aside stickers to balance the angle of Codsen */
+.page-articles-list,
+.page-articles-home__root,
+.examples__root,
+.playground__root {
+  #codsen-handshake {
+    margin-bottom: 1.5rem;
+    margin-right: 1.5rem;
+  }
+}
+
+.playground__root {
+  .content-row__container {
+    position: relative;
+    z-index: 10;
+    padding-top: 2rem;
+  }
+}
+
+/* examples root */
+/* -------------------------------------------------------------------------- */
+
+.examples__root .list-container {
+  table {
+    width: 100%;
+  }
+
+  li {
+    padding-top: 1.2rem;
+  }
+
+  td {
+    padding-bottom: 1.2rem;
+    &.examples__right-col {
+      padding-left: 2rem;
+    }
+  }
+
+  a {
+    /* don't style the list, it's overwhelming */
+    text-decoration: none !important;
+  }
+
+  .examples__left-col a {
+    @include darkTheme {
+      color: $darkRed;
+      &:hover {
+        color: $black;
+      }
+    }
+  }
+
+  tr {
+    border-top: 1px solid $borderGrey;
+    @include darkTheme {
+      border-top-color: $borderDark;
+    }
+
+    /* spin the box emoji */
+    &:hover {
+      .emoji {
+        animation: roll 0.5s;
+        transform: rotate();
+      }
     }
   }
 }

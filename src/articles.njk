@@ -3,8 +3,9 @@ layout: list
 title: Articles
 pagination:
   data: collections.posts
-  size: 4
+  size: 7
   reverse: true
+extraContainerClass: page-articles-home__root
 ---
 <section class="two-thirds page-articles-home">
   <h1><span class="pr">Articles<sup title="{{ collections.posts | length }} posts published" aria-label="{{ collections.posts | length }} posts published">Σ={{ collections.posts | length }}</sup></span></h1>
@@ -30,12 +31,22 @@ pagination:
 </section>
 <aside class="one-third">
   <section>
-    <p>
-      <a href="/articles/list/">List of all posts &rarr;</a>
-      <br>
-      <a href="/articles/tag/all/">All tags</a>
-    </p>
+    <ul class="no-styling">
+      <li>
+        <a href="/articles/list/">List of all posts &rarr;</a>
+      </li>
+      <li>
+        <a href="/articles/tag/all/">All tags</a>
+      </li>
+      <br/>
+      <li>
+        <a href="/os/examples/">All package examples</a>
+      </li>
+      <li>
+        <a href="/os/play/">All package playgrounds</a>
+      </li>
+    </ul>
     {% include "sidebar_rss_contents.njk" %}
-    {% include "svg-codsen-wow.njk" %}{% include "svg-codsen-2.njk" %}
+    {% include "svg-codsen-handshake.njk" %}{% include "svg-codsen-2.njk" %}
   </section>
 </aside>

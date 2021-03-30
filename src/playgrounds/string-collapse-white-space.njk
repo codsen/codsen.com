@@ -1,0 +1,130 @@
+<h2>{{ packageName }} <sup title="current version is {{ packageJsons[packageName].version }}" aria-label="current version is {{ packageJsons[packageName].version }}">{{ packageJsons[packageName].version }}</sup></h2>
+<div id="app">
+  <ul class="toggles">
+    <li class="trimLines">
+      <input class="tgl" id="trimLines" type="checkbox" v-model="trimLines"><label id="trimLinesLabel" class="tgl-btn" for="trimLines"></label>
+      <span class="label"><span v-if="trimLines">Trim</span><span v-else>Don&rsquo;t trim</span> lines (excluding string front/end whitespace) (<code>opts.trimLines === <span v-if="trimLines">true</span><span v-else>false</span></code>)</span>
+    </li>
+    <li class="trimStart">
+      <input v-bind:disabled="trimLines" class="tgl" id="trimStart" type="checkbox" v-model="trimStart"><label id="trimStartLabel" class="tgl-btn" for="trimStart"></label>
+      <span v-bind:class="{ strikethrough: trimLines, label: true }"><span v-if="trimStart">Trim</span><span v-else>Don&rsquo;t trim</span> front (<code>opts.trimStart === <span v-if="trimStart">true</span><span v-else>false</span></code>)</span>
+    </li>
+    <li class="trimEnd">
+      <input v-bind:disabled="trimLines" class="tgl" id="trimEnd" type="checkbox" v-model="trimEnd"><label id="trimEndLabel" class="tgl-btn" for="trimEnd"></label>
+      <span v-bind:class="{ strikethrough: trimLines, label: true }"><span v-if="trimEnd">Trim</span><span v-else>Don&rsquo;t trim</span> end (<code>opts.trimEnd === <span v-if="trimEnd">true</span><span v-else>false</span></code>)</span>
+    </li>
+    <li class="removeEmptyLines">
+      <input class="tgl" id="removeEmptyLines" type="checkbox" v-model="removeEmptyLines"><label id="removeEmptyLinesLabel" class="tgl-btn" for="removeEmptyLines"></label>
+      <span class="label"><span v-if="removeEmptyLines">Remove</span><span v-else>Don&rsquo;t remove</span> empty lines (<code>opts.removeEmptyLines === <span v-if="removeEmptyLines">true</span><span v-else>false</span></code>)</span>
+    </li>
+    <li class="enforceSpacesOnly">
+      <input class="tgl" id="enforceSpacesOnly" type="checkbox" v-model="enforceSpacesOnly"><label id="enforceSpacesOnlyLabel" class="tgl-btn" for="enforceSpacesOnly"></label>
+      <span class="label"><span v-if="enforceSpacesOnly">Enforce</span><span v-else>Don&rsquo;t enforce</span> space-only (<code>opts.enforceSpacesOnly === <span v-if="enforceSpacesOnly">true</span><span v-else>false</span></code>)</span>
+    </li>
+  </ul>
+  
+  presets: <button v-on:click="example0">initial</button> <button v-on:click="example1">nothing collapsable</button> <button v-on:click="example2">tabs</button>
+  <div class="playground-app">
+    <div>
+      <h3>Put a string</h3>
+      <textarea ref="in" v-model="text1" placeholder="put some code here"></textarea>
+    </div>
+    <div>
+      <h3>Program returns a string</h3>
+      <textarea ref="out" v-model="text2" readonly></textarea>
+    </div>
+    <div>
+      <h3>and Ranges <a href="/ranges/">???</a></h3>
+      <textarea ref="applied" v-model="text3" readonly></textarea>
+    </div>
+  </div>
+  <p>
+    <strong>TIP:</strong> the <a href="https://detergent.io">detergent.io</a>, a comprehensive text-preparation tool, uses this program
+  </p>
+</div>
+
+{# ---------------------------------------------- #}
+
+<script>
+  window.addEventListener("load", pageFullyLoaded, false);
+  function pageFullyLoaded(e) {
+    // Vue.config.productionTip = false;
+    if (Vue && stringCollapseWhiteSpace) {
+      function isStr(something) {
+        return typeof something === "string";
+      }
+      const { collapse } = stringCollapseWhiteSpace;
+      const myStorage = window.localStorage;
+      const storageKey = "codsen_play_{{ packageName }}";
+      const initial = `  aaa     bbb    ccc   ddd  \n\n\n      eee     fff    ggg   hhh  `;
+      window.Event = new Vue();
+      new Vue({
+        el: "#app",
+        data: {
+          text1: initial,
+          trimStart: true,
+          trimEnd: true,
+          trimLines: true,
+          removeEmptyLines: true,
+          enforceSpacesOnly: false,
+        },
+        mounted: function () {
+          const retrieved = myStorage.getItem(storageKey);
+          if (isStr(retrieved) && retrieved.length) {
+            this.text1 = retrieved;
+          } else {
+            this.text1 = initial;
+          }
+          this.$refs.in.focus();
+        },
+        computed: {
+          text2: function () {
+            if (isStr(this.text1)) {
+              return collapse(this.text1, {
+                trimStart: this.trimStart,
+                trimEnd: this.trimEnd,
+                trimLines: this.trimLines,
+                removeEmptyLines: this.removeEmptyLines,
+                enforceSpacesOnly: this.enforceSpacesOnly,
+              }).result;
+            }
+            return "";
+          },
+          text3: function () {
+            if (isStr(this.text1)) {
+              return JSON.stringify(collapse(this.text1, {
+                trimStart: this.trimStart,
+                trimEnd: this.trimEnd,
+                trimLines: this.trimLines,
+                removeEmptyLines: this.removeEmptyLines,
+                enforceSpacesOnly: this.enforceSpacesOnly,
+              }).ranges, null, 4);
+            }
+            return "";
+          },
+        },
+        watch: {
+          text1: function () {
+            // dump the input into the local storage:
+            if (isStr(this.text1) && this.text1.length) {
+              myStorage.setItem(storageKey, this.text1);
+            } else {
+              myStorage.setItem(storageKey, "");
+            }
+          },
+        },
+        methods: {
+          example0: function(event) {
+            this.text1 = initial
+          },
+          example1: function(event) {
+            this.text1 = `happy`
+          },
+          example2: function(event) {
+            this.text1 = `\t\t\tthere\tare\ttabs\t\teverywhere\t\t\t`
+          },
+        }
+      });
+    }
+  }
+</script>

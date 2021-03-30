@@ -21,6 +21,10 @@
     "dark": "/images/play-string-apostrophes-dark.png",
     "light": "/images/play-string-apostrophes-light.png"
   },
+  "string-collapse-white-space": {
+    "dark": "/images/play-string-collapse-white-space-dark.png",
+    "light": "/images/play-string-collapse-white-space-light.png"
+  },
   "string-fix-broken-named-entities": {
     "dark": "/images/play-string-fix-broken-named-entities-dark.png",
     "light": "/images/play-string-fix-broken-named-entities-light.png"

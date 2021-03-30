@@ -1,67 +1,56 @@
 ---
-layout: post
-pagination:
-    data: collections.allPackages
-    size: 1
-    alias: packageName
-permalink: "/os/{{ packageName }}/examples/"
-packageName: Examples
-extraContainerClass: page-examples centered-headings
+layout: list
+permalink: "/os/examples/"
+extraContainerClass: examples__root
 ---
+{% from "macros/package-listing.njk" import packageListing %}
+<section class="two-thirds">
+  <h1><span class="all-articles__all">All</span> <span class="all-articles__articles pr">examples<sup title="{{ packageExamples | length }} examples published" aria-label="{{ packageExamples | length }} examples published">Σ={{ packageExamples | length }}</sup></span></h1>
+  <div class="mb list-container">
+    
+    {# What a shocker! An HTML table tag! #}
 
-{% set oneStickerOnlyPlease = true %}
-{% from "macros/heading.njk" import heading %}
-{% set headingLabel = "<code>" + packageName + "</code> examples" %}
-
-<div class="package-nav">
-  <div class="package-back">
-    <a href="/os/{{ packageName }}/" class="arrow_left arrow_left-back">back</a>
-  </div>
-</div>
-
-{{ heading(headingLabel | safe, 1) | safe }}
-
-{% include "src/components/separator.njk" %}
-
-{% if packageExamples[packageName] %}
-
-    {{ heading("Table of Contents", 2) }}
-    <ul>
-      <li><a href="#quick-take">Quick Take</a></li>
-      {% if packageExamples[packageName] and (packageExamples[packageName] | extractNonQuickTakeExamples | length) %}
-          {% for example in packageExamples[packageName] | extractNonQuickTakeExamples %}
-              <li><a href="#{{ example.title | slugify }}">{{ example.title | mdInline | titleProper | safe }}</a></li>
-          {% endfor %}
-      {% endif %}
-    </ul>
-
-    {% include "src/components/separator.njk" %}
-
-    {% if packageExamples[packageName] and packageExamples[packageName]['_quickTake.js'] %}
-      {{ heading("Quick Take", 2) }}
-      <pre class="language-js"><code class="language-js">{{ packageExamples[packageName]['_quickTake.js'].content | decodeCurlies | prism | safe }}</code></pre>
-      {% include "btt.njk" %}
-    {% endif %}
-    {% include "src/components/separator.njk" %}
-
-    {% if packageExamples[packageName] and (packageExamples[packageName] | extractNonQuickTakeExamples | length) %}
-      {% for example in packageExamples[packageName] | extractNonQuickTakeExamples %}
-      {{ heading(example.title | mdInline | titleProper, 2) | safe }}
-      <pre class="language-js"><code class="language-js">{{ example.content | decodeCurlies | prism | safe }}</code></pre>
-      <div class="examples-actions"><a href="https://github.com/codsen/codsen/blob/main/packages/{{ packageName }}/examples/{{ example.file }}">edit</a> <span class="large-slash">/</span> <a href="/examples-help/">help</a></div>
-
-      {% if not loop.last %}
-      {% include "btt.njk" %}
-      {% include "src/components/separator.njk" %}
-      {% endif %}
-
+    <table class="presentation">
+      {% for package, obj in packageExamples %}
+        {% if obj %}
+          <tr>
+            <td class="examples__left-col">
+              {{ packageListing(package, packageJsons[package], null) }}
+            </td>
+            <td class="examples__right-col">
+              <ul class="no-styling">
+                {% for example, obj in obj %}
+                  <li>
+                    <a href="/os/{{ package }}/examples/#{{ obj.title | slugify }}"><span class="screen-reader-text">program {{ package }} example: </span>{{ obj.title | mdInline | safe }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </td>
+          </tr>
+        {% endif %}
       {% endfor %}
-    {% endif %}
+    </table>
 
-    <div class="package-nav">
-      <div class="package-back">
-        <a href="/os/{{ packageName }}/" class="arrow_left">back</a>
-      </div>
-    </div>
-
-{% endif %}
+  </div>
+</section>
+<aside class="one-third">
+  <section>
+    <ul class="no-styling">
+      <li>
+        <a href="/os/">&larr; Open Source homepage</a>
+      </li>
+      <li>
+        <a href="/articles/tag/all/">All tags</a>
+      </li>
+      <br/>
+      <li>
+        <a href="/articles/list/">All articles</a>
+      </li>
+      <li>
+        <a href="/os/play/">All package playgrounds</a>
+      </li>
+    </ul>
+    {% include "sidebar_rss_contents.njk" %}
+    {% include "svg-codsen-handshake.njk" %}{% include "svg-codsen-2.njk" %}
+  </section>
+</aside>

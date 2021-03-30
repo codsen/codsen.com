@@ -1,6 +1,6 @@
 <h2>{{ packageName }} <sup title="current version is {{ packageJsons[packageName].version }}" aria-label="current version is {{ packageJsons[packageName].version }}">{{ packageJsons[packageName].version }}</sup></h2>
 <div id="app">
-  presets: <button v-on:click="example4">initial</button> <button v-on:click="example1">broken nbsp</button> <button v-on:click="example2">double encoding</button> <button v-on:click="example3">raw semi's</button>
+  presets: <button v-on:click="example0">initial</button> <button v-on:click="example1">broken nbsp</button> <button v-on:click="example2">double encoding</button> <button v-on:click="example3">raw semi's</button>
   <div class="playground-app">
     <div>
       <h3>Put a string</h3>
@@ -34,9 +34,6 @@
       function isStr(something) {
         return typeof something === "string";
       }
-      function isObj(something) {
-        return typeof isObj === "object";
-      }
       const { fixEnt } = stringFixBrokenNamedEntities;
       const { rApply } = rangesApply;
       const myStorage = window.localStorage;
@@ -50,7 +47,7 @@
         },
         mounted: function () {
           const retrieved = myStorage.getItem(storageKey);
-          if (typeof retrieved === "string" && retrieved.length) {
+          if (isStr(retrieved) && retrieved.length) {
             this.text1 = retrieved;
           } else {
             this.text1 = initial;
@@ -59,19 +56,19 @@
         },
         computed: {
           text2: function () {
-            if (typeof this.text1 === "string") {
+            if (isStr(this.text1)) {
               return JSON.stringify(fixEnt(this.text1), null, 4);
             }
             return "";
           },
           text3: function () {
-            if (typeof this.text1 === "string") {
+            if (isStr(this.text1)) {
               return rApply(this.text1, fixEnt(this.text1));
             }
             return "";
           },
           ampLocations: function () {
-            if (typeof this.text1 === "string") {
+            if (isStr(this.text1)) {
               const gathered = [];
               fixEnt(this.text1, {
                 textAmpersandCatcherCb: idx => {
@@ -83,7 +80,7 @@
             return "";
           },
           healthyEntityLocations: function () {
-            if (typeof this.text1 === "string") {
+            if (isStr(this.text1)) {
               const gathered = [];
               fixEnt(this.text1, {
                 entityCatcherCb: idx => {
@@ -106,6 +103,9 @@
           },
         },
         methods: {
+          example0: function(event) {
+            this.text1 = initial
+          },
           example1: function(event) {
             this.text1 = `abc &nsp; xyz`
           },
@@ -114,9 +114,6 @@
           },
           example3: function(event) {
             this.text1 = `&pund; & &pond; & &poud;`
-          },
-          example4: function(event) {
-            this.text1 = initial
           },
         }
       });
