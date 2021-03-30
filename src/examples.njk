@@ -46,7 +46,7 @@ extraContainerClass: page-examples centered-headings
 
     {% if packageExamples[packageName] and (packageExamples[packageName] | extractNonQuickTakeExamples | length) %}
       {% for example in packageExamples[packageName] | extractNonQuickTakeExamples %}
-      {{ heading(example.title | mdInline | titleProper, 2) | safe }}
+      {{ heading(example.title | mdInline | safe, 2) | safe }}
       <pre class="language-js"><code class="language-js">{{ example.content | decodeCurlies | prism | safe }}</code></pre>
       <div class="examples-actions"><a href="https://github.com/codsen/codsen/blob/main/packages/{{ packageName }}/examples/{{ example.file }}">edit</a> <span class="large-slash">/</span> <a href="/examples-help/">help</a></div>
 

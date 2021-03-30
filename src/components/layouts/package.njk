@@ -215,7 +215,7 @@
             {{ heading("Examples", 2) }}
             <ul>
             {% for example in packageExamples[title] | extractNonQuickTakeExamples %}
-              <li><a href="/os/{{ title }}/examples/#{{ example.title | slugify }}"><span class="screen-reader-text">program example: </span>{{ example.title | mdInline | titleProper | safe }}</a></li>
+              <li><a href="/os/{{ title }}/examples/#{{ example.title | slugify }}"><span class="screen-reader-text">program example: </span>{{ example.title | mdInline | safe }}</a></li>
             {% endfor %}
             </ul>
             {% include "btt.njk" %}
