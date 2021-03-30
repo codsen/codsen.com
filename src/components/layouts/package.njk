@@ -54,7 +54,11 @@
               
               <h3 class="min-mid-dn">{{ label }}</h3>
               
-              {% set url = "play" %}
+              {% set url = webapps[title].url %}
+              {% if not webapps[title].url %}
+                {% set url = "/os/" + title + "/play" %}
+              {% endif %}
+
               {% if webapps[title].dark and webapps[title].light %}
                 {% set alt = "test" + title + "program online" %}
                 <a class="no-ext-link-icon show-dark-only" href="{{ url }}"><img src="{{ webapps[title].dark }}" width="300" alt="{{ alt }}"/></a>
@@ -62,10 +66,6 @@
               {% endif %}
               <h3 class="max-mid-dn">{{ label }}</h3>
               
-              {% if webapps[title].url %}
-                {% set url = webapps[title].url %}
-              {% endif %}
-
               <p>
                 <a class="button" href="{{ url }}"{% if webapps[title].url %} target="_blank"{% endif %}>Open{% if webapps[title].label %} {{ webapps[title].label }}{% endif %}</a>
               </p>
