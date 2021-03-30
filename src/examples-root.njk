@@ -5,7 +5,7 @@ extraContainerClass: examples__root
 ---
 {% from "macros/package-listing.njk" import packageListing %}
 <section class="two-thirds">
-  <h1><span class="all-articles__all">All</span> <span class="all-articles__articles pr">examples<sup title="{{ packageExamples | length }} examples published" aria-label="{{ packageExamples | length }} examples published">Σ={{ packageExamples | length }}</sup></span></h1>
+  <h1><span class="all-articles__all">All</span> <span class="all-articles__articles pr">examples<sup title="{{ packageExamples | examplesExtractTotal }} examples published" aria-label="{{ packageExamples | examplesExtractTotal }} examples published">Σ={{ packageExamples | examplesExtractTotal }}</sup></span></h1>
   <div class="mb list-container">
     
     {# What a shocker! An HTML table tag! #}

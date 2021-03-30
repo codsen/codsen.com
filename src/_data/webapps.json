@@ -17,6 +17,10 @@
     "dark": "/images/site-crush-dark.png",
     "light": "/images/site-crush-light.png"
   },
+  "is-language-code": {
+    "dark": "/images/play-is-language-code-dark.png",
+    "light": "/images/play-is-language-code-light.png"
+  },
   "string-apostrophes": {
     "dark": "/images/play-string-apostrophes-dark.png",
     "light": "/images/play-string-apostrophes-light.png"

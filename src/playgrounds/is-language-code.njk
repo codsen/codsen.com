@@ -1,0 +1,112 @@
+<h2>{{ packageName }} <sup title="current version is {{ packageJsons[packageName].version }}" aria-label="current version is {{ packageJsons[packageName].version }}">{{ packageJsons[packageName].version }}</sup></h2>
+<div id="app">  
+  presets: <button v-on:click="example0">initial</button> <button v-on:click="example1">fr</button> <button v-on:click="example2">private use</button> <button v-on:click="example3">zh-cmn-Hans-CN</button> <button v-on:click="example4">en-US</button> <button v-on:click="example5">tag with ext</button> <button v-on:click="example6">subtag in primary</button> <button v-on:click="example7">2 ext same prefix</button> <button v-on:click="example8">nothing</button>
+  <div class="playground-app">
+    <div>
+      <h3>Put a string</h3>
+      <textarea ref="in" v-model="text1" placeholder="a language code maybe"></textarea>
+    </div>
+    <div>
+      <h3><code>res</code></h3>
+      <textarea ref="out" v-model="text2" readonly></textarea>
+    </div>
+    <div>
+      <h3><code>message</code></h3>
+      <textarea ref="applied" v-model="text3" readonly></textarea>
+    </div>
+  </div>
+  <p>
+    <strong>TIP:</strong> check out <a href="https://tools.ietf.org/html/rfc5646">RFC 5646</a><br/>
+    <strong>TIP #2:</strong> check out a regex <a href="https://www.npmjs.com/package/ietf-language-tag-regex">ietf-language-tag-regex</a> by <a href="https://www.npmjs.com/~sebinsua">~sebinsua</a> on npm
+  </p>
+</div>
+
+{# ---------------------------------------------- #}
+
+<script>
+  window.addEventListener("load", pageFullyLoaded, false);
+  function pageFullyLoaded(e) {
+    // Vue.config.productionTip = false;
+    if (Vue && isLanguageCode) {
+      function isStr(something) {
+        return typeof something === "string";
+      }
+      function isObj(something) {
+        return typeof isObj === "object";
+      }
+      const { isLangCode } = isLanguageCode;
+      const myStorage = window.localStorage;
+      const storageKey = "codsen_play_{{ packageName }}";
+      const initial = `de-419-DE`;
+      window.Event = new Vue();
+      new Vue({
+        el: "#app",
+        data: {
+          text1: initial,
+        },
+        mounted: function () {
+          const retrieved = myStorage.getItem(storageKey);
+          if (typeof retrieved === "string" && retrieved.length) {
+            this.text1 = retrieved;
+          } else {
+            this.text1 = initial;
+          }
+          this.$refs.in.focus();
+        },
+        computed: {
+          text2: function () {
+            if (typeof this.text1 === "string") {
+              return isLangCode(this.text1).res;
+            }
+            return "";
+          },
+          text3: function () {
+            if (typeof this.text1 === "string") {
+              return `${isLangCode(this.text1).message}`;
+            }
+            return "";
+          },
+        },
+        watch: {
+          text1: function () {
+            // dump the input into the local storage:
+            if (isStr(this.text1) && this.text1.length) {
+              myStorage.setItem(storageKey, this.text1);
+            } else {
+              myStorage.setItem(storageKey, "");
+            }
+          },
+        },
+        methods: {
+          example0: function(event) {
+            this.text1 = initial
+          },
+          example1: function(event) {
+            this.text1 = `fr`
+          },
+          example2: function(event) {
+            this.text1 = `x-klingon`
+          },
+          example3: function(event) {
+            this.text1 = `zh-cmn-Hans-CN`
+          },
+          example4: function(event) {
+            this.text1 = `en-US`
+          },
+          example5: function(event) {
+            this.text1 = `en-US-u-islamcal`
+          },
+          example6: function(event) {
+            this.text1 = `a-DE`
+          },
+          example7: function(event) {
+            this.text1 = `ar-a-aaa-b-bbb-a-ccc`
+          },
+          example8: function(event) {
+            this.text1 = ``
+          },
+        }
+      });
+    }
+  }
+</script>

@@ -1,6 +1,8 @@
 ---
 layout: package
 title: is-language-code
+packages:
+  - ietf-language-tag-regex
 ---
 
 ## Purpose
