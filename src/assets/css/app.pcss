@@ -4893,6 +4893,13 @@ pre[class*="language-"] > code[class*="language-"] {
     }
   }
 
+  .examples__left-col a.button {
+    font-size: 1.4rem; /* smaller button */
+    @include darkTheme {
+      color: $black;
+    }
+  }
+
   tr {
     border-top: 1px solid $borderGrey;
     @include darkTheme {

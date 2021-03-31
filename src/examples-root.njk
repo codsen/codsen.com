@@ -16,6 +16,11 @@ extraContainerClass: examples__root
           <tr>
             <td class="examples__left-col">
               {{ packageListing(package, packageJsons[package], null) }}
+              {% if package in collections.packagesWithPlayground %}
+              <p>
+                <a class="button" href="/os/{{ package }}/play">Open playground</a>
+              </p>
+              {% endif %}
             </td>
             <td class="examples__right-col">
               <ul class="no-styling">
