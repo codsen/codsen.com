@@ -72,7 +72,7 @@ Here's how we use it ourselves.
 
 In short, sourcehut CI calls package.json script and it cleanses the changelogs before npm package is published to npm and all builds are comitted from CI to git.
 
-Have a look at our [sourcehut CI yml](https://github.com/codsen/codsen/blob/main/.build.yml):
+Have a look at our [CI yml config](https://github.com/codsen/codsen/blob/main/.semaphore/semaphore.yml):
 
 ```yml
 { { ciConfig | safe } }

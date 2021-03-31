@@ -73,7 +73,7 @@ Even though CI is at GitLab and repo sits at GitLab, there is no internal "rabbi
 
 During the Christmas of 2018, with a couple of spare weeks at hand, we decided to put up the monorepo onto our GitLab CI. It went successfully, although there were a few accidental semver bumps because of `commitizen` and initial misconfiguration.
 
-See our current GitLab CI config `yml` script [here](https://github.com/codsen/codsen/blob/main/.gitlab-ci.yml). We don't publish CI session data because of potential security issues if secrets leak there, but our CI script is public, and you can save lots of time by referencing it.
+See our current GitLab CI config `yml` script [here](https://github.com/codsen/codsen/blob/main/.semaphore/semaphore.yml). We don't publish CI session data because of potential security issues if secrets leak there, but our CI script is public, and you can save lots of time by referencing it.
 
 From a user perspective, CI is fantastic because it ports all the npm publishing up from the user's laptop to CI servers. We `git push` to GitLab and get on with our day, getting an email from GitLab if pipeline failed or an email from npm if packages got published.
 

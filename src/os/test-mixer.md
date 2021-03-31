@@ -43,7 +43,7 @@ Program returns an array of zero or more plain objects.
 
 ## In practice
 
-Let's say, we test [detergent](/os/detergent). It has the following default opts [`defaultOpts` in the source](https://github.com/codsen/codsen/blob/main/packages/detergent/src/util.js):
+Let's say, we test [detergent](/os/detergent). It has the following default options:
 
 ```js
 {

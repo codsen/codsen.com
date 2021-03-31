@@ -5,7 +5,7 @@ title: json-sort-cli
 
 ## Idea
 
-![the idea of json-sort-cli](package-json-sort-cli-quick-take.gif)
+![the idea of json-sort-cli](https://codsen.com/images/package-json-sort-cli-quick-take.gif)
 
 {% include "btt.njk" %}
 

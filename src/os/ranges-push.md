@@ -21,7 +21,7 @@ let ranges = new Ranges({ limitToBeAddedWhitespace: true });
 let ranges = new Ranges({ mergeType: 2 });
 ```
 
-The `ranges` (with lowercase) is your [class](https://github.com/getify/You-Dont-Know-JS/blob/master/es6%20%26%20beyond/ch3.md#classes) which contains your _ranges_ and gives you methods to get/set the values.
+The `ranges` (with lowercase) is your Class which contains your _ranges_ and gives you methods to get/set the values.
 
 You can also provide an Optional Options Object when creating the class:
 

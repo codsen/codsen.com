@@ -40,7 +40,7 @@ Technically speaking, a "schema keyset" is a superset of all objects. Two rules:
 1.  Each object of the same level between different JSON files should have same keys.
 2.  If an array has objects, those objects should have the same keys. If the array is a value and it is missing in a certain JSON, it gets filled with only one object.
 
-The merging is done on a premise to retain [as much information](https://github.com/codsen/object-merge-advanced) after merging as possible.
+The merging is done on a premise to retain [as much information](https://codsen.com/os/object-merge-advanced) after merging as possible.
 
 {% include "btt.njk" %}
 
