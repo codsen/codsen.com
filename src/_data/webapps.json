@@ -32,5 +32,9 @@
   "string-fix-broken-named-entities": {
     "dark": "/images/play-string-fix-broken-named-entities-dark.png",
     "light": "/images/play-string-fix-broken-named-entities-light.png"
+  },
+  "string-remove-widows": {
+    "dark": "/images/play-string-remove-widows-dark.png",
+    "light": "/images/play-string-remove-widows-light.png"
   }
 }

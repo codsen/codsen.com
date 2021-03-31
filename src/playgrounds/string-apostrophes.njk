@@ -3,7 +3,7 @@
   <ul class="toggles">
     <li class="convertApostrophes">
       <input class="tgl" id="convertApostrophes" type="checkbox" v-model="convertApostrophes"><label id="convertApostrophesLabel" class="tgl-btn" for="convertApostrophes"></label>
-      <span class="label"><span v-if="convertApostrophes">Enabled</span><span v-else>Disabled</span> (<code>opts.convertApostrophes === <span v-if="convertApostrophes">true</span><span v-else>false</span></code>)</span>
+      <span v-bind:class="{ label: true }"><span v-if="convertApostrophes">Enabled</span><span v-else>Disabled</span> (<code>opts.convertApostrophes === <span v-if="convertApostrophes">true</span><span v-else>false</span></code>)</span>
     </li>
     <li class="convertEntities">
       <input v-bind:disabled="!convertApostrophes" class="tgl" id="convertEntities" type="checkbox" v-model="convertEntities"><label id="convertEntitiesLabel" class="tgl-btn" for="convertEntities"></label>

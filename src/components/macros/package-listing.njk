@@ -8,7 +8,7 @@
 <div class="content-row__package group">
   
   {% if webapp and webapp.dark and webapp.light %}
-    {% set alt = "test" + name + "program online" %}
+    {% set alt = "test " + name + " program online" %}
     <div class="dib fl mr20">
       <a class="no-ext-link-icon show-dark-only" href="{{ url }}"><img src="{{ webapp.dark }}" width="100" alt="{{ alt }}"/></a>
       <a class="no-ext-link-icon show-light-only" href="{{ url }}"><img src="{{ webapp.light }}" width="100" alt="{{ alt }}"/></a>

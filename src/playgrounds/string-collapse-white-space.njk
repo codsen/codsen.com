@@ -3,7 +3,7 @@
   <ul class="toggles">
     <li class="trimLines">
       <input class="tgl" id="trimLines" type="checkbox" v-model="trimLines"><label id="trimLinesLabel" class="tgl-btn" for="trimLines"></label>
-      <span class="label"><span v-if="trimLines">Trim</span><span v-else>Don&rsquo;t trim</span> lines (excluding string front/end whitespace) (<code>opts.trimLines === <span v-if="trimLines">true</span><span v-else>false</span></code>)</span>
+      <span v-bind:class="{ label: true }"><span v-if="trimLines">Trim</span><span v-else>Don&rsquo;t trim</span> lines (excluding string front/end whitespace) (<code>opts.trimLines === <span v-if="trimLines">true</span><span v-else>false</span></code>)</span>
     </li>
     <li class="trimStart">
       <input v-bind:disabled="trimLines" class="tgl" id="trimStart" type="checkbox" v-model="trimStart"><label id="trimStartLabel" class="tgl-btn" for="trimStart"></label>
@@ -15,11 +15,11 @@
     </li>
     <li class="removeEmptyLines">
       <input class="tgl" id="removeEmptyLines" type="checkbox" v-model="removeEmptyLines"><label id="removeEmptyLinesLabel" class="tgl-btn" for="removeEmptyLines"></label>
-      <span class="label"><span v-if="removeEmptyLines">Remove</span><span v-else>Don&rsquo;t remove</span> empty lines (<code>opts.removeEmptyLines === <span v-if="removeEmptyLines">true</span><span v-else>false</span></code>)</span>
+      <span v-bind:class="{ label: true }"><span v-if="removeEmptyLines">Remove</span><span v-else>Don&rsquo;t remove</span> empty lines (<code>opts.removeEmptyLines === <span v-if="removeEmptyLines">true</span><span v-else>false</span></code>)</span>
     </li>
     <li class="enforceSpacesOnly">
       <input class="tgl" id="enforceSpacesOnly" type="checkbox" v-model="enforceSpacesOnly"><label id="enforceSpacesOnlyLabel" class="tgl-btn" for="enforceSpacesOnly"></label>
-      <span class="label"><span v-if="enforceSpacesOnly">Enforce</span><span v-else>Don&rsquo;t enforce</span> space-only (<code>opts.enforceSpacesOnly === <span v-if="enforceSpacesOnly">true</span><span v-else>false</span></code>)</span>
+      <span v-bind:class="{ label: true }"><span v-if="enforceSpacesOnly">Enforce</span><span v-else>Don&rsquo;t enforce</span> space-only (<code>opts.enforceSpacesOnly === <span v-if="enforceSpacesOnly">true</span><span v-else>false</span></code>)</span>
     </li>
   </ul>
   

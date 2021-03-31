@@ -4777,6 +4777,21 @@ pre[class*="language-"] > code[class*="language-"] {
     height: 20rem;
   }
 
+  & > div {
+    position: relative;
+  }
+
+  /* warning panel */
+  .warning-invisibles::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color: $darkRed;
+    content: "⚠️ invisible characters present!";
+    font-size: 1.2rem;
+    padding: 0 0.5rem;
+  }
+
   @media (min-width: 800px) {
     flex-direction: row;
     align-content: space-between;

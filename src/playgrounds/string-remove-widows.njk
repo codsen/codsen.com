@@ -1,0 +1,145 @@
+<h2>{{ packageName }} <sup title="current version is {{ packageJsons[packageName].version }}" aria-label="current version is {{ packageJsons[packageName].version }}">{{ packageJsons[packageName].version }}</sup></h2>
+<div id="app">
+  <ul class="toggles">
+    <li class="hyphens">
+      <input v-bind:disabled="removeWidowPreventionMeasures" class="tgl" id="hyphens" type="checkbox" v-model="hyphens"><label id="hyphensLabel" class="tgl-btn" for="hyphens"></label>
+      <span v-bind:class="{ strikethrough: removeWidowPreventionMeasures, label: true }"><span v-if="hyphens">Do</span><span v-else>Don&rsquo;t</span> add non-breaking spaces in front of hyphens/dashes (<code>opts.hyphens === <span v-if="hyphens">true</span><span v-else>false</span></code>)</span>
+    </li>
+    <li class="convertEntities">
+      <input class="tgl" id="convertEntities" type="checkbox" v-model="convertEntities"><label id="convertEntitiesLabel" class="tgl-btn" for="convertEntities"></label>
+      <span v-bind:class="{ label: true }"><span v-if="convertEntities">HTML-encode</span><span v-else>HTML-decode</span> all what was in the scope (<code>opts.convertEntities === <span v-if="convertEntities">true</span><span v-else>false</span></code>)</span>
+    </li>
+    <li class="removeWidowPreventionMeasures">
+      <input class="tgl" id="removeWidowPreventionMeasures" type="checkbox" v-model="removeWidowPreventionMeasures"><label id="removeWidowPreventionMeasuresLabel" class="tgl-btn" for="removeWidowPreventionMeasures"></label>
+      <span v-bind:class="{ label: true }"><span v-if="removeWidowPreventionMeasures">Do</span><span v-else>Don&rsquo;t</span> remove non-breaking spaces used for widow-word prevention (<code>opts.removeWidowPreventionMeasures === <span v-if="removeWidowPreventionMeasures">true</span><span v-else>false</span></code>)</span>
+    </li>
+  </ul>
+  
+  presets: <button v-on:click="example0">initial</button> <button v-on:click="example1">two paragraphs</button> <button v-on:click="example2">too short</button> <button v-on:click="example3">dashes and hyphens</button> <button v-on:click="example4">jinja</button> <button v-on:click="example5">go-hugo</button>
+  <div class="playground-app">
+    <div>
+      <h3>Put a string</h3>
+      <textarea ref="in" v-model="text1" placeholder="put some code here"></textarea>
+    </div>
+    <div v-bind:class="{ 'warning-invisibles': invisibles }">
+      <h3>Program returns a string</h3>
+      <textarea ref="out" v-model="text2" readonly></textarea>
+    </div>
+    <div>
+      <h3>and Ranges <a href="/ranges/">???</a></h3>
+      <textarea ref="applied" v-model="text3" readonly></textarea>
+    </div>
+  </div>
+  <p>
+    <strong>TIP:</strong> check out <a href="https://practicaltypography.com/widow-and-orphan-control.html">Butterick&rsquo;s Practical Typography</a><br/>
+    <strong>TIP #2:</strong> the <a href="https://detergent.io">detergent.io</a>, a comprehensive text-preparation tool, uses this program
+  </p>
+</div>
+
+{# ---------------------------------------------- #}
+
+<script>
+  window.addEventListener("load", pageFullyLoaded, false);
+  function pageFullyLoaded(e) {
+    // Vue.config.productionTip = false;
+    if (Vue && stringRemoveWidows) {
+      function isStr(something) {
+        return typeof something === "string";
+      }
+      function isObj(something) {
+        return typeof isObj === "object";
+      }
+      const { removeWidows } = stringRemoveWidows;
+      const myStorage = window.localStorage;
+      const storageKey = "codsen_play_{{ packageName }}";
+      const initial = `Some text&nbsp;with many words on one line - surely a good test.`;
+      window.Event = new Vue();
+      new Vue({
+        el: "#app",
+        data: {
+          text1: initial,
+          removeWidowPreventionMeasures: false,
+          convertEntities: true,
+          hyphens: true,
+        },
+        mounted: function () {
+          const retrieved = myStorage.getItem(storageKey);
+          if (typeof retrieved === "string" && retrieved.length) {
+            this.text1 = retrieved;
+          } else {
+            this.text1 = initial;
+          }
+          this.$refs.in.focus();
+        },
+        computed: {
+          text2: function () {
+            if (typeof this.text1 === "string") {
+              return removeWidows(this.text1, {
+                removeWidowPreventionMeasures: this.removeWidowPreventionMeasures,
+                convertEntities: this.convertEntities,
+                hyphens: this.hyphens,
+                ignore: "all",
+              }).res;
+            }
+            return "";
+          },
+          invisibles: function () {
+            if (typeof this.text1 === "string") {
+              const {res} = removeWidows(this.text1, {
+                removeWidowPreventionMeasures: this.removeWidowPreventionMeasures,
+                convertEntities: this.convertEntities,
+                hyphens: this.hyphens,
+                ignore: "all",
+              });
+              return res.split("").some(char => typeof char === "string" && !char.trim() && !`\r\n\t `.includes(char))
+            }
+            return false;
+          },
+          text3: function () {
+            if (typeof this.text1 === "string") {
+              return JSON.stringify(removeWidows(this.text1, {
+                removeWidowPreventionMeasures: this.removeWidowPreventionMeasures,
+                convertEntities: this.convertEntities,
+                hyphens: this.hyphens,
+                ignore: "all",
+              }).ranges, null, 4);
+            }
+            return "";
+          },
+        },
+        watch: {
+          text1: function () {
+            // dump the input into the local storage:
+            if (isStr(this.text1) && this.text1.length) {
+              myStorage.setItem(storageKey, this.text1);
+            } else {
+              myStorage.setItem(storageKey, "");
+            }
+          },
+        },
+        {% raw %}
+        methods: {
+          example0: function(event) {
+            this.text1 = initial
+          },
+          example1: function(event) {
+            this.text1 = `This is the first paragraph and it's long-enough.\n\nAnd this is the second paragraph – it's long-enough too.`
+          },
+          example2: function(event) {
+            this.text1 = `Too short!`
+          },
+          example3: function(event) {
+            this.text1 = `The nicest place I&rsquo;ve lived at &mdash; the house on Oxford st., Henley-on-Thames, 1880&ndash;1912.`
+          },
+          example4: function(event) {
+            this.text1 = `The price of this item is £{{ price }}.`
+          },
+          example5: function(event) {
+            this.text1 = `{{ if or (isset .Params "alt") (isset .Params "caption") }} some text and more text {{ end }}`
+          },
+        }
+        {% endraw %}
+      });
+    }
+  }
+</script>
