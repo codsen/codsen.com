@@ -61,7 +61,7 @@ function tagAwareTitle(str) {
 }
 
 module.exports = (str) => {
-  if (str && typeof str === "string" && !/\w\.\w/.test(str)) {
+  if (typeof str === "string") {
     return tagAwareTitle(str);
   }
   return str;
