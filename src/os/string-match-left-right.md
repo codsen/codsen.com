@@ -50,6 +50,7 @@ Returns Boolean `false` or value of the string that was matched, that is,
 | `maxMismatches` | Natural number or zero           | `0`        | It's like Levenshtein distance - how many characters can mismatch to yield false result? |
 | `firstMustMatch` | Boolean           | `false`        | When `opts.maxMismatches` is enabled, you can enforce that the first character must match. |
 | `lastMustMatch` | Boolean           | `false`        | When `opts.maxMismatches` is enabled, you can enforce that the last character must match. |
+| `hungry`        | Boolean           | `false`        | If all characters we looked for were matched, yet there were extra mismatching characters matched, because of `maxMismatches` allowance, default will fail. Turn this toggle on to pass in such cases. Default setting prevents a whole class of false positives. |
 
 
 Here it is with defaults, in one place, ready for copying:
