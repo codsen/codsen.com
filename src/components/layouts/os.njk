@@ -178,6 +178,11 @@
         <div class="content-row__packages content-row__packages-list">
           {% for rangePackage in allRangeLibs %}
             {{ packageListing(rangePackage, packageJsons[rangePackage]) }}
+            {% if rangePackage in collections.packagesWithPlayground %}
+            <p>
+              <a class="button" href="/os/{{ rangePackage }}/play">Open playground</a>
+            </p>
+            {% endif %}
           {% endfor %}
         </div>
       </div>
@@ -198,6 +203,11 @@
         <div class="content-row__packages content-row__packages-list">
           {% for htmlPackage in allHtmlLibs %}
             {{ packageListing(htmlPackage, packageJsons[htmlPackage]) }}
+            {% if htmlPackage in collections.packagesWithPlayground %}
+            <p>
+              <a class="button" href="/os/{{ htmlPackage }}/play">Open playground</a>
+            </p>
+            {% endif %}
           {% endfor %}
         </div>
       </div>
@@ -218,6 +228,11 @@
         <div class="content-row__packages content-row__packages-list">
           {% for stringPackage in allStringLibs %}
             {{ packageListing(stringPackage, packageJsons[stringPackage]) }}
+            {% if stringPackage in collections.packagesWithPlayground %}
+            <p>
+              <a class="button" href="/os/{{ stringPackage }}/play">Open playground</a>
+            </p>
+            {% endif %}
           {% endfor %}
         </div>
       </div>
@@ -238,6 +253,11 @@
         <div class="content-row__packages content-row__packages-list">
           {% for objectPackage in allObjectLibs %}
             {{ packageListing(objectPackage, packageJsons[objectPackage]) }}
+            {% if objectPackage in collections.packagesWithPlayground %}
+            <p>
+              <a class="button" href="/os/{{ objectPackage }}/play">Open playground</a>
+            </p>
+            {% endif %}
           {% endfor %}
         </div>
       </div>
@@ -258,6 +278,11 @@
         <div class="content-row__packages content-row__packages-list">
           {% for lernaPackage in allLernaLibs %}
             {{ packageListing(lernaPackage, packageJsons[lernaPackage]) }}
+            {% if lernaPackage in collections.packagesWithPlayground %}
+            <p>
+              <a class="button" href="/os/{{ lernaPackage }}/play">Open playground</a>
+            </p>
+            {% endif %}
           {% endfor %}
         </div>
       </div>
@@ -278,6 +303,11 @@
         <div class="content-row__packages content-row__packages-list">
           {% for cliPackage in allCliLibs %}
             {{ packageListing(cliPackage, packageJsons[cliPackage]) }}
+            {% if cliPackage in collections.packagesWithPlayground %}
+            <p>
+              <a class="button" href="/os/{{ cliPackage }}/play">Open playground</a>
+            </p>
+            {% endif %}
           {% endfor %}
         </div>
       </div>
@@ -298,6 +328,11 @@
         <div class="content-row__packages content-row__packages-list">
           {% for miscPackage in allMiscLibs %}
             {{ packageListing(miscPackage, packageJsons[miscPackage]) }}
+            {% if miscPackage in collections.packagesWithPlayground %}
+            <p>
+              <a class="button" href="/os/{{ miscPackage }}/play">Open playground</a>
+            </p>
+            {% endif %}
           {% endfor %}
         </div>
       </div>
