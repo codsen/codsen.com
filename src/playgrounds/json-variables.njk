@@ -1,6 +1,6 @@
 <h2>{{ packageName }} <sup title="current version is {{ packageJsons[packageName].version }}" aria-label="current version is {{ packageJsons[packageName].version }}">{{ packageJsons[packageName].version }}</sup></h2>
 <div id="app">  
-  presets: <button v-on:click="example0">initial</button> <button v-on:click="example1">quick take</button>
+  presets: <button v-on:click="example0">initial</button> <button v-on:click="example1">bubbling up</button> <button v-on:click="example2">quick take</button>
   <div class="playground-app">
     <div>
       <h3>Copy-paste some JSON:</h3>
@@ -68,13 +68,11 @@
           text1: function () {
             // dump the input into the local storage:
             if (isStr(this.text1) && this.text1.length) {
-              console.log(`066`);
               try {
                 const parsed = JSON.parse(this.text1);
                 myStorage.setItem(storageKey, this.text1);
                 const frozenContent = this.text1;
                 setTimeout(() => {
-                  console.log(`072`);
                   // if the content hasn't changed since 1s. ago:
                   if (this.text1 === frozenContent) {
                     this.text1 = JSON.stringify(parsed, null, 4);
@@ -93,6 +91,18 @@
             this.text1 = initial
           },
           example1: function(event) {
+            this.text1 = `{
+    "x": {
+        "y": {
+            "greeting": "{% if customer.vip %}%%-namePresent-%%{% else %}%%-nameAbsent-%%{% endif %}",
+            "namePresent": "Hi %%-firstName-%%, here's your coupon for your next purchase!",
+            "nameAbsent": "Here's a coupon for your next purchase."
+        }
+    },
+    "firstName": "{{ customer.firstName }}"
+}`
+          },
+          example2: function(event) {
             this.text1 = `{
     "a": "some text %%_var1.key1.0_%% more text %%_var2.key2.key3.1_%%",
     "b": "something",
