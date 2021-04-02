@@ -1,0 +1,108 @@
+<h2>{{ packageName }} <sup title="current version is {{ packageJsons[packageName].version }}" aria-label="current version is {{ packageJsons[packageName].version }}">{{ packageJsons[packageName].version }}</sup></h2>
+<div id="app">  
+  presets: <button v-on:click="example0">initial</button> <button v-on:click="example1">quick take</button>
+  <div class="playground-app">
+    <div>
+      <h3>Copy-paste some JSON:</h3>
+      <textarea ref="in" v-model="text1" placeholder="put some JSON here"></textarea>
+    </div>
+    <div>
+      <h3>Rendered:</h3>
+      <textarea ref="out" v-model="text2" readonly></textarea>
+    </div>
+  </div>
+</div>
+
+{# ---------------------------------------------- #}
+
+{% raw %}
+<script>
+  window.addEventListener("load", pageFullyLoaded, false);
+  function pageFullyLoaded(e) {
+    // Vue.config.productionTip = false;
+    if (Vue && jsonVariables) {
+      function isStr(something) {
+        return typeof something === "string";
+      }
+      function isObj(something) {
+        return typeof isObj === "object";
+      }
+      const { jVar } = jsonVariables;
+      const myStorage = window.localStorage;
+      const storageKey = "codsen_play_{{ packageName }}";
+      const initial = `{
+    "greeting": "{% if customer.vip %}%%-namePresent-%%{% else %}%%-nameAbsent-%%{% endif %}",
+    "namePresent": "Hi {{ customer.firstName }}, here's your coupon for your next purchase!",
+    "nameAbsent": "Here's a coupon for your next purchase."
+}`;
+      window.Event = new Vue();
+      new Vue({
+        el: "#app",
+        data: {
+          text1: initial,
+        },
+        mounted: function () {
+          const retrieved = myStorage.getItem(storageKey);
+          if (typeof retrieved === "string" && retrieved.length) {
+            this.text1 = retrieved;
+          } else {
+            this.text1 = initial;
+          }
+          this.$refs.in.focus();
+        },
+        computed: {
+          text2: function () {
+            try {
+              if (typeof this.text1 === "string") {
+                const parsed = JSON.parse(this.text1);
+                return JSON.stringify(jVar(parsed), null, 4);
+              }
+              return "";
+              
+            } catch (error) {
+              return `ERROR! ${error}`;
+            }
+          },
+        },
+        watch: {
+          text1: function () {
+            // dump the input into the local storage:
+            if (isStr(this.text1) && this.text1.length) {
+              console.log(`066`);
+              try {
+                const parsed = JSON.parse(this.text1);
+                myStorage.setItem(storageKey, this.text1);
+                const frozenContent = this.text1;
+                setTimeout(() => {
+                  console.log(`072`);
+                  // if the content hasn't changed since 1s. ago:
+                  if (this.text1 === frozenContent) {
+                    this.text1 = JSON.stringify(parsed, null, 4);
+                  }
+                }, 2000);
+              } catch (e) {
+                //
+              }
+            } else {
+              myStorage.setItem(storageKey, "");
+            }
+          },
+        },
+        methods: {
+          example0: function(event) {
+            this.text1 = initial
+          },
+          example1: function(event) {
+            this.text1 = `{
+    "a": "some text %%_var1.key1.0_%% more text %%_var2.key2.key3.1_%%",
+    "b": "something",
+    "var1": { "key1": ["value1"] },
+    "var2": { "key2": { "key3": ["", "value2"] } }
+}`
+          },
+        }
+      });
+    }
+  }
+</script>
+{% endraw %}
