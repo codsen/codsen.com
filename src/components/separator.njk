@@ -30,23 +30,16 @@
 {% include "svg-codsen-handshake.njk" %}
 {% endset %}
 
-{# kickers #}
-{% set codsenWow %}
-{% include "svg-codsen-wow.njk" %}
-{% endset %}
-
 {# set up arrays #}
 {# ------------- #}
 {% set logos = [codsen1, codsen2] | shuffle %}
 {% set others = [codsenOk, codsenMr, codsenHandshake] | shuffle %}
-{% set kickers = [codsenWow] | shuffle %}
 {% set finalStickers = [] %}
 
 {# generate random flags #}
 {# --------------------- #}
 {% set showLargeStar = ([0, 1, 2, 3, 4] | shuffle | limit(1)) > 0 %}
 {% set showSmallStar = ([0, 1, 2, 3, 4] | shuffle | limit(1)) > 0 %}
-{% set showKickers = ([0, 1] | shuffle | limit(1)) > 0 %}
 {% set showOthers = ([0, 1] | shuffle | limit(1)) > 0 %}
 {% set likely = ([0, 1, 2, 3, 4] | shuffle | limit(1)) > 0 %}
 {% set unlikely = ([0, 1, 2, 3, 4, 5, 6] | shuffle | limit(1)) == 0 %}
@@ -77,17 +70,12 @@
   {% set finalStickers = finalStickers | concat(others[1]) %}
 {% endif %}
 
-{% if veryunlikely %}
-  {% set finalStickers = finalStickers | concat(kickers[0]) %}
-{% endif %}
-
 {# ---------- #}
 
 {% if oneStickerOnlyPlease %}
   {% set star = [codsenStarLarge, codsenStarSmall] | shuffle | limit(1) %}
 
-  {# make wow half-likely #}
-  {% set sticker = [codsen1, codsen2, codsenOk, codsenMr, codsen1, codsen2, codsenOk, codsenMr, codsenWow] | shuffle | limit(1) %}
+  {% set sticker = [codsen1, codsen2, codsenOk, codsenMr, codsen1, codsen2, codsenOk, codsenMr] | shuffle | limit(1) %}
 
   {% set fiftyFifty = ([0, 1] | shuffle | limit(1)) > 0 %}
 

@@ -9,11 +9,11 @@
   </header>
   {% if article.data.image %}
     <figure class="post-img" itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject">
-      <a href="{{ article.url }}"><img width="" height="" src="/images/codsen-article-{{ article.data.image }}-m.png" class="post-image-thumbnail" alt="{{ article.data.title | unfancy }}" itemprop="contentUrl"></a>
+      <a href="{{ article.url }}"><img width="" height="" src="/images/codsen-article-{{ article.data.image }}-m.png" class="post-image-thumbnail" alt="{{ article.data.title | strip | unfancy }}" itemprop="contentUrl"></a>
     </figure>
   {% endif -%}
   <h3>
-    <a href="{{ article.url }}">{{ article.data.title | mdInline | titleProper | safe }}</a>
+    <a href="{{ article.url }}">{{ article.data.title | mdInline | safe }}</a>
   </h3>
   <div class="article-content">
     {# excerpt will come as raw markdown code, we need to render #}

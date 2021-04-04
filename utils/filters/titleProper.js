@@ -7,13 +7,17 @@ const { rRegex } = require("ranges-regex");
 function tagAwareTitle(str) {
   const whitelist = [
     "eslint",
+    "rollup",
+    "esbuild",
     "readme",
+    "iife",
     "npm",
     "json",
     "svg",
     "xml",
     "css",
     "rss",
+    "umd",
     "vs",
   ];
 

@@ -205,7 +205,7 @@
         </aside>
         <section class="package-body__content">
           {% if packageExamples[title] and packageExamples[title]['_quickTake.js'] %}
-            {{ heading(packageExamples[title]['_quickTake.js'].title, 2) | titleProper | formatTags | safe }}
+            {{ heading(packageExamples[title]['_quickTake.js'].title, 2) | formatTags | safe }}
             <pre class="language-js"><code class="language-js">{{ packageExamples[title]['_quickTake.js'].content | decodeCurlies | prism | safe }}</code></pre>
             {% include "btt.njk" %}
           {% endif %}

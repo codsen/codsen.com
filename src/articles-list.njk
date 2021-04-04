@@ -23,7 +23,7 @@ extraContainerClass: page-articles-list
             {%- if loop.first %}<span id="fresh" data-time="{{ item.date | iso }}"></span>{% endif %}
             {{ item.data.type | upper }} &nbsp; <time datetime="{{ item.date | iso }}">{{ item.date | dateDisplay }}</time>
             </header>
-            <a class="posts-link" href="{{ item.url }}">{{ item.data.title | mdInline | titleProper | safe }}</a>
+            <a class="posts-link" href="{{ item.url }}">{{ item.data.title | mdInline | safe }}</a>
           </div>
         </article>
       </li>
