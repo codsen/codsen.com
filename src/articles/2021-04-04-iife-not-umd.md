@@ -31,7 +31,7 @@ This shortcoming stems from a limited mindset, addressing only "web development"
 
 Namely.
 
-Developers write React application, unit-test components through RTL, end-to-end test the web app through cypress, then use _esbuild_ to bundle the JS file for distribution to _prod_. That JS file is pretty much guaranteed to be _solid_; it does not need any unit testing because RTL/cypress nailed the bugs.
+Developers write React application, unit-test components through RTL, end-to-end test the web app through cypress, then (let's say) use _esbuild_ to bundle the JS file for distribution to _prod_. That JS file is pretty much guaranteed to be _solid_; it does not need any unit testing because RTL/cypress nailed the bugs.
 
 However, there's another scenario, after-work open-source hacking:
 

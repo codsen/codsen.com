@@ -350,9 +350,13 @@ html {
   margin: 0;
   padding: 0;
   font-size: 62.5%; /* now, 1.0 rem = 10px */
-  @media (min-width: $mid) {
-    overflow-y: scroll; /* always show scrollbars */
-  }
+
+  /* always show scrollbars */
+  /* @media (min-width: $mid) {
+    overflow-y: scroll; 
+  } */
+
+  /* ^ disabled because sticky table th won't work */
 }
 
 body {
@@ -2790,6 +2794,61 @@ open source at all. */
   }
   .m-mdic-copy-wrapper button.u-mdic-copy-btn:hover {
     opacity: 1;
+  }
+
+  /* fix for table data */
+  table.data {
+    .content-row__package p {
+      font-size: 1.8rem;
+    }
+
+    .content-row__package__description p {
+      font-size: 1.4rem;
+      color: $emphasisGrey;
+      line-height: 1.2;
+      margin-bottom: 0;
+    }
+  }
+}
+
+table.data {
+  text-align: left;
+  position: relative;
+  border-collapse: collapse;
+
+  th {
+    position: sticky;
+    top: 0;
+    z-index: 12;
+  }
+
+  .table-data__ugly {
+    background-color: #e72c21;
+    @include darkTheme {
+      color: $black;
+      background-color: #8c0c0c; /* 0.5 opacity */
+    }
+  }
+  .table-data__worse {
+    background-color: #ff8680;
+    @include darkTheme {
+      color: $black;
+      background-color: #8c4f4c; /* 0.5 opacity */
+    }
+  }
+  .table-data__better {
+    background-color: #63c38a;
+    @include darkTheme {
+      color: $black;
+      background-color: #3e6e51; /* 0.5 opacity */
+    }
+  }
+  .table-data__best {
+    background-color: #129c49;
+    @include darkTheme {
+      color: $black;
+      background-color: #155a31; /* 0.5 opacity */
+    }
   }
 }
 

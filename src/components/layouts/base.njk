@@ -20,8 +20,7 @@
     <a href="#skiplink-content" id="skiplink-top" class="skiplink skiplink-fn">Skip to Content</a>
 
     {% set extraClass = "" %}
-    {% if ((page.url | rootUrl) == '/articles/') %}
-      {# if it's anywhere in articles/ section #}
+    {% if (((page.url) == '/articles/') or (page.url | startsWith('/articles/tag')) or (page.url | startsWith('/articles/list'))) %}
       {% set extraClass = "container-articles" %}
     {% elif ((page.url | rootUrl) == '/os/' and page.url != '/os/' ) %}
       {# if it's one of package single pages #}

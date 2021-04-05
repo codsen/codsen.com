@@ -78,6 +78,11 @@ module.exports = function (eleventyConfig) {
   );
   // strip html upon request
   eleventyConfig.addFilter("strip", require("./utils/filters/strip.js"));
+  // tap the String.prototype.startsWith()
+  eleventyConfig.addFilter(
+    "startsWith",
+    require("./utils/filters/startsWith.js")
+  );
   // add <br> in front of dashes in h*
   eleventyConfig.addFilter(
     "breakDashes",
