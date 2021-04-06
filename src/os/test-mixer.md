@@ -28,10 +28,26 @@ mixer(
 
 In other words, it's a function which takes two input arguments, second one being optional (marked by square brackets).
 
-| Input argument   | Type         | Obligatory? | Description                                                                                                                           |
-| ---------------- | ------------ | ----------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `objWithFixedKeys`    | Plain object | yes, but can be empty         | Object with boolean keys that should not be used to generate variations. |
-| `defaultsObj` | Plain object | yes, can be empty, should be a superset of `objWithFixedKeys` | Put the default options object here. |
+| Input argument   | Type         | Description                                                                                                                           |
+| ---------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `objWithFixedKeys`    | something _falsy_ or a plain object | Plain object with "pinned" values (each will reduce the generated combinations count by 1) |
+| `defaultsObj` | Plain object | Put the default options object here. |
+
+For example,
+
+```js
+mixer(
+  {
+    trim: true // this is pinned value
+  },
+  {
+    trim: false, // will be static in generated variations
+    encode: false // variations of "encode", 2^1=2 will be generated
+  }
+)
+```
+
+The order of the arguments seems backward because typically you want to export a wrapper around the `mixer()`, with defaults set, so that you can save time and omit the second argument, defaults. See an example below, with `import { mixer as testMixer } from "text-mixer";`, then `const mixer = (ref) => testMixer(ref, opts);`, then prepped `mixer()` is one-argument function, ready for use.
 
 {% include "btt.njk" %}
 

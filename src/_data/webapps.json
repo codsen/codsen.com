@@ -21,6 +21,10 @@
     "dark": "/images/play-is-language-code-dark.png",
     "light": "/images/play-is-language-code-light.png"
   },
+  "is-media-descriptor": {
+    "dark": "/images/play-is-media-descriptor-dark.png",
+    "light": "/images/play-is-media-descriptor-light.png"
+  },
   "json-variables": {
     "dark": "/images/play-json-variables-dark.png",
     "light": "/images/play-json-variables-light.png"
