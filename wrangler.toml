@@ -15,3 +15,6 @@ route = "codsen.com/*"
 [site]
 bucket = "./dist"
 entry-point = "workers-site"
+
+[build]
+command = "npm install && npm run build"
