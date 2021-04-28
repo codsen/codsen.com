@@ -11,11 +11,7 @@ tags:
   - ts
 ---
 
-I&nbsp;admire Evan W., the creator of esbuild, and I believe we'll eventually get the JS/TS instant builds one day. Same as in Deno-land. I wish I could help somehow. I&nbsp;hope I messed up my configs, and it's me not esbuild. 
-
-In this context...
-
-Programs built by esbuild v0.11.5 appear to perform **on average 27% slower** than the same code built by Rollup. Some packages perform more than 90% slower though!
+Programs built by esbuild v0.11.5 appear to perform **on average 27% slower** than the same code built by Rollup. Some packages perform more than 90% slower though! In this context, I can't use it in _production_.
 
 Here are the details of the benchmarks. I hope it's me, not&nbsp;esbuild.
 

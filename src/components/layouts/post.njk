@@ -34,7 +34,7 @@
           <h1>{{ title | mdInline | safe }}</h1>
           {% if page.url | rootUrl == "/articles/" %}
             <div class="meta">
-        			by <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person"><a href="/author/royrevelt/" itemprop="url"> <span itemprop="name">Roy Revelt</span></a></span> &mdash; posted on <span class="posted-on"><time datetime="{{ page.date | iso }}">{{ page.date | dateDisplay }}</time></span>
+        			by <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person"> <span itemprop="name">Roy Revelt</span></span> &mdash; posted on <span class="posted-on"><time datetime="{{ page.date | iso }}">{{ page.date | dateDisplay }}</time></span>
               {% if tags.length %}
               <div class="entry-tags">
         				tagged: {% for tag in tags %}<a class="tag" href="/articles/tag/{{ tag }}" rel="tag">#{{ tag }}</a> {% endfor %}

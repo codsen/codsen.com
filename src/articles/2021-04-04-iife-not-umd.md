@@ -27,21 +27,11 @@ import { stripHtml } from "../dist/string-strip-html.dev.umd";
 // run unit tests on this stripHtml()
 ```
 
-This shortcoming stems from a limited mindset, addressing only "web development" workflow, workflow most of us follow _at a day job_.
+If we can't unit test **all the builds**&nbsp;— programs we produce&nbsp;— there's no way to completely guarantee the quality.
 
-Namely.
+I've just had fixed a [hardcore bug](/articles/html-crush-bug-fixed/) in CJS builds, caused by a single misconfigured line in Babel, `loose` set to `true`. Rollup built fine, except Babel was casually omitting spread operators here and there, in CJS builds only. All that time, ESM and UMD builds were fine. It just happened that I was _assuming_ CJS will be solid; it should not break, at least without ESM failing too. Wrong.
 
-Developers write React application, unit-test components through RTL, end-to-end test the web app through cypress, then (let's say) use _esbuild_ to bundle the JS file for distribution to _prod_. That JS file is pretty much guaranteed to be _solid_; it does not need any unit testing because RTL/cypress nailed the bugs.
-
-However, there's another scenario, after-work open-source hacking:
-
-A developer writes a program to be open-sourced and published to npm. The source is in cutting-edge ES2099, plus contains all the comments and `console.log`'s so it can't be shipped as-is. Plus, we want a [playground](/os/play/) for users to test, straight from jsDelivr. We need to bundle, before even unit tests start. Bundler, `esbuild` or Rollup is used to produce different builds: CommonJS, ES Modules and a build for browsers. Unit tests run off those builds, not the source in ES2099. 
-
-Now, if we can't unit test **all the builds**&nbsp;— programs we produce&nbsp;— there's no way to completely guarantee the quality.
-
-I've just had fixed a [hardcore bug](/articles/html-crush-bug-fixed/) in CJS builds, caused by a single misconfigured line in Babel, `loose` set to `true`. Rollup built fine, except Babel was casually omitting spread operators here and there, in CJS builds only. All that time, ESM and UMD builds were fine. It just happened that I was assuming CJS will be solid; it should not break, at least without ESM failing too. Wrong.
-
-Furthermore, since I write unit tests anyway, I can easily repurpose unit tests to **check all three builds** instead of one. All I need to do is to pipe them through an [intermediary helper function](https://github.com/codsen/codsen/blob/main/packages/html-crush/test/util/util.js), calculate a result for each build, compare them to ensure they all match, then return the result of `esm` build for further consumption in unit test asserts. 
+Furthermore, since I write unit tests anyway, I can easily repurpose unit tests to **check all three builds** instead of one. All I need to do is to pipe them through an [intermediary helper function](https://github.com/codsen/codsen/blob/main/packages/html-crush/test/util/util.js), calculate a result for each build, compare them to ensure they all match, then return the result of `esm` build for further consumption in unit test asserts.
 
 It's easy in `tap`/`ava` the unit test runners, although commonly-used Jest does not pass `t`, the main test [instance](https://jestjs.io/docs/api#testname-fn-timeout) so bad news Jest users. Basically, instead of:
 
