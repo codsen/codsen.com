@@ -18,4 +18,3 @@ entry-point = "workers-site"
 
 [build]
 command = "npm install && npm run build"
-"upload.format" = "service-worker"
