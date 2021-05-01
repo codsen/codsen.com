@@ -17,5 +17,5 @@ bucket = "./dist"
 entry-point = "workers-site"
 
 [build]
-"upload.format" = "service-worker"
+upload = "service-worker"
 command = "npm install && npm run build"
