@@ -1,21 +1,10 @@
-# name of your Worker script
 name = "codsen-com"
-
-type = "javascript"
-
-# api_token (env var CF_API_TOKEN) - set through CI env
-# account_id (env var CF_ACCOUNT_ID) - set through CI env
-# zone_id (env var CF_ZONE_ID) - set through CI env
-
-#worker will be deployed to your workers.dev
+type = "webpack"
+account_id = "4dad28d388d3aab5371492d4a8877881"
 workers_dev = true
-
 route = "codsen.com/*"
+zone_id = "f928fdd5df8ad23e4e384769e712f251"
 
 [site]
 bucket = "./dist"
 entry-point = "workers-site"
-
-[build]
-upload = "service-worker"
-command = "npm install && npm run build"
