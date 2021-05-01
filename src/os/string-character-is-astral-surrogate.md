@@ -15,7 +15,7 @@ The API comprises of two functions:
 
 **isLowSurrogate (char)**
 
-It reads the character at first index (the first Unicode code point) and evaluates its `charcode`. That's it. If there are more characters they are ignored.
+It reads the character at the first index (the first Unicode code point) and evaluates its `charcode`. That's it. If there are more characters they are ignored.
 
 In theory, high surrogate goes first, low surrogate goes second [source](https://unicodebook.readthedocs.io/unicode_encodings.html#surrogates). This program enables us to detect surrogate-related errors, for example, malformed emoji or parts of emoji.
 
