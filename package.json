@@ -67,7 +67,7 @@
     "markdown-it-kbd": "^2.2.2",
     "matcher": "^4.0.0",
     "number-to-words": "^1.2.4",
-    "p-map": "^5.0.0",
+    "p-map": "^4.0.0",
     "pacote": "^11.3.3",
     "parcel": "^2.0.0-beta.2",
     "parse-github-url": "^1.0.2",
