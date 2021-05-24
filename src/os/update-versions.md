@@ -41,3 +41,26 @@ If any dependency is listed on both `dependencies` and `devDependencies`, it wil
 If Lerna build goes wrong, a key called `gitHead` is created in `package.json`. Lerna normally cleans it up, but if things go wrong, the key might be left there. This CLI removes a key called `gitHead` if such exists, in every processed `package.json`.
 
 {% include "btt.njk" %}
+
+## Blacklist to avoid major semver bumps
+
+Since v4.1.0, it's possible to stop bumping major semver ranges (like 2.x.x -> 3.x.x). Create a `upd.config.json` in the root of the package or monorepo and put all package names you don't want major-bumped, for example:
+
+```json
+{
+  "noMajorBumping": [
+    "ansi-regex",
+    "colorette",
+    "define-lazy-prop",
+    "log-symbols",
+    "meow",
+    "p-map",
+    "p-reduce",
+    "rollup-plugin-dts",
+    "sort-keys",
+    "tap"
+  ]
+}
+```
+
+All packages above won't get major semver bumps, only patch and minor.

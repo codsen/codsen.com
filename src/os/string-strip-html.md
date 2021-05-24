@@ -16,7 +16,7 @@ packages:
 - Can be used to generate Email Text versions. Puts URL links.
 - It can detect and skip false positives, for example, `a < b and c > d`.
 - Enabled-by-default but optional Recursive HTML Decoding — nothing will escape!
-- It won't strip JSP tags
+- It won't strip templating tags (like JSP)
 
 PS. We have [`stristri`](/os/stristri/) which also strips HTML. It can strip not only HTML but also CSS, text and templating tags. But it has less granular control over whitespace.
 
@@ -239,7 +239,7 @@ The idea is, it sets `opts.stripTogetherWithTheirContents` to `["*"]` — asteri
 
 Sometimes you want more control over the program: maybe you want to strip only certain tags and write your custom conditions, maybe you want to do something extra on tags which are being ignored, for example, fix whitespace within them?
 
-You can get this level of control using `opts.cb`. In options object, under key's `cb` value, put a function. Whenever this program wants to do something, it will call your function, `Array.forEach(key => {})`-style. Instead of `key` you get a plain object with the following keys:
+You can do it using `opts.cb`, passing a _callback function_. The idea is, once the program detects a _truthy_ callback, it will stop performing the actions automatically. Instead, it will give you all the data: `tag` object with tag details, proposed deletion ranges, proposed string to insert and so on — then you must push the range yourself into `rangesArr`. If you don't push anything, that tag won't be deleted.
 
 ```js
 const cb = ({
@@ -253,10 +253,11 @@ const cb = ({
   if (tag) {
     // do something depending on what's in the current tag
     console.log(JSON.stringify(tag, null, 4));
+  } else {
+    // default action which does nothing different from normal, non-callback operation
+    rangesArr.push(deleteFrom, deleteTo, insert);
+    // you might want to do something different, depending on "tag" contents.
   }
-  // default action which does nothing different from normal, non-callback operation
-  rangesArr.push(deleteFrom, deleteTo, insert);
-  // you might want to do something different, depending on "tag" contents.
 };
 const { result } = stripHtml("abc<hr>def", { cb });
 console.log(result);
@@ -283,7 +284,6 @@ You could add more logic, conditionally push only certain ranges, tweak the rang
 ```js
 {
   "attributes": [],
-  "lastOpeningBracketAt": 3,
   "slashPresent": false,
   "leftOuterWhitespace": 3,
   "onlyPlausible": false,
@@ -291,9 +291,12 @@ You could add more logic, conditionally push only certain ranges, tweak the rang
   "nameContainsLetters": true,
   "nameEnds": 6,
   "name": "hr",
+  "lastOpeningBracketAt": 3,
   "lastClosingBracketAt": 6
 }
 ```
+
+For example, strict bracket-to-bracket range would be `[tag.lastOpeningBracketAt, tag.lastClosingBracketAt + 1]`.
 
 {% include "btt.njk" %}
 
