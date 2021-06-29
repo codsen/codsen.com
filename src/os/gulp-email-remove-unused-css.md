@@ -75,7 +75,7 @@ Code-wise, here's the idea:
 
 ```js
 const tap = require('gulp-tap')
-const comb = require('email-comb')
+const { comb } = require('email-comb')
 const util = require('gulp-util')
 const whitelist = ['.External*', '.ReadMsgBody', '.yshortcuts', '.Mso*', '#outlook', '.module*']
 

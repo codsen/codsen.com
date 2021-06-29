@@ -9,14 +9,14 @@ packages:
 
 ## Features
 
-- Adds or removes the whitespace to make the output presentable.
+- Attempts to format the output nicely.
+- Full control using a callback if needed.
 - Removes tag pairs along with the content inside (handy for `script`).
-- Works on broken, partial, incomplete, non-valid HTML.
 - Works on HTML mixed with other languages (because it does not parse).
+- Works on broken, partial, incomplete, non-valid HTML.
 - Can be used to generate Email Text versions. Puts URL links.
-- It can detect and skip false positives, for example, `a < b and c > d`.
 - Enabled-by-default but optional Recursive HTML Decoding — nothing will escape!
-- It won't strip templating tags (like JSP)
+- It won't strip templating tags (like JSP).
 
 PS. We have [`stristri`](/os/stristri/) which also strips HTML. It can strip not only HTML but also CSS, text and templating tags. But it has less granular control over whitespace.
 

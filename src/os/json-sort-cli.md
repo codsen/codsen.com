@@ -35,7 +35,7 @@ or `sortjson`, same thing. We wired up both. See the [API section](#api-flags) (
 | `-n`  | `--nodemodules`      | Don't ignore any **n**ode_modules folders and package-lock.json's                                  |
 | `-t`  | `--tabs`             | Use **t**abs for JSON file indentation                                                             |
 | `-i`  | `--indentationCount` | How many spaces or tabs to use (default = 2 spaces or 1 tab)                                       |
-| `-s`  | `--silent`           | When on, no output is shown. Only exit codes determine the success or failure.                     |
+| `-s`  | `--silent`           | When on, no output is shown. If enabled, you'll distinguish success from failure by [exit code](https://tldp.org/LDP/abs/html/exit-status.html). |
 | `-a`  | `--arrays`           | Also sort any arrays if they contain only string elements                                          |
 | `-h`  | `--help`             | Shows (similar to this) **h**elp                                                                   |
 | `-v`  | `--version`          | Shows the installed **v**ersion of your `json-sort-cli`                                            |
