@@ -8,6 +8,9 @@
     "type": "git",
     "url": "https://github.com/codsen/codsen"
   },
+  "parcelIgnore": [
+    "images/*.*"
+  ],
   "scripts": {
     "----------- DEV -----------": "",
     "start": "npm run dev",
@@ -16,7 +19,7 @@
     "watch:assets": "parcel watch ./src/assets/css/app.pcss ./src/assets/js/app.js --dist-dir ./bundle --no-source-maps --no-hmr",
     "serve": "date +%s > hash.txt && eleventy --serve --port=8080",
     "----------- PROD -----------": "",
-    "build": "npm run build:eleventy && npm run search && npm run build:eleventy && npm run replace",
+    "build": "npm run build:eleventy && npm run search && npm run build:eleventy",
     "build:html": "date +%s > hash.txt && eleventy",
     "build:assets": "parcel build ./src/assets/css/app.pcss ./src/assets/js/app.js ./src/assets/js/interdeps.js ./src/assets/js/search-worker.js --dist-dir ./bundle --no-source-maps",
     "build:eleventy": "cross-env ELEVENTY_ENV=prod run-s clean:* build:assets build:html",
@@ -34,7 +37,6 @@
     "links": "linkinator ./dist --recurse --concurrency 1",
     "js:watch": "jest --watch",
     "----------- ETC -----------": "",
-    "replace": "replace 'http://localhost:8080/' 'https://codsen.com/' . -r --include='dist/assets/**/*'",
     "search": "node utils/scripts/fixSearchWorkerRoot.js"
   },
   "dependencies": {
@@ -69,7 +71,7 @@
     "number-to-words": "^1.2.4",
     "p-map": "^4.0.0",
     "pacote": "^11.3.3",
-    "parcel": "^2.0.0-beta.2",
+    "parcel": "^2.0.0-beta.3.1",
     "parse-github-url": "^1.0.2",
     "postcss": "^8.2.15",
     "postcss-color-mix": "^1.1.0",
@@ -82,7 +84,6 @@
     "ranges-apply": "^5.0.16",
     "ranges-invert": "^4.0.16",
     "ranges-regex": "^4.0.16",
-    "replace": "^1.2.1",
     "slugify": "^1.5.3",
     "string-strip-html": "^8.2.13",
     "string-unfancy": "^4.0.16",
@@ -106,6 +107,7 @@
     "linkinator": "^2.13.6",
     "luxon": "^1.26.0",
     "npm-run-all": "^4.1.5",
+    "parcel-resolver-ignore": "^1.0.1",
     "postcss-advanced-variables": "^3.0.1",
     "postcss-cli": "^8.3.1",
     "postcss-easy-import": "^3.0.0",
