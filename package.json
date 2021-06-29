@@ -71,7 +71,7 @@
     "number-to-words": "^1.2.4",
     "p-map": "^4.0.0",
     "pacote": "^11.3.3",
-    "parcel": "^2.0.0-beta.3.1",
+    "parcel": "^2.0.0-beta.2",
     "parse-github-url": "^1.0.2",
     "postcss": "^8.2.15",
     "postcss-color-mix": "^1.1.0",
