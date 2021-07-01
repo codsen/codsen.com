@@ -378,7 +378,10 @@ function setWebWorker() {
     myWorker.terminate();
   }
   myWorker = new Worker(
-    "http://localhost:8080/assets/REPLACE_WITH_HASH_URL/js/search-worker.js"
+    new URL(
+      "/assets/REPLACE_WITH_HASH_URL/js/search-worker.js",
+      import.meta.url
+    )
   );
 
   myWorker.onmessage = (e) => {

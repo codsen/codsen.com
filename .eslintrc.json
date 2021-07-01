@@ -2,7 +2,8 @@
   "env": {
     "es6": true,
     "jest": true,
-    "browser": true
+    "browser": true,
+    "cypress/globals": true
   },
   "extends": [
     "airbnb-base",
@@ -10,18 +11,23 @@
     "plugin:prettier/recommended",
     "plugin:import/errors",
     "plugin:import/warnings",
-    "plugin:row-num/recommended"
+    "plugin:row-num/recommended",
+    "plugin:cypress/recommended"
   ],
   "parserOptions": {
     "ecmaVersion": 11,
     "sourceType": "module"
   },
-  "plugins": ["row-num"],
+  "plugins": ["row-num", "cypress"],
   "ignorePatterns": [
     "**/eslint-plugin-row-num/rules/utils/**",
     "**/dist/**",
     "**/tap/**"
   ],
+  "globals": {
+    "cy": "writable",
+    "Cypress": "writable"
+  },
   "rules": {
     "array-callback-return": 0,
     "consistent-return": 0,
@@ -60,10 +66,7 @@
     "no-unneeded-ternary": "error",
     "no-useless-return": "error",
     "no-var": "error",
-    "one-var": [
-      "error",
-      "never"
-    ],
+    "one-var": ["error", "never"],
     "prefer-arrow-callback": "error",
     "prefer-const": "error",
     "prefer-destructuring": 0,
